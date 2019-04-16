@@ -1,6 +1,6 @@
 # The Button
 
-The simplest time tracking service everrr...
+A simple time tracking service.
 
 ## Getting started
 
