@@ -1,3 +1,4 @@
+flask-wtf==0.14.2
 flask==1.0.2
 python-dotenv==0.10.1
 # Generated with piprot 0.9.10
