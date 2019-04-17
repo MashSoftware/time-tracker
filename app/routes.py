@@ -13,7 +13,7 @@ def index():
 def signup():
     form = SignupForm()
     if form.validate_on_submit():
-        flash('Thanks for signing up!', 'success')
+        flash('Thanks for signing up {}!'.format(form.first_name.data.title()), 'success')
         return redirect(url_for('index'))
     return render_template('sign_up.html', title='Sign up', form=form)
 
