@@ -17,6 +17,7 @@ itsdangerous==1.1.0       # via flask
 jinja2==2.10.1            # via flask
 mako==1.0.9               # via alembic
 markupsafe==1.1.1         # via jinja2, mako
+psycopg2==2.8.2
 pycparser==2.19           # via cffi
 python-dateutil==2.8.0    # via alembic
 python-dotenv==0.10.1
