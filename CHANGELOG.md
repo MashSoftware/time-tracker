@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.3.0] - 2019-04-18
+
+### Added
+
+- User account page
+- Record time user last logged in
+- Redirect protection after log in
+
 ## [0.2.0] - 2019-04-18
 
 ### Added
