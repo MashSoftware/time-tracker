@@ -19,6 +19,7 @@
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                {% if current_user.is_anonymous %}
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('signup') }}"><i class="fas fa-user-plus fa-lg fa-fw"></i> Sign up</a>
@@ -27,6 +28,13 @@
                         <a class="nav-link" href="{{ url_for('login') }}"><i class="fas fa-sign-in-alt fa-lg fa-fw"></i> Log in</a>
                     </li>
                 </ul>
+                {% else %}
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt fa-lg fa-fw"></i> Log out</a>
+                    </li>
+                </ul>
+                {% endif %}
             </div>
         </div>
     </nav>
@@ -45,7 +53,7 @@
             {% if category == 'info' %}
             <h4 class="alert-heading">Heads up</h4>
             {% endif %}
-            {{ message }}
+            <p class="mb-1">{{ message }}</p>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -58,7 +66,7 @@
             <h4 class="alert-heading">There is a problem</h4>
             {% for field, errors in form.errors.items() %}
             {% for error in errors %}
-            <p class="mb-1"><a href="#{{field}}" class="alert-link">{{ error }}</a></p>
+            <p class="mb-1">{{ error }}</p>
             {% endfor %}
             {% endfor %}
         </div>
