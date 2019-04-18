@@ -1,3 +1,6 @@
+import uuid
+from datetime import datetime
+
 import bcrypt
 from sqlalchemy.dialects.postgresql import UUID
 
@@ -18,6 +21,14 @@ class User(db.Model):
     updated_at = db.Column(db.DateTime(timezone=True), nullable=True)
 
     # Methods
+    def __init__(self, password, first_name, last_name, email_address):
+        self.user_id = str(uuid.uuid4())
+        self.first_name = first_name.title()
+        self.last_name = last_name.title()
+        self.email_address = email_address.lower()
+        self.created_at = datetime.utcnow()
+        self.set_password(password)
+
     def set_password(self, password):
         self.password = bcrypt.hashpw(password.encode('UTF-8'), bcrypt.gensalt())
 
