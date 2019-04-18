@@ -28,7 +28,7 @@ def signup():
         )
         db.session.add(user)
         db.session.commit()
-        flash('Thanks for signing up {}!'.format(user.first_name), 'success')
+        flash('Thanks for signing up {}! Please log in to continue.'.format(user.first_name), 'success')
         return redirect(url_for('login'))
     return render_template('sign_up.html', title='Sign up', form=form)
 
@@ -66,3 +66,12 @@ def logout():
 @login_required
 def account():
     return render_template('account.html', title='My Account')
+
+
+@app.route('/account/delete')
+@login_required
+def delete_account():
+    db.session.delete(current_user)
+    db.session.commit()
+    flash('Your account and all personal information has been permanently deleted', 'success')
+    return redirect(url_for('index'))
