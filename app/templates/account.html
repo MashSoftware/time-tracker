@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+    <div class="col">
+        <dl>
+            <dt>Name</dt>
+            <dd>{{ current_user.first_name }} {{ current_user.last_name }}</dd>
+
+            <dt>Email address</dt>
+            <dd>{{ current_user.email_address }}</dd>
+
+            <dt>Member since</dt>
+            <dd>{{ current_user.created_at }}</dd>
+
+            <dt>Last log in</dt>
+            <dd>{{ current_user.login_at }}</dd>
+
+            {% if current_user.updated_at %}
+            <dt>Last updated</dt>
+            <dd>{{ current_user.updated_at }}</dd>
+            {% endif %}
+        </dl>
+    </div>
+</div>
+{% endblock %}

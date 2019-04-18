@@ -1,5 +1,8 @@
-from flask import flash, redirect, render_template, url_for
-from flask_login import current_user, login_user, logout_user
+from datetime import datetime
+
+from flask import flash, redirect, render_template, request, url_for
+from flask_login import current_user, login_required, login_user, logout_user
+from werkzeug.urls import url_parse
 
 from app import app, db
 from app.forms import LoginForm, SignupForm
@@ -41,8 +44,14 @@ def login():
             flash('Invalid email address or password.', 'danger')
             return redirect(url_for('login'))
         login_user(user, remember=form.remember_me.data)
+        user.login_at = datetime.utcnow()
+        db.session.add(user)
+        db.session.commit()
+        next_page = request.args.get('next')
+        if not next_page or url_parse(next_page).netloc != '':
+            next_page = url_for('index')
         flash('Welcome back {}.'.format(current_user.first_name), 'success')
-        return redirect(url_for('index'))
+        return redirect(next_page)
     return render_template('log_in.html', title='Log in', form=form)
 
 
@@ -51,3 +60,9 @@ def logout():
     logout_user()
     flash('You have been successfully logged out.', 'success')
     return redirect(url_for('index'))
+
+
+@app.route('/account')
+@login_required
+def account():
+    return render_template('account.html', title='My Account')
