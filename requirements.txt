@@ -8,6 +8,7 @@ alembic==1.0.9            # via flask-migrate
 bcrypt==3.1.6
 cffi==1.12.2              # via bcrypt
 click==7.0                # via flask
+flask-login==0.4.1
 flask-migrate==2.4.0
 flask-sqlalchemy==2.3.2
 flask-wtf==0.14.2
