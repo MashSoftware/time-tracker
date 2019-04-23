@@ -25,13 +25,11 @@ def signup():
     form = SignupForm()
     if form.validate_on_submit():
         user = User(
-            first_name=form.first_name.data,
-            last_name=form.last_name.data,
             email_address=form.email_address.data,
             password=form.password.data)
         db.session.add(user)
         db.session.commit()
-        flash('Thanks for signing up {}! Please log in to continue.'.format(user.first_name), 'success')
+        flash('Thanks for signing up! Please log in to continue.', 'success')
         return redirect(url_for('login'))
     return render_template('sign_up.html', title='Sign up', form=form)
 
@@ -53,7 +51,7 @@ def login():
         next_page = request.args.get('next')
         if not next_page or url_parse(next_page).netloc != '':
             next_page = url_for('index')
-        flash('Welcome back {}.'.format(current_user.first_name), 'success')
+        flash('Welcome back.', 'success')
         return redirect(next_page)
     return render_template('log_in.html', title='Log in', form=form)
 

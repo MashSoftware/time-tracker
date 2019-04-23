@@ -5,28 +5,6 @@
         <form action="" method="post" novalidate>
             {{ form.csrf_token }}
             <div class="form-group">
-                {{ form.first_name.label }}
-                {% if form.first_name.errors %}
-                {{ form.first_name(class="form-control is-invalid") }}
-                {% else %}
-                {{ form.first_name(class="form-control") }}
-                {% endif %}
-                {% for error in form.first_name.errors %}
-                <div class="invalid-feedback">{{error}}</div>
-                {% endfor %}
-            </div>
-            <div class="form-group">
-                {{ form.last_name.label }} <i>(optional)</i>
-                {% if form.last_name.errors %}
-                {{ form.last_name(class="form-control is-invalid") }}
-                {% else %}
-                {{ form.last_name(class="form-control") }}
-                {% endif %}
-                {% for error in form.last_name.errors %}
-                <div class="invalid-feedback">{{error}}</div>
-                {% endfor %}
-            </div>
-            <div class="form-group">
                 {{ form.email_address.label }}
                 {% if form.email_address.errors %}
                 {{ form.email_address(class="form-control is-invalid", type="email") }}

@@ -14,8 +14,6 @@ class User(UserMixin, db.Model):
     # Fields
     id = db.Column(UUID, primary_key=True)
     password = db.Column(db.Binary, nullable=False)
-    first_name = db.Column(db.String, nullable=False)
-    last_name = db.Column(db.String, nullable=True)
     email_address = db.Column(db.String, nullable=False, unique=True, index=True)
     login_at = db.Column(db.DateTime(timezone=True), nullable=True)
     created_at = db.Column(db.DateTime(timezone=True), nullable=False)
@@ -25,10 +23,8 @@ class User(UserMixin, db.Model):
     events = db.relationship('Event', backref='user', lazy=True, passive_deletes=True)
 
     # Methods
-    def __init__(self, password, first_name, last_name, email_address):
+    def __init__(self, password, email_address):
         self.id = str(uuid.uuid4())
-        self.first_name = first_name.title()
-        self.last_name = last_name.title()
         self.email_address = email_address.lower()
         self.created_at = datetime.utcnow()
         self.set_password(password)

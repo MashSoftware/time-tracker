@@ -3,9 +3,6 @@
 <div class="row">
     <div class="col">
         <dl>
-            <dt>Name</dt>
-            <dd>{{ current_user.first_name }} {{ current_user.last_name }}</dd>
-
             <dt>Email address</dt>
             <dd>{{ current_user.email_address }}</dd>
 
@@ -27,7 +24,7 @@
         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash fa-lg fa-fw"></i> Delete account</button></p>
     </div>
 </div>
-    
+
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -42,8 +39,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-chevron-left fa-lg fa-fw"></i> Cancel</button>
-                <a class="btn btn-danger" href="{{ url_for('delete_account') }}" role="button"><i
-                        class="fas fa-trash fa-lg fa-fw"></i> Delete</a>
+                <a class="btn btn-danger" href="{{ url_for('delete_account') }}" role="button"><i class="fas fa-trash fa-lg fa-fw"></i> Delete</a>
             </div>
         </div>
     </div>
