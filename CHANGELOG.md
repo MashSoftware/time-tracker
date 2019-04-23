@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.5.0] - 2019-04-23
+
+### Added
+
+- "The button" to add events
+- List of start and stop timestamps
+- Public homepage for non-signed in users
+
+### Changed
+
+- Consistent datetime formatting
+- Updated meta tags
+
 ## [0.4.0] - 2019-04-18
 
 ### Added
