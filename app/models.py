@@ -21,6 +21,9 @@ class User(UserMixin, db.Model):
     created_at = db.Column(db.DateTime(timezone=True), nullable=False)
     updated_at = db.Column(db.DateTime(timezone=True), nullable=True)
 
+    # Relationships
+    events = db.relationship('Event', backref='user', lazy=True, passive_deletes=True)
+
     # Methods
     def __init__(self, password, first_name, last_name, email_address):
         self.id = str(uuid.uuid4())
@@ -40,3 +43,17 @@ class User(UserMixin, db.Model):
 @login.user_loader
 def load_user(id):
     return User.query.get(id)
+
+
+class Event(db.Model):
+    # Fields
+    id = db.Column(UUID, primary_key=True)
+    user_id = db.Column(UUID, db.ForeignKey('user_account.id', ondelete="CASCADE"), nullable=False, index=True)
+    started_at = db.Column(db.DateTime(timezone=True), nullable=False, index=True)
+    ended_at = db.Column(db.DateTime(timezone=True), nullable=True)
+
+    # Methods
+    def __init__(self, user_id, started_at):
+        self.id = str(uuid.uuid4())
+        self.user_id = str(uuid.UUID(user_id, version=4))
+        self.started_at = started_at
