@@ -33,12 +33,7 @@
     </div>
     <div class="col-md-8">
         {% for event in events %}
-        <div class="card">
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">Start: {{ event.started_at.strftime('%d/%m/%Y %H:%M:%S') }}</li>
-                {% if event.ended_at %}<li class="list-group-item">Stop: {{ event.ended_at.strftime('%d/%m/%Y %H:%M:%S') }}</li>{% endif %}
-            </ul>
-        </div>
+        {% include '_event.html' %}
         <br>
         {% endfor %}
     </div>
