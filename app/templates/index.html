@@ -1,8 +1,47 @@
 {% extends "base.html" %}
 {% block content %}
+{% if current_user.is_anonymous %}
 <div class="row">
     <div class="col">
-        
+        <div class="jumbotron">
+            <h1 class="display-4">Push the button...</h1>
+            <p class="lead">Time tracking made simple. One button, push it, done!</p>
+        </div>
     </div>
 </div>
+<div class="row">
+    <div class="col-md-4">
+        <h2>Step 1</h2>
+        <p>Create an account...</p>
+    </div>
+    <div class="col-md-4">
+        <h2>Step 2</h2>
+        <p>Push the button...</p>
+    </div>
+    <div class="col-md-4">
+        <h2>Step 3</h2>
+        <p>See all the times you pushed the button...</p>
+    </div>
+</div>
+{% else %}
+<div class="row">
+    <div class="col-md-4">
+        <a class="btn btn-primary btn-lg btn-block" href="/push" role="button">
+            <h1>{% if events and events[0].ended_at is none %}Stop{% else %}Start{% endif %}</h1>
+        </a>
+        <br>
+    </div>
+    <div class="col-md-8">
+        {% for event in events %}
+        <div class="card">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Start: {{ event.started_at.strftime('%d/%m/%Y %H:%M:%S') }}</li>
+                {% if event.ended_at %}<li class="list-group-item">Stop: {{ event.ended_at.strftime('%d/%m/%Y %H:%M:%S') }}</li>{% endif %}
+            </ul>
+        </div>
+        <br>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
 {% endblock %}

@@ -6,12 +6,16 @@ from werkzeug.urls import url_parse
 
 from app import app, db
 from app.forms import LoginForm, SignupForm
-from app.models import User
+from app.models import Event, User
 
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    if current_user.is_authenticated:
+        events = Event.query.filter_by(user_id=current_user.id).order_by(Event.started_at.desc()).all()
+        return render_template('index.html', events=events)
+    else:
+        return render_template('index.html')
 
 
 @app.route('/signup', methods=['GET', 'POST'])
@@ -24,8 +28,7 @@ def signup():
             first_name=form.first_name.data,
             last_name=form.last_name.data,
             email_address=form.email_address.data,
-            password=form.password.data
-        )
+            password=form.password.data)
         db.session.add(user)
         db.session.commit()
         flash('Thanks for signing up {}! Please log in to continue.'.format(user.first_name), 'success')
@@ -74,4 +77,20 @@ def delete_account():
     db.session.delete(current_user)
     db.session.commit()
     flash('Your account and all personal information has been permanently deleted', 'success')
+    return redirect(url_for('index'))
+
+
+@app.route('/push')
+@login_required
+def create_event():
+    event = Event.query.filter_by(user_id=current_user.id).order_by(Event.started_at.desc()).first()
+    if event and event.ended_at is None:
+        event.ended_at = datetime.utcnow()
+        db.session.add(event)
+    else:
+        new_event = Event(
+            user_id=current_user.id,
+            started_at=datetime.utcnow())
+        db.session.add(new_event)
+    db.session.commit()
     return redirect(url_for('index'))
