@@ -10,10 +10,10 @@
             <dd>{{ current_user.email_address }}</dd>
 
             <dt>Member since</dt>
-            <dd>{{ current_user.created_at }}</dd>
+            <dd>{{ current_user.created_at.strftime('%d/%m/%Y %H:%M:%S') }}</dd>
 
             <dt>Last log in</dt>
-            <dd>{{ current_user.login_at }}</dd>
+            <dd>{{ current_user.login_at.strftime('%d/%m/%Y %H:%M:%S') }}</dd>
 
             {% if current_user.updated_at %}
             <dt>Last updated</dt>
