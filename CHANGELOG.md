@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.8.0] - 2019-04-24
+
+### Added
+
+- Update account details
+
+### Changed
+
+- Sign up or log in links in homepage text
+
 ## [0.7.0] - 2019-04-24
 
 ### Added
