@@ -5,7 +5,7 @@ from flask_login import current_user, login_required, login_user, logout_user
 from werkzeug.urls import url_parse
 
 from app import app, db
-from app.forms import LoginForm, PasswordForm, SignupForm
+from app.forms import AccountForm, LoginForm, PasswordForm, SignupForm
 from app.models import Event, User
 
 
@@ -31,7 +31,7 @@ def signup():
         db.session.commit()
         flash('Thanks for signing up! Please log in to continue.', 'success')
         return redirect(url_for('login'))
-    return render_template('sign_up.html', title='Sign up', form=form)
+    return render_template('sign_up_form.html', title='Sign up', form=form)
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -53,7 +53,7 @@ def login():
             next_page = url_for('index')
         flash('Welcome back.', 'success')
         return redirect(next_page)
-    return render_template('log_in.html', title='Log in', form=form)
+    return render_template('log_in_form.html', title='Log in', form=form)
 
 
 @app.route('/logout')
@@ -78,7 +78,7 @@ def delete_account():
     return redirect(url_for('index'))
 
 
-@app.route("/account/change-password", methods=['GET', 'POST'])
+@app.route('/account/change-password', methods=['GET', 'POST'])
 @login_required
 def change_password():
     form = PasswordForm()
@@ -94,7 +94,23 @@ def change_password():
             return redirect(url_for('change_password'))
         return redirect(url_for('account'))
 
-    return render_template('change_password.html', title='Change password', form=form)
+    return render_template('password_form.html', title='Change password', form=form)
+
+
+@app.route('/account/update', methods=['GET', 'POST'])
+@login_required
+def update_account():
+    form = AccountForm()
+    if form.validate_on_submit():
+        current_user.email_address = form.email_address.data
+        current_user.updated_at = datetime.utcnow()
+        db.session.add(current_user)
+        db.session.commit()
+        flash('Your account has been updated', 'success')
+        return redirect(url_for('account'))
+    elif request.method == 'GET':
+        form.email_address.data = current_user.email_address
+    return render_template('account_form.html', title='Update details', form=form)
 
 
 @app.route('/push')

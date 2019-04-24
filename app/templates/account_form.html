@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+    <div class="col-lg-6">
+        <form action="" method="post" novalidate>
+            {{ form.csrf_token }}
+            <div class="form-group">
+                {{ form.email_address.label }}
+                {% if form.email_address.errors %}
+                {{ form.email_address(class="form-control is-invalid", type="email") }}
+                {% else %}
+                {{ form.email_address(class="form-control", type="email") }}
+                {% endif %}
+                <small id="emailHelp" class="form-text text-muted">{{ form.email_address.description }}</small>
+                {% for error in form.email_address.errors %}
+                <div class="invalid-feedback">{{error}}</div>
+                {% endfor %}
+            </div>
+            <p><button class="btn btn-primary" type="submit"><i class="fas fa-user-edit fa-lg fa-fw"></i> Update</button></p>
+            <p><a class="btn btn-secondary" href="{{ url_for('account') }}" role="button"><i class="fas fa-chevron-left fa-lg fa-fw"></i> Go back</a></p>
+        </form>
+    </div>
+</div>
+{% endblock %}

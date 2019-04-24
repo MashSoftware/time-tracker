@@ -39,3 +39,13 @@ class PasswordForm(FlaskForm):
     def validate_new_password(self, new_password):
         if new_password.data == self.current_password.data:
             raise ValidationError('New password must be different to current password')
+
+
+class AccountForm(FlaskForm):
+    email_address = StringField('Email address', validators=[InputRequired(message="Email address is required"), Email()],
+                                description="We'll never share your email with anyone else.")
+
+    def validate_email_address(self, email_address):
+        user = User.query.filter_by(email_address=email_address.data).first()
+        if user is not None:
+            raise ValidationError('Email address is already in use')
