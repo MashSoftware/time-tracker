@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.7.0] - 2019-04-24
+
+### Added
+
+- Change password for user account
+
 ### Changed
 
 - Include sub-template for events

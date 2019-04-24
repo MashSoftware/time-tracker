@@ -26,3 +26,16 @@ class LoginForm(FlaskForm):
     password = PasswordField('Password', validators=[InputRequired(message="Password is required"), Length(min=8, max=72, message="Password must be between 8 and 72 characters")],
                              description="Must be between 8 and 72 characters")
     remember_me = BooleanField('Remember me')
+
+
+class PasswordForm(FlaskForm):
+    current_password = PasswordField('Current password', validators=[
+                                     InputRequired(message="Current password is required"), Length(min=8, max=72, message="Current password must be between 8 and 72 characters")])
+    new_password = PasswordField('New password', validators=[InputRequired(message="New password is required"), Length(min=8, max=72, message="New password must be between 8 and 72 characters")],
+                                 description="Must be between 8 and 72 characters")
+    confirm_password = PasswordField('Confirm password', validators=[InputRequired(
+        message="Confirm your password"), EqualTo('new_password', message="Passwords must match.")])
+
+    def validate_new_password(self, new_password):
+        if new_password.data == self.current_password.data:
+            raise ValidationError('New password must be different to current password')

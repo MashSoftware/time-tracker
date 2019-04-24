@@ -14,13 +14,14 @@
 
             {% if current_user.updated_at %}
             <dt>Last updated</dt>
-            <dd>{{ current_user.updated_at }}</dd>
+            <dd>{{ current_user.updated_at.strftime('%d/%m/%Y %H:%M:%S') }}</dd>
             {% endif %}
         </dl>
     </div>
 </div>
 <div class="row">
     <div class="col">
+        <p><a class="btn btn-primary" href="{{ url_for('change_password') }}" role="button"><i class="fas fa-key fa-lg fa-fw"></i> Change password</a></p>
         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash fa-lg fa-fw"></i> Delete account</button></p>
     </div>
 </div>

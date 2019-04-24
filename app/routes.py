@@ -5,7 +5,7 @@ from flask_login import current_user, login_required, login_user, logout_user
 from werkzeug.urls import url_parse
 
 from app import app, db
-from app.forms import LoginForm, SignupForm
+from app.forms import LoginForm, PasswordForm, SignupForm
 from app.models import Event, User
 
 
@@ -76,6 +76,25 @@ def delete_account():
     db.session.commit()
     flash('Your account and all personal information has been permanently deleted', 'success')
     return redirect(url_for('index'))
+
+
+@app.route("/account/change-password", methods=['GET', 'POST'])
+@login_required
+def change_password():
+    form = PasswordForm()
+    if form.validate_on_submit():
+        if current_user.check_password(form.current_password.data):
+            current_user.set_password(form.new_password.data)
+            current_user.updated_at = datetime.utcnow()
+            db.session.add(current_user)
+            db.session.commit()
+            flash('Your password has been changed', 'success')
+        else:
+            flash('Invalid password.', 'danger')
+            return redirect(url_for('change_password'))
+        return redirect(url_for('account'))
+
+    return render_template('change_password.html', title='Change password', form=form)
 
 
 @app.route('/push')
