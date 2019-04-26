@@ -127,3 +127,13 @@ def create_event():
         db.session.add(new_event)
     db.session.commit()
     return redirect(url_for('index'))
+
+
+@app.route('/push/<uuid:id>/delete')
+@login_required
+def delete_event(id):
+    event = Event.query.get_or_404(str(id))
+    db.session.delete(event)
+    db.session.commit()
+    flash('Time has been deleted', 'success')
+    return redirect(url_for('index'))
