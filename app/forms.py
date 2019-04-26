@@ -1,7 +1,9 @@
+from datetime import datetime
+
 from flask_wtf import FlaskForm
-from wtforms import BooleanField, PasswordField, StringField
+from wtforms import BooleanField, DateTimeField, PasswordField, StringField
 from wtforms.validators import (Email, EqualTo, InputRequired, Length,
-                                ValidationError)
+                                Optional, ValidationError)
 
 from app.models import User
 
@@ -49,3 +51,26 @@ class AccountForm(FlaskForm):
         user = User.query.filter_by(email_address=email_address.data).first()
         if user is not None:
             raise ValidationError('Email address is already in use')
+
+
+class EventForm(FlaskForm):
+    started_at = DateTimeField(
+        'Start',
+        format='%d/%m/%Y %H:%M:%S',
+        validators=[InputRequired(message="Started is required")])
+    ended_at = DateTimeField(
+        'Stop',
+        format='%d/%m/%Y %H:%M:%S',
+        validators=[Optional()],
+        description="Leave blank if ongoing")
+
+    def validate_started_at(self, started_at):
+        if started_at.data > datetime.utcnow():
+            raise ValidationError('Start must be in the past')
+
+    def validate_ended_at(self, ended_at):
+        if ended_at.data <= self.started_at.data:
+            raise ValidationError('Stop must be after start')
+
+        if ended_at.data > datetime.utcnow():
+            raise ValidationError('Stop must be in the past')

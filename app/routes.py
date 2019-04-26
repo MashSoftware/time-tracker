@@ -5,7 +5,8 @@ from flask_login import current_user, login_required, login_user, logout_user
 from werkzeug.urls import url_parse
 
 from app import app, db
-from app.forms import AccountForm, LoginForm, PasswordForm, SignupForm
+from app.forms import (AccountForm, EventForm, LoginForm, PasswordForm,
+                       SignupForm)
 from app.models import Event, User
 
 
@@ -135,5 +136,23 @@ def delete_event(id):
     event = Event.query.get_or_404(str(id))
     db.session.delete(event)
     db.session.commit()
-    flash('Time has been deleted', 'success')
+    flash('Time entry has been deleted', 'success')
     return redirect(url_for('index'))
+
+
+@app.route('/push/<uuid:id>/update', methods=['GET', 'POST'])
+@login_required
+def update_event(id):
+    event = Event.query.get_or_404(str(id))
+    form = EventForm()
+    if form.validate_on_submit():
+        event.started_at = form.started_at.data
+        event.ended_at = form.ended_at.data
+        db.session.add(event)
+        db.session.commit()
+        flash('Time entry has been updated', 'success')
+        return redirect(url_for('index'))
+    elif request.method == 'GET':
+        form.started_at.data = event.started_at
+        form.ended_at.data = event.ended_at
+    return render_template('event_form.html', title='Edit time', form=form)

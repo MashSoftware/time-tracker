@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+    <div class="col-lg-6">
+            <form action="" method="post" novalidate>
+            {{ form.csrf_token }}
+            <div class="form-group">
+                {{ form.started_at.label }}
+                {% if form.started_at.errors %}
+                {{ form.started_at(class="form-control is-invalid", type="datetime-local") }}
+                {% else %}
+                {{ form.started_at(class="form-control", type="datetime-local") }}
+                {% endif %}
+                {% if form.started_at.description %}
+                <small id="{{ form.started_at.id }}Help" class="form-text text-muted">{{ form.started_at.description }}</small>
+                {% endif %}
+                {% for error in form.started_at.errors %}
+                <div class="invalid-feedback">{{error}}</div>
+                {% endfor %}
+            </div>
+            <div class="form-group">
+                {{ form.ended_at.label }} <i>(optional)</i>
+                {% if form.ended_at.errors %}
+                {{ form.ended_at(class="form-control is-invalid", type="datetime-local") }}
+                {% else %}
+                {{ form.ended_at(class="form-control", type="datetime-local") }}
+                {% endif %}
+                {% if form.ended_at.description %}
+                <small id="{{ form.ended_at.id }}Help" class="form-text text-muted">{{ form.ended_at.description }}</small>
+                {% endif %}
+                {% for error in form.ended_at.errors %}
+                <div class="invalid-feedback">{{error}}</div>
+                {% endfor %}
+            </div>
+            <p><button class="btn btn-primary" type="submit"><i class="fas fa-edit fa-lg fa-fw"></i> Edit</button></p>
+            <p><a class="btn btn-secondary" href="{{ url_for('index') }}" role="button"><i class="fas fa-chevron-left fa-lg fa-fw"></i> Go back</a></p>
+        </form>
+    </div>
+</div>
+{% endblock %}

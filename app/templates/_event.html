@@ -4,6 +4,7 @@
         {% if event.ended_at %}<li class="list-group-item">Stop: {{ event.ended_at.strftime('%d/%m/%Y %H:%M:%S') }}</li>{% endif %}
     </ul>
     <div class="card-footer text-muted">
+        <a href="{{ url_for('update_event', id=event.id)}}" class="card-link"><i class="fas fa-edit fa-lg fa-fw"></i> Edit</a>
         <a href="{{ url_for('delete_event', id=event.id)}}" class="card-link"><i class="fas fa-trash fa-lg fa-fw"></i> Delete</a>
     </div>
 </div>
