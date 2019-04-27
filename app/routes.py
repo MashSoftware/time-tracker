@@ -1,13 +1,13 @@
 from datetime import datetime
 
-from flask import flash, redirect, render_template, request, url_for
-from flask_login import current_user, login_required, login_user, logout_user
-from werkzeug.urls import url_parse
-
 from app import app, db
 from app.forms import (AccountForm, EventForm, LoginForm, PasswordForm,
                        SignupForm)
 from app.models import Event, User
+from flask import flash, redirect, render_template, request, url_for
+from flask_login import current_user, login_required, login_user, logout_user
+from werkzeug.exceptions import Forbidden
+from werkzeug.urls import url_parse
 
 
 @app.route('/')
@@ -134,6 +134,8 @@ def create_event():
 @login_required
 def delete_event(id):
     event = Event.query.get_or_404(str(id))
+    if event not in current_user.events:
+        raise Forbidden()
     db.session.delete(event)
     db.session.commit()
     flash('Time entry has been deleted', 'success')
@@ -144,6 +146,8 @@ def delete_event(id):
 @login_required
 def update_event(id):
     event = Event.query.get_or_404(str(id))
+    if event not in current_user.events:
+        raise Forbidden()
     form = EventForm()
     if form.validate_on_submit():
         event.started_at = form.started_at.data

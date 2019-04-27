@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - HTTP Exception handling
 
+### Fixed
+
+- Raise Forbidden (403) exception when attempting to edit or delete time entries not belonging to the current user
+
 ## [0.9.0] - 2019-04-26
 
 ### Added
