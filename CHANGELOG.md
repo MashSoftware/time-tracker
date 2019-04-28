@@ -11,6 +11,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - HTTP Exception handling
 - Footer links
+- Alpha phase badge in nav bar
+- Address bar theme colour
 
 ### Fixed
 
