@@ -7,14 +7,14 @@
             <dd>{{ current_user.email_address }}</dd>
 
             <dt>Member since</dt>
-            <dd>{{ current_user.created_at.strftime('%d/%m/%Y %H:%M:%S') }}</dd>
+            <dd>{{ moment(current_user.created_at).format('LLLL') }}</dd>
 
             <dt>Last log in</dt>
-            <dd>{{ current_user.login_at.strftime('%d/%m/%Y %H:%M:%S') }}</dd>
+            <dd>{{ moment(current_user.login_at).calendar() }}</dd>
 
             {% if current_user.updated_at %}
             <dt>Last updated</dt>
-            <dd>{{ current_user.updated_at.strftime('%d/%m/%Y %H:%M:%S') }}</dd>
+            <dd>{{ moment(current_user.updated_at).format('LLLL') }}</dd>
             {% endif %}
         </dl>
     </div>
