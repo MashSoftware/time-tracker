@@ -7,8 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.10.0] - 2019-05-01
+
 ### Added
 
+- Display locale aware dates and times
 - HTTP Exception handling
 - Footer links
 - Alpha phase badge in nav bar
