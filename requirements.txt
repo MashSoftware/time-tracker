@@ -10,6 +10,7 @@ cffi==1.12.3              # via bcrypt
 click==7.0                # via flask
 flask-login==0.4.1
 flask-migrate==2.4.0
+flask-moment==0.7.0
 flask-sqlalchemy==2.4.0
 flask-wtf==0.14.2
 flask==1.0.2

@@ -1,7 +1,7 @@
 <div class="card">
     <ul class="list-group list-group-flush">
-        <li class="list-group-item">Start: {{ event.started_at.strftime('%d/%m/%Y %H:%M:%S') }}</li>
-        {% if event.ended_at %}<li class="list-group-item">Stop: {{ event.ended_at.strftime('%d/%m/%Y %H:%M:%S') }}</li>{% endif %}
+        <li class="list-group-item"><strong>Start: </strong>{{ moment(event.started_at).format('LLLL') }}</li>
+        {% if event.ended_at %}<li class="list-group-item"><strong>Stop: </strong>{{ moment(event.ended_at).format('LLLL') }}</li>{% endif %}
     </ul>
     <div class="card-footer text-muted">
         <a href="{{ url_for('update_event', id=event.id)}}" class="card-link"><i class="fas fa-edit fa-lg fa-fw"></i> Edit</a>
