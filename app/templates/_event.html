@@ -1,6 +1,6 @@
 <div class="card shadow-sm">
     <div class="card-body">
-        <p class="card-text">
+        <p class="card-text lead">
             {% if event.ended_at %}
                 {{ moment(event.started_at).format('LTS') }} to {{ moment(event.ended_at).format('LTS') }}
             {% else %}
