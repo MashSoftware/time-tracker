@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 
 - Display approximate time since started for in-progress entries
+- Auto refresh time since started every minute
 
 ### Changed
 
