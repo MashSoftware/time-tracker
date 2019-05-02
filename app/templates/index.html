@@ -33,7 +33,15 @@
     </div>
     <div class="col-md-8">
         {% for event in events %}
-        {% include '_event.html' %}
+            {% if loop.index == 1 %}
+                <h4>{{ moment(event.started_at).format('dddd Do MMMM YYYY') }}</h4>
+                {% include '_event.html' %}
+            {% elif event.started_at.strftime('%x') != loop.previtem.started_at.strftime('%x') %}
+                <h4>{{ moment(event.started_at).format('dddd Do MMMM YYYY') }}</h4>
+                {% include '_event.html' %}
+            {% else  %}
+                {% include '_event.html' %}
+            {% endif %}
         <br>
         {% endfor %}
     </div>
