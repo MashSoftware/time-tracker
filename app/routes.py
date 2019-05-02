@@ -159,4 +159,4 @@ def update_event(id):
     elif request.method == 'GET':
         form.started_at.data = event.started_at
         form.ended_at.data = event.ended_at
-    return render_template('event_form.html', title='Edit time', form=form)
+    return render_template('event_form.html', title='Edit time', form=form, event=event)
