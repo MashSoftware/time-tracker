@@ -2,9 +2,9 @@
     <div class="card-body">
         <p class="card-text">
             {% if event.ended_at %}
-                {{ moment(event.started_at).format('LTS') }} to {{ moment(event.ended_at).format('LTS') }}
+                {{ moment(event.started_at).format('HH:mm:ss') }} to {{ moment(event.ended_at).format('HH:mm:ss') }}
             {% else %}
-                {{ moment(event.started_at).format('LTS') }} 
+                {{ moment(event.started_at).format('HH:mm:ss') }} 
             {% endif %}
         </p>
         <a href="{{ url_for('update_event', id=event.id)}}" class="card-link"><i class="fas fa-edit fa-lg fa-fw"></i> Edit</a>
