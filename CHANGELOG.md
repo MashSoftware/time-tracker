@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Simplified time entry card layout
 - Using 24 hour time format
 - Grouped entries by start date
+- Moved delete time entry button from card to edit page to prevent accidental deletions
 
 ## [0.10.1] - 2019-05-01
 
