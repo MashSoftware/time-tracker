@@ -7,9 +7,9 @@
             <div class="form-group">
                 {{ form.started_at.label }}
                 {% if form.started_at.errors %}
-                {{ form.started_at(class="form-control is-invalid", type="datetime-local") }}
+                {{ form.started_at(class="form-control is-invalid") }}
                 {% else %}
-                {{ form.started_at(class="form-control", type="datetime-local") }}
+                {{ form.started_at(class="form-control") }}
                 {% endif %}
                 {% if form.started_at.description %}
                 <small id="{{ form.started_at.id }}Help" class="form-text text-muted">{{ form.started_at.description }}</small>
@@ -21,9 +21,9 @@
             <div class="form-group">
                 {{ form.ended_at.label }} <i>(optional)</i>
                 {% if form.ended_at.errors %}
-                {{ form.ended_at(class="form-control is-invalid", type="datetime-local") }}
+                {{ form.ended_at(class="form-control is-invalid") }}
                 {% else %}
-                {{ form.ended_at(class="form-control", type="datetime-local") }}
+                {{ form.ended_at(class="form-control") }}
                 {% endif %}
                 {% if form.ended_at.description %}
                 <small id="{{ form.ended_at.id }}Help" class="form-text text-muted">{{ form.ended_at.description }}</small>

@@ -19,6 +19,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Grouped entries by start date
 - Moved delete time entry button from card to edit page to prevent accidental deletions
 
+### Fixed
+
+- Editing times in Chrome resulted in an error due to the `datetime-local` picker tool removing seconds. Changed inputs to `text` type rather than HTML5 `datetime-local` to improve compatibility at the expense of browser/device native pickers. Needs further investigation to improve user experience.
+
 ## [0.10.1] - 2019-05-01
 
 ### Fixed
