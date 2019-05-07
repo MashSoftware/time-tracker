@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.11.0] - 2019-05-07
+
 ### Added
 
 - Display approximate time since started for in-progress entries
@@ -18,6 +20,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Using 24 hour time format
 - Grouped entries by start date
 - Moved delete time entry button from card to edit page to prevent accidental deletions
+- Handle times that span dates by showing the end date and time
+- Added icon and "now" to the button to make it clear the action relates to the current time
 
 ### Fixed
 
