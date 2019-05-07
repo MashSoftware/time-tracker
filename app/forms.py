@@ -57,12 +57,13 @@ class EventForm(FlaskForm):
     started_at = DateTimeField(
         'Start',
         format='%d/%m/%Y %H:%M:%S',
-        validators=[InputRequired(message="Started is required")])
+        validators=[InputRequired(message="Started is required")],
+        description="Must be in the format dd/mm/yyyy hh:mm:ss")
     ended_at = DateTimeField(
         'Stop',
         format='%d/%m/%Y %H:%M:%S',
         validators=[Optional()],
-        description="Leave blank if ongoing")
+        description="Must be in the format dd/mm/yyyy hh:mm:ss")
 
     def validate_started_at(self, started_at):
         if started_at.data > datetime.utcnow():
