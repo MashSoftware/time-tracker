@@ -2,7 +2,11 @@
     <div class="card-body">
         <p class="card-text lead">
             {% if event.ended_at %}
-                {{ moment(event.started_at).format('LTS') }} to {{ moment(event.ended_at).format('LTS') }}
+                {% if event.started_at.strftime('%x') != event.ended_at.strftime('%x') %}
+                    {{ moment(event.started_at).format('LTS') }} to {{ moment(event.ended_at).format('L') }} {{ moment(event.ended_at).format('LTS') }}
+                {% else %}
+                    {{ moment(event.started_at).format('LTS') }} to {{ moment(event.ended_at).format('LTS') }}
+                {% endif %}
             {% else %}
                 {{ moment(event.started_at).format('LTS') }} (Started {{ moment(event.started_at).fromNow(refresh=True) }})
             {% endif %}
