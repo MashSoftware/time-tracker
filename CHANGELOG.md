@@ -9,11 +9,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
-- Capture user selected timezone on sign up and in account details,
+- Capture user selected time zone on sign up.
+- Update time zone in account details.
 
 ### Changed
 
 - All primary action buttons are now larger than non-primary actions, to help the user identify the intended action to take.
+- All buttons are now block sized, to improve hit target on mobile devices and for consistency on all devices.
+
+### Fixed
+
+- Updating account details and _not_ changing email address generated a validation error, because the email address is already in use. Now if the email address is not changed no validation error occurrs.
 
 ## [0.11.0] - 2019-05-07
 
