@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+
+- Capture user selected timezone on sign up and in account details,
+
+### Changed
+
+- All primary action buttons are now larger than non-primary actions, to help the user identify the intended action to take.
+
 ## [0.11.0] - 2019-05-07
 
 ### Added

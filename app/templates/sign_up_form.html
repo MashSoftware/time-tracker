@@ -39,6 +39,15 @@
                 <div class="invalid-feedback">{{error}}</div>
                 {% endfor %}
             </div>
+            <div class="form-group">
+                {{ form.timezone.label }}
+                {% if form.timezone.errors %}
+                {{ form.timezone(class="form-control is-invalid") }}
+                {% else %}
+                {{ form.timezone(class="form-control") }}
+                {% endif %}
+                <small id="timezoneHelp" class="form-text text-muted">{{ form.timezone.description }}</small>
+            </div>
             <button class="btn btn-block btn-lg btn-primary" type="submit"><i class="fas fa-user-plus fa-lg fa-fw"></i> Sign up</button>
         </form>
     </div>

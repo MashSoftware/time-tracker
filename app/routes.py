@@ -1,13 +1,15 @@
 from datetime import datetime
 
-from app import app, db
-from app.forms import (AccountForm, EventForm, LoginForm, PasswordForm,
-                       SignupForm)
-from app.models import Event, User
+import pytz
 from flask import flash, redirect, render_template, request, url_for
 from flask_login import current_user, login_required, login_user, logout_user
 from werkzeug.exceptions import Forbidden
 from werkzeug.urls import url_parse
+
+from app import app, db
+from app.forms import (AccountForm, EventForm, LoginForm, PasswordForm,
+                       SignupForm)
+from app.models import Event, User
 
 
 @app.route('/')
@@ -27,7 +29,8 @@ def signup():
     if form.validate_on_submit():
         user = User(
             email_address=form.email_address.data,
-            password=form.password.data)
+            password=form.password.data,
+            timezone=form.timezone.data)
         db.session.add(user)
         db.session.commit()
         flash('Thanks for signing up! Please log in to continue.', 'success')
@@ -104,6 +107,7 @@ def update_account():
     form = AccountForm()
     if form.validate_on_submit():
         current_user.email_address = form.email_address.data
+        current_user.timezone = form.timezone.data
         current_user.updated_at = datetime.utcnow()
         db.session.add(current_user)
         db.session.commit()
@@ -111,6 +115,7 @@ def update_account():
         return redirect(url_for('account'))
     elif request.method == 'GET':
         form.email_address.data = current_user.email_address
+        form.timezone.data = current_user.timezone
     return render_template('account_form.html', title='Update details', form=form)
 
 

@@ -6,6 +6,9 @@
             <dt>Email address</dt>
             <dd>{{ current_user.email_address }}</dd>
 
+            <dt>Timezone</dt>
+            <dd>{{ current_user.timezone }}</dd>
+
             <dt>Member since</dt>
             <dd>{{ moment(current_user.created_at).format('LLLL') }}</dd>
 

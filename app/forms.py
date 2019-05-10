@@ -1,7 +1,10 @@
 from datetime import datetime
 
+import pytz
+from flask_login import current_user
 from flask_wtf import FlaskForm
-from wtforms import BooleanField, DateTimeField, PasswordField, StringField
+from wtforms import (BooleanField, DateTimeField, PasswordField, SelectField,
+                     StringField)
 from wtforms.validators import (Email, EqualTo, InputRequired, Length,
                                 Optional, ValidationError)
 
@@ -9,12 +12,19 @@ from app.models import User
 
 
 class SignupForm(FlaskForm):
+    tz_tuples = []
+    for tz in pytz.common_timezones:
+        tz_tuples.append((tz, tz))
+
     email_address = StringField('Email address', validators=[InputRequired(message="Email address is required"), Email()],
                                 description="We'll never share your email with anyone else.")
     password = PasswordField('Password', validators=[InputRequired(message="Password is required"), Length(min=8, max=72, message="Password must be between 8 and 72 characters")],
                              description="Must be between 8 and 72 characters.")
     confirm_password = PasswordField('Confirm password', validators=[InputRequired(
         message="Confirm your password"), EqualTo('password', message="Passwords must match.")])
+    timezone = SelectField('Timezone', validators=[InputRequired(message="Timezone is required")],
+                           choices=tz_tuples,
+                           default='Europe/London')
 
     def validate_email_address(self, email_address):
         user = User.query.filter_by(email_address=email_address.data).first()
@@ -44,13 +54,21 @@ class PasswordForm(FlaskForm):
 
 
 class AccountForm(FlaskForm):
+    tz_tuples = []
+    for tz in pytz.common_timezones:
+        tz_tuples.append((tz, tz))
+
     email_address = StringField('Email address', validators=[InputRequired(message="Email address is required"), Email()],
                                 description="We'll never share your email with anyone else.")
+    timezone = SelectField('Timezone', validators=[InputRequired(message="Timezone is required")],
+                           choices=tz_tuples,
+                           default='Europe/London')
 
     def validate_email_address(self, email_address):
-        user = User.query.filter_by(email_address=email_address.data).first()
-        if user is not None:
-            raise ValidationError('Email address is already in use')
+        if email_address.data != current_user.email_address:
+            user = User.query.filter_by(email_address=email_address.data).first()
+            if user is not None:
+                raise ValidationError('Email address is already in use')
 
 
 class EventForm(FlaskForm):
