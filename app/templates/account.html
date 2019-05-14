@@ -7,7 +7,7 @@
             <dd>{{ user.email_address }}</dd>
 
             <dt>Timezone</dt>
-            <dd>{{ user.timezone }}</dd>
+            <dd>{{ user.timezone.replace("_", " ") }}</dd>
 
             <dt>Member since</dt>
             <dd>{{ user.created_at.strftime('%A %d %B %Y %H:%M:%S %Z') }}</dd>
