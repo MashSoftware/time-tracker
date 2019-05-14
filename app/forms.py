@@ -14,7 +14,7 @@ from app.models import User
 class SignupForm(FlaskForm):
     tz_tuples = []
     for tz in pytz.common_timezones:
-        tz_tuples.append((tz, tz))
+        tz_tuples.append((tz, tz.replace("_", " ")))
 
     email_address = StringField('Email address', validators=[InputRequired(message="Email address is required"), Email()],
                                 description="We'll never share your email with anyone else.")
@@ -56,7 +56,7 @@ class PasswordForm(FlaskForm):
 class AccountForm(FlaskForm):
     tz_tuples = []
     for tz in pytz.common_timezones:
-        tz_tuples.append((tz, tz))
+        tz_tuples.append((tz, tz.replace("_", " ")))
 
     email_address = StringField('Email address', validators=[InputRequired(message="Email address is required"), Email()],
                                 description="We'll never share your email with anyone else.")
