@@ -84,12 +84,12 @@ class EventForm(FlaskForm):
         description="Must be in the format dd/mm/yyyy hh:mm:ss")
 
     def validate_started_at(self, started_at):
-        if started_at.data > datetime.utcnow():
+        if pytz.timezone(current_user.timezone).localize(started_at.data) > pytz.utc.localize(datetime.utcnow()):
             raise ValidationError('Start must be in the past')
 
     def validate_ended_at(self, ended_at):
         if ended_at.data <= self.started_at.data:
             raise ValidationError('Stop must be after start')
 
-        if ended_at.data > datetime.utcnow():
+        if pytz.timezone(current_user.timezone).localize(ended_at.data) > pytz.utc.localize(datetime.utcnow()):
             raise ValidationError('Stop must be in the past')

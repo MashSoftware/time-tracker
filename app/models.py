@@ -2,6 +2,7 @@ import uuid
 from datetime import datetime
 
 import bcrypt
+import pytz
 from flask_login import UserMixin
 from sqlalchemy.dialects.postgresql import UUID
 
@@ -28,7 +29,7 @@ class User(UserMixin, db.Model):
         self.id = str(uuid.uuid4())
         self.email_address = email_address.lower()
         self.timezone = timezone
-        self.created_at = datetime.utcnow()
+        self.created_at = pytz.utc.localize(datetime.utcnow())
         self.set_password(password)
 
     def set_password(self, password):

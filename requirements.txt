@@ -10,14 +10,13 @@ cffi==1.12.3              # via bcrypt
 click==7.0                # via flask
 flask-login==0.4.1
 flask-migrate==2.4.0
-flask-moment==0.7.0
 flask-sqlalchemy==2.4.0
 flask-wtf==0.14.2
 flask==1.0.2
 gunicorn==19.9.0
 itsdangerous==1.1.0       # via flask
 jinja2==2.10.1            # via flask
-mako==1.0.9               # via alembic
+mako==1.0.10              # via alembic
 markupsafe==1.1.1         # via jinja2, mako
 psycopg2==2.8.2
 pycparser==2.19           # via cffi
