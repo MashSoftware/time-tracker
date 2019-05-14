@@ -21,7 +21,7 @@ markupsafe==1.1.1         # via jinja2, mako
 psycopg2==2.8.2
 pycparser==2.19           # via cffi
 python-dateutil==2.8.0    # via alembic
-python-dotenv==0.10.1
+python-dotenv==0.10.2
 python-editor==1.0.4      # via alembic
 pytz==2019.1
 six==1.12.0               # via bcrypt, python-dateutil

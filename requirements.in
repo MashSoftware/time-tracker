@@ -6,7 +6,7 @@ flask-wtf==0.14.2
 flask==1.0.2
 gunicorn==19.9.0
 psycopg2==2.8.2
-python-dotenv==0.10.1
+python-dotenv==0.10.2
 pytz==2019.1
 # Generated with piprot 0.9.10
 # Looks like you've been keeping up to date, time for a delicious beverage!
