@@ -27,17 +27,17 @@
 <div class="row">
     <div class="col-md-4">
         <a class="btn btn-primary btn-lg btn-block" href="/push" role="button">
-            <h1><i class="fas fa-stopwatch"></i> {% if events and events[0].ended_at is none %}Stop now{% else %}Start now{% endif %}</h1>
+            <h1>{% if events and events[0].ended_at is none %}Stop now{% else %}Start now{% endif %}</h1>
         </a>
         <br>
     </div>
     <div class="col-md-8">
         {% for event in events %}
             {% if loop.index == 1 %}
-                <h4>{{ moment(event.started_at).format('dddd Do MMMM YYYY') }}</h4>
+                <h4>{{ event.started_at.strftime('%A %d %B %Y') }}</h4>
                 {% include '_event.html' %}
-            {% elif event.started_at.strftime('%x') != loop.previtem.started_at.strftime('%x') %}
-                <h4>{{ moment(event.started_at).format('dddd Do MMMM YYYY') }}</h4>
+            {% elif event.started_at.strftime('%y%m%d') != loop.previtem.started_at.strftime('%y%m%d') %}
+                <h4>{{ event.started_at.strftime('%A %d %B %Y') }}</h4>
                 {% include '_event.html' %}
             {% else  %}
                 {% include '_event.html' %}

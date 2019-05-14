@@ -4,26 +4,29 @@
     <div class="col">
         <dl>
             <dt>Email address</dt>
-            <dd>{{ current_user.email_address }}</dd>
+            <dd>{{ user.email_address }}</dd>
+
+            <dt>Timezone</dt>
+            <dd>{{ user.timezone.replace("_", " ") }}</dd>
 
             <dt>Member since</dt>
-            <dd>{{ moment(current_user.created_at).format('LLLL') }}</dd>
+            <dd>{{ user.created_at.strftime('%A %d %B %Y %H:%M:%S %Z') }}</dd>
 
             <dt>Last log in</dt>
-            <dd>{{ moment(current_user.login_at).calendar() }}</dd>
+            <dd>{{ user.login_at.strftime('%A %d %B %Y %H:%M:%S %Z') }}</dd>
 
-            {% if current_user.updated_at %}
+            {% if user.updated_at %}
             <dt>Last updated</dt>
-            <dd>{{ moment(current_user.updated_at).format('LLLL') }}</dd>
+            <dd>{{ user.updated_at.strftime('%A %d %B %Y %H:%M:%S %Z') }}</dd>
             {% endif %}
         </dl>
     </div>
 </div>
 <div class="row">
-    <div class="col">
-        <p><a class="btn btn-primary" href="{{ url_for('update_account') }}" role="button"><i class="fas fa-user-edit fa-lg fa-fw"></i> Update details</a></p>
-        <p><a class="btn btn-primary" href="{{ url_for('change_password') }}" role="button"><i class="fas fa-key fa-lg fa-fw"></i> Change password</a></p>
-        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash fa-lg fa-fw"></i> Delete account</button></p>
+    <div class="col-md-4">
+        <a class="btn btn-block btn-lg btn-primary" href="{{ url_for('update_account') }}" role="button"><i class="fas fa-user-edit fa-lg fa-fw"></i> Update account</a>
+        <a class="btn btn-block btn-lg btn-primary" href="{{ url_for('change_password') }}" role="button"><i class="fas fa-key fa-lg fa-fw"></i> Change password</a>
+        <button type="button" class="btn btn-block btn-danger" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash fa-lg fa-fw"></i> Delete account</button>
     </div>
 </div>
 

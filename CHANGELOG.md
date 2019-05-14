@@ -7,6 +7,33 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.12.0] - 2019-05-14
+
+### Added
+
+- Capture user selected time zone on sign up.
+- Update time zone in account details.
+
+### Changed
+
+- Timezones and conversions are now handled server-side based on the users selected timezone in their account.
+- Existing accounts have a default UTC timezone until set by the user.
+- All primary action buttons are now larger than non-primary actions, to help the user identify the intended action to take.
+- All buttons are now block sized, to improve hit target on mobile devices and for consistency on all devices.
+- Reduced responsive breakpoint for forms so fields don't render full page width on iPad sized devices.
+
+### Removed
+
+- Removed Flask Moment (and therefore MomentJS) in favour of server-side timezone handling.
+- Removed approximate time since started for in-progress entries.
+- Removed "Go back" button on forms, since this just replicates browser back in most cases.
+- Removed stopwatch icon from start/stop button.
+
+### Fixed
+
+- Updating account details and _not_ changing email address generated a validation error, because the email address is already in use. Now if the email address is not changed no validation error occurrs.
+- Fixed error when trying to localise a non-existant timestamp for accounts that have never been updated.
+
 ## [0.11.0] - 2019-05-07
 
 ### Added

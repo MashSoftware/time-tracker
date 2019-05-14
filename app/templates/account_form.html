@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="row">
-    <div class="col-lg-6">
+    <div class="col-md-6">
         <form action="" method="post" novalidate>
             {{ form.csrf_token }}
             <div class="form-group">
@@ -16,8 +16,16 @@
                 <div class="invalid-feedback">{{error}}</div>
                 {% endfor %}
             </div>
-            <p><button class="btn btn-lg btn-primary" type="submit"><i class="fas fa-user-edit fa-lg fa-fw"></i> Update</button></p>
-            <p><a class="btn btn-secondary" href="{{ url_for('account') }}" role="button"><i class="fas fa-chevron-left fa-lg fa-fw"></i> Go back</a></p>
+            <div class="form-group">
+                {{ form.timezone.label }}
+                {% if form.timezone.errors %}
+                {{ form.timezone(class="form-control is-invalid") }}
+                {% else %}
+                {{ form.timezone(class="form-control") }}
+                {% endif %}
+                <small id="timezoneHelp" class="form-text text-muted">{{ form.timezone.description }}</small>
+            </div>
+            <button class="btn btn-block btn-lg btn-primary" type="submit"><i class="fas fa-user-edit fa-lg fa-fw"></i> Update</button>
         </form>
     </div>
 </div>
