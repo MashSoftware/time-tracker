@@ -2,7 +2,8 @@ from datetime import datetime
 
 import pytz
 from flask import flash, redirect, render_template, request, url_for
-from flask_login import current_user, login_required, login_user, logout_user
+from flask_login import (current_user, fresh_login_required, login_required,
+                         login_user, logout_user)
 from werkzeug.exceptions import Forbidden
 from werkzeug.urls import url_parse
 
@@ -82,7 +83,7 @@ def account():
 
 
 @app.route('/account/delete')
-@login_required
+@fresh_login_required
 def delete_account():
     db.session.delete(current_user)
     db.session.commit()
@@ -91,7 +92,7 @@ def delete_account():
 
 
 @app.route('/account/change-password', methods=['GET', 'POST'])
-@login_required
+@fresh_login_required
 def change_password():
     form = PasswordForm()
     if form.validate_on_submit():
@@ -110,7 +111,7 @@ def change_password():
 
 
 @app.route('/account/update', methods=['GET', 'POST'])
-@login_required
+@fresh_login_required
 def update_account():
     form = AccountForm()
     if form.validate_on_submit():
