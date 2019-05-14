@@ -77,7 +77,7 @@ def account():
     user = current_user
     user.created_at = user.created_at.astimezone(pytz.timezone(user.timezone))
     user.login_at = user.login_at.astimezone(pytz.timezone(user.timezone))
-    user.updated_at = user.updated_at.astimezone(pytz.timezone(user.timezone))
+    user.updated_at = user.updated_at.astimezone(pytz.timezone(user.timezone)) if user.updated_at else None
     return render_template('account.html', title='My Account', user=user)
 
 
