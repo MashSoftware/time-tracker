@@ -45,8 +45,6 @@ def signup():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    if current_user.is_authenticated:
-        return redirect(url_for('index'))
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email_address=form.email_address.data).first()
@@ -62,6 +60,8 @@ def login():
             next_page = url_for('index')
         flash('Welcome back.', 'success')
         return redirect(next_page)
+    elif request.method == 'GET' and current_user.is_authenticated:
+        form.email_address.data = current_user.email_address
     return render_template('log_in_form.html', title='Log in', form=form)
 
 
