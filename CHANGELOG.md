@@ -10,6 +10,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 
 - Require fresh login in order to update account details, change password or delete account.
+- Global rate limits of 1 per second and 60 per minute for all unauthenticated requests based on remote IP address.
+- Rate limiting backed by Redis.
 
 ### Changed
 
