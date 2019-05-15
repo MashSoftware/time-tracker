@@ -9,5 +9,6 @@ gunicorn==19.9.0
 psycopg2==2.8.2
 python-dotenv==0.10.2
 pytz==2019.1
+redis==3.2.1
 # Generated with piprot 0.9.10
 # Looks like you've been keeping up to date, time for a delicious beverage!
