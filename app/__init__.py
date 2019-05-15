@@ -13,5 +13,7 @@ login.login_view = 'login'
 login.login_message_category = 'info'
 login.refresh_view = 'login'
 login.needs_refresh_message_category = 'info'
+app.jinja_env.trim_blocks = True
+app.jinja_env.lstrip_blocks = True
 
 from app import routes, models, errors

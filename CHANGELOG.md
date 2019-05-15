@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - Require fresh login in order to update account details, change password or delete account.
 
+### Changed
+
+- Strip whitespace from around template tags to reduce the size of output html pages.
+
 ## [0.12.0] - 2019-05-14
 
 ### Added
