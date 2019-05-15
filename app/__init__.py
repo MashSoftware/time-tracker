@@ -12,5 +12,6 @@ login = LoginManager(app)
 login.login_view = 'login'
 login.login_message_category = 'info'
 login.refresh_view = 'login'
+login.needs_refresh_message_category = 'info'
 
 from app import routes, models, errors
