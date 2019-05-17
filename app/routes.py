@@ -7,7 +7,7 @@ from flask_login import (current_user, fresh_login_required, login_required,
 from werkzeug.exceptions import Forbidden
 from werkzeug.urls import url_parse
 
-from app import app, db
+from app import app, db, limiter
 from app.forms import (AccountForm, EventForm, LoginForm, PasswordForm,
                        SignupForm)
 from app.models import Event, User
@@ -74,6 +74,7 @@ def logout():
 
 @app.route('/account')
 @login_required
+@limiter.limit("1 per second", key_func=lambda: current_user.id)
 def account():
     user = current_user
     user.created_at = user.created_at.astimezone(pytz.timezone(user.timezone))
@@ -84,6 +85,7 @@ def account():
 
 @app.route('/account/delete')
 @fresh_login_required
+@limiter.limit("1 per second", key_func=lambda: current_user.id)
 def delete_account():
     db.session.delete(current_user)
     db.session.commit()
@@ -93,6 +95,7 @@ def delete_account():
 
 @app.route('/account/change-password', methods=['GET', 'POST'])
 @fresh_login_required
+@limiter.limit("1 per second", key_func=lambda: current_user.id)
 def change_password():
     form = PasswordForm()
     if form.validate_on_submit():
@@ -112,6 +115,7 @@ def change_password():
 
 @app.route('/account/update', methods=['GET', 'POST'])
 @fresh_login_required
+@limiter.limit("1 per second", key_func=lambda: current_user.id)
 def update_account():
     form = AccountForm()
     if form.validate_on_submit():
@@ -130,6 +134,7 @@ def update_account():
 
 @app.route('/push')
 @login_required
+@limiter.limit("1 per second", key_func=lambda: current_user.id)
 def create_event():
     event = Event.query.filter_by(user_id=current_user.id).order_by(Event.started_at.desc()).first()
     if event and event.ended_at is None:
@@ -146,6 +151,7 @@ def create_event():
 
 @app.route('/push/<uuid:id>/delete')
 @login_required
+@limiter.limit("1 per second", key_func=lambda: current_user.id)
 def delete_event(id):
     event = Event.query.get_or_404(str(id))
     if event not in current_user.events:
@@ -158,6 +164,7 @@ def delete_event(id):
 
 @app.route('/push/<uuid:id>/update', methods=['GET', 'POST'])
 @login_required
+@limiter.limit("1 per second", key_func=lambda: current_user.id)
 def update_event(id):
     event = Event.query.get_or_404(str(id))
     if event not in current_user.events:
