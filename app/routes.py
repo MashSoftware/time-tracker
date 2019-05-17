@@ -16,8 +16,9 @@ from app.models import Event, User
 @app.route('/')
 def index():
     if current_user.is_authenticated:
-        events = Event.query.filter_by(user_id=current_user.id).order_by(Event.started_at.desc()).all()
-        for event in events:
+        page = request.args.get('page', 1, type=int)
+        events = Event.query.filter_by(user_id=current_user.id).order_by(Event.started_at.desc()).paginate(page, 10, True)
+        for event in events.items:
             event.started_at = event.started_at.astimezone(pytz.timezone(current_user.timezone))
             if event.ended_at:
                 event.ended_at = event.ended_at.astimezone(pytz.timezone(current_user.timezone))

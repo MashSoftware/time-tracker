@@ -27,12 +27,12 @@
 <div class="row">
     <div class="col-md-4">
         <a class="btn btn-primary btn-lg btn-block" href="/push" role="button">
-            <h1>{% if events and events[0].ended_at is none %}Stop now{% else %}Start now{% endif %}</h1>
+            <h1>{% if events and events.items[0].ended_at is none %}Stop now{% else %}Start now{% endif %}</h1>
         </a>
         <br>
     </div>
     <div class="col-md-8">
-        {% for event in events %}
+        {% for event in events.items %}
             {% if loop.index == 1 %}
                 <h4>{{ event.started_at.strftime('%A %d %B %Y') }}</h4>
                 {% include '_event.html' %}
@@ -44,6 +44,35 @@
             {% endif %}
         <br>
         {% endfor %}
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+                {% if events.has_prev %}
+                <li class="page-item"><a class="page-link" href="{{ url_for('index', page=events.prev_num) }}">Previous</a></li>
+                {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                </li>
+                {% endif %}
+                {% for page in events.iter_pages() %}
+                    {% if page %}
+                        {% if page != events.page %}
+                        <li class="page-item"><a class="page-link" href="{{ url_for('index', page=page) }}">{{ page }}</a></li>
+                        {% else %}
+                        <li class="page-item active" aria-current="page">
+                            <a class="page-link" href="{{ url_for('index', page=page) }}">{{ page }} <span class="sr-only">(current)</span></a>
+                        </li>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+                {% if events.has_next %}
+                <li class="page-item"><a class="page-link" href="{{ url_for('index', page=events.next_num) }}">Next</a></li>
+                {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Next</a>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
     </div>
 </div>
 {% endif %}
