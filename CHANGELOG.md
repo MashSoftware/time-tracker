@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Rate limiting backed by Redis.
 - Global rate limits of 1 per second and 60 per minute for all unauthenticated requests, based on remote IP address.
 - Specific rate limits of 1 per second for authenticated requests to account and time related actions, based on user ID.
+- Enabled gzip compression.
 
 ### Changed
 
