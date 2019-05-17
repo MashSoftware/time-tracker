@@ -171,15 +171,13 @@ def update_event(id):
         raise Forbidden()
     form = EventForm()
     if form.validate_on_submit():
-        # Create a user timezone localised timestamp from the form data
         locale_started_at = pytz.timezone(current_user.timezone).localize(form.started_at.data)
-        locale_ended_at = pytz.timezone(current_user.timezone).localize(form.ended_at.data)
-        # Convert localised timestamp into UTC
         utc_started_at = locale_started_at.astimezone(pytz.utc)
-        utc_ended_at = locale_ended_at.astimezone(pytz.utc)
-        # Persist UTC timestamp
         event.started_at = utc_started_at
-        event.ended_at = utc_ended_at
+        if form.ended_at.data:
+            locale_ended_at = pytz.timezone(current_user.timezone).localize(form.ended_at.data)
+            utc_ended_at = locale_ended_at.astimezone(pytz.utc)
+            event.ended_at = utc_ended_at
         db.session.add(event)
         db.session.commit()
         flash('Time entry has been updated', 'success')
@@ -187,5 +185,6 @@ def update_event(id):
     elif request.method == 'GET':
         # Show timestamp in users localised timezone
         form.started_at.data = event.started_at.astimezone(pytz.timezone(current_user.timezone))
-        form.ended_at.data = event.ended_at.astimezone(pytz.timezone(current_user.timezone))
+        if event.ended_at:
+            form.ended_at.data = event.ended_at.astimezone(pytz.timezone(current_user.timezone))
     return render_template('event_form.html', title='Edit time', form=form, event=event)
