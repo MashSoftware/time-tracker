@@ -2,11 +2,12 @@ from datetime import datetime
 
 import pytz
 from flask import flash, redirect, render_template, request, url_for
-from flask_login import current_user, login_required, login_user, logout_user
+from flask_login import (current_user, fresh_login_required, login_required,
+                         login_user, logout_user)
 from werkzeug.exceptions import Forbidden
 from werkzeug.urls import url_parse
 
-from app import app, db
+from app import app, db, limiter
 from app.forms import (AccountForm, EventForm, LoginForm, PasswordForm,
                        SignupForm)
 from app.models import Event, User
@@ -44,8 +45,6 @@ def signup():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    if current_user.is_authenticated:
-        return redirect(url_for('index'))
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email_address=form.email_address.data).first()
@@ -61,6 +60,8 @@ def login():
             next_page = url_for('index')
         flash('Welcome back.', 'success')
         return redirect(next_page)
+    elif request.method == 'GET' and current_user.is_authenticated:
+        form.email_address.data = current_user.email_address
     return render_template('log_in_form.html', title='Log in', form=form)
 
 
@@ -73,6 +74,7 @@ def logout():
 
 @app.route('/account')
 @login_required
+@limiter.limit("1 per second", key_func=lambda: current_user.id)
 def account():
     user = current_user
     user.created_at = user.created_at.astimezone(pytz.timezone(user.timezone))
@@ -82,7 +84,8 @@ def account():
 
 
 @app.route('/account/delete')
-@login_required
+@fresh_login_required
+@limiter.limit("1 per second", key_func=lambda: current_user.id)
 def delete_account():
     db.session.delete(current_user)
     db.session.commit()
@@ -91,7 +94,8 @@ def delete_account():
 
 
 @app.route('/account/change-password', methods=['GET', 'POST'])
-@login_required
+@fresh_login_required
+@limiter.limit("1 per second", key_func=lambda: current_user.id)
 def change_password():
     form = PasswordForm()
     if form.validate_on_submit():
@@ -110,7 +114,8 @@ def change_password():
 
 
 @app.route('/account/update', methods=['GET', 'POST'])
-@login_required
+@fresh_login_required
+@limiter.limit("1 per second", key_func=lambda: current_user.id)
 def update_account():
     form = AccountForm()
     if form.validate_on_submit():
@@ -129,6 +134,7 @@ def update_account():
 
 @app.route('/push')
 @login_required
+@limiter.limit("1 per second", key_func=lambda: current_user.id)
 def create_event():
     event = Event.query.filter_by(user_id=current_user.id).order_by(Event.started_at.desc()).first()
     if event and event.ended_at is None:
@@ -145,6 +151,7 @@ def create_event():
 
 @app.route('/push/<uuid:id>/delete')
 @login_required
+@limiter.limit("1 per second", key_func=lambda: current_user.id)
 def delete_event(id):
     event = Event.query.get_or_404(str(id))
     if event not in current_user.events:
@@ -157,21 +164,20 @@ def delete_event(id):
 
 @app.route('/push/<uuid:id>/update', methods=['GET', 'POST'])
 @login_required
+@limiter.limit("1 per second", key_func=lambda: current_user.id)
 def update_event(id):
     event = Event.query.get_or_404(str(id))
     if event not in current_user.events:
         raise Forbidden()
     form = EventForm()
     if form.validate_on_submit():
-        # Create a user timezone localised timestamp from the form data
         locale_started_at = pytz.timezone(current_user.timezone).localize(form.started_at.data)
-        locale_ended_at = pytz.timezone(current_user.timezone).localize(form.ended_at.data)
-        # Convert localised timestamp into UTC
         utc_started_at = locale_started_at.astimezone(pytz.utc)
-        utc_ended_at = locale_ended_at.astimezone(pytz.utc)
-        # Persist UTC timestamp
         event.started_at = utc_started_at
-        event.ended_at = utc_ended_at
+        if form.ended_at.data:
+            locale_ended_at = pytz.timezone(current_user.timezone).localize(form.ended_at.data)
+            utc_ended_at = locale_ended_at.astimezone(pytz.utc)
+            event.ended_at = utc_ended_at
         db.session.add(event)
         db.session.commit()
         flash('Time entry has been updated', 'success')
@@ -179,5 +185,6 @@ def update_event(id):
     elif request.method == 'GET':
         # Show timestamp in users localised timezone
         form.started_at.data = event.started_at.astimezone(pytz.timezone(current_user.timezone))
-        form.ended_at.data = event.ended_at.astimezone(pytz.timezone(current_user.timezone))
+        if event.ended_at:
+            form.ended_at.data = event.ended_at.astimezone(pytz.timezone(current_user.timezone))
     return render_template('event_form.html', title='Edit time', form=form, event=event)

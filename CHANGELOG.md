@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.13.0] - 2019-05-17
+
+### Added
+
+- Require fresh login in order to update account details, change password or delete account.
+- Rate limiting backed by Redis.
+- Global rate limits of 1 per second and 60 per minute for all unauthenticated requests, based on remote IP address.
+- Specific rate limits of 1 per second for authenticated requests to account and time related actions, based on user ID.
+- Enabled gzip compression.
+
+### Changed
+
+- Strip whitespace from around template tags to reduce the size of output html pages.
+
+### Fixed
+
+- Fixed an error that occurred when editing a time entry with no end timestamp due to null timezone conversion.
+
 ## [0.12.0] - 2019-05-14
 
 ### Added
