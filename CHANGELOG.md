@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+
+- Pagination of time entries, with 10 per page.
+- Controls to navigate paginated time entries.
+
 ## [0.13.0] - 2019-05-17
 
 ### Added
