@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.13.0] - 2019-05-14
+
 ### Added
 
 - Require fresh login in order to update account details, change password or delete account.
