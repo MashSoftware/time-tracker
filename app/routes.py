@@ -18,11 +18,16 @@ def index():
     if current_user.is_authenticated:
         page = request.args.get('page', 1, type=int)
         events = Event.query.filter_by(user_id=current_user.id).order_by(Event.started_at.desc()).paginate(page, 10, True)
+        last_event = Event.query.filter_by(user_id=current_user.id).order_by(Event.started_at.desc()).first()
+        if last_event and last_event.ended_at:
+            start = True
+        else:
+            start = False
         for event in events.items:
             event.started_at = event.started_at.astimezone(pytz.timezone(current_user.timezone))
             if event.ended_at:
                 event.ended_at = event.ended_at.astimezone(pytz.timezone(current_user.timezone))
-        return render_template('index.html', events=events)
+        return render_template('index.html', events=events, start=start)
     else:
         return render_template('index.html')
 

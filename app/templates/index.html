@@ -27,7 +27,7 @@
 <div class="row">
     <div class="col-md-4">
         <a class="btn btn-primary btn-lg btn-block" href="/push" role="button">
-            <h1>{% if events.items and events.items[0].ended_at is none %}Stop now{% else %}Start now{% endif %}</h1>
+            <h1>{% if start %}Start now{% else %}Stop now{% endif %}</h1>
         </a>
         <br>
     </div>
