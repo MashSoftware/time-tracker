@@ -184,6 +184,8 @@ def update_event(id):
             locale_ended_at = pytz.timezone(current_user.timezone).localize(form.ended_at.data)
             utc_ended_at = locale_ended_at.astimezone(pytz.utc)
             event.ended_at = utc_ended_at
+        else:
+            event.ended_at = None
         db.session.add(event)
         db.session.commit()
         flash('Time entry has been updated', 'success')
