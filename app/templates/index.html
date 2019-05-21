@@ -26,9 +26,18 @@
 {% else %}
 <div class="row">
     <div class="col-md-4">
-        <a class="btn btn-primary btn-lg btn-block" href="/push" role="button">
-            <h1>{% if start %}Start now{% else %}Stop now{% endif %}</h1>
-        </a>
+        <div class="btn-group btn-block">
+            <a class="btn btn-primary btn-lg btn-block" href="{{ url_for('create_event') }}" role="button">
+                <h1>{% if start %}Start now{% else %}Stop now{% endif %}</h1>
+            </a>
+            <button type="button" class="btn btn-lg btn-primary dropdown-toggle dropdown-toggle-split"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="{{ url_for('manual_event') }}">Manual entry</a>
+            </div>
+        </div>
         <br>
     </div>
     <div class="col-md-8">

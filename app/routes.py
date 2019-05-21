@@ -155,6 +155,28 @@ def create_event():
     return redirect(url_for('index'))
 
 
+@app.route('/push/manual', methods=['GET', 'POST'])
+@login_required
+@limiter.limit("1 per second", key_func=lambda: current_user.id)
+def manual_event():
+    form = EventForm()
+    if form.validate_on_submit():
+        locale_started_at = pytz.timezone(current_user.timezone).localize(form.started_at.data)
+        utc_started_at = locale_started_at.astimezone(pytz.utc)
+        event = Event(user_id=current_user.id, started_at=utc_started_at)
+        if form.ended_at.data:
+            locale_ended_at = pytz.timezone(current_user.timezone).localize(form.ended_at.data)
+            utc_ended_at = locale_ended_at.astimezone(pytz.utc)
+            event.ended_at = utc_ended_at
+        else:
+            event.ended_at = None
+        db.session.add(event)
+        db.session.commit()
+        flash('Time entry has been added', 'success')
+        return redirect(url_for('index'))
+    return render_template('create_event_form.html', title='Enter time', form=form)
+
+
 @app.route('/push/<uuid:id>/delete')
 @login_required
 @limiter.limit("1 per second", key_func=lambda: current_user.id)
@@ -195,4 +217,4 @@ def update_event(id):
         form.started_at.data = event.started_at.astimezone(pytz.timezone(current_user.timezone))
         if event.ended_at:
             form.ended_at.data = event.ended_at.astimezone(pytz.timezone(current_user.timezone))
-    return render_template('event_form.html', title='Edit time', form=form, event=event)
+    return render_template('update_event_form.html', title='Edit time', form=form, event=event)
