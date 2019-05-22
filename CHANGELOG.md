@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.14.1] - 2019-05-22
+
+### Fixed
+
+- "Start/stop" button displayed the wrong text for new users with no entries, now corrected.
+- An unsuccessful login attempt hit the rate limiter due to the redirect to the same page, added a 1 second sleep to overcome.
+- Spacing between the new split button and the first date entry on mobile was a little close, added some padding.
+
 ## [0.14.0] - 2019-05-21
 
 ### Added

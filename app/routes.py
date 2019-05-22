@@ -1,3 +1,4 @@
+import time
 from datetime import datetime
 
 import pytz
@@ -19,7 +20,7 @@ def index():
         page = request.args.get('page', 1, type=int)
         events = Event.query.filter_by(user_id=current_user.id).order_by(Event.started_at.desc()).paginate(page, 10, True)
         last_event = Event.query.filter_by(user_id=current_user.id).order_by(Event.started_at.desc()).first()
-        if last_event and last_event.ended_at:
+        if (last_event and last_event.ended_at) or last_event is None:
             start = True
         else:
             start = False
@@ -55,6 +56,7 @@ def login():
     if form.validate_on_submit():
         user = User.query.filter_by(email_address=form.email_address.data).first()
         if user is None or not user.check_password(form.password.data):
+            time.sleep(1)
             flash('Invalid email address or password.', 'danger')
             return redirect(url_for('login'))
         login_user(user, remember=form.remember_me.data)
