@@ -42,16 +42,35 @@
     </div>
     <div class="col-md-8">
         {% for event in events.items %}
-            {% if loop.index == 1 %}
-                <h4>{{ event.started_at.strftime('%A %d %B %Y') }}</h4>
-                {% include '_event.html' %}
-            {% elif event.started_at.strftime('%y%m%d') != loop.previtem.started_at.strftime('%y%m%d') %}
-                <h4>{{ event.started_at.strftime('%A %d %B %Y') }}</h4>
-                {% include '_event.html' %}
-            {% else  %}
-                {% include '_event.html' %}
-            {% endif %}
+        {% if loop.index == 1 or event.started_at.strftime('%y%m%d') != loop.previtem.started_at.strftime('%y%m%d') %}
+        <div class="card shadow-sm">
+            <div class="card-header lead">
+                {{ event.started_at.strftime('%A %d %B %Y') }}
+            </div>
+            <div class="list-group list-group-flush">
+                {% for this_event in events.items %}
+                    {% if this_event.started_at.strftime('%Y%m%d') == event.started_at.strftime('%Y%m%d') %}
+                        {% if this_event.ended_at is none %}
+                        <a href="{{ url_for('update_event', id=this_event.id) }}" class="list-group-item list-group-item-action list-group-item-info">
+                        {% else %}
+                        <a href="{{ url_for('update_event', id=this_event.id) }}" class="list-group-item list-group-item-action">
+                        {% endif %}
+                        {% if this_event.ended_at %}
+                            {% if this_event.started_at.strftime('%y%m%d') != this_event.ended_at.strftime('%y%m%d') %}
+                                {{ this_event.started_at.strftime('%H:%M:%S') }} to {{ this_event.ended_at.strftime('%d/%m/%Y') }} {{ this_event.ended_at.strftime('%H:%M:%S') }}
+                            {% else %}
+                                {{ this_event.started_at.strftime('%H:%M:%S') }} to {{ this_event.ended_at.strftime('%H:%M:%S')}}
+                            {% endif %}
+                        {% else %}
+                            Started at {{ this_event.started_at.strftime('%H:%M:%S') }}
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+                </a>
+            </div>
+        </div>
         <br>
+        {% endif %}
         {% endfor %}
         {% if events.items %}
         <nav aria-label="Page navigation">
