@@ -56,13 +56,13 @@
                         <a href="{{ url_for('update_event', id=this_event.id) }}" class="list-group-item list-group-item-action">
                         {% endif %}
                         {% if this_event.ended_at %}
-                            {% if this_event.started_at.strftime('%y%m%d') != this_event.ended_at.strftime('%y%m%d') %}
-                                {{ this_event.started_at.strftime('%H:%M:%S') }} to {{ this_event.ended_at.strftime('%d/%m/%Y') }} {{ this_event.ended_at.strftime('%H:%M:%S') }}
+                            {% if this_event.started_at.strftime('%Y%m%d') != this_event.ended_at.strftime('%Y%m%d') %}
+                                {{ this_event.started_at.strftime('%H:%M') }} to {{ this_event.ended_at.strftime('%d/%m/%Y') }} {{ this_event.ended_at.strftime('%H:%M') }}
                             {% else %}
-                                {{ this_event.started_at.strftime('%H:%M:%S') }} to {{ this_event.ended_at.strftime('%H:%M:%S')}}
+                                {{ this_event.started_at.strftime('%H:%M') }} to {{ this_event.ended_at.strftime('%H:%M')}}
                             {% endif %}
                         {% else %}
-                            Started at {{ this_event.started_at.strftime('%H:%M:%S') }}
+                            Started at {{ this_event.started_at.strftime('%H:%M') }}
                         {% endif %}
                     {% endif %}
                 {% endfor %}
