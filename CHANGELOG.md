@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - Redesigned time cards using list groups within cards. One card per day, many entry pairs per card. List items are clickable links to edit that entry.
 - Given greater visual identification to in-progress time entries, highlighting with the "info" contextual class and added wording.
+- Removed seconds from time card display to improve readability.
 
 ## [0.14.1] - 2019-05-22
 
