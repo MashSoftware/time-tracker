@@ -44,9 +44,7 @@
         {% for event in events.items %}
         {% if loop.index == 1 or event.started_at.strftime('%y%m%d') != loop.previtem.started_at.strftime('%y%m%d') %}
         <div class="card shadow-sm">
-            <div class="card-header lead">
-                {{ event.started_at.strftime('%A %d %B %Y') }}
-            </div>
+            <h5 class="card-header">{{ event.started_at.strftime('%A %d %B %Y') }}</h5>
             <div class="list-group list-group-flush">
                 {% for this_event in events.items %}
                     {% if this_event.started_at.strftime('%Y%m%d') == event.started_at.strftime('%Y%m%d') %}
