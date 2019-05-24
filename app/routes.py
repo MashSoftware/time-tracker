@@ -9,8 +9,9 @@ from werkzeug.exceptions import Forbidden
 from werkzeug.urls import url_parse
 
 from app import app, db, limiter
+from app.email import send_reset_password_email
 from app.forms import (AccountForm, EventForm, LoginForm, PasswordForm,
-                       SignupForm)
+                       ResetPasswordRequestForm, SignupForm)
 from app.models import Event, User
 
 
@@ -78,6 +79,20 @@ def logout():
     logout_user()
     flash('You have been successfully logged out.', 'success')
     return redirect(url_for('index'))
+
+
+@app.route('/reset-password-request', methods=['GET', 'POST'])
+def reset_password_request():
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+    form = ResetPasswordRequestForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(email_address=form.email_address.data).first()
+        if user:
+            send_reset_password_email(user)
+        flash('Check your email for the instructions to reset your password.', 'success')
+        return redirect(url_for('login'))
+    return render_template('reset_password_request_form.html', title='Reset password', form=form)
 
 
 @app.route('/account')
