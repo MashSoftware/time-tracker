@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.15.0] - 2019-05-24
+
 ### Changed
 
 - Redesigned time cards using list groups within cards. One card per day, many entry pairs per card. List items are clickable links to edit that entry.
