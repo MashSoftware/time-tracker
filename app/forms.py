@@ -93,3 +93,8 @@ class EventForm(FlaskForm):
 
         if pytz.timezone(current_user.timezone).localize(ended_at.data) > pytz.utc.localize(datetime.utcnow()):
             raise ValidationError('Stop must be in the past')
+
+
+class ResetPasswordRequestForm(FlaskForm):
+    email_address = StringField('Email address', validators=[
+                                InputRequired(message="Email address is required"), Email()])
