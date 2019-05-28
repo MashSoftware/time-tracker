@@ -11,7 +11,7 @@ from werkzeug.urls import url_parse
 from app import app, db, limiter
 from app.email import send_reset_password_email
 from app.forms import (AccountForm, EventForm, LoginForm, PasswordForm,
-                       ResetPasswordRequestForm, SignupForm)
+                       ResetPasswordForm, ResetPasswordRequestForm, SignupForm)
 from app.models import Event, User
 
 
@@ -93,6 +93,22 @@ def reset_password_request():
         flash('Check your email for the instructions to reset your password.', 'success')
         return redirect(url_for('login'))
     return render_template('reset_password_request_form.html', title='Reset password', form=form)
+
+
+@app.route('/reset-password/<token>', methods=['GET', 'POST'])
+def reset_password(token):
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+    user = User.verify_reset_password_token(token)
+    if not user:
+        return redirect(url_for('index'))
+    form = ResetPasswordForm()
+    if form.validate_on_submit():
+        user.set_password(form.new_password.data)
+        db.session.commit()
+        flash('Your password has been reset, you may now log in.', 'success')
+        return redirect(url_for('login'))
+    return render_template('reset_password.html', title='Reset password', form=form)
 
 
 @app.route('/account')
