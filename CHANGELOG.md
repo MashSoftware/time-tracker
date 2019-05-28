@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 
 - All non-primary actions are now outline buttons, to promote the visual hierarchy of the primary action.
+- Refactored URLs to remove reference to `push` resource in favour of `entry` for consistency of language.
 - Dropped `/update` from the update entry URL since there is no non-updaing view of the resource.
 
 ## [0.15.0](https://github.com/MashSoftware/the-button/compare/v0.14.1...v0.15.0) - 2019-05-24
