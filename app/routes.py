@@ -155,7 +155,7 @@ def update_account():
     return render_template('account_form.html', title='Update account', form=form)
 
 
-@app.route('/push')
+@app.route('/entry')
 @login_required
 @limiter.limit("1 per second", key_func=lambda: current_user.id)
 def create_event():
@@ -172,7 +172,7 @@ def create_event():
     return redirect(url_for('index'))
 
 
-@app.route('/push/manual', methods=['GET', 'POST'])
+@app.route('/entry/manual', methods=['GET', 'POST'])
 @login_required
 @limiter.limit("1 per second", key_func=lambda: current_user.id)
 def manual_event():
@@ -194,7 +194,7 @@ def manual_event():
     return render_template('create_event_form.html', title='Enter time', form=form)
 
 
-@app.route('/push/<uuid:id>/delete')
+@app.route('/entry/<uuid:id>/delete')
 @login_required
 @limiter.limit("1 per second", key_func=lambda: current_user.id)
 def delete_event(id):
@@ -207,7 +207,7 @@ def delete_event(id):
     return redirect(url_for('index'))
 
 
-@app.route('/push/<uuid:id>', methods=['GET', 'POST'])
+@app.route('/entry/<uuid:id>', methods=['GET', 'POST'])
 @login_required
 @limiter.limit("1 per second", key_func=lambda: current_user.id)
 def update_event(id):
