@@ -13,13 +13,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - Redesigned time cards using list groups within cards. One card per day, many entry pairs per card. List items are clickable links to edit that entry.
 - Given greater visual identification to in-progress time entries, highlighting with the "info" contextual class and added wording.
-- Removed seconds from time card display to improve readability.
+- Removed seconds from time card display to improve readability. Thanks [@LlamaComedian](https://github.com/LlamaComedian).
 
 ## [0.14.1](https://github.com/MashSoftware/the-button/compare/v0.14.0...v0.14.1) - 2019-05-22
 
 ### Fixed
 
-- "Start/stop" button displayed the wrong text for new users with no entries, now corrected.
+- "Start/stop" button displayed the wrong text for new users with no entries, now corrected. Thanks [@russwillis](https://github.com/russwillis).
 - An unsuccessful login attempt hit the rate limiter due to the redirect to the same page, added a 1 second sleep to overcome.
 - Spacing between the new split button and the first date entry on mobile was a little close, added some padding.
 
@@ -29,7 +29,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - Pagination of time entries, with 10 per page.
 - Controls to navigate paginated time entries.
-- Manual time entry form, accessible via dropdown on split start/stop button. Thanks @annie-birchall
+- Manual time entry form, accessible via dropdown on split start/stop button. Thanks [@annie-birchall](https://github.com/annie-birchall).
 
 ## [0.13.0](https://github.com/MashSoftware/the-button/compare/v0.12.0...v0.13.0) - 2019-05-17
 
@@ -94,7 +94,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Fixed
 
-- Editing times in Chrome resulted in an error due to the `datetime-local` picker tool removing seconds. Changed inputs to `text` type rather than HTML5 `datetime-local` to improve compatibility at the expense of browser/device native pickers. Needs further investigation to improve user experience.
+- Editing times in Chrome resulted in an error due to the `datetime-local` picker tool removing seconds. Changed inputs to `text` type rather than HTML5 `datetime-local` to improve compatibility at the expense of browser/device native pickers. Needs further investigation to improve user experience. Thanks [@mattgirdler](https://github.com/mattgirdler).
 
 ## [0.10.1](https://github.com/MashSoftware/the-button/compare/v0.10.0...v0.10.1) - 2019-05-01
 
@@ -106,7 +106,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
-- Display locale aware dates and times
+- Display locale aware dates and times. Thanks [@annie-birchall](https://github.com/annie-birchall).
 - HTTP Exception handling
 - Footer links
 - Alpha phase badge in nav bar
