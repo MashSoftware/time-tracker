@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Ability to request a password reset from the login page. Thanks [@skipster2k2](https://github.com/skipster2k2).
 - Send a reset password email to the user with a unique URL containing a JSON Web Token (JWT) that can be decoded to the user's ID.
 - Form to allow the user to change their password once a valid password reset token has been supplied.
+- Send emails asynchronously to allow application execution to continue.
 - Links to GitHub diffs for each release in changelog.
 - Thanks to anyone who helped in any way with an item in each release.
 
