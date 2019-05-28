@@ -15,7 +15,7 @@ def send_reset_password_email(user):
     token = user.get_reset_password_token()
     send_email(
         'The Button - Reset your password',
-        sender='no-reply@mashsoftware.com',
+        sender='the-button@mashsoftware.com',
         recipients=[user.email_address],
         text_body=render_template('email/reset_password.txt', user=user, token=token),
         html_body=render_template('email/reset_password.html', user=user, token=token)
