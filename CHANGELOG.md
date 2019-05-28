@@ -13,6 +13,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Links to GitHub diffs for each release in changelog.
 - Thanks to anyone who helped in any way with an item in each release.
 
+### Changed
+
+- All non-primary actions are now outline buttons, to promote the visual hierarchy of the primary action.
+
 ## [0.15.0](https://github.com/MashSoftware/the-button/compare/v0.14.1...v0.15.0) - 2019-05-24
 
 ### Changed
