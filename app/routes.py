@@ -207,7 +207,7 @@ def delete_event(id):
     return redirect(url_for('index'))
 
 
-@app.route('/push/<uuid:id>/update', methods=['GET', 'POST'])
+@app.route('/push/<uuid:id>', methods=['GET', 'POST'])
 @login_required
 @limiter.limit("1 per second", key_func=lambda: current_user.id)
 def update_event(id):

@@ -9,13 +9,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
-- Ability to request a password reset from the login page.
+- Ability to request a password reset from the login page. Thanks [@skipster2k2](https://github.com/skipster2k2).
 - Links to GitHub diffs for each release in changelog.
 - Thanks to anyone who helped in any way with an item in each release.
 
 ### Changed
 
 - All non-primary actions are now outline buttons, to promote the visual hierarchy of the primary action.
+- Dropped `/update` from the update entry URL since there is no non-updaing view of the resource.
 
 ## [0.15.0](https://github.com/MashSoftware/the-button/compare/v0.14.1...v0.15.0) - 2019-05-24
 
