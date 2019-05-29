@@ -149,7 +149,7 @@ def change_password():
             return redirect(url_for('change_password'))
         return redirect(url_for('account'))
 
-    return render_template('password_form.html', title='Change password', form=form)
+    return render_template('change_password_form.html', title='Change password', form=form)
 
 
 @app.route('/account/update', methods=['GET', 'POST'])
