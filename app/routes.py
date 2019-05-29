@@ -108,7 +108,7 @@ def reset_password(token):
         db.session.commit()
         flash('Your password has been reset, you may now log in.', 'success')
         return redirect(url_for('login'))
-    return render_template('reset_password.html', title='Reset password', form=form)
+    return render_template('reset_password_form.html', title='Reset password', form=form)
 
 
 @app.route('/account')
