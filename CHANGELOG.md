@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 
 - HTTP security headers via [Talisman](https://github.com/GoogleCloudPlatform/flask-talisman), gaining an [A+ rating](https://securityheaders.com/?q=https%3A%2F%2Fmash-the-button.herokuapp.com%2F&followRedirects=on).
-- Defined Content Security Policy.
+- Defined Content Security Policy. Thanks [@andymantell](https://github.com/andymantell).
 - Ability to request a password reset from the login page. Thanks [@skipster2k2](https://github.com/skipster2k2).
 - Send a reset password email to the user with a unique URL containing a JSON Web Token (JWT) that can be decoded to the user's ID.
 - Form to allow the user to change their password once a valid password reset token has been supplied.
