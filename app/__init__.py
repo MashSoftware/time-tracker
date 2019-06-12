@@ -28,6 +28,7 @@ csp = {
         'stackpath.bootstrapcdn.com',
         'use.fontawesome.com'
     ],
+    'font-src': 'use.fontawesome.com',
     'script-src': [
         'code.jquery.com',
         'cdnjs.cloudflare.com',
