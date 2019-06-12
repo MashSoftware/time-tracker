@@ -90,7 +90,6 @@ def reset_password_request():
         user = User.query.filter_by(email_address=form.email_address.data).first()
         if user:
             send_reset_password_email(user)
-            print("Sent email")
         flash('Check your email for the instructions to reset your password.', 'success')
         return redirect(url_for('login'))
     return render_template('reset_password_request_form.html', title='Reset password', form=form)
