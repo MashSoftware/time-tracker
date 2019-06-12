@@ -10,7 +10,7 @@ flask==1.0.2  # Latest 1.0.3
 gunicorn==19.9.0
 psycopg2==2.8.2
 pyjwt==1.7.1
-python-dotenv==0.10.2
+python-dotenv==0.10.3
 pytz==2019.1
 redis==3.2.1
 requests==2.22.0
