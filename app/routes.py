@@ -207,7 +207,7 @@ def manual_event():
         db.session.commit()
         flash('Time entry has been added', 'success')
         return redirect(url_for('index'))
-    return render_template('create_event_form.html', title='Enter time', form=form)
+    return render_template('create_event_form.html', title='Create time entry', form=form)
 
 
 @app.route('/entry/<uuid:id>/delete')
@@ -250,4 +250,4 @@ def update_event(id):
         form.started_at.data = event.started_at.astimezone(pytz.timezone(current_user.timezone))
         if event.ended_at:
             form.ended_at.data = event.ended_at.astimezone(pytz.timezone(current_user.timezone))
-    return render_template('update_event_form.html', title='Edit time', form=form, event=event)
+    return render_template('update_event_form.html', title='Edit time entry', form=form, event=event)
