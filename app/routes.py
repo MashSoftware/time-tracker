@@ -105,6 +105,7 @@ def reset_password(token):
     form = ResetPasswordForm()
     if form.validate_on_submit():
         user.set_password(form.new_password.data)
+        user.updated_at = pytz.utc.localize(datetime.utcnow())
         db.session.commit()
         flash('Your password has been reset, you may now log in.', 'success')
         return redirect(url_for('login'))
