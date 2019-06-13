@@ -5,33 +5,52 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [Unreleased](https://github.com/MashSoftware/the-button/compare/master...develop)
 
-## [0.15.0] - 2019-05-24
+## [0.16.0](https://github.com/MashSoftware/the-button/compare/v0.15.0...v0.16.0) - 2019-06-13
+
+### Added
+
+- HTTP security headers via [Talisman](https://github.com/GoogleCloudPlatform/flask-talisman), gaining an [A+ rating](https://securityheaders.com/?q=https%3A%2F%2Fmash-the-button.herokuapp.com%2F&followRedirects=on).
+- Defined Content Security Policy. Thanks [@andymantell](https://github.com/andymantell).
+- Ability to request a password reset from the login page. Thanks [@skipster2k2](https://github.com/skipster2k2).
+- Send a reset password email via [Mailgun](https://www.mailgun.com) to the user with a unique URL containing a JSON Web Token (JWT) that can be decoded to the user's ID.
+- Form to allow the user to change their password once a valid password reset token has been supplied.
+- Links to GitHub diffs for each release in changelog.
+- Thanks to anyone who helped in any way with an item in each release.
+
+### Changed
+
+- All non-primary actions are now outline buttons, to promote the visual hierarchy of the primary action.
+- On the "Edit time entry" form, the primary action is now "Save" instead of "Edit".
+- Refactored URLs to remove reference to `push` resource in favour of `entry` for consistency of language.
+- Dropped `/update` from the update entry URL since there is no non-updaing view of the resource.
+
+## [0.15.0](https://github.com/MashSoftware/the-button/compare/v0.14.1...v0.15.0) - 2019-05-24
 
 ### Changed
 
 - Redesigned time cards using list groups within cards. One card per day, many entry pairs per card. List items are clickable links to edit that entry.
 - Given greater visual identification to in-progress time entries, highlighting with the "info" contextual class and added wording.
-- Removed seconds from time card display to improve readability.
+- Removed seconds from time card display to improve readability. Thanks [@LlamaComedian](https://github.com/LlamaComedian).
 
-## [0.14.1] - 2019-05-22
+## [0.14.1](https://github.com/MashSoftware/the-button/compare/v0.14.0...v0.14.1) - 2019-05-22
 
 ### Fixed
 
-- "Start/stop" button displayed the wrong text for new users with no entries, now corrected.
+- "Start/stop" button displayed the wrong text for new users with no entries, now corrected. Thanks [@russwillis](https://github.com/russwillis).
 - An unsuccessful login attempt hit the rate limiter due to the redirect to the same page, added a 1 second sleep to overcome.
 - Spacing between the new split button and the first date entry on mobile was a little close, added some padding.
 
-## [0.14.0] - 2019-05-21
+## [0.14.0](https://github.com/MashSoftware/the-button/compare/v0.13.0...v0.14.0) - 2019-05-21
 
 ### Added
 
 - Pagination of time entries, with 10 per page.
 - Controls to navigate paginated time entries.
-- Manual time entry form, accessible via dropdown on split start/stop button.
+- Manual time entry form, accessible via dropdown on split start/stop button. Thanks [@annie-birchall](https://github.com/annie-birchall).
 
-## [0.13.0] - 2019-05-17
+## [0.13.0](https://github.com/MashSoftware/the-button/compare/v0.12.0...v0.13.0) - 2019-05-17
 
 ### Added
 
@@ -49,7 +68,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - Fixed an error that occurred when editing a time entry with no end timestamp due to null timezone conversion.
 
-## [0.12.0] - 2019-05-14
+## [0.12.0](https://github.com/MashSoftware/the-button/compare/v0.11.0...v0.12.0) - 2019-05-14
 
 ### Added
 
@@ -76,7 +95,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Updating account details and _not_ changing email address generated a validation error, because the email address is already in use. Now if the email address is not changed no validation error occurrs.
 - Fixed error when trying to localise a non-existant timestamp for accounts that have never been updated.
 
-## [0.11.0] - 2019-05-07
+## [0.11.0](https://github.com/MashSoftware/the-button/compare/v0.10.1...v0.11.0) - 2019-05-07
 
 ### Added
 
@@ -94,19 +113,19 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Fixed
 
-- Editing times in Chrome resulted in an error due to the `datetime-local` picker tool removing seconds. Changed inputs to `text` type rather than HTML5 `datetime-local` to improve compatibility at the expense of browser/device native pickers. Needs further investigation to improve user experience.
+- Editing times in Chrome resulted in an error due to the `datetime-local` picker tool removing seconds. Changed inputs to `text` type rather than HTML5 `datetime-local` to improve compatibility at the expense of browser/device native pickers. Needs further investigation to improve user experience. Thanks [@mattgirdler](https://github.com/mattgirdler).
 
-## [0.10.1] - 2019-05-01
+## [0.10.1](https://github.com/MashSoftware/the-button/compare/v0.10.0...v0.10.1) - 2019-05-01
 
 ### Fixed
 
 - User account dates and times missing localisation
 
-## [0.10.0] - 2019-05-01
+## [0.10.0](https://github.com/MashSoftware/the-button/compare/v0.9.0...v0.10.0) - 2019-05-01
 
 ### Added
 
-- Display locale aware dates and times
+- Display locale aware dates and times. Thanks [@annie-birchall](https://github.com/annie-birchall).
 - HTTP Exception handling
 - Footer links
 - Alpha phase badge in nav bar
@@ -116,14 +135,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - Raise Forbidden (403) exception when attempting to edit or delete time entries not belonging to the current user
 
-## [0.9.0] - 2019-04-26
+## [0.9.0](https://github.com/MashSoftware/the-button/compare/v0.8.0...v0.9.0) - 2019-04-26
 
 ### Added
 
 - Delete time entries
 - Edit time entries
 
-## [0.8.0] - 2019-04-24
+## [0.8.0](https://github.com/MashSoftware/the-button/compare/v0.7.0...v0.8.0) - 2019-04-24
 
 ### Added
 
@@ -133,7 +152,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - Sign up or log in links in homepage text
 
-## [0.7.0] - 2019-04-24
+## [0.7.0](https://github.com/MashSoftware/the-button/compare/v0.6.0...v0.7.0) - 2019-04-24
 
 ### Added
 
@@ -143,13 +162,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - Include sub-template for events
 
-## [0.6.0] - 2019-04-23
+## [0.6.0](https://github.com/MashSoftware/the-button/compare/v0.5.0...v0.6.0) - 2019-04-23
 
 ### Removed
 
 - User first name and last name
 
-## [0.5.0] - 2019-04-23
+## [0.5.0](https://github.com/MashSoftware/the-button/compare/v0.4.0...v0.5.0) - 2019-04-23
 
 ### Added
 
@@ -162,13 +181,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Consistent datetime formatting
 - Updated meta tags
 
-## [0.4.0] - 2019-04-18
+## [0.4.0](https://github.com/MashSoftware/the-button/compare/v0.3.0...v0.4.0) - 2019-04-18
 
 ### Added
 
 - Delete user account
 
-## [0.3.0] - 2019-04-18
+## [0.3.0](https://github.com/MashSoftware/the-button/compare/v0.2.0...v0.3.0) - 2019-04-18
 
 ### Added
 
@@ -176,7 +195,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Record time user last logged in
 - Redirect protection after log in
 
-## [0.2.0] - 2019-04-18
+## [0.2.0](https://github.com/MashSoftware/the-button/compare/v0.1.0...v0.2.0) - 2019-04-18
 
 ### Added
 
@@ -188,7 +207,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Navigation based on authentication status
 - Flash message formatting
 
-## [0.1.0] - 2019-04-18
+## [0.1.0](https://github.com/MashSoftware/the-button/compare/4b9057c8b8b4d110496dfabf9dd31b9e86070d4a...v0.1.0) - 2019-04-18
 
 ### Added
 

@@ -9,8 +9,9 @@ from werkzeug.exceptions import Forbidden
 from werkzeug.urls import url_parse
 
 from app import app, db, limiter
+from app.email import send_reset_password_email
 from app.forms import (AccountForm, EventForm, LoginForm, PasswordForm,
-                       SignupForm)
+                       ResetPasswordForm, ResetPasswordRequestForm, SignupForm)
 from app.models import Event, User
 
 
@@ -80,6 +81,37 @@ def logout():
     return redirect(url_for('index'))
 
 
+@app.route('/reset-password-request', methods=['GET', 'POST'])
+def reset_password_request():
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+    form = ResetPasswordRequestForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(email_address=form.email_address.data).first()
+        if user:
+            send_reset_password_email(user)
+        flash('Check your email for the instructions to reset your password.', 'success')
+        return redirect(url_for('login'))
+    return render_template('reset_password_request_form.html', title='Reset password', form=form)
+
+
+@app.route('/reset-password/<token>', methods=['GET', 'POST'])
+def reset_password(token):
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+    user = User.verify_reset_password_token(token)
+    if not user:
+        return redirect(url_for('index'))
+    form = ResetPasswordForm()
+    if form.validate_on_submit():
+        user.set_password(form.new_password.data)
+        user.updated_at = pytz.utc.localize(datetime.utcnow())
+        db.session.commit()
+        flash('Your password has been reset, you may now log in.', 'success')
+        return redirect(url_for('login'))
+    return render_template('reset_password_form.html', title='Reset password', form=form)
+
+
 @app.route('/account')
 @login_required
 @limiter.limit("1 per second", key_func=lambda: current_user.id)
@@ -118,7 +150,7 @@ def change_password():
             return redirect(url_for('change_password'))
         return redirect(url_for('account'))
 
-    return render_template('password_form.html', title='Change password', form=form)
+    return render_template('change_password_form.html', title='Change password', form=form)
 
 
 @app.route('/account/update', methods=['GET', 'POST'])
@@ -140,7 +172,7 @@ def update_account():
     return render_template('account_form.html', title='Update account', form=form)
 
 
-@app.route('/push')
+@app.route('/entry')
 @login_required
 @limiter.limit("1 per second", key_func=lambda: current_user.id)
 def create_event():
@@ -157,7 +189,7 @@ def create_event():
     return redirect(url_for('index'))
 
 
-@app.route('/push/manual', methods=['GET', 'POST'])
+@app.route('/entry/manual', methods=['GET', 'POST'])
 @login_required
 @limiter.limit("1 per second", key_func=lambda: current_user.id)
 def manual_event():
@@ -176,10 +208,10 @@ def manual_event():
         db.session.commit()
         flash('Time entry has been added', 'success')
         return redirect(url_for('index'))
-    return render_template('create_event_form.html', title='Enter time', form=form)
+    return render_template('create_event_form.html', title='Create time entry', form=form)
 
 
-@app.route('/push/<uuid:id>/delete')
+@app.route('/entry/<uuid:id>/delete')
 @login_required
 @limiter.limit("1 per second", key_func=lambda: current_user.id)
 def delete_event(id):
@@ -192,7 +224,7 @@ def delete_event(id):
     return redirect(url_for('index'))
 
 
-@app.route('/push/<uuid:id>/update', methods=['GET', 'POST'])
+@app.route('/entry/<uuid:id>', methods=['GET', 'POST'])
 @login_required
 @limiter.limit("1 per second", key_func=lambda: current_user.id)
 def update_event(id):
@@ -219,4 +251,4 @@ def update_event(id):
         form.started_at.data = event.started_at.astimezone(pytz.timezone(current_user.timezone))
         if event.ended_at:
             form.ended_at.data = event.ended_at.astimezone(pytz.timezone(current_user.timezone))
-    return render_template('update_event_form.html', title='Edit time', form=form, event=event)
+    return render_template('update_event_form.html', title='Edit time entry', form=form, event=event)

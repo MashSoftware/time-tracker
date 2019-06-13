@@ -55,7 +55,7 @@
                         {% endif %}
                         {% if this_event.ended_at %}
                             {% if this_event.started_at.strftime('%Y%m%d') != this_event.ended_at.strftime('%Y%m%d') %}
-                                {{ this_event.started_at.strftime('%H:%M') }} to {{ this_event.ended_at.strftime('%d/%m/%Y') }} {{ this_event.ended_at.strftime('%H:%M') }}
+                                {{ this_event.started_at.strftime('%H:%M') }} to {{ this_event.ended_at.strftime('%d/%m/%Y') }} at {{ this_event.ended_at.strftime('%H:%M') }}
                             {% else %}
                                 {{ this_event.started_at.strftime('%H:%M') }} to {{ this_event.ended_at.strftime('%H:%M')}}
                             {% endif %}

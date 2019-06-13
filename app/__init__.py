@@ -6,6 +6,7 @@ from flask_login import LoginManager
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 from flask_compress import Compress
+from flask_talisman import Talisman
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -21,5 +22,20 @@ login.needs_refresh_message_category = 'info'
 login.needs_refresh_message = 'To protect your account, please log in again to access this page.'
 limiter = Limiter(app, key_func=get_remote_address, default_limits=["1 per second", "60 per minute"])
 Compress(app)
+csp = {
+    'default-src': '\'self\'',
+    'style-src': [
+        'stackpath.bootstrapcdn.com',
+        'use.fontawesome.com'
+    ],
+    'font-src': 'use.fontawesome.com',
+    'script-src': [
+        'code.jquery.com',
+        'cdnjs.cloudflare.com',
+        'stackpath.bootstrapcdn.com'
+    ],
+    'img-src': 'data:'
+}
+Talisman(app, content_security_policy=csp)
 
 from app import routes, models, errors
