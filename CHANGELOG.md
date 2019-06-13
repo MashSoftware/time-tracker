@@ -22,6 +22,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 
 - All non-primary actions are now outline buttons, to promote the visual hierarchy of the primary action.
+- On the "Edit time entry" form, the primary action is now "Save" instead of "Edit".
 - Refactored URLs to remove reference to `push` resource in favour of `entry` for consistency of language.
 - Dropped `/update` from the update entry URL since there is no non-updaing view of the resource.
 
