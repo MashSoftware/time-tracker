@@ -10,7 +10,7 @@ def send_reset_password_email(user):
         '{0}/messages'.format(app.config['MAILGUN_API_URL']),
         auth=("api", app.config['MAILGUN_API_KEY']),
         data={
-            "from": "The Button <mailgun@sandboxa445b3262e834e028a1c45d00bc714b1.mailgun.org>",
+            "from": "The Button <thebutton@mashsoftware.com>",
             "to": user.email_address,
             "subject": "Reset your password",
             "text": render_template('email/reset_password.txt', token=token),
