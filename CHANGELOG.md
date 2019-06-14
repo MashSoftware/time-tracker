@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased](https://github.com/MashSoftware/the-button/compare/master...develop)
 
+### Added
+
+- New accounts must be activated to confirm the email addressed used is genuine.
+- Send an activation token to the users email address.
+- Activation timestamp is recorded on users account information.
+- Accounts that have not been activated are not able to log in.
+- Flash message if an invalid or expired password reset token is provided, informing the user to request another.
+
+### Changed
+
+- Generic user token generation and verification methods.
+- Improved wording in password reset email content.
+
 ## [0.16.0](https://github.com/MashSoftware/the-button/compare/v0.15.0...v0.16.0) - 2019-06-13
 
 ### Added
