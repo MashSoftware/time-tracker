@@ -5,7 +5,7 @@ from app import app
 
 
 def send_reset_password_email(user):
-    token = user.get_reset_password_token()
+    token = user.generate_token()
     return requests.post(
         '{0}/messages'.format(app.config['MAILGUN_API_URL']),
         auth=("api", app.config['MAILGUN_API_KEY']),
