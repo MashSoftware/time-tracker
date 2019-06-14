@@ -1,0 +1,14 @@
+Hi,
+
+You recently signed up to "The Button".
+
+Please use the following link to confirm your email address and activate your account:
+
+{{ url_for('activate', token=token, _external=True) }}
+
+This link is only valid for the next 10 minutes.
+
+Thanks,
+
+The Button Team
+Mash Software

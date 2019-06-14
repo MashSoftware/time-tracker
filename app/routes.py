@@ -9,7 +9,7 @@ from werkzeug.exceptions import Forbidden
 from werkzeug.urls import url_parse
 
 from app import app, db, limiter
-from app.email import send_reset_password_email
+from app.email import send_activation_email, send_reset_password_email
 from app.forms import (AccountForm, EventForm, LoginForm, PasswordForm,
                        ResetPasswordForm, ResetPasswordRequestForm, SignupForm)
 from app.models import Event, User
@@ -46,9 +46,24 @@ def signup():
             timezone=form.timezone.data)
         db.session.add(user)
         db.session.commit()
-        flash('Thanks for signing up! Please log in to continue.', 'success')
-        return redirect(url_for('login'))
+        send_activation_email(user)
+        flash('Thanks for signing up! Please check your email for instructions to activate your account.', 'success')
+        return redirect(url_for('index'))
     return render_template('sign_up_form.html', title='Sign up', form=form)
+
+
+@app.route('/activate/<token>')
+def activate(token):
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+    user = User.verify_token(token)
+    if not user:
+        flash('The activation token is invalid, please request another.', 'danger')
+        return redirect(url_for('index'))
+    user.activated_at = pytz.utc.localize(datetime.utcnow())
+    db.session.commit()
+    flash('Your account has been activated. Please log in to continue.', 'success')
+    return redirect(url_for('login'))
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -59,6 +74,10 @@ def login():
         if user is None or not user.check_password(form.password.data):
             time.sleep(1)
             flash('Invalid email address or password.', 'danger')
+            return redirect(url_for('login'))
+        elif user.activated_at is None:
+            time.sleep(1)
+            flash('You must activate your account before you can log in. Please check your email for an activation link.', 'danger')
             return redirect(url_for('login'))
         login_user(user, remember=form.remember_me.data)
         user.login_at = pytz.utc.localize(datetime.utcnow())
