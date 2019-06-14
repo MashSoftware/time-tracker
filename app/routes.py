@@ -90,7 +90,7 @@ def reset_password_request():
         user = User.query.filter_by(email_address=form.email_address.data).first()
         if user:
             send_reset_password_email(user)
-        flash('Check your email for the instructions to reset your password.', 'success')
+        flash('Please check your email for instructions to reset your password.', 'success')
         return redirect(url_for('login'))
     return render_template('reset_password_request_form.html', title='Reset password', form=form)
 
@@ -99,8 +99,9 @@ def reset_password_request():
 def reset_password(token):
     if current_user.is_authenticated:
         return redirect(url_for('index'))
-    user = User.verify_reset_password_token(token)
+    user = User.verify_token(token)
     if not user:
+        flash('The password reset token is invalid, please request another.', 'danger')
         return redirect(url_for('index'))
     form = ResetPasswordForm()
     if form.validate_on_submit():
@@ -129,7 +130,7 @@ def account():
 def delete_account():
     db.session.delete(current_user)
     db.session.commit()
-    flash('Your account and all personal information has been permanently deleted', 'success')
+    flash('Your account and all personal information has been permanently deleted.', 'success')
     return redirect(url_for('index'))
 
 
@@ -144,7 +145,7 @@ def change_password():
             current_user.updated_at = pytz.utc.localize(datetime.utcnow())
             db.session.add(current_user)
             db.session.commit()
-            flash('Your password has been changed', 'success')
+            flash('Your password has been changed.', 'success')
         else:
             flash('Invalid password.', 'danger')
             return redirect(url_for('change_password'))
@@ -164,7 +165,7 @@ def update_account():
         current_user.updated_at = pytz.utc.localize(datetime.utcnow())
         db.session.add(current_user)
         db.session.commit()
-        flash('Your account has been updated', 'success')
+        flash('Your account has been updated.', 'success')
         return redirect(url_for('account'))
     elif request.method == 'GET':
         form.email_address.data = current_user.email_address
@@ -206,7 +207,7 @@ def manual_event():
             event.ended_at = None
         db.session.add(event)
         db.session.commit()
-        flash('Time entry has been added', 'success')
+        flash('Time entry has been added.', 'success')
         return redirect(url_for('index'))
     return render_template('create_event_form.html', title='Create time entry', form=form)
 
@@ -220,7 +221,7 @@ def delete_event(id):
         raise Forbidden()
     db.session.delete(event)
     db.session.commit()
-    flash('Time entry has been deleted', 'success')
+    flash('Time entry has been deleted.', 'success')
     return redirect(url_for('index'))
 
 
@@ -244,7 +245,7 @@ def update_event(id):
             event.ended_at = None
         db.session.add(event)
         db.session.commit()
-        flash('Time entry has been updated', 'success')
+        flash('Time entry has been updated.', 'success')
         return redirect(url_for('index'))
     elif request.method == 'GET':
         # Show timestamp in users localised timezone
