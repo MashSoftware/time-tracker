@@ -1,6 +1,6 @@
 <p>Hi,</p>
 <p>Thanks for signing up to "The Button".</p>
-<p>Please use the following link to confirm your email address and activate your account:</p>
+<p>Please <a href="{{ url_for('activate', token=token, _external=True) }}">click here</a> to confirm your email address and activate your account:</p>
 <p>{{ url_for('activate', token=token, _external=True) }}</p>
 <p>This link is only valid for the next hour.</p>
 <p>Thanks,</p>
