@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - Generic user token generation and verification methods.
 - Improved wording in password reset email content.
+- Disabled browser spellchecking on email address input fields.
 
 ## [0.16.0](https://github.com/MashSoftware/the-button/compare/v0.15.0...v0.16.0) - 2019-06-13
 
