@@ -58,7 +58,7 @@ def activate(token):
         return redirect(url_for('index'))
     user = User.verify_token(token)
     if not user:
-        flash('The activation token is invalid, please request another.', 'danger')
+        flash('The activation token is invalid.', 'danger')
         return redirect(url_for('index'))
     user.activated_at = pytz.utc.localize(datetime.utcnow())
     db.session.commit()
