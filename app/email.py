@@ -5,7 +5,7 @@ from app import app
 
 
 def send_activation_email(user):
-    token = user.generate_token()
+    token = user.generate_token(expires_in=3600)
     return requests.post(
         '{0}/messages'.format(app.config['MAILGUN_API_URL']),
         auth=("api", app.config['MAILGUN_API_KEY']),
