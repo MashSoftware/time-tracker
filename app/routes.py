@@ -11,7 +11,7 @@ from werkzeug.urls import url_parse
 from app import app, db, limiter
 from app.email import send_activation_email, send_reset_password_email
 from app.forms import (AccountForm, EventForm, LoginForm, PasswordForm,
-                       ResetPasswordForm, ResetPasswordRequestForm, SignupForm)
+                       ResetPasswordForm, SignupForm, TokenRequestForm)
 from app.models import Event, User
 
 
@@ -52,13 +52,27 @@ def signup():
     return render_template('sign_up_form.html', title='Sign up', form=form)
 
 
+@app.route('/activate', methods=['GET', 'POST'])
+def activate_request():
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+    form = TokenRequestForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(email_address=form.email_address.data).first()
+        if user:
+            send_activation_email(user)
+        flash("We've sent an email to {0} with instructions to activate your account.".format(form.email_address.data), 'success')
+        return redirect(url_for('index'))
+    return render_template('activate_request_form.html', title='Activate account', form=form)
+
+
 @app.route('/activate/<token>')
 def activate(token):
     if current_user.is_authenticated:
         return redirect(url_for('index'))
     user = User.verify_token(token)
     if not user:
-        flash('The activation token is invalid.', 'danger')
+        flash('The activation token is invalid, please request another.', 'danger')
         return redirect(url_for('index'))
     user.activated_at = pytz.utc.localize(datetime.utcnow())
     db.session.commit()
@@ -100,11 +114,11 @@ def logout():
     return redirect(url_for('index'))
 
 
-@app.route('/reset-password-request', methods=['GET', 'POST'])
+@app.route('/reset-password', methods=['GET', 'POST'])
 def reset_password_request():
     if current_user.is_authenticated:
         return redirect(url_for('index'))
-    form = ResetPasswordRequestForm()
+    form = TokenRequestForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email_address=form.email_address.data).first()
         if user:

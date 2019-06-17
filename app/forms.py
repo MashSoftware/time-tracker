@@ -95,7 +95,7 @@ class EventForm(FlaskForm):
             raise ValidationError('Stop must be in the past')
 
 
-class ResetPasswordRequestForm(FlaskForm):
+class TokenRequestForm(FlaskForm):
     email_address = StringField('Email address', validators=[
                                 InputRequired(message="Email address is required"), Email(), Length(max=256, message="Email address must be less than 256 characters")])
 
