@@ -16,7 +16,7 @@ class SignupForm(FlaskForm):
     for tz in pytz.common_timezones:
         tz_tuples.append((tz, tz.replace("_", " ")))
 
-    email_address = StringField('Email address', validators=[InputRequired(message="Email address is required"), Email()],
+    email_address = StringField('Email address', validators=[InputRequired(message="Email address is required"), Email(), Length(max=256, message="Email address must be less than 256 characters")],
                                 description="We'll never share your email with anyone else.")
     password = PasswordField('Password', validators=[InputRequired(message="Password is required"), Length(min=8, max=72, message="Password must be between 8 and 72 characters")],
                              description="Must be between 8 and 72 characters.")
@@ -34,7 +34,7 @@ class SignupForm(FlaskForm):
 
 class LoginForm(FlaskForm):
     email_address = StringField('Email address', validators=[
-                                InputRequired(message="Email address is required"), Email()])
+                                InputRequired(message="Email address is required"), Email(), Length(max=256, message="Email address must be less than 256 characters")])
     password = PasswordField('Password', validators=[InputRequired(message="Password is required"), Length(min=8, max=72, message="Password must be between 8 and 72 characters")],
                              description="Must be between 8 and 72 characters")
     remember_me = BooleanField('Remember me')
@@ -58,7 +58,7 @@ class AccountForm(FlaskForm):
     for tz in pytz.common_timezones:
         tz_tuples.append((tz, tz.replace("_", " ")))
 
-    email_address = StringField('Email address', validators=[InputRequired(message="Email address is required"), Email()],
+    email_address = StringField('Email address', validators=[InputRequired(message="Email address is required"), Email(), Length(max=256, message="Email address must be less than 256 characters")],
                                 description="We'll never share your email with anyone else.")
     timezone = SelectField('Timezone', validators=[InputRequired(message="Timezone is required")],
                            choices=tz_tuples,
@@ -97,7 +97,7 @@ class EventForm(FlaskForm):
 
 class ResetPasswordRequestForm(FlaskForm):
     email_address = StringField('Email address', validators=[
-                                InputRequired(message="Email address is required"), Email()])
+                                InputRequired(message="Email address is required"), Email(), Length(max=256, message="Email address must be less than 256 characters")])
 
 
 class ResetPasswordForm(FlaskForm):
