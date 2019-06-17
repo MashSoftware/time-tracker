@@ -22,6 +22,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Disabled browser spellchecking on email address input fields.
 - Set maximum length of email addresses to 256 characters, validated by forms.
 - Enabled browser autocompletion of email address fields.
+- Play back email address to the user to confirm email sending actions.
 
 ## [0.16.0](https://github.com/MashSoftware/the-button/compare/v0.15.0...v0.16.0) - 2019-06-13
 
