@@ -47,7 +47,7 @@ def signup():
         db.session.add(user)
         db.session.commit()
         send_activation_email(user)
-        flash('Thanks for signing up! Please check your email for instructions to activate your account.', 'success')
+        flash("Thanks for signing up! We've sent an email to {0} with instructions to activate your account.".format(user.email_address), 'success')
         return redirect(url_for('index'))
     return render_template('sign_up_form.html', title='Sign up', form=form)
 
@@ -109,7 +109,7 @@ def reset_password_request():
         user = User.query.filter_by(email_address=form.email_address.data).first()
         if user:
             send_reset_password_email(user)
-        flash('Please check your email for instructions to reset your password.', 'success')
+        flash("We've sent an email to {0} with instructions to reset your password.".format(form.email_address.data), 'success')
         return redirect(url_for('login'))
     return render_template('reset_password_request_form.html', title='Reset password', form=form)
 
