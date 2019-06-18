@@ -26,7 +26,7 @@ def send_confirmation_email(user):
         data={
             "from": "The Button <thebutton@mashsoftware.com>",
             "to": user.email_address,
-            "subject": "Activate your account",
+            "subject": "Confirm your email address",
             "text": render_template('email/confirmation.txt', token=token),
             "html": render_template('email/confirmation.html', token=token)}
     )

@@ -9,7 +9,8 @@ from werkzeug.exceptions import Forbidden
 from werkzeug.urls import url_parse
 
 from app import app, db, limiter
-from app.email import send_activation_email, send_reset_password_email
+from app.email import (send_activation_email, send_confirmation_email,
+                       send_reset_password_email)
 from app.forms import (AccountForm, EventForm, LoginForm, PasswordForm,
                        ResetPasswordForm, SignupForm, TokenRequestForm)
 from app.models import Event, User
@@ -60,7 +61,7 @@ def activate_request():
     if form.validate_on_submit():
         user = User.query.filter_by(email_address=form.email_address.data).first()
         if user:
-            send_activation_email(user)
+            send_confirmation_email(user)
         flash("We've sent an email to {0} with instructions to activate your account.".format(form.email_address.data), 'success')
         return redirect(url_for('index'))
     return render_template('activate_request_form.html', title='Activate account', form=form)
@@ -85,13 +86,9 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email_address=form.email_address.data).first()
-        if user is None or not user.check_password(form.password.data):
+        if user is None or not user.check_password(form.password.data) or user.activated_at is None:
             time.sleep(1)
             flash('Invalid email address or password.', 'danger')
-            return redirect(url_for('login'))
-        elif user.activated_at is None:
-            time.sleep(1)
-            flash('You must activate your account before you can log in. Please check your email for an activation link.', 'danger')
             return redirect(url_for('login'))
         login_user(user, remember=form.remember_me.data)
         user.login_at = pytz.utc.localize(datetime.utcnow())
@@ -193,7 +190,11 @@ def change_password():
 def update_account():
     form = AccountForm()
     if form.validate_on_submit():
-        current_user.email_address = form.email_address.data
+        if form.email_address.data != current_user.email_address:
+            current_user.email_address = form.email_address.data
+            current_user.activated_at = None
+            send_confirmation_email(current_user)
+            flash("We've sent an email to {0} with instructions to confirm your email address.".format(current_user.email_address), 'success')
         current_user.timezone = form.timezone.data
         current_user.updated_at = pytz.utc.localize(datetime.utcnow())
         db.session.add(current_user)
