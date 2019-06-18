@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased](https://github.com/MashSoftware/the-button/compare/master...develop)
 
+## [0.17.0](https://github.com/MashSoftware/the-button/compare/v0.16.0...v0.17.0) - 2019-06-18
+
 ### Added
 
 - New accounts must be activated to confirm the email address used is genuine and accessible by the user.
