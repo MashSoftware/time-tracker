@@ -18,6 +18,20 @@ def send_activation_email(user):
     )
 
 
+def send_confirmation_email(user):
+    token = user.generate_token(expires_in=3600)
+    return requests.post(
+        '{0}/messages'.format(app.config['MAILGUN_API_URL']),
+        auth=("api", app.config['MAILGUN_API_KEY']),
+        data={
+            "from": "The Button <thebutton@mashsoftware.com>",
+            "to": user.email_address,
+            "subject": "Activate your account",
+            "text": render_template('email/confirmation.txt', token=token),
+            "html": render_template('email/confirmation.html', token=token)}
+    )
+
+
 def send_reset_password_email(user):
     token = user.generate_token()
     return requests.post(
