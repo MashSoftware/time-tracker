@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
-- New accounts must be activated to confirm the email addressed used is genuine and accessible by the user.
+- New accounts must be activated to confirm the email address used is genuine and accessible by the user.
 - Send an activation token to the users email address.
 - Activation timestamp is recorded on users account information.
 - Accounts that have not been activated are not able to log in.
