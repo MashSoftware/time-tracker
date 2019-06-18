@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Activation timestamp is recorded on users account information.
 - Accounts that have not been activated are not able to log in.
 - Activation request form for users whose tokens expire or are not received.
+- Changing the email address on an account then requires that new email address to be confirmed. An email is sent to the new address after change.
 - Flash message if an invalid or expired password reset token is provided, informing the user to request another.
 
 ### Changed
