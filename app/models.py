@@ -17,8 +17,9 @@ class User(UserMixin, db.Model):
     # Fields
     id = db.Column(UUID, primary_key=True)
     password = db.Column(db.Binary, nullable=False)
-    email_address = db.Column(db.String, nullable=False, unique=True, index=True)
+    email_address = db.Column(db.String(256), nullable=False, unique=True, index=True)
     timezone = db.Column(db.String, nullable=False, server_default='UTC')
+    activated_at = db.Column(db.DateTime(timezone=True), nullable=True)
     login_at = db.Column(db.DateTime(timezone=True), nullable=True)
     created_at = db.Column(db.DateTime(timezone=True), nullable=False)
     updated_at = db.Column(db.DateTime(timezone=True), nullable=True)
@@ -40,15 +41,15 @@ class User(UserMixin, db.Model):
     def check_password(self, password):
         return bcrypt.checkpw(password.encode('UTF-8'), self.password)
 
-    def get_reset_password_token(self, expires_in=600):
+    def generate_token(self, expires_in=600):
         return jwt.encode(
-            {'reset_password': self.id, 'exp': time() + expires_in},
+            {'id': self.id, 'exp': time() + expires_in},
             app.config['SECRET_KEY'], algorithm='HS256').decode('utf-8')
 
     @staticmethod
-    def verify_reset_password_token(token):
+    def verify_token(token):
         try:
-            id = jwt.decode(token, app.config['SECRET_KEY'], algorithms=['HS256'])['reset_password']
+            id = jwt.decode(token, app.config['SECRET_KEY'], algorithms=['HS256'])['id']
         except:
             return
         return User.query.get(id)

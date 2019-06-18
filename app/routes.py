@@ -9,9 +9,10 @@ from werkzeug.exceptions import Forbidden
 from werkzeug.urls import url_parse
 
 from app import app, db, limiter
-from app.email import send_reset_password_email
+from app.email import (send_activation_email, send_confirmation_email,
+                       send_reset_password_email)
 from app.forms import (AccountForm, EventForm, LoginForm, PasswordForm,
-                       ResetPasswordForm, ResetPasswordRequestForm, SignupForm)
+                       ResetPasswordForm, SignupForm, TokenRequestForm)
 from app.models import Event, User
 
 
@@ -46,9 +47,38 @@ def signup():
             timezone=form.timezone.data)
         db.session.add(user)
         db.session.commit()
-        flash('Thanks for signing up! Please log in to continue.', 'success')
-        return redirect(url_for('login'))
+        send_activation_email(user)
+        flash("Thanks for signing up! We've sent an email to {0} with instructions to activate your account.".format(user.email_address), 'success')
+        return redirect(url_for('index'))
     return render_template('sign_up_form.html', title='Sign up', form=form)
+
+
+@app.route('/activate', methods=['GET', 'POST'])
+def activate_request():
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+    form = TokenRequestForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(email_address=form.email_address.data).first()
+        if user:
+            send_confirmation_email(user)
+        flash("We've sent an email to {0} with instructions to activate your account.".format(form.email_address.data), 'success')
+        return redirect(url_for('index'))
+    return render_template('activate_request_form.html', title='Activate account', form=form)
+
+
+@app.route('/activate/<token>')
+def activate(token):
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+    user = User.verify_token(token)
+    if not user:
+        flash('The activation token is invalid, please request another.', 'danger')
+        return redirect(url_for('index'))
+    user.activated_at = pytz.utc.localize(datetime.utcnow())
+    db.session.commit()
+    flash('Your account has been activated. Please log in to continue.', 'success')
+    return redirect(url_for('login'))
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -56,7 +86,7 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email_address=form.email_address.data).first()
-        if user is None or not user.check_password(form.password.data):
+        if user is None or not user.check_password(form.password.data) or user.activated_at is None:
             time.sleep(1)
             flash('Invalid email address or password.', 'danger')
             return redirect(url_for('login'))
@@ -81,16 +111,16 @@ def logout():
     return redirect(url_for('index'))
 
 
-@app.route('/reset-password-request', methods=['GET', 'POST'])
+@app.route('/reset-password', methods=['GET', 'POST'])
 def reset_password_request():
     if current_user.is_authenticated:
         return redirect(url_for('index'))
-    form = ResetPasswordRequestForm()
+    form = TokenRequestForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email_address=form.email_address.data).first()
         if user:
             send_reset_password_email(user)
-        flash('Check your email for the instructions to reset your password.', 'success')
+        flash("We've sent an email to {0} with instructions to reset your password.".format(form.email_address.data), 'success')
         return redirect(url_for('login'))
     return render_template('reset_password_request_form.html', title='Reset password', form=form)
 
@@ -99,8 +129,9 @@ def reset_password_request():
 def reset_password(token):
     if current_user.is_authenticated:
         return redirect(url_for('index'))
-    user = User.verify_reset_password_token(token)
+    user = User.verify_token(token)
     if not user:
+        flash('The password reset token is invalid, please request another.', 'danger')
         return redirect(url_for('index'))
     form = ResetPasswordForm()
     if form.validate_on_submit():
@@ -129,7 +160,7 @@ def account():
 def delete_account():
     db.session.delete(current_user)
     db.session.commit()
-    flash('Your account and all personal information has been permanently deleted', 'success')
+    flash('Your account and all personal information has been permanently deleted.', 'success')
     return redirect(url_for('index'))
 
 
@@ -144,7 +175,7 @@ def change_password():
             current_user.updated_at = pytz.utc.localize(datetime.utcnow())
             db.session.add(current_user)
             db.session.commit()
-            flash('Your password has been changed', 'success')
+            flash('Your password has been changed.', 'success')
         else:
             flash('Invalid password.', 'danger')
             return redirect(url_for('change_password'))
@@ -159,12 +190,16 @@ def change_password():
 def update_account():
     form = AccountForm()
     if form.validate_on_submit():
-        current_user.email_address = form.email_address.data
+        if form.email_address.data != current_user.email_address:
+            current_user.email_address = form.email_address.data
+            current_user.activated_at = None
+            send_confirmation_email(current_user)
+            flash("We've sent an email to {0} with instructions to confirm your email address.".format(current_user.email_address), 'success')
         current_user.timezone = form.timezone.data
         current_user.updated_at = pytz.utc.localize(datetime.utcnow())
         db.session.add(current_user)
         db.session.commit()
-        flash('Your account has been updated', 'success')
+        flash('Your account has been updated.', 'success')
         return redirect(url_for('account'))
     elif request.method == 'GET':
         form.email_address.data = current_user.email_address
@@ -206,7 +241,7 @@ def manual_event():
             event.ended_at = None
         db.session.add(event)
         db.session.commit()
-        flash('Time entry has been added', 'success')
+        flash('Time entry has been added.', 'success')
         return redirect(url_for('index'))
     return render_template('create_event_form.html', title='Create time entry', form=form)
 
@@ -220,7 +255,7 @@ def delete_event(id):
         raise Forbidden()
     db.session.delete(event)
     db.session.commit()
-    flash('Time entry has been deleted', 'success')
+    flash('Time entry has been deleted.', 'success')
     return redirect(url_for('index'))
 
 
@@ -244,7 +279,7 @@ def update_event(id):
             event.ended_at = None
         db.session.add(event)
         db.session.commit()
-        flash('Time entry has been updated', 'success')
+        flash('Time entry has been updated.', 'success')
         return redirect(url_for('index'))
     elif request.method == 'GET':
         # Show timestamp in users localised timezone
