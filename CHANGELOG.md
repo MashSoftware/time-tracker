@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Changed
 
+- Landing page sales pitch describing the service.
 - Wording on link to resend account activation email.
 - If a user requests another activation email and they have never activated before, they will receive the original activation email. Otherwise they will receive the confirmation email used when changing email address.
 
