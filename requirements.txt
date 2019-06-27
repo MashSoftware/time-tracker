@@ -4,7 +4,7 @@
 #
 #    pip-compile
 #
-alembic==1.0.10           # via flask-migrate
+alembic==1.0.11           # via flask-migrate
 bcrypt==3.1.7
 certifi==2019.6.16        # via requests
 cffi==1.12.3              # via bcrypt
