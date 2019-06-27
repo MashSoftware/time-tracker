@@ -63,6 +63,7 @@
         <br><br>
     </div>
     <div class="col-md-8">
+        {% if events.items %}<p class="text-muted">Page {{events.page}} of {{events.pages}}</p>{% endif %}
         {% for event in events.items %}
         {% if loop.index == 1 or event.started_at.strftime('%y%m%d') != loop.previtem.started_at.strftime('%y%m%d') %}
         <div class="card shadow-sm">
