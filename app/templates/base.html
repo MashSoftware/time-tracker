@@ -60,6 +60,9 @@
             {% if category == 'info' %}
             <h4 class="alert-heading">Heads up</h4>
             {% endif %}
+            {% if category == 'warning' %}
+            <h4 class="alert-heading">Heads up</h4>
+            {% endif %}
             <p class="mb-1">{{ message }}</p>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>

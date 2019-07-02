@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased](https://github.com/MashSoftware/the-button/compare/master...develop)
 
+### Added
+
+- A limit of 80 time entries per account.
+- Tell the user when they have reached the limit on their account.
+- Delete the oldest entry when creating a new one, once account entry limit has been reached
+
 ### Changed
 
 - Landing page sales pitch describing the service.
