@@ -35,7 +35,7 @@
 <div class="row">
     <div class="col">
         <h2><i class="fas fa-globe-europe fa-lg fa-fw"></i> Web first</h2>
-        <p class="lead">We treat the browser as a first-class citizen, not a fallback option. Mobile-first responsive design means The Button looks great and works well on any device. The web is open, democratic and free in a way that app marketplaces tend not to be.</p>
+        <p class="lead">We treat the browser as a first-class citizen, not a fallback option. Mobile-first responsive design means The Button looks great and works well on any device. The web is open, democratic and free in a way that app stores tend not to be.</p>
     </div>
 </div>
 <hr>
@@ -64,35 +64,28 @@
     </div>
     <div class="col-md-8">
         {% if events.items %}<p class="text-muted">Page {{events.page}} of {{events.pages}}</p>{% endif %}
-        {% for event in events.items %}
-        {% if loop.index == 1 or event.started_at.strftime('%y%m%d') != loop.previtem.started_at.strftime('%y%m%d') %}
-        <div class="card shadow-sm">
-            <h5 class="card-header">{{ event.started_at.strftime('%A %d %B %Y') }}</h5>
-            <div class="list-group list-group-flush">
-                {% for this_event in events.items %}
-                    {% if this_event.started_at.strftime('%Y%m%d') == event.started_at.strftime('%Y%m%d') %}
-                        {% if this_event.ended_at is none %}
-                        <a href="{{ url_for('update_event', id=this_event.id) }}" class="list-group-item list-group-item-action list-group-item-info">
-                        {% else %}
-                        <a href="{{ url_for('update_event', id=this_event.id) }}" class="list-group-item list-group-item-action">
-                        {% endif %}
-                        {% if this_event.ended_at %}
-                            {% if this_event.started_at.strftime('%Y%m%d') != this_event.ended_at.strftime('%Y%m%d') %}
-                                {{ this_event.started_at.strftime('%H:%M') }} to {{ this_event.ended_at.strftime('%d/%m/%Y') }} at {{ this_event.ended_at.strftime('%H:%M') }}
-                            {% else %}
-                                {{ this_event.started_at.strftime('%H:%M') }} to {{ this_event.ended_at.strftime('%H:%M')}}
-                            {% endif %}
-                        {% else %}
-                            Started at {{ this_event.started_at.strftime('%H:%M') }}
-                        {% endif %}
+        {% for date in entries %}
+            <div class="card shadow-sm">
+                <h5 class="card-header">{{date.date}}</h5>
+                <div class="list-group list-group-flush">
+                {% for entry in date.entries %}
+                    {% if entry.ended_at is none %}
+                    <a href="{{ url_for('update_event', id=entry.id) }}" class="list-group-item list-group-item-action list-group-item-info">Started at {{entry.started_at.strftime('%H:%M')}}</a>
+                    {% else %}
+                    <a href="{{ url_for('update_event', id=entry.id) }}" class="list-group-item list-group-item-action">
+                        {{entry.started_at.strftime('%H:%M')}} to 
+                        {% if entry.started_at.strftime('%Y%m%d') != entry.ended_at.strftime('%Y%m%d') %}{{entry.ended_at.strftime('%d/%m/%y at %H:%M')}}{%else%}{{entry.ended_at.strftime('%H:%M')}}{% endif %} - 
+                        {% if entry.duration.hours > 0 %}{{entry.duration.hours}} {% if entry.duration.hours == 1 %}hour{% else %}hours{% endif %} {% endif %} 
+                        {% if entry.duration.minutes > 0 %}{{entry.duration.minutes}} {% if entry.duration.minutes == 1 %}minute{% else %}minutes{% endif %}{% endif %} 
+                        {% if entry.duration.hours == 0 and entry.duration.minutes == 0 %}{{entry.duration.seconds}} {% if entry.duration.seconds == 1 %}second{% else %}seconds{% endif %}{% endif %}
+                    </a>
                     {% endif %}
                 {% endfor %}
-                </a>
+                </div>
             </div>
-        </div>
-        <br>
-        {% endif %}
+            <br>
         {% endfor %}
+
         {% if events.items %}
         <nav aria-label="Page navigation">
             <ul class="pagination justify-content-center">
