@@ -29,6 +29,10 @@ def index():
 
         int_dict = {}
         for event in events.items:
+            event.started_at = event.started_at.astimezone(pytz.timezone(current_user.timezone))
+            if event.ended_at:
+                event.ended_at = event.ended_at.astimezone(pytz.timezone(current_user.timezone))
+
             date_dict = int_dict.setdefault(event.started_at.strftime('%A %d %B %Y'), {'entries': [], 'total_hours': None, 'total_hours_decimal': None})
             date_dict['entries'].append(event)
             if event.ended_at:
@@ -38,11 +42,6 @@ def index():
                 event.duration = {'hours': hours, 'minutes': minutes, 'seconds': seconds}
 
         output = [{'date': key, 'entries': value['entries']} for key, value in int_dict.items()]
-
-        for event in events.items:
-            event.started_at = event.started_at.astimezone(pytz.timezone(current_user.timezone))
-            if event.ended_at:
-                event.ended_at = event.ended_at.astimezone(pytz.timezone(current_user.timezone))
         return render_template('index.html', events=events, start=start, entries=output)
     else:
         return render_template('index.html')
