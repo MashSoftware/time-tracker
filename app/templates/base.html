@@ -23,28 +23,26 @@
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                {% if current_user.is_anonymous %}
                 <ul class="navbar-nav ml-auto">
+                    {% if current_user.is_anonymous %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('signup') }}"><i class="fas fa-user-plus fa-lg fa-fw"></i> Sign up</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('login') }}"><i class="fas fa-sign-in-alt fa-lg fa-fw"></i> Log in</a>
                     </li>
-                </ul>
-                {% else %}
-                <ul class="navbar-nav ml-auto">
+                    {% else %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('account') }}"><i class="fas fa-user fa-lg fa-fw"></i> Account</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt fa-lg fa-fw"></i> Log out</a>
                     </li>
+                    {% endif %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('help') }}"><i class="fas fa-question-circle fa-lg fa-fw"></i> Help</a>
                     </li>
                 </ul>
-                {% endif %}
             </div>
         </div>
     </nav>
