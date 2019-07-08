@@ -9,9 +9,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
+- Time entry duration.
 - A limit of 80 time entries per account.
 - Tell the user when they have reached the limit on their account.
 - Delete the oldest entry when creating a new one, once account entry limit has been reached
+- Help page with FAQs and contact details.
 
 ### Changed
 
