@@ -307,3 +307,8 @@ def update_event(id):
         if event.ended_at:
             form.ended_at.data = event.ended_at.astimezone(pytz.timezone(current_user.timezone))
     return render_template('update_event_form.html', title='Edit time entry', form=form, event=event)
+
+
+@app.route('/help')
+def help():
+    return render_template('help.html', title='Help')
