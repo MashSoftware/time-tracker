@@ -40,6 +40,7 @@ def index():
                 hours, remainder = divmod(seconds, 3600)
                 minutes, seconds = divmod(remainder, 60)
                 event.duration = {'hours': hours, 'minutes': minutes, 'seconds': seconds}
+                event.duration_decimal = str(round(((int((event.ended_at - event.started_at).total_seconds()) / 60) / 60), 4))[:-2]
 
         output = [{'date': key, 'entries': value['entries']} for key, value in int_dict.items()]
         return render_template('index.html', events=events, start=start, entries=output)
