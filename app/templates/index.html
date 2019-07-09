@@ -75,9 +75,7 @@
                     <a href="{{ url_for('update_event', id=entry.id) }}" class="list-group-item list-group-item-action">
                         {{entry.started_at.strftime('%H:%M')}} to 
                         {% if entry.started_at.strftime('%Y%m%d') != entry.ended_at.strftime('%Y%m%d') %}{{entry.ended_at.strftime('%d/%m/%y at %H:%M')}}{%else%}{{entry.ended_at.strftime('%H:%M')}}{% endif %} - 
-                        {% if entry.duration.hours > 0 %}{{entry.duration.hours}}h{% endif %} 
-                        {% if entry.duration.minutes > 0 %}{{entry.duration.minutes}}min{% endif %} 
-                        {% if entry.duration.hours == 0 and entry.duration.minutes == 0 %}{{entry.duration.seconds}}s{% endif %}
+                        {{entry.duration}}
                         ({{entry.duration_decimal}})
                     </a>
                     {% endif %}
