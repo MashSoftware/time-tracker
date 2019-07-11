@@ -33,11 +33,11 @@ def index():
             if event.ended_at:
                 event.ended_at = event.ended_at.astimezone(pytz.timezone(current_user.timezone))
 
-            date_dict = int_dict.setdefault(event.started_at.strftime('%A %d %B %Y'), {'entries': [], 'total_hours': None, 'total_hours_decimal': None})
+            date_dict = int_dict.setdefault(event.started_at.strftime('%A %d %B %Y'), {'entries': [], 'total_seconds': 0, 'total_duration': None, 'total_duration_decimal': 0})
             date_dict['entries'].append(event)
             if event.ended_at:
-                seconds = int((event.ended_at - event.started_at).total_seconds())
-                hours, remainder = divmod(seconds, 3600)
+                event.total_seconds = int((event.ended_at - event.started_at).total_seconds())
+                hours, remainder = divmod(event.total_seconds, 3600)
                 minutes, seconds = divmod(remainder, 60)
                 if hours > 0:
                     event.duration = str(hours) + "h " + str(minutes) + "min"
@@ -45,9 +45,20 @@ def index():
                     event.duration = str(minutes) + "min"
                 else:
                     event.duration = str(seconds) + "s"
-                event.duration_decimal = str(round(((int((event.ended_at - event.started_at).total_seconds()) / 60) / 60), 4))[:-2]
+                event.duration_decimal = (event.total_seconds / 60 / 60)
 
-        output = [{'date': key, 'entries': value['entries']} for key, value in int_dict.items()]
+                date_dict['total_seconds'] += event.total_seconds
+                hours, remainder = divmod(date_dict['total_seconds'], 3600)
+                minutes, seconds = divmod(remainder, 60)
+                if hours > 0:
+                    date_dict['total_duration'] = str(hours) + "h " + str(minutes) + "min"
+                elif minutes > 0:
+                    date_dict['total_duration'] = str(minutes) + "min"
+                else:
+                    date_dict['total_duration'] = str(seconds) + "s"
+                date_dict['total_duration_decimal'] += event.duration_decimal
+
+        output = [{'date': key, 'entries': value['entries'], 'total_duration': value['total_duration'], 'total_duration_decimal': value['total_duration_decimal']} for key, value in int_dict.items()]
         return render_template('index.html', events=events, start=start, entries=output)
     else:
         return render_template('index.html')
