@@ -66,7 +66,10 @@
         {% if events.items %}<p class="text-muted">Page {{events.page}} of {{events.pages}}</p>{% endif %}
         {% for date in entries %}
             <div class="card shadow-sm">
-                <h5 class="card-header">{{date.date}}<br><small class="text-muted">{{date.total_duration}} ({{date.total_duration_decimal|round(2, 'floor')}})</small></h5>
+                <h5 class="card-header">
+                    {{date.date}}
+                    {% if date.total_duration %}<br><small class="text-muted">{{date.total_duration}} ({{date.total_duration_decimal|round(2, 'floor')}})</small>{% endif %}
+                </h5>
                 <div class="list-group list-group-flush">
                 {% for entry in date.entries %}
                     {% if entry.ended_at is none %}
