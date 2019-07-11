@@ -7,12 +7,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased](https://github.com/MashSoftware/the-button/compare/master...develop)
 
+## [0.18.0](https://github.com/MashSoftware/the-button/compare/v0.17.0...v0.18.0) - 2019-07-11
+
 ### Added
 
-- Time entry duration expressed as hours, minutes, seconds and decimal hours.
+- Time entry duration expressed as time and decimal hours.
+- Daily total time duration expressed as time and decimal hours.
 - A limit of 80 time entries per account.
 - Tell the user when they have reached the limit on their account.
-- Delete the oldest entry when creating a new one, once account entry limit has been reached
+- The users oldest entry is deleted when creating a new one, once the account entry limit has been reached
 - Help page with FAQs.
 
 ### Changed
