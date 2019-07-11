@@ -26,11 +26,40 @@ def index():
             start = True
         else:
             start = False
+
+        int_dict = {}
         for event in events.items:
             event.started_at = event.started_at.astimezone(pytz.timezone(current_user.timezone))
             if event.ended_at:
                 event.ended_at = event.ended_at.astimezone(pytz.timezone(current_user.timezone))
-        return render_template('index.html', events=events, start=start)
+
+            date_dict = int_dict.setdefault(event.started_at.strftime('%A %d %B %Y'), {'entries': [], 'total_seconds': 0, 'total_duration': None, 'total_duration_decimal': 0})
+            date_dict['entries'].append(event)
+            if event.ended_at:
+                event.total_seconds = int((event.ended_at - event.started_at).total_seconds())
+                hours, remainder = divmod(event.total_seconds, 3600)
+                minutes, seconds = divmod(remainder, 60)
+                if hours > 0:
+                    event.duration = str(hours) + "h " + str(minutes) + "min"
+                elif minutes > 0:
+                    event.duration = str(minutes) + "min"
+                else:
+                    event.duration = str(seconds) + "s"
+                event.duration_decimal = (event.total_seconds / 60 / 60)
+
+                date_dict['total_seconds'] += event.total_seconds
+                hours, remainder = divmod(date_dict['total_seconds'], 3600)
+                minutes, seconds = divmod(remainder, 60)
+                if hours > 0:
+                    date_dict['total_duration'] = str(hours) + "h " + str(minutes) + "min"
+                elif minutes > 0:
+                    date_dict['total_duration'] = str(minutes) + "min"
+                else:
+                    date_dict['total_duration'] = str(seconds) + "s"
+                date_dict['total_duration_decimal'] += event.duration_decimal
+
+        output = [{'date': key, 'entries': value['entries'], 'total_duration': value['total_duration'], 'total_duration_decimal': value['total_duration_decimal']} for key, value in int_dict.items()]
+        return render_template('index.html', events=events, start=start, entries=output)
     else:
         return render_template('index.html')
 
@@ -60,7 +89,9 @@ def activate_request():
     form = TokenRequestForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email_address=form.email_address.data).first()
-        if user:
+        if user.activated_at is None:
+            send_activation_email(user)
+        else:
             send_confirmation_email(user)
         flash("We've sent an email to {0} with instructions to activate your account.".format(form.email_address.data), 'success')
         return redirect(url_for('index'))
@@ -216,6 +247,11 @@ def create_event():
         event.ended_at = pytz.utc.localize(datetime.utcnow())
         db.session.add(event)
     else:
+        entry_count = Event.query.filter_by(user_id=current_user.id).count()
+        if current_user.entry_limit <= entry_count:
+            oldest_event = Event.query.filter_by(user_id=current_user.id).order_by(Event.started_at.asc()).first()
+            db.session.delete(oldest_event)
+            flash('You have reached the {0} entry limit for your account. The oldest entry has been deleted.'.format(current_user.entry_limit), 'warning')
         new_event = Event(
             user_id=current_user.id,
             started_at=pytz.utc.localize(datetime.utcnow()))
@@ -287,3 +323,8 @@ def update_event(id):
         if event.ended_at:
             form.ended_at.data = event.ended_at.astimezone(pytz.timezone(current_user.timezone))
     return render_template('update_event_form.html', title='Edit time entry', form=form, event=event)
+
+
+@app.route('/help')
+def help():
+    return render_template('help.html', title='Help')

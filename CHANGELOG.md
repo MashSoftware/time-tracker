@@ -7,6 +7,23 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased](https://github.com/MashSoftware/the-button/compare/master...develop)
 
+## [0.18.0](https://github.com/MashSoftware/the-button/compare/v0.17.0...v0.18.0) - 2019-07-11
+
+### Added
+
+- Time entry duration expressed as time and decimal hours.
+- Daily total time duration expressed as time and decimal hours.
+- A limit of 80 time entries per account.
+- Tell the user when they have reached the limit on their account.
+- The users oldest entry is deleted when creating a new one, once the account entry limit has been reached
+- Help page with FAQs.
+
+### Changed
+
+- Landing page sales pitch describing the service.
+- Wording on link to resend account activation email.
+- If a user requests another activation email and they have never activated before, they will receive the original activation email. Otherwise they will receive the confirmation email used when changing email address.
+
 ## [0.17.0](https://github.com/MashSoftware/the-button/compare/v0.16.0...v0.17.0) - 2019-06-18
 
 ### Added

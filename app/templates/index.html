@@ -6,21 +6,43 @@
         <div class="jumbotron">
             <h1 class="display-4">Push the button...</h1>
             <p class="lead">Time tracking made simple.</p>
+            <a class="btn btn-primary btn-lg" href="{{ url_for('signup') }}" role="button"><i class="fas fa-user-plus fa-lg fa-fw"></i> Sign up</a>
+            <a class="btn btn-secondary btn-lg" href="{{ url_for('login') }}" role="button"><i class="fas fa-sign-in-alt fa-lg fa-fw"></i> Log in</a>
         </div>
     </div>
 </div>
 <div class="row">
-    <div class="col-md-4">
-        <h2>Step 1</h2>
-        <p><a href="{{ url_for('signup') }}">Sign up</a> or <a href="{{ url_for('login') }}">log in</a>...</p>
+    <div class="col">
+        <h2><i class="fas fa-stopwatch fa-lg fa-fw"></i> Simple</h2>
+        <p class="lead">Clear, quick and simple to use. Just click to start, click again to finish, job done! Want to add a time entry manually? You can do that too. <i>COMING SOON: categorise your time with tags!</i></p>
     </div>
-    <div class="col-md-4">
-        <h2>Step 2</h2>
-        <p>Push the button...</p>
+</div>
+<hr>
+<div class="row">
+    <div class="col">
+        <h2><i class="fas fa-tachometer-alt fa-lg fa-fw"></i> Fast</h2>
+        <p class="lead">A lightweight and fast user interface, perfect for mobile networks. Reasonable rate limits protect the app from abuse and maintain a good service for everyone. Scores a perfect 100% on Google's PageSpeed analysis!</p>
     </div>
-    <div class="col-md-4">
-        <h2>Step 3</h2>
-        <p>See all the times you pushed the button...</p>
+</div>
+<hr>
+<div class="row">
+    <div class="col">
+        <h2><i class="fas fa-shield-alt fa-lg fa-fw"></i> Secure</h2>
+        <p class="lead">Uses security standards and strict policies to protect from cross-site scripting, code injection, cross-site request forgery and session hijacking attacks. Encrypted passwords are resistant to rainbow table, dictionary and brute force attacks.</p>
+    </div>
+</div>
+<hr>
+<div class="row">
+    <div class="col">
+        <h2><i class="fas fa-globe-europe fa-lg fa-fw"></i> Web first</h2>
+        <p class="lead">We treat the browser as a first-class citizen, not a fallback option. Mobile-first responsive design means The Button looks great and works well on any device. The web is open, democratic and free in a way that app stores tend not to be.</p>
+    </div>
+</div>
+<hr>
+<div class="row">
+    <div class="col">
+        <h2><i class="fas fa-database fa-lg fa-fw"></i> Open</h2>
+        <p class="lead">Fully open source code, all hosted and run within the EU. Stores the least amount of personal data possible, only an email address. You are in full control of your data and can permanently delete everything at any time with a single click.</p>
     </div>
 </div>
 {% else %}
@@ -41,35 +63,31 @@
         <br><br>
     </div>
     <div class="col-md-8">
-        {% for event in events.items %}
-        {% if loop.index == 1 or event.started_at.strftime('%y%m%d') != loop.previtem.started_at.strftime('%y%m%d') %}
-        <div class="card shadow-sm">
-            <h5 class="card-header">{{ event.started_at.strftime('%A %d %B %Y') }}</h5>
-            <div class="list-group list-group-flush">
-                {% for this_event in events.items %}
-                    {% if this_event.started_at.strftime('%Y%m%d') == event.started_at.strftime('%Y%m%d') %}
-                        {% if this_event.ended_at is none %}
-                        <a href="{{ url_for('update_event', id=this_event.id) }}" class="list-group-item list-group-item-action list-group-item-info">
-                        {% else %}
-                        <a href="{{ url_for('update_event', id=this_event.id) }}" class="list-group-item list-group-item-action">
-                        {% endif %}
-                        {% if this_event.ended_at %}
-                            {% if this_event.started_at.strftime('%Y%m%d') != this_event.ended_at.strftime('%Y%m%d') %}
-                                {{ this_event.started_at.strftime('%H:%M') }} to {{ this_event.ended_at.strftime('%d/%m/%Y') }} at {{ this_event.ended_at.strftime('%H:%M') }}
-                            {% else %}
-                                {{ this_event.started_at.strftime('%H:%M') }} to {{ this_event.ended_at.strftime('%H:%M')}}
-                            {% endif %}
-                        {% else %}
-                            Started at {{ this_event.started_at.strftime('%H:%M') }}
-                        {% endif %}
+        {% if events.items %}<p class="text-muted">Page {{events.page}} of {{events.pages}}</p>{% endif %}
+        {% for date in entries %}
+            <div class="card shadow-sm">
+                <h5 class="card-header">
+                    {{date.date}}
+                    {% if date.total_duration %}<br><small class="text-muted">{{date.total_duration}} ({{date.total_duration_decimal|round(2, 'floor')}})</small>{% endif %}
+                </h5>
+                <div class="list-group list-group-flush">
+                {% for entry in date.entries %}
+                    {% if entry.ended_at is none %}
+                    <a href="{{ url_for('update_event', id=entry.id) }}" class="list-group-item list-group-item-action list-group-item-info">Started at {{entry.started_at.strftime('%H:%M')}}</a>
+                    {% else %}
+                    <a href="{{ url_for('update_event', id=entry.id) }}" class="list-group-item list-group-item-action">
+                        {{entry.started_at.strftime('%H:%M')}} to 
+                        {% if entry.started_at.strftime('%Y%m%d') != entry.ended_at.strftime('%Y%m%d') %}{{entry.ended_at.strftime('%d/%m/%y at %H:%M')}}{%else%}{{entry.ended_at.strftime('%H:%M')}}{% endif %} - 
+                        {{entry.duration}}
+                        ({{entry.duration_decimal|round(2, 'floor')}})
+                    </a>
                     {% endif %}
                 {% endfor %}
-                </a>
+                </div>
             </div>
-        </div>
-        <br>
-        {% endif %}
+            <br>
         {% endfor %}
+
         {% if events.items %}
         <nav aria-label="Page navigation">
             <ul class="pagination justify-content-center">

@@ -1,4 +1,4 @@
-bcrypt==3.1.6
+bcrypt==3.1.7
 flask-compress==1.4.0
 flask-limiter==1.0.1
 flask-login==0.4.1
@@ -6,7 +6,7 @@ flask-migrate==2.5.2
 flask-sqlalchemy==2.4.0
 flask-talisman==0.7.0
 flask-wtf==0.14.2
-flask==1.0.2  # Latest 1.0.3
+flask==1.0.4  # Latest 1.1.1
 gunicorn==19.9.0
 psycopg2==2.8.3
 pyjwt==1.7.1
@@ -15,4 +15,4 @@ pytz==2019.1
 redis==3.2.1
 requests==2.22.0
 # Generated with piprot 0.9.10
-# Your requirements are 440 days out of date
+# Your requirements are 3 days out of date
