@@ -16,27 +16,34 @@
 <body>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
         <div class="container">
-            <a class="navbar-brand" href="{{ url_for('index') }}"><i class="far fa-clock fa-lg"></i> The Button <span class="badge badge-info">ALPHA</span></a>
+            <a class="navbar-brand" href="{{ url_for('index') }}"> The Button <span class="badge badge-info">ALPHA</span></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    {% if current_user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('entry.entries') }}"><i class="far fa-clock fa-lg fa-fw"></i> Entries</a>
+                    </li>
+                    {% endif %}
+                </ul>
                 <ul class="navbar-nav ml-auto">
                     {% if current_user.is_anonymous %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('signup') }}"><i class="fas fa-user-plus fa-lg fa-fw"></i> Sign up</a>
+                        <a class="nav-link" href="{{ url_for('auth.signup') }}"><i class="fas fa-user-plus fa-lg fa-fw"></i> Sign up</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('login') }}"><i class="fas fa-sign-in-alt fa-lg fa-fw"></i> Log in</a>
+                        <a class="nav-link" href="{{ url_for('auth.login') }}"><i class="fas fa-sign-in-alt fa-lg fa-fw"></i> Log in</a>
                     </li>
                     {% else %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('account') }}"><i class="fas fa-user fa-lg fa-fw"></i> Account</a>
+                        <a class="nav-link" href="{{ url_for('account.account') }}"><i class="fas fa-user fa-lg fa-fw"></i> Account</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt fa-lg fa-fw"></i> Log out</a>
+                        <a class="nav-link" href="{{ url_for('auth.logout') }}"><i class="fas fa-sign-out-alt fa-lg fa-fw"></i> Log out</a>
                     </li>
                     {% endif %}
                     <li class="nav-item">

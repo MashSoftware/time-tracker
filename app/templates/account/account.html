@@ -24,8 +24,8 @@
 </div>
 <div class="row">
     <div class="col-md-4">
-        <a class="btn btn-block btn-lg btn-primary" href="{{ url_for('update_account') }}" role="button"><i class="fas fa-user-edit fa-lg fa-fw"></i> Update account</a>
-        <a class="btn btn-block btn-lg btn-primary" href="{{ url_for('change_password') }}" role="button"><i class="fas fa-key fa-lg fa-fw"></i> Change password</a>
+        <a class="btn btn-block btn-lg btn-primary" href="{{ url_for('account.update') }}" role="button"><i class="fas fa-user-edit fa-lg fa-fw"></i> Update account</a>
+        <a class="btn btn-block btn-lg btn-primary" href="{{ url_for('account.change_password') }}" role="button"><i class="fas fa-key fa-lg fa-fw"></i> Change password</a>
         <button type="button" class="btn btn-block btn-outline-danger" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash fa-lg fa-fw"></i> Delete account</button>
     </div>
 </div>
@@ -44,7 +44,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-secondary" data-dismiss="modal"><i class="fas fa-chevron-left fa-lg fa-fw"></i> Cancel</button>
-                <a class="btn btn-danger" href="{{ url_for('delete_account') }}" role="button"><i class="fas fa-trash fa-lg fa-fw"></i> Delete</a>
+                <a class="btn btn-danger" href="{{ url_for('account.delete') }}" role="button"><i class="fas fa-trash fa-lg fa-fw"></i> Delete</a>
             </div>
         </div>
     </div>

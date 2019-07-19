@@ -2,7 +2,7 @@ Hi,
 
 Please use the following link to confirm your email address:
 
-{{ url_for('activate', token=token, _external=True) }}
+{{ url_for('auth.activate', token=token, _external=True) }}
 
 This link is only valid for the next hour.
 
