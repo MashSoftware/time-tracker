@@ -7,8 +7,8 @@ from flask_login import current_user, fresh_login_required, login_required
 
 from app import db, limiter
 from app.account import bp
-from app.email import send_confirmation_email
 from app.account.forms import AccountForm, PasswordForm
+from app.main.email import send_confirmation_email
 
 
 @bp.route('/')

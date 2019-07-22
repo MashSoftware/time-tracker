@@ -16,7 +16,7 @@
 <body>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
         <div class="container">
-            <a class="navbar-brand" href="{{ url_for('index') }}"> The Button <span class="badge badge-info">ALPHA</span></a>
+            <a class="navbar-brand" href="{{ url_for('main.index') }}"> The Button <span class="badge badge-info">ALPHA</span></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -26,7 +26,7 @@
                 <ul class="navbar-nav mr-auto">
                     {% if current_user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('entry.entries') }}"><i class="far fa-clock fa-lg fa-fw"></i> Entries</a>
+                        <a class="nav-link" href="{{ url_for('entry.entries') }}"><i class="far fa-clock fa-lg fa-fw"></i> Time entries</a>
                     </li>
                     {% endif %}
                 </ul>
@@ -47,7 +47,7 @@
                     </li>
                     {% endif %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('help') }}"><i class="fas fa-question-circle fa-lg fa-fw"></i> Help</a>
+                        <a class="nav-link" href="{{ url_for('main.help') }}"><i class="fas fa-question-circle fa-lg fa-fw"></i> Help</a>
                     </li>
                 </ul>
             </div>

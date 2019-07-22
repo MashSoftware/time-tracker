@@ -10,8 +10,8 @@ from app import db
 from app.auth import bp
 from app.auth.forms import (LoginForm, ResetPasswordForm, SignupForm,
                             TokenRequestForm)
-from app.email import (send_activation_email, send_confirmation_email,
-                       send_reset_password_email)
+from app.main.email import (send_activation_email, send_confirmation_email,
+                            send_reset_password_email)
 from app.models import User
 
 
