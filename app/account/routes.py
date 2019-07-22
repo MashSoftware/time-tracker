@@ -53,7 +53,8 @@ def update():
             current_user.email_address = form.email_address.data
             current_user.activated_at = None
             send_confirmation_email(current_user)
-            flash("We've sent an email to {0} with instructions to confirm your email address.".format(current_user.email_address), 'success')
+            flash("We've sent an email to {0} with instructions to confirm your email address."
+                  .format(current_user.email_address), 'success')
         current_user.timezone = form.timezone.data
         current_user.updated_at = pytz.utc.localize(datetime.utcnow())
         db.session.add(current_user)

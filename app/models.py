@@ -52,7 +52,7 @@ class User(UserMixin, db.Model):
     def verify_token(token):
         try:
             id = jwt.decode(token, current_app.config['SECRET_KEY'], algorithms=['HS256'])['id']
-        except:
+        except jwt.PyJWTError:
             return
         return User.query.get(id)
 

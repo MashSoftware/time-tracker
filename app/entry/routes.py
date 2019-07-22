@@ -29,7 +29,9 @@ def entries():
         if event.ended_at:
             event.ended_at = event.ended_at.astimezone(pytz.timezone(current_user.timezone))
 
-        date_dict = int_dict.setdefault(event.started_at.strftime('%A %d %B %Y'), {'entries': [], 'total_seconds': 0, 'total_duration': None, 'total_duration_decimal': 0})
+        date_dict = int_dict.setdefault(
+            event.started_at.strftime('%A %d %B %Y'),
+            {'entries': [], 'total_seconds': 0, 'total_duration': None, 'total_duration_decimal': 0})
         date_dict['entries'].append(event)
         if event.ended_at:
             event.total_seconds = int((event.ended_at - event.started_at).total_seconds())
@@ -54,7 +56,12 @@ def entries():
                 date_dict['total_duration'] = str(seconds) + "s"
             date_dict['total_duration_decimal'] += event.duration_decimal
 
-    output = [{'date': key, 'entries': value['entries'], 'total_duration': value['total_duration'], 'total_duration_decimal': value['total_duration_decimal']} for key, value in int_dict.items()]
+    output = [
+        {
+            'date': key, 'entries': value['entries'],
+            'total_duration': value['total_duration'],
+            'total_duration_decimal': value['total_duration_decimal']
+        } for key, value in int_dict.items()]
     return render_template('entry/entries.html', events=events, start=start, entries=output)
 
 
@@ -71,7 +78,8 @@ def auto():
         if current_user.entry_limit <= entry_count:
             oldest_event = Event.query.filter_by(user_id=current_user.id).order_by(Event.started_at.asc()).first()
             db.session.delete(oldest_event)
-            flash('You have reached the {0} entry limit for your account. The oldest entry has been deleted.'.format(current_user.entry_limit), 'warning')
+            flash('You have reached the {0} entry limit for your account. The oldest entry has been deleted.'
+                  .format(current_user.entry_limit), 'warning')
         new_event = Event(
             user_id=current_user.id,
             started_at=pytz.utc.localize(datetime.utcnow()))

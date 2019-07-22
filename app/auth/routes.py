@@ -28,7 +28,8 @@ def signup():
         db.session.add(user)
         db.session.commit()
         send_activation_email(user)
-        flash("Thanks for signing up! We've sent an email to {0} with instructions to activate your account.".format(user.email_address), 'success')
+        flash("Thanks for signing up! We've sent an email to {0} with instructions to activate your account."
+              .format(user.email_address), 'success')
         return redirect(url_for('index'))
     return render_template('auth/sign_up_form.html', title='Sign up', form=form)
 
@@ -44,7 +45,8 @@ def activate_request():
             send_activation_email(user)
         else:
             send_confirmation_email(user)
-        flash("We've sent an email to {0} with instructions to activate your account.".format(form.email_address.data), 'success')
+        flash("We've sent an email to {0} with instructions to activate your account."
+              .format(form.email_address.data), 'success')
         return redirect(url_for('index'))
     return render_template('auth/activate_request_form.html', title='Activate account', form=form)
 
@@ -102,7 +104,8 @@ def reset_password_request():
         user = User.query.filter_by(email_address=form.email_address.data).first()
         if user:
             send_reset_password_email(user)
-        flash("We've sent an email to {0} with instructions to reset your password.".format(form.email_address.data), 'success')
+        flash("We've sent an email to {0} with instructions to reset your password."
+              .format(form.email_address.data), 'success')
         return redirect(url_for('auth.login'))
     return render_template('auth/reset_password_request_form.html', title='Reset password', form=form)
 
