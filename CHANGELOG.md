@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased](https://github.com/MashSoftware/the-button/compare/master...develop)
 
+### Added
+
+- Version number and release date to page footer, with link to changelog.
+
 ### Changed
 
 - Large refactor to modularise application code, in preparation for new features.
