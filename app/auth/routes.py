@@ -30,7 +30,7 @@ def signup():
         send_activation_email(user)
         flash("Thanks for signing up! We've sent an email to {0} with instructions to activate your account."
               .format(user.email_address), 'success')
-        return redirect(url_for('index'))
+        return redirect(url_for('main.index'))
     return render_template('auth/sign_up_form.html', title='Sign up', form=form)
 
 
@@ -47,7 +47,7 @@ def activate_request():
             send_confirmation_email(user)
         flash("We've sent an email to {0} with instructions to activate your account."
               .format(form.email_address.data), 'success')
-        return redirect(url_for('index'))
+        return redirect(url_for('main.index'))
     return render_template('auth/activate_request_form.html', title='Activate account', form=form)
 
 
@@ -58,7 +58,7 @@ def activate(token):
     user = User.verify_token(token)
     if not user:
         flash('The activation token is invalid, please request another.', 'danger')
-        return redirect(url_for('index'))
+        return redirect(url_for('main.index'))
     user.activated_at = pytz.utc.localize(datetime.utcnow())
     db.session.commit()
     flash('Your account has been activated. Please log in to continue.', 'success')
@@ -92,7 +92,7 @@ def login():
 def logout():
     logout_user()
     flash('You have been successfully logged out.', 'success')
-    return redirect(url_for('index'))
+    return redirect(url_for('main.index'))
 
 
 @bp.route('/reset-password', methods=['GET', 'POST'])
@@ -117,7 +117,7 @@ def reset_password(token):
     user = User.verify_token(token)
     if not user:
         flash('The password reset token is invalid, please request another.', 'danger')
-        return redirect(url_for('index'))
+        return redirect(url_for('main.index'))
     form = ResetPasswordForm()
     if form.validate_on_submit():
         user.set_password(form.new_password.data)
