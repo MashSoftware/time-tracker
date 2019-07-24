@@ -7,9 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased](https://github.com/MashSoftware/the-button/compare/master...develop)
 
+## [0.19.0](https://github.com/MashSoftware/the-button/compare/v0.18.0...v0.19.0) - 2019-07-25
+
 ### Added
 
-- Version number and release date to page footer, with link to changelog.
+- Version number and release date added to page footer, with a link to this changelog.
 - For all pages with a primary action button, a secondary "cancel" button has been added.
 
 ### Changed
@@ -17,7 +19,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Large refactor to modularise application code, in preparation for new features.
 - Moved time entries to their own URL on `/entries` along with top navigation bar link.
 - Updated help page with categories questions and answers.
-- Returned secondary action buttons to non-outline styling, since they were visually too close to a form input field.
+- Reverted secondary action buttons to non-outline styling, since they were visually too close to a form input field.
 
 ## [0.18.0](https://github.com/MashSoftware/the-button/compare/v0.17.0...v0.18.0) - 2019-07-11
 
