@@ -7,9 +7,9 @@
             <div class="form-group">
                 {{ form.description.label }}
                 {% if form.description.errors %}
-                {{ form.description(class="form-control is-invalid", type="text", spellcheck="false", autocomplete="email") }}
+                {{ form.description(class="form-control is-invalid", type="text", spellcheck="true") }}
                 {% else %}
-                {{ form.description(class="form-control", type="text", spellcheck="false", autocomplete="email") }}
+                {{ form.description(class="form-control", type="text", spellcheck="true") }}
                 {% endif %}
                 <small id="emailHelp" class="form-text text-muted">{{ form.description.description }}</small>
                 {% for error in form.description.errors %}
