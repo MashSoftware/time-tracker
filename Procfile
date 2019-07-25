@@ -1,1 +1,1 @@
-web: gunicorn app:app --log-file -
+web: flask db upgrade; gunicorn the_button:app --log-file -

@@ -1,14 +1,12 @@
 import requests
-from flask import render_template
-
-from app import app
+from flask import current_app, render_template
 
 
 def send_activation_email(user):
     token = user.generate_token(expires_in=3600)
     return requests.post(
-        '{0}/messages'.format(app.config['MAILGUN_API_URL']),
-        auth=("api", app.config['MAILGUN_API_KEY']),
+        '{0}/messages'.format(current_app.config['MAILGUN_API_URL']),
+        auth=("api", current_app.config['MAILGUN_API_KEY']),
         data={
             "from": "The Button <thebutton@mashsoftware.com>",
             "to": user.email_address,
@@ -21,8 +19,8 @@ def send_activation_email(user):
 def send_confirmation_email(user):
     token = user.generate_token(expires_in=3600)
     return requests.post(
-        '{0}/messages'.format(app.config['MAILGUN_API_URL']),
-        auth=("api", app.config['MAILGUN_API_KEY']),
+        '{0}/messages'.format(current_app.config['MAILGUN_API_URL']),
+        auth=("api", current_app.config['MAILGUN_API_KEY']),
         data={
             "from": "The Button <thebutton@mashsoftware.com>",
             "to": user.email_address,
@@ -35,8 +33,8 @@ def send_confirmation_email(user):
 def send_reset_password_email(user):
     token = user.generate_token()
     return requests.post(
-        '{0}/messages'.format(app.config['MAILGUN_API_URL']),
-        auth=("api", app.config['MAILGUN_API_KEY']),
+        '{0}/messages'.format(current_app.config['MAILGUN_API_URL']),
+        auth=("api", current_app.config['MAILGUN_API_KEY']),
         data={
             "from": "The Button <thebutton@mashsoftware.com>",
             "to": user.email_address,

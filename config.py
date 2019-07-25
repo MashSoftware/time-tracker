@@ -10,3 +10,5 @@ class Config(object):
     RATELIMIT_HEADERS_ENABLED = True
     MAILGUN_API_KEY = os.environ.get('MAILGUN_API_KEY')
     MAILGUN_API_URL = os.environ.get('MAILGUN_API_URL')
+    VERSION_NUMBER = os.environ.get('VERSION_NUMBER')
+    RELEASE_DATE = os.environ.get('RELEASE_DATE')

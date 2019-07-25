@@ -5,10 +5,11 @@ from time import time
 import bcrypt
 import jwt
 import pytz
+from flask import current_app
 from flask_login import UserMixin
 from sqlalchemy.dialects.postgresql import UUID
 
-from app import app, db, login
+from app import db, login
 
 
 class User(UserMixin, db.Model):
@@ -45,13 +46,13 @@ class User(UserMixin, db.Model):
     def generate_token(self, expires_in=600):
         return jwt.encode(
             {'id': self.id, 'exp': time() + expires_in},
-            app.config['SECRET_KEY'], algorithm='HS256').decode('utf-8')
+            current_app.config['SECRET_KEY'], algorithm='HS256').decode('utf-8')
 
     @staticmethod
     def verify_token(token):
         try:
-            id = jwt.decode(token, app.config['SECRET_KEY'], algorithms=['HS256'])['id']
-        except:
+            id = jwt.decode(token, current_app.config['SECRET_KEY'], algorithms=['HS256'])['id']
+        except jwt.PyJWTError:
             return
         return User.query.get(id)
 
