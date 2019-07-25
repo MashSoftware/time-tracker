@@ -62,6 +62,9 @@ def create_app(config_class=Config):
     from app.entry import bp as entry_bp
     app.register_blueprint(entry_bp, url_prefix='/entries')
 
+    from app.tag import bp as tag_bp
+    app.register_blueprint(tag_bp, url_prefix='/tags')
+
     return app
 
 
