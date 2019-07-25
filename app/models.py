@@ -21,6 +21,7 @@ class User(UserMixin, db.Model):
     email_address = db.Column(db.String(256), nullable=False, unique=True, index=True)
     timezone = db.Column(db.String, nullable=False, server_default='UTC')
     entry_limit = db.Column(db.Integer, nullable=False, server_default='80')
+    tag_limit = db.Column(db.Integer, nullable=False, server_default='5')
     activated_at = db.Column(db.DateTime(timezone=True), nullable=True)
     login_at = db.Column(db.DateTime(timezone=True), nullable=True)
     created_at = db.Column(db.DateTime(timezone=True), nullable=False)
@@ -28,6 +29,7 @@ class User(UserMixin, db.Model):
 
     # Relationships
     events = db.relationship('Event', backref='user', lazy=True, passive_deletes=True)
+    tags = db.relationship('Tag', backref='user', lazy=True, passive_deletes=True)
 
     # Methods
     def __init__(self, password, email_address, timezone):
@@ -66,6 +68,7 @@ class Event(db.Model):
     # Fields
     id = db.Column(UUID, primary_key=True)
     user_id = db.Column(UUID, db.ForeignKey('user_account.id', ondelete="CASCADE"), nullable=False, index=True)
+    tag_id = db.Column(UUID, db.ForeignKey('tag.id', ondelete="SET NULL"), nullable=True, index=True)
     started_at = db.Column(db.DateTime(timezone=True), nullable=False, index=True)
     ended_at = db.Column(db.DateTime(timezone=True), nullable=True)
 
@@ -74,3 +77,22 @@ class Event(db.Model):
         self.id = str(uuid.uuid4())
         self.user_id = str(uuid.UUID(user_id, version=4))
         self.started_at = started_at
+
+
+class Tag(db.Model):
+    # Fields
+    id = db.Column(UUID, primary_key=True)
+    user_id = db.Column(UUID, db.ForeignKey('user_account.id', ondelete="CASCADE"), nullable=False, index=True)
+    description = db.Column(db.String(64), nullable=False)
+    created_at = db.Column(db.DateTime(timezone=True), nullable=False)
+    updated_at = db.Column(db.DateTime(timezone=True), nullable=True)
+
+    # Relationships
+    events = db.relationship('Event', backref='tag', lazy=True, passive_deletes=True)
+
+    # Methods
+    def __init__(self, user_id, description):
+        self.id = str(uuid.uuid4())
+        self.user_id = str(uuid.UUID(user_id, version=4))
+        self.description = description
+        self.created_at = pytz.utc.localize(datetime.utcnow())
