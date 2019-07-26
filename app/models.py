@@ -29,7 +29,7 @@ class User(UserMixin, db.Model):
 
     # Relationships
     events = db.relationship('Event', backref='user', lazy=True, passive_deletes=True)
-    tags = db.relationship('Tag', backref='user', lazy=True, passive_deletes=True)
+    tags = db.relationship('Tag', backref='user', lazy=True, passive_deletes=True, order_by='asc(Tag.name)')
 
     # Methods
     def __init__(self, password, email_address, timezone):
