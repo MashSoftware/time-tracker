@@ -5,14 +5,13 @@
         <form action="" method="post" novalidate>
             {{ form.csrf_token }}
             <div class="form-group">
-                {{ form.description.label }}
-                {% if form.description.errors %}
-                {{ form.description(class="form-control is-invalid", type="text", spellcheck="true") }}
+                {{ form.name.label }}
+                {% if form.name.errors %}
+                {{ form.name(class="form-control is-invalid", type="text", spellcheck="true") }}
                 {% else %}
-                {{ form.description(class="form-control", type="text", spellcheck="true") }}
+                {{ form.name(class="form-control", type="text", spellcheck="true") }}
                 {% endif %}
-                <small id="emailHelp" class="form-text text-muted">{{ form.description.description }}</small>
-                {% for error in form.description.errors %}
+                {% for error in form.name.errors %}
                 <div class="invalid-feedback">{{error}}</div>
                 {% endfor %}
             </div>

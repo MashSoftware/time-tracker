@@ -1,8 +1,8 @@
 """create_tag_table
 
-Revision ID: 74f9b1f37dd7
+Revision ID: cf04f2a23d02
 Revises: a9da40cf2371
-Create Date: 2019-07-25 16:20:22.472219
+Create Date: 2019-07-26 14:12:01.532883
 
 """
 import sqlalchemy as sa
@@ -10,7 +10,7 @@ from alembic import op
 from sqlalchemy.dialects import postgresql
 
 # revision identifiers, used by Alembic.
-revision = '74f9b1f37dd7'
+revision = 'cf04f2a23d02'
 down_revision = 'a9da40cf2371'
 branch_labels = None
 depends_on = None
@@ -21,11 +21,12 @@ def upgrade():
     op.create_table('tag',
     sa.Column('id', postgresql.UUID(), nullable=False),
     sa.Column('user_id', postgresql.UUID(), nullable=False),
-    sa.Column('description', sa.String(length=64), nullable=False),
+    sa.Column('name', sa.String(length=64), nullable=False),
     sa.Column('created_at', sa.DateTime(timezone=True), nullable=False),
     sa.Column('updated_at', sa.DateTime(timezone=True), nullable=True),
     sa.ForeignKeyConstraint(['user_id'], ['user_account.id'], ondelete='CASCADE'),
-    sa.PrimaryKeyConstraint('id')
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('user_id', 'name')
     )
     op.create_index(op.f('ix_tag_user_id'), 'tag', ['user_id'], unique=False)
     op.add_column('event', sa.Column('tag_id', postgresql.UUID(), nullable=True))

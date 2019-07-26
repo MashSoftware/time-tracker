@@ -5,14 +5,14 @@ from wtforms.validators import InputRequired, Length, ValidationError
 
 
 class TagForm(FlaskForm):
-    description = StringField(
-        'Description',
+    name = StringField(
+        'Name',
         validators=[
-            InputRequired(message="Description is required"),
-            Length(max=64, message="Description must be less than 64 characters")
+            InputRequired(message="Name is required"),
+            Length(max=64, message="Name must be less than 64 characters")
         ])
 
-    def validate_description(self, description):
+    def validate_name(self, name):
         for tag in current_user.tags:
-            if tag.description == description.data:
-                raise ValidationError('You have already created a tag with that description')
+            if tag.name == name.data:
+                raise ValidationError('You have already created a tag with that name')

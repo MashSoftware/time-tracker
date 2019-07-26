@@ -15,7 +15,7 @@ from app.tag.forms import TagForm
 @login_required
 @limiter.limit("1 per second", key_func=lambda: current_user.id)
 def tags():
-    tags = Tag.query.filter_by(user_id=current_user.id).order_by(Tag.description.asc())
+    tags = Tag.query.filter_by(user_id=current_user.id).order_by(Tag.name.asc())
     return render_template('tag/tags.html', title='Tags', tags=tags)
 
 
@@ -25,7 +25,7 @@ def tags():
 def create():
     form = TagForm()
     if form.validate_on_submit():
-        tag = Tag(user_id=current_user.id, description=form.description.data)
+        tag = Tag(user_id=current_user.id, name=form.name.data)
         db.session.add(tag)
         db.session.commit()
         flash('Tag has been created.', 'success')
@@ -42,14 +42,14 @@ def update(id):
         raise Forbidden()
     form = TagForm()
     if form.validate_on_submit():
-        tag.description = form.description.data
+        tag.name = form.name.data
         tag.updated_at = pytz.utc.localize(datetime.utcnow())
         db.session.add(tag)
         db.session.commit()
         flash('Tag has been updated.', 'success')
         return redirect(url_for('tag.tags'))
     elif request.method == 'GET':
-        form.description.data = tag.description
+        form.name.data = tag.name
     return render_template('tag/update_tag_form.html', title='Edit tag', form=form, tag=tag)
 
 
