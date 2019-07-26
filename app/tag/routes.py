@@ -15,7 +15,7 @@ from app.tag.forms import TagForm
 @login_required
 @limiter.limit("1 per second", key_func=lambda: current_user.id)
 def tags():
-    tags = Tag.query.filter_by(user_id=current_user.id).order_by(Tag.name.asc())
+    tags = current_user.tags
     return render_template('tag/tags.html', title='Tags', tags=tags)
 
 
