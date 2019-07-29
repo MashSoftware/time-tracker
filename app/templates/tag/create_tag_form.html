@@ -11,6 +11,9 @@
                 {% else %}
                 {{ form.name(class="form-control", type="text", spellcheck="true") }}
                 {% endif %}
+                {% if form.name.description %}
+                <small id="{{ form.name.id }}Help" class="form-text text-muted">{{ form.name.description }}</small>
+                {% endif %}
                 {% for error in form.name.errors %}
                 <div class="invalid-feedback">{{error}}</div>
                 {% endfor %}
