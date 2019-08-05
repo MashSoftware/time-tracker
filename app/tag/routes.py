@@ -23,6 +23,10 @@ def tags():
 @login_required
 @limiter.limit("1 per second", key_func=lambda: current_user.id)
 def create():
+    if len(current_user.tags) == current_user.tag_limit:
+        flash('You have reached the {0} tag limit for your account. Please delete an existing tag in order to create a new one.'
+              .format(current_user.tag_limit), 'warning')
+        return redirect(url_for('tag.tags'))
     form = TagForm()
     if form.validate_on_submit():
         tag = Tag(user_id=current_user.id, name=form.name.data)
