@@ -27,13 +27,17 @@
                 <div class="list-group list-group-flush">
                 {% for entry in date.entries %}
                     {% if entry.ended_at is none %}
-                    <a href="{{ url_for('entry.update', id=entry.id) }}" class="list-group-item list-group-item-action list-group-item-info">Started at {{entry.started_at.strftime('%H:%M')}}</a>
+                    <a href="{{ url_for('entry.update', id=entry.id) }}" class="list-group-item list-group-item-action list-group-item-info">
+                        Started at {{entry.started_at.strftime('%H:%M')}}
+                        {% if entry.tag %}<span class="badge badge-info"><i class="fas fa-tag fa-fw"></i> {{entry.tag.name}}</span>{% endif %}
+                    </a>
                     {% else %}
                     <a href="{{ url_for('entry.update', id=entry.id) }}" class="list-group-item list-group-item-action">
                         {{entry.started_at.strftime('%H:%M')}} to 
                         {% if entry.started_at.strftime('%Y%m%d') != entry.ended_at.strftime('%Y%m%d') %}{{entry.ended_at.strftime('%d/%m/%y at %H:%M')}}{%else%}{{entry.ended_at.strftime('%H:%M')}}{% endif %} - 
                         {{entry.duration}}
                         ({{entry.duration_decimal|round(2, 'floor')}})
+                        {% if entry.tag %}<span class="badge badge-info"><i class="fas fa-tag fa-fw"></i> {{entry.tag.name}}</span>{% endif %}
                     </a>
                     {% endif %}
                 {% endfor %}

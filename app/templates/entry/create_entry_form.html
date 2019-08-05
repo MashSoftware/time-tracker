@@ -32,6 +32,15 @@
                 <div class="invalid-feedback">{{error}}</div>
                 {% endfor %}
             </div>
+            <div class="form-group">
+                {{ form.tag.label }}
+                {% for subfield in form.tag %}
+                <div class="form-check">
+                    {{ subfield(class="form-check-input") }}
+                    {{ subfield.label(class="form-check-label") }}
+                </div>
+                {% endfor %}
+            </div>
             <button class="btn btn-block btn-lg btn-primary" type="submit"><i class="fas fa-plus fa-lg fa-fw"></i> Create</button>
             <a class="btn btn-block btn-secondary" href="{{ url_for('entry.entries') }}"><i class="fas fa-chevron-left fa-lg fa-fw"></i> Cancel</a>
         </form>
