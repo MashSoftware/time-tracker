@@ -2,7 +2,7 @@
 {% block content %}
 <div class="row">
     <div class="col-md-4">
-        {% for tag in tags %}
+        {% for tag in current_user.tags %}
         <p class="lead"><a href="{{ url_for('tag.update', id=tag.id)}}" class="badge badge-info"><i class="fas fa-tag fa-fw"></i> {{ tag.name }}</a></p>
         {% endfor %}
         <a class="btn btn-block btn-lg btn-primary" href="{{ url_for('tag.create') }}" role="button"><i class="fas fa-plus fa-lg fa-fw"></i> Create new tag</a>

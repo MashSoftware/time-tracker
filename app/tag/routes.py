@@ -15,8 +15,7 @@ from app.tag.forms import TagForm
 @login_required
 @limiter.limit("1 per second", key_func=lambda: current_user.id)
 def tags():
-    tags = current_user.tags
-    return render_template('tag/tags.html', title='Tags', tags=tags)
+    return render_template('tag/tags.html', title='Tags')
 
 
 @bp.route('/new', methods=['GET', 'POST'])
