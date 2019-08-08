@@ -24,6 +24,17 @@
             <li class="lead">What happens if I create a new entry after getting to the 80 limit?</li>
             <p>When you click on "start now" the oldest entry you have made will be automatically deleted and the new entry created.</p>
         </ul>
+        <h2>Tags</h2>
+        <ul>
+            <li class="lead">What are tags?</li>
+            <p>Tags are a way of categorising your time entries. They can be anything you want to record, measure or track. You could use them for whole projects, or individual tasks.</p>
+            <li class="lead">How do I use tags?</li>
+            <p>First <a href="{{ url_for('tag.create') }}">create a tag</a> and give it a name. Then update any of your <a href="{{ url_for('entry.entries') }}">time entries</a>, select the tag from the list and save.</p>
+            <li class="lead">Can other people see my tags?</li>
+            <p>No, tags are personal to each user account and cannot be shared.</p>
+            <li class="lead">What happens when I delete a tag?</li>
+            <p>When a tag is deleted then all links between that tag and time entries are also removed. Your time entries will not be removed as well.</p>
+        </ul>
     </div>
 </div>
 {% endblock %}

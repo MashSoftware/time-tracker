@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased](https://github.com/MashSoftware/the-button/compare/master...develop)
 
+## [0.20.0](https://github.com/MashSoftware/the-button/compare/v0.19.0...v0.20.0) - 2019-08-08
+
+### Added
+
+- Create and maintain a set of up to five tags, used to categorise time entries.
+- Edit a time entry to select from your personal list of tags to apply.
+- Display tags on cards in the time entry view.
+- Help topics relating to tags.
+
 ## [0.19.0](https://github.com/MashSoftware/the-button/compare/v0.18.0...v0.19.0) - 2019-07-25
 
 ### Added

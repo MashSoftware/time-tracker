@@ -74,16 +74,15 @@ def auto():
         event.ended_at = pytz.utc.localize(datetime.utcnow())
         db.session.add(event)
     else:
-        entry_count = Event.query.filter_by(user_id=current_user.id).count()
-        if current_user.entry_limit <= entry_count:
+        if current_user.entry_limit <= len(current_user.events):
             oldest_event = Event.query.filter_by(user_id=current_user.id).order_by(Event.started_at.asc()).first()
             db.session.delete(oldest_event)
             flash('You have reached the {0} entry limit for your account. The oldest entry has been deleted.'
                   .format(current_user.entry_limit), 'warning')
-        new_event = Event(
+        event = Event(
             user_id=current_user.id,
             started_at=pytz.utc.localize(datetime.utcnow()))
-        db.session.add(new_event)
+        db.session.add(event)
     db.session.commit()
     return redirect(url_for('entry.entries'))
 
@@ -93,16 +92,22 @@ def auto():
 @limiter.limit("1 per second", key_func=lambda: current_user.id)
 def manual():
     form = EventForm()
+    form.tag.choices = [(tag.id, tag.name) for tag in current_user.tags]
+    form.tag.choices.insert(0, ('None', 'None'))
     if form.validate_on_submit():
         locale_started_at = pytz.timezone(current_user.timezone).localize(form.started_at.data)
         utc_started_at = locale_started_at.astimezone(pytz.utc)
-        event = Event(user_id=current_user.id, started_at=utc_started_at)
+        event = Event(
+            user_id=current_user.id,
+            started_at=utc_started_at)
         if form.ended_at.data:
             locale_ended_at = pytz.timezone(current_user.timezone).localize(form.ended_at.data)
             utc_ended_at = locale_ended_at.astimezone(pytz.utc)
             event.ended_at = utc_ended_at
         else:
             event.ended_at = None
+        if form.tag.data != 'None':
+            event.tag_id = form.tag.data
         db.session.add(event)
         db.session.commit()
         flash('Time entry has been added.', 'success')
@@ -118,6 +123,8 @@ def update(id):
     if event not in current_user.events:
         raise Forbidden()
     form = EventForm()
+    form.tag.choices = [(tag.id, tag.name) for tag in current_user.tags]
+    form.tag.choices.insert(0, ('None', 'None'))
     if form.validate_on_submit():
         locale_started_at = pytz.timezone(current_user.timezone).localize(form.started_at.data)
         utc_started_at = locale_started_at.astimezone(pytz.utc)
@@ -128,6 +135,10 @@ def update(id):
             event.ended_at = utc_ended_at
         else:
             event.ended_at = None
+        if form.tag.data != 'None':
+            event.tag_id = form.tag.data
+        else:
+            event.tag_id = None
         db.session.add(event)
         db.session.commit()
         flash('Time entry has been updated.', 'success')
@@ -137,6 +148,8 @@ def update(id):
         form.started_at.data = event.started_at.astimezone(pytz.timezone(current_user.timezone))
         if event.ended_at:
             form.ended_at.data = event.ended_at.astimezone(pytz.timezone(current_user.timezone))
+        if event.tag_id:
+            form.tag.data = event.tag_id
     return render_template('entry/update_entry_form.html', title='Edit time entry', form=form, event=event)
 
 
