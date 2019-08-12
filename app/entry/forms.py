@@ -3,21 +3,23 @@ from datetime import datetime
 import pytz
 from flask_login import current_user
 from flask_wtf import FlaskForm
-from wtforms import DateTimeField, RadioField
+from wtforms import DateField, RadioField, TimeField
 from wtforms.validators import InputRequired, Optional, ValidationError
 
 
 class EventForm(FlaskForm):
-    started_at = DateTimeField(
-        'Start',
-        format='%d/%m/%Y %H:%M:%S',
-        validators=[InputRequired(message="Started is required")],
-        description="Must be in the format dd/mm/yyyy hh:mm:ss")
-    ended_at = DateTimeField(
-        'Stop',
-        format='%d/%m/%Y %H:%M:%S',
-        validators=[Optional()],
-        description="Must be in the format dd/mm/yyyy hh:mm:ss")
+    started_at_date = DateField(
+        'Start date',
+        validators=[InputRequired(message="Start date is required")])
+    started_at_time = TimeField(
+        'Start time',
+        validators=[InputRequired(message="Start time is required")])
+    ended_at_date = DateField(
+        'Stop date',
+        validators=[Optional()])
+    ended_at_time = TimeField(
+        'Stop time',
+        validators=[Optional()])
     tag = RadioField(
         'Tag',
         validators=[InputRequired(message="Tag is required")])

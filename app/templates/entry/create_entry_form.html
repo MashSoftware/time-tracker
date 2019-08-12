@@ -4,33 +4,65 @@
     <div class="col-md-6">
         <form action="" method="post" novalidate>
             {{ form.csrf_token }}
-            <div class="form-group">
-                {{ form.started_at.label }}
-                {% if form.started_at.errors %}
-                {{ form.started_at(class="form-control is-invalid") }}
-                {% else %}
-                {{ form.started_at(class="form-control") }}
-                {% endif %}
-                {% if form.started_at.description %}
-                <small id="{{ form.started_at.id }}Help" class="form-text text-muted">{{ form.started_at.description }}</small>
-                {% endif %}
-                {% for error in form.started_at.errors %}
-                <div class="invalid-feedback">{{error}}</div>
-                {% endfor %}
+            <div class="form-row">
+                <div class="form-group col-sm">
+                    {{ form.started_at_date.label }}
+                    {% if form.started_at_date.errors %}
+                    {{ form.started_at_date(class="form-control is-invalid", type="date") }}
+                    {% else %}
+                    {{ form.started_at_date(class="form-control", type="date") }}
+                    {% endif %}
+                    {% if form.started_at_date.description %}
+                    <small id="{{ form.started_at_date.id }}Help" class="form-text text-muted">{{ form.started_at_date.description }}</small>
+                    {% endif %}
+                    {% for error in form.started_at_date.errors %}
+                    <div class="invalid-feedback">{{error}}</div>
+                    {% endfor %}
+                </div>
+                <div class="form-group col-sm">
+                    {{ form.started_at_time.label }}
+                    {% if form.started_at_time.errors %}
+                    {{ form.started_at_time(class="form-control is-invalid", type="time") }}
+                    {% else %}
+                    {{ form.started_at_time(class="form-control", type="time") }}
+                    {% endif %}
+                    {% if form.started_at_time.description %}
+                    <small id="{{ form.started_at_time.id }}Help" class="form-text text-muted">{{ form.started_at_time.description }}</small>
+                    {% endif %}
+                    {% for error in form.started_at_time.errors %}
+                    <div class="invalid-feedback">{{error}}</div>
+                    {% endfor %}
+                </div>
             </div>
-            <div class="form-group">
-                {{ form.ended_at.label }} <i>(optional)</i>
-                {% if form.ended_at.errors %}
-                {{ form.ended_at(class="form-control is-invalid") }}
-                {% else %}
-                {{ form.ended_at(class="form-control") }}
-                {% endif %}
-                {% if form.ended_at.description %}
-                <small id="{{ form.ended_at.id }}Help" class="form-text text-muted">{{ form.ended_at.description }}</small>
-                {% endif %}
-                {% for error in form.ended_at.errors %}
-                <div class="invalid-feedback">{{error}}</div>
-                {% endfor %}
+            <div class="form-row">
+                <div class="form-group col-sm">
+                    {{ form.ended_at_date.label }} <i>(optional)</i>
+                    {% if form.ended_at_date.errors %}
+                    {{ form.ended_at_date(class="form-control is-invalid", type="date") }}
+                    {% else %}
+                    {{ form.ended_at_date(class="form-control", type="date") }}
+                    {% endif %}
+                    {% if form.ended_at_date.description %}
+                    <small id="{{ form.ended_at_date.id }}Help" class="form-text text-muted">{{ form.ended_at_date.description }}</small>
+                    {% endif %}
+                    {% for error in form.ended_at_date.errors %}
+                    <div class="invalid-feedback">{{error}}</div>
+                    {% endfor %}
+                </div>
+                <div class="form-group col-sm">
+                    {{ form.ended_at_time.label }} <i>(optional)</i>
+                    {% if form.ended_at_time.errors %}
+                    {{ form.ended_at_time(class="form-control is-invalid", type="time") }}
+                    {% else %}
+                    {{ form.ended_at_time(class="form-control", type="time") }}
+                    {% endif %}
+                    {% if form.ended_at_time.description %}
+                    <small id="{{ form.ended_at_time.id }}Help" class="form-text text-muted">{{ form.ended_at_time.description }}</small>
+                    {% endif %}
+                    {% for error in form.ended_at_time.errors %}
+                    <div class="invalid-feedback">{{error}}</div>
+                    {% endfor %}
+                </div>
             </div>
             <div class="form-group">
                 {{ form.tag.label }}
