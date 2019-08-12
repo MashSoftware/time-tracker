@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+    <div class="col-md-6">
+        <form action="" method="post" novalidate>
+            {{ form.csrf_token }}
+            <div class="form-group">
+                {{ form.sunday.label }}
+                {% if form.sunday.errors %}
+                {{ form.sunday(class="form-control is-invalid", type="time") }}
+                {% else %}
+                {{ form.sunday(class="form-control", type="time") }}
+                {% endif %}
+                {% for error in form.sunday.errors %}
+                <div class="invalid-feedback">{{error}}</div>
+                {% endfor %}
+            </div>
+            <div class="form-group">
+                {{ form.monday.label }}
+                {% if form.monday.errors %}
+                {{ form.monday(class="form-control is-invalid", type="time") }}
+                {% else %}
+                {{ form.monday(class="form-control", type="time") }}
+                {% endif %}
+                {% for error in form.monday.errors %}
+                <div class="invalid-feedback">{{error}}</div>
+                {% endfor %}
+            </div>
+            <div class="form-group">
+                {{ form.tuesday.label }}
+                {% if form.tuesday.errors %}
+                {{ form.tuesday(class="form-control is-invalid", type="time") }}
+                {% else %}
+                {{ form.tuesday(class="form-control", type="time") }}
+                {% endif %}
+                {% for error in form.tuesday.errors %}
+                <div class="invalid-feedback">{{error}}</div>
+                {% endfor %}
+            </div>
+            <div class="form-group">
+                {{ form.wednesday.label }}
+                {% if form.wednesday.errors %}
+                {{ form.wednesday(class="form-control is-invalid", type="time") }}
+                {% else %}
+                {{ form.wednesday(class="form-control", type="time") }}
+                {% endif %}
+                {% for error in form.wednesday.errors %}
+                <div class="invalid-feedback">{{error}}</div>
+                {% endfor %}
+            </div>
+            <div class="form-group">
+                {{ form.thursday.label }}
+                {% if form.thursday.errors %}
+                {{ form.thursday(class="form-control is-invalid", type="time") }}
+                {% else %}
+                {{ form.thursday(class="form-control", type="time") }}
+                {% endif %}
+                {% for error in form.thursday.errors %}
+                <div class="invalid-feedback">{{error}}</div>
+                {% endfor %}
+            </div>
+            <div class="form-group">
+                {{ form.friday.label }}
+                {% if form.friday.errors %}
+                {{ form.friday(class="form-control is-invalid", type="time") }}
+                {% else %}
+                {{ form.friday(class="form-control", type="time") }}
+                {% endif %}
+                {% for error in form.friday.errors %}
+                <div class="invalid-feedback">{{error}}</div>
+                {% endfor %}
+            </div>
+            <div class="form-group">
+                {{ form.saturday.label }}
+                {% if form.saturday.errors %}
+                {{ form.saturday(class="form-control is-invalid", type="time") }}
+                {% else %}
+                {{ form.saturday(class="form-control", type="time") }}
+                {% endif %}
+                {% for error in form.saturday.errors %}
+                <div class="invalid-feedback">{{error}}</div>
+                {% endfor %}
+            </div>
+            <button class="btn btn-block btn-lg btn-primary" type="submit"><i class="fas fa-calendar-alt fa-lg fa-fw"></i> Update</button>
+            <a class="btn btn-block btn-secondary" href="{{ url_for('account.account') }}"><i class="fas fa-chevron-left fa-lg fa-fw"></i> Cancel</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

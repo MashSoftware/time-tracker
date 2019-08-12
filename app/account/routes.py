@@ -7,7 +7,7 @@ from flask_login import current_user, fresh_login_required, login_required
 
 from app import db, limiter
 from app.account import bp
-from app.account.forms import AccountForm, PasswordForm
+from app.account.forms import AccountForm, PasswordForm, ScheduleForm
 from app.main.email import send_confirmation_email
 
 
@@ -75,3 +75,15 @@ def delete():
     db.session.commit()
     flash('Your account and all personal information has been permanently deleted.', 'success')
     return redirect(url_for('main.index'))
+
+
+@bp.route('/schedule', methods=['GET', 'POST'])
+@fresh_login_required
+@limiter.limit("1 per second", key_func=lambda: current_user.id)
+def schedule():
+    form = ScheduleForm()
+    if form.validate_on_submit():
+        pass
+    elif request.method == 'GET':
+        pass
+    return render_template('account/schedule_form.html', title='Update schedule', form=form)
