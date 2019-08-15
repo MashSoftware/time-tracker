@@ -45,7 +45,7 @@ def create_app(config_class=Config):
             'cdnjs.cloudflare.com',
             'stackpath.bootstrapcdn.com'
         ],
-        'img-src': 'data:'
+        'img-src': ['data:', '\'self\'']
     }
     talisman.init_app(app, content_security_policy=csp)
 
