@@ -12,7 +12,7 @@ psycopg2==2.8.3
 pyjwt==1.7.1
 python-dotenv==0.10.3
 pytz==2019.2
-redis==3.3.6
+redis==3.3.8
 requests==2.22.0
 # Generated with piprot 0.9.10
 # Looks like you've been keeping up to date, time for a delicious beverage!
