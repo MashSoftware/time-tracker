@@ -1,5 +1,5 @@
 import time
-from datetime import datetime
+from datetime import date, datetime
 
 import pytz
 from flask import flash, redirect, render_template, request, url_for
@@ -83,7 +83,17 @@ def delete():
 def schedule():
     form = ScheduleForm()
     if form.validate_on_submit():
-        pass
+        current_user.sunday = (datetime.combine(date.min, form.sunday.data) - datetime.min).total_seconds() if form.sunday.data else 0
+        current_user.monday = (datetime.combine(date.min, form.monday.data) - datetime.min).total_seconds() if form.monday.data else 0
+        current_user.tuesday = (datetime.combine(date.min, form.tuesday.data) - datetime.min).total_seconds() if form.tuesday.data else 0
+        current_user.wednesday = (datetime.combine(date.min, form.wednesday.data) - datetime.min).total_seconds() if form.wednesday.data else 0
+        current_user.thursday = (datetime.combine(date.min, form.thursday.data) - datetime.min).total_seconds() if form.thursday.data else 0
+        current_user.friday = (datetime.combine(date.min, form.friday.data) - datetime.min).total_seconds() if form.friday.data else 0
+        current_user.saturday = (datetime.combine(date.min, form.saturday.data) - datetime.min).total_seconds() if form.saturday.data else 0
+        db.session.add(current_user)
+        db.session.commit()
+        flash('Your schedule has been updated', 'success')
+        return redirect(url_for('account.account'))
     elif request.method == 'GET':
         pass
     return render_template('account/schedule_form.html', title='Update schedule', form=form)
