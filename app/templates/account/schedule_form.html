@@ -5,17 +5,6 @@
         <form action="" method="post" novalidate>
             {{ form.csrf_token }}
             <div class="form-group">
-                {{ form.sunday.label }}
-                {% if form.sunday.errors %}
-                {{ form.sunday(class="form-control is-invalid", type="time") }}
-                {% else %}
-                {{ form.sunday(class="form-control", type="time") }}
-                {% endif %}
-                {% for error in form.sunday.errors %}
-                <div class="invalid-feedback">{{error}}</div>
-                {% endfor %}
-            </div>
-            <div class="form-group">
                 {{ form.monday.label }}
                 {% if form.monday.errors %}
                 {{ form.monday(class="form-control is-invalid", type="time") }}
@@ -78,6 +67,17 @@
                 {{ form.saturday(class="form-control", type="time") }}
                 {% endif %}
                 {% for error in form.saturday.errors %}
+                <div class="invalid-feedback">{{error}}</div>
+                {% endfor %}
+            </div>
+            <div class="form-group">
+                {{ form.sunday.label }}
+                {% if form.sunday.errors %}
+                {{ form.sunday(class="form-control is-invalid", type="time") }}
+                {% else %}
+                {{ form.sunday(class="form-control", type="time") }}
+                {% endif %}
+                {% for error in form.sunday.errors %}
                 <div class="invalid-feedback">{{error}}</div>
                 {% endfor %}
             </div>
