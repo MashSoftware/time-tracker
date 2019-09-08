@@ -26,6 +26,13 @@ class User(UserMixin, db.Model):
     login_at = db.Column(db.DateTime(timezone=True), nullable=True)
     created_at = db.Column(db.DateTime(timezone=True), nullable=False)
     updated_at = db.Column(db.DateTime(timezone=True), nullable=True)
+    sunday = db.Column(db.Integer, nullable=False, server_default='0')
+    monday = db.Column(db.Integer, nullable=False, server_default='0')
+    tuesday = db.Column(db.Integer, nullable=False, server_default='0')
+    wednesday = db.Column(db.Integer, nullable=False, server_default='0')
+    thursday = db.Column(db.Integer, nullable=False, server_default='0')
+    friday = db.Column(db.Integer, nullable=False, server_default='0')
+    saturday = db.Column(db.Integer, nullable=False, server_default='0')
 
     # Relationships
     events = db.relationship('Event', backref='user', lazy=True, passive_deletes=True)
