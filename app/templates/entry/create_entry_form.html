@@ -67,9 +67,9 @@
             <div class="form-group">
                 {{ form.tag.label }}
                 {% for subfield in form.tag %}
-                <div class="form-check">
-                    {{ subfield(class="form-check-input") }}
-                    {{ subfield.label(class="form-check-label") }}
+                <div class="custom-control custom-radio">
+                    {{ subfield(class="custom-control-input", type="radio") }}
+                    {{ subfield.label(class="custom-control-label") }}
                 </div>
                 {% endfor %}
             </div>
