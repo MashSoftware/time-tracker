@@ -95,13 +95,29 @@ def manual():
     form.tag.choices = [(tag.id, tag.name) for tag in current_user.tags]
     form.tag.choices.insert(0, ('None', 'None'))
     if form.validate_on_submit():
-        locale_started_at = pytz.timezone(current_user.timezone).localize(form.started_at.data)
+        started_at = datetime(
+            form.started_at_date.data.year,
+            form.started_at_date.data.month,
+            form.started_at_date.data.day,
+            form.started_at_time.data.hour,
+            form.started_at_time.data.minute,
+            form.started_at_time.data.second
+        )
+        locale_started_at = pytz.timezone(current_user.timezone).localize(started_at)
         utc_started_at = locale_started_at.astimezone(pytz.utc)
         event = Event(
             user_id=current_user.id,
             started_at=utc_started_at)
-        if form.ended_at.data:
-            locale_ended_at = pytz.timezone(current_user.timezone).localize(form.ended_at.data)
+        if form.ended_at_date.data and form.ended_at_time.data:
+            ended_at = datetime(
+                form.ended_at_date.data.year,
+                form.ended_at_date.data.month,
+                form.ended_at_date.data.day,
+                form.ended_at_time.data.hour,
+                form.ended_at_time.data.minute,
+                form.ended_at_time.data.second
+            )
+            locale_ended_at = pytz.timezone(current_user.timezone).localize(ended_at)
             utc_ended_at = locale_ended_at.astimezone(pytz.utc)
             event.ended_at = utc_ended_at
         else:
@@ -126,11 +142,27 @@ def update(id):
     form.tag.choices = [(tag.id, tag.name) for tag in current_user.tags]
     form.tag.choices.insert(0, ('None', 'None'))
     if form.validate_on_submit():
-        locale_started_at = pytz.timezone(current_user.timezone).localize(form.started_at.data)
+        started_at = datetime(
+            form.started_at_date.data.year,
+            form.started_at_date.data.month,
+            form.started_at_date.data.day,
+            form.started_at_time.data.hour,
+            form.started_at_time.data.minute,
+            form.started_at_time.data.second
+        )
+        locale_started_at = pytz.timezone(current_user.timezone).localize(started_at)
         utc_started_at = locale_started_at.astimezone(pytz.utc)
         event.started_at = utc_started_at
-        if form.ended_at.data:
-            locale_ended_at = pytz.timezone(current_user.timezone).localize(form.ended_at.data)
+        if form.ended_at_date.data and form.ended_at_time.data:
+            ended_at = datetime(
+                form.ended_at_date.data.year,
+                form.ended_at_date.data.month,
+                form.ended_at_date.data.day,
+                form.ended_at_time.data.hour,
+                form.ended_at_time.data.minute,
+                form.ended_at_time.data.second
+            )
+            locale_ended_at = pytz.timezone(current_user.timezone).localize(ended_at)
             utc_ended_at = locale_ended_at.astimezone(pytz.utc)
             event.ended_at = utc_ended_at
         else:
@@ -145,9 +177,11 @@ def update(id):
         return redirect(url_for('entry.entries'))
     elif request.method == 'GET':
         # Show timestamp in users localised timezone
-        form.started_at.data = event.started_at.astimezone(pytz.timezone(current_user.timezone))
+        form.started_at_date.data = event.started_at.astimezone(pytz.timezone(current_user.timezone))
+        form.started_at_time.data = event.started_at.astimezone(pytz.timezone(current_user.timezone))
         if event.ended_at:
-            form.ended_at.data = event.ended_at.astimezone(pytz.timezone(current_user.timezone))
+            form.ended_at_date.data = event.ended_at.astimezone(pytz.timezone(current_user.timezone))
+            form.ended_at_time.data = event.ended_at.astimezone(pytz.timezone(current_user.timezone))
         if event.tag_id:
             form.tag.data = event.tag_id
     return render_template('entry/update_entry_form.html', title='Edit time entry', form=form, event=event)
