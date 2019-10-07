@@ -24,13 +24,33 @@ class EventForm(FlaskForm):
         'Tag',
         validators=[InputRequired(message="Tag is required")])
 
-    def validate_started_at(self, started_at):
-        if pytz.timezone(current_user.timezone).localize(started_at.data) > pytz.utc.localize(datetime.utcnow()):
+    def validate_started_at_date(self, started_at_date):
+        started_at = datetime(
+            started_at_date.data.year,
+            started_at_date.data.month,
+            started_at_date.data.day,
+            self.started_at_time.data.hour,
+            self.started_at_time.data.minute,
+            self.started_at_time.data.second
+        )
+        if pytz.timezone(current_user.timezone).localize(started_at) > pytz.utc.localize(datetime.utcnow()):
             raise ValidationError('Start must be in the past')
 
-    def validate_ended_at(self, ended_at):
-        if ended_at.data <= self.started_at.data:
+    def validate_started_at_time(self, started_at_time):
+        started_at = datetime(
+            self.started_at_date.data.year,
+            self.started_at_date.data.month,
+            self.started_at_date.data.day,
+            started_at_time.data.hour,
+            started_at_time.data.minute,
+            started_at_time.data.second
+        )
+        if pytz.timezone(current_user.timezone).localize(started_at) > pytz.utc.localize(datetime.utcnow()):
+            raise ValidationError('Start must be in the past')
+
+    def validate_ended_at_date(self, ended_at_date):
+        if ended_at_date.data <= self.started_at_date.data:
             raise ValidationError('Stop must be after start')
 
-        if pytz.timezone(current_user.timezone).localize(ended_at.data) > pytz.utc.localize(datetime.utcnow()):
+        if pytz.timezone(current_user.timezone).localize(ended_at_date.data) > pytz.utc.localize(datetime.utcnow()):
             raise ValidationError('Stop must be in the past')
