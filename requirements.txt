@@ -11,7 +11,7 @@ cffi==1.12.3              # via bcrypt
 chardet==3.0.4            # via requests
 click==7.0                # via flask
 flask-compress==1.4.0
-flask-limiter==1.0.1
+flask-limiter==1.1.0
 flask-login==0.4.1
 flask-migrate==2.5.2
 flask-sqlalchemy==2.4.1
@@ -21,7 +21,7 @@ flask==1.1.1
 gunicorn==19.9.0
 idna==2.8                 # via requests
 itsdangerous==1.1.0       # via flask
-jinja2==2.10.1            # via flask
+jinja2==2.10.3            # via flask
 limits==1.3               # via flask-limiter
 mako==1.1.0               # via alembic
 markupsafe==1.1.1         # via jinja2, mako
@@ -31,11 +31,11 @@ pyjwt==1.7.1
 python-dateutil==2.8.0    # via alembic
 python-dotenv==0.10.3
 python-editor==1.0.4      # via alembic
-pytz==2019.2
+pytz==2019.3
 redis==3.3.8
 requests==2.22.0
 six==1.12.0               # via bcrypt, flask-limiter, flask-talisman, limits, python-dateutil
-sqlalchemy==1.3.8         # via alembic, flask-sqlalchemy
+sqlalchemy==1.3.9         # via alembic, flask-sqlalchemy
 urllib3==1.25.6           # via requests
 werkzeug==0.16.0          # via flask
 wtforms==2.2.1            # via flask-wtf
