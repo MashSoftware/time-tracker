@@ -19,6 +19,12 @@
         <a href="{{ url_for('account.update') }}">Change</a>
     </dd>
 
+    <dt class="col-sm-3">Schedule</dt>
+    <dd class="col-sm-7"></dd>
+    <dd class="col-sm-2 text-md-right">
+        <a href="{{ url_for('account.schedule') }}">Change</a>
+    </dd>
+
     <dt class="col-sm-3">Member since</dt>
     <dd class="col-sm-9">{{ user.created_at.strftime('%A %d %B %Y %H:%M:%S %Z') }}</dd>
     
