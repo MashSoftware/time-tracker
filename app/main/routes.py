@@ -27,5 +27,5 @@ def help():
 
 
 @bp.app_errorhandler(HTTPException)
-def forbidden(error):
+def http_error(error):
     return render_template('error.html', title='Oops!', error=error), error.code
