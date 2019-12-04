@@ -3,7 +3,7 @@ from flask_login import current_user
 from flask_wtf import FlaskForm
 from wtforms import PasswordField, SelectField, StringField, TimeField
 from wtforms.validators import (Email, EqualTo, InputRequired, Length,
-                                Optional, ValidationError)
+                                ValidationError)
 
 from app.models import User
 
@@ -58,10 +58,10 @@ class PasswordForm(FlaskForm):
 
 
 class ScheduleForm(FlaskForm):
-    sunday = TimeField('Sunday', validators=[Optional()])
-    monday = TimeField('Monday', validators=[Optional()])
-    tuesday = TimeField('Tuesday', validators=[Optional()])
-    wednesday = TimeField('Wednesday', validators=[Optional()])
-    thursday = TimeField('Thursday', validators=[Optional()])
-    friday = TimeField('Friday', validators=[Optional()])
-    saturday = TimeField('Saturday', validators=[Optional()])
+    sunday = TimeField('Sunday', validators=[InputRequired(message="Sunday is required")])
+    monday = TimeField('Monday', validators=[InputRequired(message="Monday is required")])
+    tuesday = TimeField('Tuesday', validators=[InputRequired(message="Tuesday is required")])
+    wednesday = TimeField('Wednesday', validators=[InputRequired(message="Wednesday is required")])
+    thursday = TimeField('Thursday', validators=[InputRequired(message="Thursday is required")])
+    friday = TimeField('Friday', validators=[InputRequired(message="Friday is required")])
+    saturday = TimeField('Saturday', validators=[InputRequired(message="Saturday is required")])
