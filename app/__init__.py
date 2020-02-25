@@ -42,10 +42,10 @@ def create_app(config_class=Config):
         'font-src': 'use.fontawesome.com',
         'script-src': [
             'code.jquery.com',
-            'cdnjs.cloudflare.com',
+            'cdn.jsdelivr.net',
             'stackpath.bootstrapcdn.com'
         ],
-        'img-src': 'data:'
+        'img-src': ['data:', '\'self\'']
     }
     talisman.init_app(app, content_security_policy=csp)
 

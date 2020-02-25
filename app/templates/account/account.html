@@ -1,32 +1,42 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="row">
-    <div class="col">
-        <dl>
-            <dt>Email address</dt>
-            <dd>{{ user.email_address }}</dd>
+    <div class="col-md-8">
+        <dl class="row">
+            <dt class="col-sm-3">Email Address</dt>
+            <dd class="col-sm-7">{{ user.email_address }}</dd>
+            <dd class="col-sm-2 text-md-right">
+                <a href="{{ url_for('account.update') }}">Change</a>
+            </dd>
 
-            <dt>Timezone</dt>
-            <dd>{{ user.timezone.replace("_", " ") }}</dd>
+            <dt class="col-sm-3">Password</dt>
+            <dd class="col-sm-7">••••••••</dd>
+            <dd class="col-sm-2 text-md-right">
+                <a href="{{ url_for('account.change_password') }}">Change</a>
+            </dd>
 
-            <dt>Member since</dt>
-            <dd>{{ user.created_at.strftime('%A %d %B %Y %H:%M:%S %Z') }}</dd>
+            <dt class="col-sm-3">Timezone</dt>
+            <dd class="col-sm-7">{{ user.timezone.replace("_", " ") }}</dd>
+            <dd class="col-sm-2 text-md-right">
+                <a href="{{ url_for('account.update') }}">Change</a>
+            </dd>
 
-            <dt>Last log in</dt>
-            <dd>{{ user.login_at.strftime('%A %d %B %Y %H:%M:%S %Z') }}</dd>
-
+            <dt class="col-sm-3">Member since</dt>
+            <dd class="col-sm-9">{{ user.created_at.strftime('%A %d %B %Y %H:%M:%S %Z') }}</dd>
+            
+            <dt class="col-sm-3">Last log in</dt>
+            <dd class="col-sm-9">{{ user.login_at.strftime('%A %d %B %Y %H:%M:%S %Z') }}</dd>
+            
             {% if user.updated_at %}
-            <dt>Last updated</dt>
-            <dd>{{ user.updated_at.strftime('%A %d %B %Y %H:%M:%S %Z') }}</dd>
+            <dt class="col-sm-3">Last updated</dt>
+            <dd class="col-sm-9">{{ user.updated_at.strftime('%A %d %B %Y %H:%M:%S %Z') }}</dd>
             {% endif %}
         </dl>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-4">
-        <a class="btn btn-block btn-lg btn-primary" href="{{ url_for('account.update') }}" role="button"><i class="fas fa-user-edit fa-lg fa-fw"></i> Update account</a>
-        <a class="btn btn-block btn-lg btn-primary" href="{{ url_for('account.change_password') }}" role="button"><i class="fas fa-key fa-lg fa-fw"></i> Change password</a>
-        <button type="button" class="btn btn-block btn-danger" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash fa-lg fa-fw"></i> Delete account</button>
+        <div class="row">
+            <div class="col-sm-6">
+                <button type="button" class="btn btn-block btn-danger" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash fa-lg fa-fw"></i> Delete account</button>
+            </div>
+        </div>
     </div>
 </div>
 

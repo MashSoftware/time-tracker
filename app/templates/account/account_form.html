@@ -19,9 +19,9 @@
             <div class="form-group">
                 {{ form.timezone.label }}
                 {% if form.timezone.errors %}
-                {{ form.timezone(class="form-control is-invalid") }}
+                {{ form.timezone(class="custom-select is-invalid") }}
                 {% else %}
-                {{ form.timezone(class="form-control") }}
+                {{ form.timezone(class="custom-select") }}
                 {% endif %}
                 <small id="timezoneHelp" class="form-text text-muted">{{ form.timezone.description }}</small>
             </div>

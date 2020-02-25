@@ -29,9 +29,9 @@
                 {% endfor %}
             </div>
             <div class="form-group">
-                <div class="form-check">
-                    {{ form.remember_me(class="form-check-input") }}
-                    {{ form.remember_me.label(class="form-check-label") }}
+                <div class="custom-control custom-checkbox">
+                    {{ form.remember_me(class="custom-control-input", type="checkbox") }}
+                    {{ form.remember_me.label(class="custom-control-label") }}
                 </div>
             </div>
             <button class="btn btn-block btn-lg btn-primary" type="submit"><i class="fas fa-sign-in-alt fa-lg fa-fw"></i> Log in</button>

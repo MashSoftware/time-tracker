@@ -1,5 +1,5 @@
 import time
-from datetime import datetime
+from datetime import date, datetime, time
 
 import pytz
 from flask import flash, redirect, render_template, request, url_for
@@ -7,7 +7,7 @@ from flask_login import current_user, fresh_login_required, login_required
 
 from app import db, limiter
 from app.account import bp
-from app.account.forms import AccountForm, PasswordForm
+from app.account.forms import AccountForm, PasswordForm, ScheduleForm
 from app.main.email import send_confirmation_email
 
 
@@ -75,3 +75,51 @@ def delete():
     db.session.commit()
     flash('Your account and all personal information has been permanently deleted.', 'success')
     return redirect(url_for('main.index'))
+
+
+@bp.route('/schedule', methods=['GET', 'POST'])
+@fresh_login_required
+@limiter.limit("1 per second", key_func=lambda: current_user.id)
+def schedule():
+    form = ScheduleForm()
+    if form.validate_on_submit():
+        current_user.monday = (datetime.combine(date.min, form.monday.data) - datetime.min).total_seconds()
+        current_user.tuesday = (datetime.combine(date.min, form.tuesday.data) - datetime.min).total_seconds()
+        current_user.wednesday = (datetime.combine(date.min, form.wednesday.data) - datetime.min).total_seconds()
+        current_user.thursday = (datetime.combine(date.min, form.thursday.data) - datetime.min).total_seconds()
+        current_user.friday = (datetime.combine(date.min, form.friday.data) - datetime.min).total_seconds()
+        current_user.saturday = (datetime.combine(date.min, form.saturday.data) - datetime.min).total_seconds()
+        current_user.sunday = (datetime.combine(date.min, form.sunday.data) - datetime.min).total_seconds()
+        db.session.add(current_user)
+        db.session.commit()
+        flash('Your schedule has been updated', 'success')
+        return redirect(url_for('account.account'))
+    elif request.method == 'GET':
+        mon_hours, mon_remainder = divmod(current_user.monday, 3600)
+        mon_minutes, mon_seconds = divmod(mon_remainder, 60)
+        form.monday.data = time(hour=mon_hours, minute=mon_minutes, second=mon_seconds)
+
+        tue_hours, tue_remainder = divmod(current_user.tuesday, 3600)
+        tue_minutes, tue_seconds = divmod(tue_remainder, 60)
+        form.tuesday.data = time(hour=tue_hours, minute=tue_minutes, second=tue_seconds)
+
+        wed_hours, wed_remainder = divmod(current_user.wednesday, 3600)
+        wed_minutes, wed_seconds = divmod(wed_remainder, 60)
+        form.wednesday.data = time(hour=wed_hours, minute=wed_minutes, second=wed_seconds)
+
+        thu_hours, thu_remainder = divmod(current_user.thursday, 3600)
+        thu_minutes, thu_seconds = divmod(thu_remainder, 60)
+        form.thursday.data = time(hour=thu_hours, minute=thu_minutes, second=thu_seconds)
+
+        fri_hours, fri_remainder = divmod(current_user.friday, 3600)
+        fri_minutes, fri_seconds = divmod(fri_remainder, 60)
+        form.friday.data = time(hour=fri_hours, minute=fri_minutes, second=fri_seconds)
+
+        sat_hours, sat_remainder = divmod(current_user.saturday, 3600)
+        sat_minutes, sat_seconds = divmod(sat_remainder, 60)
+        form.saturday.data = time(hour=sat_hours, minute=sat_minutes, second=sat_seconds)
+
+        sun_hours, sun_remainder = divmod(current_user.sunday, 3600)
+        sun_minutes, sun_seconds = divmod(sun_remainder, 60)
+        form.sunday.data = time(hour=sun_hours, minute=sun_minutes, second=sun_seconds)
+    return render_template('account/schedule_form.html', title='Update schedule', form=form)

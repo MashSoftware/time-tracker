@@ -43,5 +43,6 @@ def downgrade():
     op.drop_index(op.f('ix_event_tag_id'), table_name='event')
     op.drop_column('event', 'tag_id')
     op.drop_index(op.f('ix_tag_user_id'), table_name='tag')
+    op.drop_constraint('tag_user_id_name_key', 'tag', type_='unique')
     op.drop_table('tag')
     # ### end Alembic commands ###

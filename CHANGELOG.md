@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased](https://github.com/MashSoftware/the-button/compare/master...develop)
 
+## [0.21.0](https://github.com/MashSoftware/the-button/compare/v0.20.0...v0.21.0) - 2020-02-25
+
+### Added
+
+- Favicons, Apple touch icons, Android Chrome icons and Windows 8/10 tile icons. Thanks [@joehonywill](https://github.com/joehonywill)
+
+### Changed
+
+- Use HTML5 input types for dates and times, to instruct browsers to present their own controls where available. On mobile devices the native date and time picker controls will be used. This gives users an easier, quicker and more familiar way to input information.
+- Use Bootstrap's custom form controls to provide consistency between browsers and a more cohesive look and feel.
+- Updated design of account page.
+- Upgrade to Bootstrap 4.4.1.
+- Accessibility and best practice fixes from Google Lighthouse analysis.
+
 ## [0.20.0](https://github.com/MashSoftware/the-button/compare/v0.19.0...v0.20.0) - 2019-08-08
 
 ### Added

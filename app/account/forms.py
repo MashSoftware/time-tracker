@@ -1,7 +1,7 @@
 import pytz
 from flask_login import current_user
 from flask_wtf import FlaskForm
-from wtforms import PasswordField, SelectField, StringField
+from wtforms import PasswordField, SelectField, StringField, TimeField
 from wtforms.validators import (Email, EqualTo, InputRequired, Length,
                                 ValidationError)
 
@@ -55,3 +55,13 @@ class PasswordForm(FlaskForm):
     def validate_new_password(self, new_password):
         if new_password.data == self.current_password.data:
             raise ValidationError('New password must be different to current password')
+
+
+class ScheduleForm(FlaskForm):
+    monday = TimeField('Monday', validators=[InputRequired(message="Monday is required")])
+    tuesday = TimeField('Tuesday', validators=[InputRequired(message="Tuesday is required")])
+    wednesday = TimeField('Wednesday', validators=[InputRequired(message="Wednesday is required")])
+    thursday = TimeField('Thursday', validators=[InputRequired(message="Thursday is required")])
+    friday = TimeField('Friday', validators=[InputRequired(message="Friday is required")])
+    saturday = TimeField('Saturday', validators=[InputRequired(message="Saturday is required")])
+    sunday = TimeField('Sunday', validators=[InputRequired(message="Sunday is required")])
