@@ -90,6 +90,7 @@ def schedule():
         current_user.friday = (datetime.combine(date.min, form.friday.data) - datetime.min).total_seconds()
         current_user.saturday = (datetime.combine(date.min, form.saturday.data) - datetime.min).total_seconds()
         current_user.sunday = (datetime.combine(date.min, form.sunday.data) - datetime.min).total_seconds()
+        current_user.updated_at = pytz.utc.localize(datetime.utcnow())
         db.session.add(current_user)
         db.session.commit()
         flash('Your schedule has been updated', 'success')
