@@ -48,7 +48,7 @@
 
         {% if events.items %}
         <nav aria-label="Page navigation">
-            <ul class="pagination pagination-lg justify-content-center">
+            <ul class="pagination justify-content-center">
                 {% if events.has_prev %}
                 <li class="page-item">
                     <a class="page-link" href="{{ url_for('entry.entries', page=events.prev_num) }}" aria-label="Previous"><i class="fas fa-chevron-left"></i></a>
