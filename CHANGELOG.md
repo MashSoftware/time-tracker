@@ -7,11 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased](https://github.com/MashSoftware/the-button/compare/master...develop)
 
-## [0.21.0](https://github.com/MashSoftware/the-button/compare/v0.20.0...v0.21.0) - 2020-02-xx
+## [0.21.0](https://github.com/MashSoftware/the-button/compare/v0.20.0...v0.21.0) - 2020-02-25
 
 ### Added
 
-- Favicons, Apple touch icons, Android Chrome icons and Windows 8/10 tile icons
+- Favicons, Apple touch icons, Android Chrome icons and Windows 8/10 tile icons. Thanks [@joehonywill](https://github.com/joehonywill)
 
 ### Changed
 
