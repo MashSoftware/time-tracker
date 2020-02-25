@@ -33,18 +33,24 @@ class EventForm(FlaskForm):
     def validate_started_at_time(self, started_at_time):
         current_localised_datetime = pytz.timezone(current_user.timezone).localize(datetime.utcnow())
 
-        started_at = datetime(
-            self.started_at_date.data.year,
-            self.started_at_date.data.month,
-            self.started_at_date.data.day,
-            started_at_time.data.hour,
-            started_at_time.data.minute,
-            started_at_time.data.second)
+        try:
+            started_at = datetime(
+                self.started_at_date.data.year,
+                self.started_at_date.data.month,
+                self.started_at_date.data.day,
+                started_at_time.data.hour,
+                started_at_time.data.minute,
+                started_at_time.data.second)
+        except AttributeError:
+            raise ValidationError('Start date is required')
 
         if pytz.timezone(current_user.timezone).localize(started_at) > current_localised_datetime:
             raise ValidationError('Start time must be now or in the past')
 
     def validate_ended_at_date(self, ended_at_date):
+        if self.started_at_date.data is None:
+            raise ValidationError('Start date and time are also required')
+
         if ended_at_date.data < self.started_at_date.data:
             raise ValidationError('Stop date must be the same as or after start date')
 
@@ -54,21 +60,27 @@ class EventForm(FlaskForm):
             raise ValidationError('Stop date must be today or in the past')
 
     def validate_ended_at_time(self, ended_at_time):
-        started_at = datetime(
-            self.started_at_date.data.year,
-            self.started_at_date.data.month,
-            self.started_at_date.data.day,
-            self.started_at_time.data.hour,
-            self.started_at_time.data.minute,
-            self.started_at_time.data.second)
+        try:
+            started_at = datetime(
+                self.started_at_date.data.year,
+                self.started_at_date.data.month,
+                self.started_at_date.data.day,
+                self.started_at_time.data.hour,
+                self.started_at_time.data.minute,
+                self.started_at_time.data.second)
+        except AttributeError:
+            raise ValidationError('Start date and time are also required')
 
-        ended_at = datetime(
-            self.ended_at_date.data.year,
-            self.ended_at_date.data.month,
-            self.ended_at_date.data.day,
-            ended_at_time.data.hour,
-            ended_at_time.data.minute,
-            ended_at_time.data.second)
+        try:
+            ended_at = datetime(
+                self.ended_at_date.data.year,
+                self.ended_at_date.data.month,
+                self.ended_at_date.data.day,
+                ended_at_time.data.hour,
+                ended_at_time.data.minute,
+                ended_at_time.data.second)
+        except AttributeError:
+            raise ValidationError('Stop date is required')
 
         if ended_at < started_at:
             raise ValidationError('Stop time must be after start time')
