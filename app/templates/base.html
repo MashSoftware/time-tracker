@@ -5,9 +5,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="The Button - Time tracking made simple.">
-    <meta name="keywords" content="time, tracking, tracker, clocking, log, logging, record, recording, simple, easy, quick">
+    <meta name="keywords" content="time, timing, timer, track, tracking, tracker, clocking, clock, clock-in, clock-out, log, logging, logger, record, recording, simple, easy, quick">
     <meta name="author" content="Matthew Shaw">
 
+    <!-- Open Graph Metadata -->
+    <meta property="og:title" content="The Button"/>
+    <meta property="og:description" content="Time tracking made simple"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="{{ request.url }}"/>
+    <meta property="og:image" content="{{ url_for('static', filename='apple-touch-icon.png') }}"/>
+
+    <!-- Favicon Platforms -->
     <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='apple-touch-icon.png') }}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon-32x32.png') }}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='favicon-16x16.png') }}">
@@ -16,6 +24,7 @@
     <meta name="apple-mobile-web-app-title" content="The Button">
     <meta name="application-name" content="The Button">
     <meta name="msapplication-TileColor" content="#2196f3">
+    <meta name="msapplication-config" content="{{ url_for('static', filename='browserconfig.xml') }}">
     <meta name="theme-color" content="#343a40">
 
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
