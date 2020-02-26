@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased](https://github.com/MashSoftware/the-button/compare/master...develop)
 
+### Added
+
+- Open Graph Protocol metadata tags to enable better link sharing on social media.
+
 ## [0.21.1](https://github.com/MashSoftware/the-button/compare/v0.21.0...v0.21.1) - 2020-02-25
 
 ### Fixed
