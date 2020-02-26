@@ -27,12 +27,6 @@ def apple_touch_icon():
                                'apple-touch-icon.png', mimetype='image/png')
 
 
-@bp.route('/browserconfig.xml')
-def browserconfig():
-    return send_from_directory(os.path.join(current_app.root_path, 'static'),
-                               'browserconfig.xml', mimetype='application/xml')
-
-
 @bp.route('/help')
 def help():
     return render_template('help.html', title='Help')
