@@ -19,6 +19,16 @@ def account():
     user.created_at = user.created_at.astimezone(pytz.timezone(user.timezone))
     user.login_at = user.login_at.astimezone(pytz.timezone(user.timezone))
     user.updated_at = user.updated_at.astimezone(pytz.timezone(user.timezone)) if user.updated_at else None
+
+    schedule_seconds = user.monday + user.tuesday + user.wednesday + user.thursday + user.friday + user.saturday + user.sunday
+    hours, remainder = divmod(schedule_seconds, 3600)
+    minutes, seconds = divmod(remainder, 60)
+    if hours > 0:
+        user.schedule = str(hours) + "h " + str(minutes) + "min"
+    elif minutes > 0:
+        user.schedule = str(minutes) + "min"
+    else:
+        user.schedule = str(seconds) + "s"
     return render_template('account/account.html', title='My Account', user=user)
 
 
