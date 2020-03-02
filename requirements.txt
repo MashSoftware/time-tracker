@@ -4,14 +4,14 @@
 #
 #    pip-compile
 #
-alembic==1.4.0            # via flask-migrate
+alembic==1.4.1            # via flask-migrate
 bcrypt==3.1.7             # via -r requirements.in (line 1)
 certifi==2019.11.28       # via requests
 cffi==1.14.0              # via bcrypt
 chardet==3.0.4            # via requests
 click==7.0                # via flask
 flask-compress==1.4.0     # via -r requirements.in (line 2)
-flask-limiter==1.1.0      # via -r requirements.in (line 3)
+flask-limiter==1.2.1      # via -r requirements.in (line 3)
 flask-login==0.5.0        # via -r requirements.in (line 4)
 flask-migrate==2.5.2      # via -r requirements.in (line 5)
 flask-sqlalchemy==2.4.1   # via -r requirements.in (line 6), flask-migrate
@@ -22,14 +22,14 @@ gunicorn==20.0.4          # via -r requirements.in (line 10)
 idna==2.9                 # via requests
 itsdangerous==1.1.0       # via flask, flask-wtf
 jinja2==2.11.1            # via flask
-limits==1.5               # via flask-limiter
-mako==1.1.1               # via alembic
+limits==1.5.1             # via flask-limiter
+mako==1.1.2               # via alembic
 markupsafe==1.1.1         # via jinja2, mako
 psycopg2==2.8.4           # via -r requirements.in (line 11)
 pycparser==2.19           # via cffi
 pyjwt==1.7.1              # via -r requirements.in (line 12)
 python-dateutil==2.8.1    # via alembic
-python-dotenv==0.11.0     # via -r requirements.in (line 13)
+python-dotenv==0.12.0     # via -r requirements.in (line 13)
 python-editor==1.0.4      # via alembic
 pytz==2019.3              # via -r requirements.in (line 14)
 redis==3.4.1              # via -r requirements.in (line 15)
