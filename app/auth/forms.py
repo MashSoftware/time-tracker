@@ -16,7 +16,7 @@ class SignupForm(FlaskForm):
         'Email address',
         validators=[
             InputRequired(message="Email address is required"),
-            Email(),
+            Email(granular_message=True, check_deliverability=True),
             Length(max=256, message="Email address must be less than 256 characters")],
         description="We'll never share your email with anyone else.")
     password = PasswordField(
@@ -48,7 +48,7 @@ class LoginForm(FlaskForm):
         'Email address',
         validators=[
             InputRequired(message="Email address is required"),
-            Email(),
+            Email(granular_message=True, check_deliverability=True),
             Length(max=256, message="Email address must be less than 256 characters")])
     password = PasswordField(
         'Password',
@@ -64,7 +64,7 @@ class TokenRequestForm(FlaskForm):
         'Email address',
         validators=[
             InputRequired(message="Email address is required"),
-            Email(),
+            Email(granular_message=True, check_deliverability=True),
             Length(max=256, message="Email address must be less than 256 characters")])
 
 
