@@ -19,9 +19,9 @@
             <div class="form-group">
                 {{ form.password.label }}
                 {% if form.password.errors %}
-                {{ form.password(class="form-control is-invalid") }}
+                {{ form.password(class="form-control is-invalid", aria_describedby="passwordHelp") }}
                 {% else %}
-                {{ form.password(class="form-control") }}
+                {{ form.password(class="form-control", aria_describedby="passwordHelp") }}
                 {% endif %}
                 <small id="passwordHelp" class="form-text text-muted">{{ form.password.description }}</small>
                 {% for error in form.password.errors %}

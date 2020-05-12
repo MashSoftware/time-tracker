@@ -7,12 +7,12 @@
             <div class="form-group">
                 {{ form.name.label }}
                 {% if form.name.errors %}
-                {{ form.name(class="form-control is-invalid", type="text", spellcheck="true") }}
+                {{ form.name(class="form-control is-invalid", type="text", spellcheck="true", aria_describedby="nameHelp") }}
                 {% else %}
-                {{ form.name(class="form-control", type="text", spellcheck="true") }}
+                {{ form.name(class="form-control", type="text", spellcheck="true", aria_describedby="nameHelp") }}
                 {% endif %}
                 {% if form.name.description %}
-                <small id="{{ form.name.id }}Help" class="form-text text-muted">{{ form.name.description }}</small>
+                <small id="nameHelp" class="form-text text-muted">{{ form.name.description }}</small>
                 {% endif %}
                 {% for error in form.name.errors %}
                 <div class="invalid-feedback">{{error}}</div>
