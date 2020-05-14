@@ -11,9 +11,7 @@
                 {% else %}
                 {{ form.name(class="form-control", type="text", spellcheck="true", aria_describedby="nameHelp") }}
                 {% endif %}
-                {% if form.name.description %}
                 <small id="nameHelp" class="form-text text-muted">{{ form.name.description }}</small>
-                {% endif %}
                 {% for error in form.name.errors %}
                 <div class="invalid-feedback">{{error}}</div>
                 {% endfor %}
