@@ -81,8 +81,8 @@
             </div>
         </div>
     </nav>
+    <br>
     <div class="container">
-        <br>
         {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
         {% for category, message in messages %}
@@ -126,9 +126,9 @@
         </div>
         {% endif %}
         {% block content %}{% endblock %}
-        <hr>
     </div>
     <footer class="container text-muted">
+        <hr>
         <p>
             <a href="https://github.com/MashSoftware/the-button/blob/master/CHANGELOG.md" target="blank" rel="noopener">{{ config['VERSION_NUMBER'] }}</a> - {{ config['RELEASE_DATE'] }}<br>
             <i class="far fa-copyright"></i> <a href="https://www.mashsoftware.com/" target="blank" rel="noopener">Mash Software</a> 2019 - 2020<br>
