@@ -81,7 +81,7 @@ def login():
         next_page = request.args.get('next')
         if not next_page or url_parse(next_page).netloc != '':
             next_page = url_for('entry.entries')
-        flash('Welcome back.', 'success')
+        flash('You have logged in.', 'success')
         return redirect(next_page)
     elif request.method == 'GET' and current_user.is_authenticated:
         form.email_address.data = current_user.email_address
@@ -91,7 +91,7 @@ def login():
 @bp.route('/logout')
 def logout():
     logout_user()
-    flash('You have been successfully logged out.', 'success')
+    flash('You have logged out.', 'success')
     return redirect(url_for('main.index'))
 
 
