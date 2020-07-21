@@ -8,27 +8,17 @@ from wtforms.validators import InputRequired, Optional, ValidationError
 
 
 class EventForm(FlaskForm):
-    started_at_date = DateField(
-        'Start date',
-        validators=[InputRequired(message="Start date is required")])
-    started_at_time = TimeField(
-        'Start time',
-        validators=[InputRequired(message="Start time is required")])
-    ended_at_date = DateField(
-        'Stop date',
-        validators=[Optional()])
-    ended_at_time = TimeField(
-        'Stop time',
-        validators=[Optional()])
-    tag = RadioField(
-        'Tag',
-        validators=[InputRequired(message="Tag is required")])
+    started_at_date = DateField("Start date", validators=[InputRequired(message="Start date is required")])
+    started_at_time = TimeField("Start time", validators=[InputRequired(message="Start time is required")])
+    ended_at_date = DateField("Stop date", validators=[Optional()])
+    ended_at_time = TimeField("Stop time", validators=[Optional()])
+    tag = RadioField("Tag", validators=[InputRequired(message="Tag is required")])
 
     def validate_started_at_date(self, started_at_date):
         current_localised_date = pytz.timezone(current_user.timezone).localize(datetime.utcnow()).date()
 
         if started_at_date.data > current_localised_date:
-            raise ValidationError('Start date must be today or in the past')
+            raise ValidationError("Start date must be today or in the past")
 
     def validate_started_at_time(self, started_at_time):
         current_localised_datetime = pytz.timezone(current_user.timezone).localize(datetime.utcnow())
@@ -40,24 +30,25 @@ class EventForm(FlaskForm):
                 self.started_at_date.data.day,
                 started_at_time.data.hour,
                 started_at_time.data.minute,
-                started_at_time.data.second)
+                started_at_time.data.second,
+            )
         except AttributeError:
-            raise ValidationError('Start date is required')
+            raise ValidationError("Start date is required")
 
         if pytz.timezone(current_user.timezone).localize(started_at) > current_localised_datetime:
-            raise ValidationError('Start time must be now or in the past')
+            raise ValidationError("Start time must be now or in the past")
 
     def validate_ended_at_date(self, ended_at_date):
         if self.started_at_date.data is None:
-            raise ValidationError('Start date and time are also required')
+            raise ValidationError("Start date and time are also required")
 
         if ended_at_date.data < self.started_at_date.data:
-            raise ValidationError('Stop date must be the same as or after start date')
+            raise ValidationError("Stop date must be the same as or after start date")
 
         current_localised_date = pytz.timezone(current_user.timezone).localize(datetime.utcnow()).date()
 
         if ended_at_date.data > current_localised_date:
-            raise ValidationError('Stop date must be today or in the past')
+            raise ValidationError("Stop date must be today or in the past")
 
     def validate_ended_at_time(self, ended_at_time):
         try:
@@ -67,9 +58,10 @@ class EventForm(FlaskForm):
                 self.started_at_date.data.day,
                 self.started_at_time.data.hour,
                 self.started_at_time.data.minute,
-                self.started_at_time.data.second)
+                self.started_at_time.data.second,
+            )
         except AttributeError:
-            raise ValidationError('Start date and time are also required')
+            raise ValidationError("Start date and time are also required")
 
         try:
             ended_at = datetime(
@@ -78,14 +70,15 @@ class EventForm(FlaskForm):
                 self.ended_at_date.data.day,
                 ended_at_time.data.hour,
                 ended_at_time.data.minute,
-                ended_at_time.data.second)
+                ended_at_time.data.second,
+            )
         except AttributeError:
-            raise ValidationError('Stop date is required')
+            raise ValidationError("Stop date is required")
 
         if ended_at < started_at:
-            raise ValidationError('Stop time must be after start time')
+            raise ValidationError("Stop time must be after start time")
 
         current_localised_datetime = pytz.timezone(current_user.timezone).localize(datetime.utcnow())
 
         if pytz.timezone(current_user.timezone).localize(ended_at) > current_localised_datetime:
-            raise ValidationError('Stop time must be now or in the past')
+            raise ValidationError("Stop time must be now or in the past")
