@@ -24,7 +24,7 @@ def tags():
 def create():
     if len(current_user.tags) == current_user.tag_limit:
         flash(
-            "You have reached the {0} tag limit for your account."
+            "You have reached the {0} tag limit for your account. "
             "Please delete an existing tag in order to create a new one.".format(current_user.tag_limit),
             "warning",
         )
