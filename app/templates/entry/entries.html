@@ -35,8 +35,7 @@
                     <a href="{{ url_for('entry.update', id=entry.id) }}" class="list-group-item list-group-item-action">
                         {{entry.started_at.strftime('%H:%M')}} to 
                         {% if entry.started_at.strftime('%Y%m%d') != entry.ended_at.strftime('%Y%m%d') %}{{entry.ended_at.strftime('%d/%m/%y at %H:%M')}}{%else%}{{entry.ended_at.strftime('%H:%M')}}{% endif %} - 
-                        {{entry.duration_string()}}
-                        ({{entry.duration_decimal()|round(2, 'floor')}})
+                        {{entry.duration_string()}} ({{entry.duration_decimal()|round(2, 'floor')}})
                         {% if entry.tag %}<span class="badge badge-info"><i class="fas fa-tag fa-fw"></i> {{entry.tag.name}}</span>{% endif %}
                     </a>
                     {% endif %}
