@@ -1,10 +1,9 @@
 import pytz
+from app.models import User
 from flask_login import current_user
 from flask_wtf import FlaskForm
 from wtforms import PasswordField, SelectField, StringField, TimeField
 from wtforms.validators import Email, EqualTo, InputRequired, Length, ValidationError
-
-from app.models import User
 
 
 class AccountForm(FlaskForm):

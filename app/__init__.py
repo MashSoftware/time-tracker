@@ -1,3 +1,4 @@
+from config import Config
 from flask import Flask
 from flask_compress import Compress
 from flask_limiter import Limiter
@@ -6,8 +7,6 @@ from flask_login import LoginManager
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from flask_talisman import Talisman
-
-from config import Config
 
 db = SQLAlchemy()
 migrate = Migrate()
@@ -35,7 +34,7 @@ def create_app(config_class=Config):
     compress.init_app(app)
     csp = {
         "default-src": "'self'",
-        "style-src": ["'unsafe-inline'", "stackpath.bootstrapcdn.com", "use.fontawesome.com"],
+        "style-src": ["stackpath.bootstrapcdn.com", "use.fontawesome.com"],
         "font-src": "use.fontawesome.com",
         "script-src": ["code.jquery.com", "cdn.jsdelivr.net", "stackpath.bootstrapcdn.com"],
         "img-src": ["data:", "'self'"],

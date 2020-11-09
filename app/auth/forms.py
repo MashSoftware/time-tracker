@@ -1,9 +1,8 @@
 import pytz
+from app.models import User
 from flask_wtf import FlaskForm
 from wtforms import BooleanField, PasswordField, SelectField, StringField
 from wtforms.validators import Email, EqualTo, InputRequired, Length, ValidationError
-
-from app.models import User
 
 
 class SignupForm(FlaskForm):

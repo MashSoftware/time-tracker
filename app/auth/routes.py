@@ -2,15 +2,14 @@ import time
 from datetime import datetime
 
 import pytz
-from flask import flash, redirect, render_template, request, url_for
-from flask_login import current_user, login_user, logout_user
-from werkzeug.urls import url_parse
-
 from app import db
 from app.auth import bp
 from app.auth.forms import LoginForm, ResetPasswordForm, SignupForm, TokenRequestForm
 from app.main.email import send_activation_email, send_confirmation_email, send_reset_password_email
 from app.models import User
+from flask import flash, redirect, render_template, request, url_for
+from flask_login import current_user, login_user, logout_user
+from werkzeug.urls import url_parse
 
 
 @bp.route("/signup", methods=["GET", "POST"])
