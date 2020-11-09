@@ -12,8 +12,8 @@ cffi==1.14.3              # via bcrypt
 chardet==3.0.4            # via requests
 click==7.1.2              # via flask
 dnspython==2.0.0          # via email-validator
-email_validator==1.1.1    # via -r requirements.in
-flask-compress==1.7.0     # via -r requirements.in
+email_validator==1.1.2    # via -r requirements.in
+flask-compress==1.8.0     # via -r requirements.in
 flask-limiter==1.4        # via -r requirements.in
 flask-login==0.5.0        # via -r requirements.in
 flask-migrate==2.5.3      # via -r requirements.in
@@ -32,9 +32,9 @@ psycopg2==2.8.6           # via -r requirements.in
 pycparser==2.20           # via cffi
 pyjwt==1.7.1              # via -r requirements.in
 python-dateutil==2.8.1    # via alembic
-python-dotenv==0.14.0     # via -r requirements.in
+python-dotenv==0.15.0     # via -r requirements.in
 python-editor==1.0.4      # via alembic
-pytz==2020.1              # via -r requirements.in
+pytz==2020.4              # via -r requirements.in
 redis==3.5.3              # via -r requirements.in
 requests==2.24.0          # via -r requirements.in
 six==1.15.0               # via bcrypt, flask-limiter, flask-talisman, limits, python-dateutil

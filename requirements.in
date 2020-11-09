@@ -1,6 +1,6 @@
 bcrypt==3.2.0
-email_validator==1.1.1  # Latest 1.1.2
-flask-compress==1.7.0  # Latest 1.8.0
+email_validator==1.1.2
+flask-compress==1.8.0
 flask-limiter==1.4
 flask-login==0.5.0
 flask-migrate==2.5.3
@@ -11,9 +11,9 @@ flask==1.1.2
 gunicorn==20.0.4
 psycopg2==2.8.6
 pyjwt==1.7.1
-python-dotenv==0.14.0  # Latest 0.15.0
-pytz==2020.1  # Latest 2020.4
+python-dotenv==0.15.0
+pytz==2020.4
 redis==3.5.3
 requests==2.24.0
 # Generated with piprot 0.9.10
-# Your requirements are 498 days out of date
+# Looks like you've been keeping up to date, time for a delicious beverage!
