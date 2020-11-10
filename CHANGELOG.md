@@ -15,7 +15,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 
 - Improved email address validation on sign up, log in, password reset, account activation and account update. Now provides more granular error messages if an input email address is invalid. Also checks the deliverability of the email address by resolving the domain name.
-- Upgrade to Bootstrap 4.5.0.
+- Upgrade to Bootstrap 4.5.3.
 
 ## [0.21.1](https://github.com/MashSoftware/the-button/compare/v0.21.0...v0.21.1) - 2020-02-25
 
