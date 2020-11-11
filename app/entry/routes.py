@@ -76,6 +76,7 @@ def auto():
                 "warning",
             )
         event = Event(user_id=current_user.id, started_at=pytz.utc.localize(datetime.utcnow()))
+        event.tag_id = request.args.get("tag_id", None, type=str)
         db.session.add(event)
     db.session.commit()
     return redirect(url_for("entry.entries"))

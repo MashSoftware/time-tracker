@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
+- Start tagged time entries immediately using the dropdown button menu
 - Open Graph Protocol metadata tags to enable better link sharing on social media.
 - ARIA attributes added to help text within forms, to improve accessibility and assistive technology user experience.
 
