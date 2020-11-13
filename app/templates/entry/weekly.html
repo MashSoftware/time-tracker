@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+    <div class="col-md-6">
+        {% if events %}
+            <p class="lead">{{ events | length }} time entries this week.</p>
+            <div class="progress">
+                <div class="progress-bar {% if progress >= 100 %}bg-success{% endif %}" role="progressbar" style="width: {{ progress }}%" aria-valuenow="{{ progress }}" aria-valuemin="0" aria-valuemax="100">{{ progress }}%</div>
+            </div>
+            <p>{{ weekly_time }} of {{ current_user.schedule_string() }}</p>
+            <br>
+            {% for event in events %}
+            <div class="card">
+                <div class="card-body">
+                    {{event.started_at.strftime('%H:%M')}} to {{event.ended_at.strftime('%H:%M')}} - {{event.duration_string()}} ({{event.duration_decimal()}}) {% if event.tag %}<span class="badge badge-info"><i class="fas fa-tag fa-fw"></i> {{event.tag.name}}</span>{% endif %}
+                </div>
+                <div class="card-footer">
+                    <a href="{{ url_for('entry.update', id=event.id) }}" class="card-link"><i class="fas fa-edit fa-lg fa-fw"></i> Update</a>
+                    <a href="#" class="card-link text-danger"><i class="fas fa-trash fa-lg fa-fw"></i> Delete</a>
+                </div>
+            </div>
+            <br>
+            {% endfor %}
+        {% else %}
+        <div class="alert alert-info" role="alert">There are no time entries for this week.</div>
+        {% endif %}
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+                <li class="page-item">
+                    <a class="page-link"
+                        href="{{ url_for('entry.weekly', year=previous_week[0], week=previous_week[1]) }}"
+                        aria-label="Previous"><i class="fas fa-chevron-left"></i> Previous</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="{{ url_for('entry.weekly') }}">Current</a>
+                </li>
+                {% if request.args.get('week') == None or request.args.get('week') == today[1] %}
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Next <i class="fas fa-chevron-right"></i></a>
+                </li>
+                {% else %}
+                <li class="page-item">
+                    <a class="page-link" href="{{ url_for('entry.weekly', year=next_week[0], week=next_week[1]) }}"
+                        aria-label="Next">Next <i class="fas fa-chevron-right"></i></a>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+</div>
+        
+{% endblock %}

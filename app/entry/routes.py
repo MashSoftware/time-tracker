@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import date, datetime, timedelta
 
 import pytz
 from app import db, limiter
@@ -191,3 +191,58 @@ def delete(id):
     db.session.commit()
     flash("Time entry has been deleted.", "success")
     return redirect(url_for("entry.entries"))
+
+
+@bp.route("/weekly")
+@login_required
+@limiter.limit("1 per second", key_func=lambda: current_user.id)
+def weekly():
+    today = date.today().isocalendar()
+    year = request.args.get("year", default=str(today[0]), type=str)
+    week = request.args.get("week", default=str(today[1]), type=str)
+    first_day = datetime.strptime(year + week + "1", "%G%V%u")
+    last_day = datetime.strptime(year + week + "7", "%G%V%u")
+    next_week = (first_day + timedelta(weeks=1)).isocalendar()
+    previous_week = (first_day - timedelta(weeks=1)).isocalendar()
+
+    if first_day.strftime("%Y") == last_day.strftime("%Y"):
+        if first_day.strftime("%B") == last_day.strftime("%B"):
+            title = first_day.strftime("%d") + " - " + last_day.strftime("%d %B %Y")
+        else:
+            title = first_day.strftime("%d %B") + " - " + last_day.strftime("%d %B %Y")
+    else:
+        title = first_day.strftime("%d %B %Y") + " - " + last_day.strftime("%d %B %Y")
+
+    events = (
+        Event.query.filter_by(user_id=current_user.id)
+        .filter(Event.started_at.between(first_day, last_day))
+        .order_by(Event.started_at.asc())
+        .all()
+    )
+    # daily_totals = stuff
+    weekly_seconds = 0
+    for event in events:
+        if event.ended_at:
+            weekly_seconds += event.duration()
+
+    hours, remainder = divmod(weekly_seconds, 3600)
+    minutes, seconds = divmod(remainder, 60)
+    if hours > 0:
+        weekly_time = str(hours) + " h " + str(minutes) + " min"
+    elif minutes > 0:
+        weekly_time = str(minutes) + " min"
+    else:
+        weekly_time = str(seconds) + "s"
+
+    progress = int((weekly_seconds / current_user.schedule()) * 100)
+
+    return render_template(
+        "entry/weekly.html",
+        today=today,
+        next_week=next_week,
+        previous_week=previous_week,
+        events=events,
+        weekly_time=weekly_time,
+        progress=progress,
+        title=title,
+    )
