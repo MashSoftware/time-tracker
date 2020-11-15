@@ -62,12 +62,12 @@ def update():
         current_user.updated_at = pytz.utc.localize(datetime.utcnow())
         db.session.add(current_user)
         db.session.commit()
-        flash("Your account has been updated.", "success")
+        flash("Account changes have been saved.", "success")
         return redirect(url_for("account.account"))
     elif request.method == "GET":
         form.email_address.data = current_user.email_address
         form.timezone.data = current_user.timezone
-    return render_template("account/account_form.html", title="Update account", form=form)
+    return render_template("account/account_form.html", title="Edit account", form=form)
 
 
 @bp.route("/delete")
@@ -98,7 +98,7 @@ def schedule():
         current_user.updated_at = pytz.utc.localize(datetime.utcnow())
         db.session.add(current_user)
         db.session.commit()
-        flash("Your schedule has been updated", "success")
+        flash("Schedule changes have been saved", "success")
         return redirect(url_for("account.account"))
     elif request.method == "GET":
         mon_hours, mon_remainder = divmod(current_user.monday, 3600)
@@ -128,4 +128,4 @@ def schedule():
         sun_hours, sun_remainder = divmod(current_user.sunday, 3600)
         sun_minutes, sun_seconds = divmod(sun_remainder, 60)
         form.sunday.data = time(hour=sun_hours, minute=sun_minutes, second=sun_seconds)
-    return render_template("account/schedule_form.html", title="Update schedule", form=form)
+    return render_template("account/schedule_form.html", title="Edit schedule", form=form)

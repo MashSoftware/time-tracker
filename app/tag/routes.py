@@ -52,7 +52,7 @@ def update(id):
         tag.updated_at = pytz.utc.localize(datetime.utcnow())
         db.session.add(tag)
         db.session.commit()
-        flash("Tag has been updated.", "success")
+        flash("Tag has been saved.", "success")
         return redirect(url_for("tag.tags"))
     elif request.method == "GET":
         form.name.data = tag.name

@@ -166,7 +166,7 @@ def update(id):
             event.tag_id = None
         db.session.add(event)
         db.session.commit()
-        flash("Time entry has been updated.", "success")
+        flash("Time entry changes have been saved.", "success")
         return redirect(url_for("entry.entries"))
     elif request.method == "GET":
         # Show timestamp in users localised timezone
