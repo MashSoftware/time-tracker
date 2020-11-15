@@ -50,8 +50,14 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     {% if current_user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('entry.entries') }}"><i class="fas fa-clock fa-lg fa-fw"></i> Time</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-clock fa-lg fa-fw"></i> Time
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ url_for('entry.entries') }}"><i class="fas fa-list fa-lg fa-fw"></i> List</a>
+                            <a class="dropdown-item" href="{{ url_for('entry.weekly') }}"><i class="fas fa-calendar-week fa-lg fa-fw"></i> Weekly</a>
+                        </div>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('tag.tags') }}"><i class="fas fa-tags fa-lg fa-fw"></i> Tags</a>
