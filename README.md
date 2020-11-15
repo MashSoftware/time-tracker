@@ -8,7 +8,7 @@ A simple time tracking service.
 
 ### Required
 
-- Python 3.x.x
+- Python 3.6.x or higher
 - Postgres 9.5.x or higher
 
 ### Optional
