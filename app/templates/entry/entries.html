@@ -11,7 +11,7 @@
                 <span class="sr-only">Toggle Dropdown</span>
             </button>
             <div class="dropdown-menu dropdown-menu-right">
-                <a class="dropdown-item" href="{{ url_for('entry.manual') }}">Manual entry</a>
+                <a class="dropdown-item {% if not start %}disabled{% endif %}" href="{{ url_for('entry.manual') }}">Manual entry</a>
                 {% if current_user.tags %}
                 <div class="dropdown-divider"></div>
                     {% for tag in current_user.tags %}
