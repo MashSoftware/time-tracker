@@ -1,14 +1,21 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="row">
+    <div class="col">
+        {% if events %}
+        <p class="lead">{{ events | length }} time entries this week.</p>
+        <div class="progress">
+            <div class="progress-bar {% if progress >= 100 %}bg-success{% endif %}" role="progressbar" style="width: {{ progress }}%" aria-valuenow="{{ progress }}" aria-valuemin="0" aria-valuemax="100">{{ progress }}%</div>
+        </div>
+        <p>{{ weekly_time }} of {{ current_user.schedule_string() }}</p>
+        {% else %}
+        <div class="alert alert-info" role="alert">There are no time entries for this week.</div>
+        {% endif %}
+    </div>
+</div>
+<div class="row">
     <div class="col-md-6">
         {% if events %}
-            <p class="lead">{{ events | length }} time entries this week.</p>
-            <div class="progress">
-                <div class="progress-bar {% if progress >= 100 %}bg-success{% endif %}" role="progressbar" style="width: {{ progress }}%" aria-valuenow="{{ progress }}" aria-valuemin="0" aria-valuemax="100">{{ progress }}%</div>
-            </div>
-            <p>{{ weekly_time }} of {{ current_user.schedule_string() }}</p>
-            <br>
             {% for event in events %}
             <div class="card">
                 <div class="card-body">
@@ -21,8 +28,7 @@
             </div>
             <br>
             {% endfor %}
-        {% else %}
-        <div class="alert alert-info" role="alert">There are no time entries for this week.</div>
+        
         {% endif %}
     </div>
 </div>
