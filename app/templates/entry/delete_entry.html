@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+        <h3>Are you sure?</h3>
+        <p class="lead">This time entry will be permanently deleted.</p>
+        <div class="card">
+            <div class="card-body">
+                {{event.started_at.strftime('%H:%M')}} to {{event.ended_at.strftime('%H:%M')}} - {{event.duration_string()}} ({{event.duration_decimal()}}) {% if event.tag %}<span class="badge badge-info"><i class="fas fa-tag fa-fw"></i> {{event.tag.name}}</span>{% endif %}
+            </div>
+        </div>
+        <br>
+        <form action="" method="post" novalidate>
+            <button class="btn btn-danger" type="submit"><i class="fas fa-trash fa-lg fa-fw"></i> Delete</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

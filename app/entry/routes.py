@@ -180,17 +180,20 @@ def update(id):
     return render_template("entry/update_entry_form.html", title="Edit time entry", form=form, event=event)
 
 
-@bp.route("/<uuid:id>/delete")
+@bp.route("/<uuid:id>/delete", methods=["GET", "POST"])
 @login_required
 @limiter.limit("1 per second", key_func=lambda: current_user.id)
 def delete(id):
     event = Event.query.get_or_404(str(id))
     if event not in current_user.events:
         raise Forbidden()
-    db.session.delete(event)
-    db.session.commit()
-    flash("Time entry has been deleted.", "success")
-    return redirect(url_for("entry.entries"))
+    if request.method == "GET":
+        return render_template("entry/delete_entry.html", title="Delete time entry", event=event)
+    elif request.method == "POST":
+        db.session.delete(event)
+        db.session.commit()
+        flash("Time entry has been deleted.", "success")
+        return redirect(url_for("entry.entries"))
 
 
 @bp.route("/weekly")
