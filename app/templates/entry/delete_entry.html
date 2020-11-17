@@ -17,7 +17,8 @@
         </div>
         <br>
         <form action="" method="post" novalidate>
-            <button class="btn btn-danger" type="submit"><i class="fas fa-trash fa-lg fa-fw"></i> Delete</button>
+            <button class="btn btn-block btn-danger" type="submit"><i class="fas fa-trash fa-lg fa-fw"></i> Delete</button>
+            <a class="btn btn-block btn-secondary" href="{{ url_for('entry.entries') }}"><i class="fas fa-chevron-left fa-lg fa-fw"></i> Cancel</a>
         </form>
     </div>
 </div>
