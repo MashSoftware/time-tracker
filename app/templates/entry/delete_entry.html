@@ -6,7 +6,13 @@
         <p class="lead">This time entry will be permanently deleted.</p>
         <div class="card">
             <div class="card-body">
-                {{event.started_at.strftime('%H:%M')}} to {{event.ended_at.strftime('%H:%M')}} - {{event.duration_string()}} ({{event.duration_decimal()}}) {% if event.tag %}<span class="badge badge-info"><i class="fas fa-tag fa-fw"></i> {{event.tag.name}}</span>{% endif %}
+                {% if event.ended_at is none %}
+                    Started at {{event.started_at.strftime('%H:%M')}}
+                    {% if event.tag %}<br><span class="badge badge-info"><i class="fas fa-tag fa-fw"></i> {{event.tag.name}}</span>{% endif %}
+                {% else %}
+                    {{event.started_at.strftime('%H:%M')}} to {{event.ended_at.strftime('%H:%M')}} - {{event.duration_string()}} ({{event.duration_decimal()}})
+                    {% if event.tag %}<br><span class="badge badge-info"><i class="fas fa-tag fa-fw"></i> {{event.tag.name}}</span>{% endif %}
+                {% endif %}
             </div>
         </div>
         <br>
