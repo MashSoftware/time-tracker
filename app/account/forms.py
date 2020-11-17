@@ -64,10 +64,10 @@ class PasswordForm(FlaskForm):
 
 
 class ScheduleForm(FlaskForm):
-    monday = TimeField("Monday", validators=[InputRequired(message="Monday\'s time is required")])
-    tuesday = TimeField("Tuesday", validators=[InputRequired(message="Tuesday\'s time is required")])
-    wednesday = TimeField("Wednesday", validators=[InputRequired(message="Wednesday\'s time is required")])
-    thursday = TimeField("Thursday", validators=[InputRequired(message="Thursday\'s time is required")])
-    friday = TimeField("Friday", validators=[InputRequired(message="Friday\'s time is required")])
-    saturday = TimeField("Saturday", validators=[InputRequired(message="Saturday\'s time is required")])
-    sunday = TimeField("Sunday", validators=[InputRequired(message="Sunday\'s time is required")])
+    monday = TimeField("Monday", validators=[InputRequired(message="Monday's time is required")])
+    tuesday = TimeField("Tuesday", validators=[InputRequired(message="Tuesday's time is required")])
+    wednesday = TimeField("Wednesday", validators=[InputRequired(message="Wednesday's time is required")])
+    thursday = TimeField("Thursday", validators=[InputRequired(message="Thursday's time is required")])
+    friday = TimeField("Friday", validators=[InputRequired(message="Friday's time is required")])
+    saturday = TimeField("Saturday", validators=[InputRequired(message="Saturday's time is required")])
+    sunday = TimeField("Sunday", validators=[InputRequired(message="Sunday's time is required")])
