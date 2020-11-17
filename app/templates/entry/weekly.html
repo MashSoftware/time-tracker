@@ -4,8 +4,13 @@
     <div class="col">
         {% if events %}
         <p class="lead">{{ events | length }} time entries this week.</p>
+        <style nonce="{{csp_nonce()}}">
+            .progress-bar {
+                width: {{progress}}%
+            }
+        </style>
         <div class="progress">
-            <div class="progress-bar {% if progress >= 100 %}bg-success{% endif %}" role="progressbar" style="width: {{ progress }}%" aria-valuenow="{{ progress }}" aria-valuemin="0" aria-valuemax="100">{{ progress }}%</div>
+            <div class="progress-bar {% if progress >= 100 %}bg-success{% endif %}" role="progressbar" aria-valuenow="{{ progress }}" aria-valuemin="0" aria-valuemax="100">{{ progress }}%</div>
         </div>
         <p>{{ weekly_time }} of {{ current_user.schedule_string() }}</p>
         {% else %}
@@ -19,9 +24,14 @@
             {% for event in events %}
             <div class="card">
                 <div class="card-body">
-                    {{event.started_at.strftime('%H:%M')}} to {{event.ended_at.strftime('%H:%M')}} - {{event.duration_string()}} ({{event.duration_decimal()}})
-                    {% if event.tag %}<br><span class="badge badge-info"><i class="fas fa-tag fa-fw"></i> {{event.tag.name}}</span>{% endif %}
-                </div>
+                    {% if event.ended_at is none %}
+                        Started at {{event.started_at.strftime('%H:%M')}}
+                        {% if event.tag %}<br><span class="badge badge-info"><i class="fas fa-tag fa-fw"></i> {{event.tag.name}}</span>{% endif %}
+                    {% else %}
+                        {{event.started_at.strftime('%H:%M')}} to {{event.ended_at.strftime('%H:%M')}} - {{event.duration_string()}} ({{event.duration_decimal()}})
+                        {% if event.tag %}<br><span class="badge badge-info"><i class="fas fa-tag fa-fw"></i> {{event.tag.name}}</span>{% endif %}
+                    {% endif %}
+                    </div>
                 <div class="card-footer">
                     <a href="{{ url_for('entry.update', id=event.id) }}" class="card-link"><i class="fas fa-edit fa-lg fa-fw"></i> Edit</a>
                     <a href="{{ url_for('entry.delete', id=event.id) }}" class="card-link text-danger"><i class="fas fa-trash fa-lg fa-fw"></i> Delete</a>
