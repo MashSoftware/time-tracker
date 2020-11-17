@@ -39,7 +39,7 @@ def create_app(config_class=Config):
         "script-src": ["code.jquery.com", "cdn.jsdelivr.net"],
         "img-src": ["data:", "'self'"],
     }
-    talisman.init_app(app, content_security_policy=csp)
+    talisman.init_app(app, content_security_policy=csp, content_security_policy_nonce_in=["style-src"])
 
     # Register blueprints
     from app.main import bp as main_bp
