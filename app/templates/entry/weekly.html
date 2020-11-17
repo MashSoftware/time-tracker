@@ -31,7 +31,7 @@
                         {{event.started_at.strftime('%H:%M')}} to {{event.ended_at.strftime('%H:%M')}} - {{event.duration_string()}} ({{event.duration_decimal()}})
                         {% if event.tag %}<br><span class="badge badge-info"><i class="fas fa-tag fa-fw"></i> {{event.tag.name}}</span>{% endif %}
                     {% endif %}
-                    </div>
+                </div>
                 <div class="card-footer">
                     <a href="{{ url_for('entry.update', id=event.id) }}" class="card-link"><i class="fas fa-edit fa-lg fa-fw"></i> Edit</a>
                     <a href="{{ url_for('entry.delete', id=event.id) }}" class="card-link text-danger"><i class="fas fa-trash fa-lg fa-fw"></i> Delete</a>
