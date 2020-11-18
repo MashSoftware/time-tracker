@@ -12,7 +12,7 @@ from flask_login import current_user, fresh_login_required, login_required
 
 @bp.route("/")
 @login_required
-@limiter.limit("1 per second", key_func=lambda: current_user.id)
+@limiter.limit("2 per second", key_func=lambda: current_user.id)
 def account():
     user = current_user
     user.created_at = user.created_at.astimezone(pytz.timezone(user.timezone))
@@ -23,7 +23,7 @@ def account():
 
 @bp.route("/change-password", methods=["GET", "POST"])
 @fresh_login_required
-@limiter.limit("1 per second", key_func=lambda: current_user.id)
+@limiter.limit("2 per second", key_func=lambda: current_user.id)
 def change_password():
     form = PasswordForm()
     if form.validate_on_submit():
@@ -44,7 +44,7 @@ def change_password():
 
 @bp.route("/update", methods=["GET", "POST"])
 @fresh_login_required
-@limiter.limit("1 per second", key_func=lambda: current_user.id)
+@limiter.limit("2 per second", key_func=lambda: current_user.id)
 def update():
     form = AccountForm()
     if form.validate_on_submit():
@@ -72,7 +72,7 @@ def update():
 
 @bp.route("/delete")
 @fresh_login_required
-@limiter.limit("1 per second", key_func=lambda: current_user.id)
+@limiter.limit("2 per second", key_func=lambda: current_user.id)
 def delete():
     db.session.delete(current_user)
     db.session.commit()
@@ -84,7 +84,7 @@ def delete():
 
 @bp.route("/schedule", methods=["GET", "POST"])
 @fresh_login_required
-@limiter.limit("1 per second", key_func=lambda: current_user.id)
+@limiter.limit("2 per second", key_func=lambda: current_user.id)
 def schedule():
     form = ScheduleForm()
     if form.validate_on_submit():

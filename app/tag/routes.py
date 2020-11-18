@@ -13,14 +13,14 @@ from app.tag.forms import TagForm
 
 @bp.route("/")
 @login_required
-@limiter.limit("1 per second", key_func=lambda: current_user.id)
+@limiter.limit("2 per second", key_func=lambda: current_user.id)
 def tags():
     return render_template("tag/tags.html", title="Tags")
 
 
 @bp.route("/new", methods=["GET", "POST"])
 @login_required
-@limiter.limit("1 per second", key_func=lambda: current_user.id)
+@limiter.limit("2 per second", key_func=lambda: current_user.id)
 def create():
     if len(current_user.tags) == current_user.tag_limit:
         flash(
@@ -41,7 +41,7 @@ def create():
 
 @bp.route("/<uuid:id>", methods=["GET", "POST"])
 @login_required
-@limiter.limit("1 per second", key_func=lambda: current_user.id)
+@limiter.limit("2 per second", key_func=lambda: current_user.id)
 def update(id):
     tag = Tag.query.get_or_404(str(id))
     if tag not in current_user.tags:
@@ -61,7 +61,7 @@ def update(id):
 
 @bp.route("/<uuid:id>/delete")
 @login_required
-@limiter.limit("1 per second", key_func=lambda: current_user.id)
+@limiter.limit("2 per second", key_func=lambda: current_user.id)
 def delete(id):
     tag = Tag.query.get_or_404(str(id))
     if tag not in current_user.tags:

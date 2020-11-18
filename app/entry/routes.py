@@ -12,7 +12,7 @@ from werkzeug.exceptions import Forbidden
 
 @bp.route("/")
 @login_required
-@limiter.limit("1 per second", key_func=lambda: current_user.id)
+@limiter.limit("2 per second", key_func=lambda: current_user.id)
 def entries():
     page = request.args.get("page", 1, type=int)
     events = Event.query.filter_by(user_id=current_user.id).order_by(Event.started_at.desc()).paginate(page, 10, True)
@@ -59,7 +59,7 @@ def entries():
 
 @bp.route("/auto")
 @login_required
-@limiter.limit("1 per second", key_func=lambda: current_user.id)
+@limiter.limit("2 per second", key_func=lambda: current_user.id)
 def auto():
     event = Event.query.filter_by(user_id=current_user.id).order_by(Event.started_at.desc()).first()
     if event and event.ended_at is None:
@@ -84,7 +84,7 @@ def auto():
 
 @bp.route("/manual", methods=["GET", "POST"])
 @login_required
-@limiter.limit("1 per second", key_func=lambda: current_user.id)
+@limiter.limit("2 per second", key_func=lambda: current_user.id)
 def manual():
     form = EventForm()
     form.tag.choices = [(tag.id, tag.name) for tag in current_user.tags]
@@ -126,7 +126,7 @@ def manual():
 
 @bp.route("/<uuid:id>", methods=["GET", "POST"])
 @login_required
-@limiter.limit("1 per second", key_func=lambda: current_user.id)
+@limiter.limit("2 per second", key_func=lambda: current_user.id)
 def update(id):
     event = Event.query.get_or_404(str(id))
     if event not in current_user.events:
@@ -182,7 +182,7 @@ def update(id):
 
 @bp.route("/<uuid:id>/delete", methods=["GET", "POST"])
 @login_required
-@limiter.limit("1 per second", key_func=lambda: current_user.id)
+@limiter.limit("2 per second", key_func=lambda: current_user.id)
 def delete(id):
     event = Event.query.get_or_404(str(id))
     if event not in current_user.events:
@@ -198,7 +198,7 @@ def delete(id):
 
 @bp.route("/weekly")
 @login_required
-@limiter.limit("1 per second", key_func=lambda: current_user.id)
+@limiter.limit("2 per second", key_func=lambda: current_user.id)
 def weekly():
     today = date.today().isocalendar()
     year = request.args.get("year", default=str(today[0]), type=str)

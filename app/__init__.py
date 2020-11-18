@@ -16,7 +16,7 @@ login.login_message_category = "info"
 login.refresh_view = "auth.login"
 login.needs_refresh_message_category = "info"
 login.needs_refresh_message = "To protect your account, please log in again to access this page."
-limiter = Limiter(key_func=get_remote_address, default_limits=["1 per second", "60 per minute"])
+limiter = Limiter(key_func=get_remote_address, default_limits=["2 per second", "60 per minute"])
 compress = Compress()
 talisman = Talisman()
 
