@@ -25,7 +25,7 @@
     <div class="col-md-8">
         {% if events.items %}<p class="text-muted">Page {{events.page}} of {{events.pages}}</p>{% endif %}
         {% for date in entries %}
-            <div class="card shadow-sm">
+            <div class="card shadow">
                 <h5 class="card-header">
                     {{date.date}}
                     {% if date.total_duration %}<br><small class="text-muted">{{date.total_duration}} ({{date.total_duration_decimal|round(2, 'floor')}})</small>{% endif %}
