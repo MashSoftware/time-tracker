@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 
 - Improved email address validation on sign up, log in, password reset, account activation and account update. Now provides more granular error messages if an input email address is invalid. Also checks the deliverability of the email address by resolving the domain name.
+- Delete confirmation actions changed from modal dialogs to new pages, inspired by [this tweet](https://twitter.com/adambsilver/status/1290266510334681088).
 - Increased user tag limit from 5 to 8.
 - Consistent actions, headings and confirmation messages.
 - Upgrade to Bootstrap 4.5.3.
