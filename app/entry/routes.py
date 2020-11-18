@@ -210,11 +210,11 @@ def weekly():
 
     if first_day.strftime("%Y") == last_day.strftime("%Y"):
         if first_day.strftime("%B") == last_day.strftime("%B"):
-            title = first_day.strftime("%d") + " - " + last_day.strftime("%d %B %Y")
+            title = first_day.strftime("%d") + " to " + last_day.strftime("%d %B %Y")
         else:
-            title = first_day.strftime("%d %B") + " - " + last_day.strftime("%d %B %Y")
+            title = first_day.strftime("%d %B") + " to " + last_day.strftime("%d %B %Y")
     else:
-        title = first_day.strftime("%d %B %Y") + " - " + last_day.strftime("%d %B %Y")
+        title = first_day.strftime("%d %B %Y") + " to " + last_day.strftime("%d %B %Y")
 
     events = (
         Event.query.filter_by(user_id=current_user.id)
