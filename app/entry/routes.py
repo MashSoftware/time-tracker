@@ -208,6 +208,12 @@ def weekly():
     next_week = (first_day + timedelta(weeks=1)).isocalendar()
     previous_week = (first_day - timedelta(weeks=1)).isocalendar()
 
+    last_event = Event.query.filter_by(user_id=current_user.id).order_by(Event.started_at.desc()).first()
+    if (last_event and last_event.ended_at) or last_event is None:
+        start = True
+    else:
+        start = False
+
     if first_day.strftime("%Y") == last_day.strftime("%Y"):
         if first_day.strftime("%B") == last_day.strftime("%B"):
             title = first_day.strftime("%d") + " to " + last_day.strftime("%d %B %Y")
@@ -244,6 +250,7 @@ def weekly():
 
     return render_template(
         "entry/weekly.html",
+        start=start,
         today=today,
         next_week=next_week,
         previous_week=previous_week,
