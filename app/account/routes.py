@@ -70,16 +70,19 @@ def update():
     return render_template("account/account_form.html", title="Edit account", form=form)
 
 
-@bp.route("/delete")
+@bp.route("/delete", methods=["GET", "POST"])
 @fresh_login_required
 @limiter.limit("2 per second", key_func=lambda: current_user.id)
 def delete():
-    db.session.delete(current_user)
-    db.session.commit()
-    flash(
-        "Your account and all personal information has been permanently deleted.", "success",
-    )
-    return redirect(url_for("main.index"))
+    if request.method == "GET":
+        return render_template("account/delete_account.html", title="Delete account")
+    elif request.method == "POST":
+        db.session.delete(current_user)
+        db.session.commit()
+        flash(
+            "Your account and all personal information has been permanently deleted.", "success",
+        )
+        return redirect(url_for("main.index"))
 
 
 @bp.route("/schedule", methods=["GET", "POST"])
