@@ -59,14 +59,17 @@ def update(id):
     return render_template("tag/update_tag_form.html", title="Edit tag", form=form, tag=tag)
 
 
-@bp.route("/<uuid:id>/delete")
+@bp.route("/<uuid:id>/delete", methods=["GET", "POST"])
 @login_required
 @limiter.limit("2 per second", key_func=lambda: current_user.id)
 def delete(id):
     tag = Tag.query.get_or_404(str(id))
     if tag not in current_user.tags:
         raise Forbidden()
-    db.session.delete(tag)
-    db.session.commit()
-    flash("Tag has been deleted.", "success")
-    return redirect(url_for("tag.tags"))
+    if request.method == "GET":
+        return render_template("tag/delete_tag.html", title="Delete tag", tag=tag)
+    elif request.method == "POST":
+        db.session.delete(tag)
+        db.session.commit()
+        flash("Tag has been deleted.", "success")
+        return redirect(url_for("tag.tags"))

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+    <div class="col-md-6">
+        <h3>Are you sure?</h3>
+        <p class="lead">This tag will be permanently deleted.</p>
+        <p class="lead"><span class="badge badge-info"><i class="fas fa-tag fa-fw"></i> {{ tag.name }}</span></p>
+        <form action="" method="post" novalidate>
+            <button class="btn btn-block btn-lg btn-danger" type="submit"><i class="fas fa-trash fa-lg fa-fw"></i> Yes - delete tag</button>
+            <a class="btn btn-block btn-secondary" href="{{ url_for('tag.tags') }}"><i class="fas fa-chevron-left fa-lg fa-fw"></i> Cancel</a>
+        </form>
+    </div>
+</div>
+{% endblock %}
