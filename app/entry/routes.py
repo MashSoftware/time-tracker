@@ -237,7 +237,10 @@ def weekly():
     else:
         weekly_time = str(seconds) + "s"
 
-    progress = int((weekly_seconds / current_user.schedule()) * 100)
+    if current_user.schedule():
+        progress = int((weekly_seconds / current_user.schedule()) * 100)
+    else:
+        progress = 0
 
     return render_template(
         "entry/weekly.html",
