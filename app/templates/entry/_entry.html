@@ -1,0 +1,16 @@
+<div class="card shadow">
+    <div class="card-body">
+        <h5 class="card-title">{{event.started_at.strftime('%A %d %B %Y')}}</h5>
+        {% if event.ended_at %}<h6 class="card-subtitle mb-2 text-muted">{{event.duration_string()}} ({{event.duration_decimal()}})</h6>{% endif %}
+        <p class="card-text">
+            {% if event.ended_at is none %}
+                Started at {{event.started_at.strftime('%H:%M')}}
+            {% else %}
+                {{event.started_at.strftime('%H:%M')}} to {{event.ended_at.strftime('%H:%M')}}
+            {% endif %}
+            {% if event.tag %}<br><span class="badge badge-info"><i class="fas fa-tag fa-fw"></i> {{event.tag.name}}</span>{% endif %}
+        </p>
+        <a href="{{ url_for('entry.update', id=event.id) }}" class="card-link"><i class="fas fa-edit fa-fw"></i> Edit</a>
+        <a href="{{ url_for('entry.delete', id=event.id) }}" class="card-link text-danger"><i class="fas fa-trash fa-fw"></i> Delete</a>
+    </div>
+</div>
