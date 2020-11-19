@@ -225,7 +225,7 @@ def weekly():
     events = (
         Event.query.filter_by(user_id=current_user.id)
         .filter(Event.started_at.between(first_day, last_day))
-        .order_by(Event.started_at.asc())
+        .order_by(Event.started_at.desc())
         .all()
     )
     # daily_totals = stuff
