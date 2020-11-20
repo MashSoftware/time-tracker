@@ -12,7 +12,7 @@
         <div class="progress">
             <div class="progress-bar {% if progress >= 100 %}bg-success{% endif %}" role="progressbar" aria-valuenow="{{ progress }}" aria-valuemin="0" aria-valuemax="100">{{ progress }}%</div>
         </div>
-        <p>{{ weekly_time }} of {{ current_user.schedule_string() }}</p>
+        <p>{{ weekly_string }} of {{ current_user.schedule_string() }} ({{weekly_decimal}} of {{current_user.schedule_decimal()}})</p>
         {% else %}
         <div class="alert alert-info" role="alert">There are no time entries for this week.</div>
         {% endif %}
