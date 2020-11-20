@@ -237,11 +237,13 @@ def weekly():
     hours, remainder = divmod(weekly_seconds, 3600)
     minutes, seconds = divmod(remainder, 60)
     if hours > 0:
-        weekly_time = str(hours) + " h " + str(minutes) + " min"
+        weekly_string = str(hours) + " h " + str(minutes) + " min"
     elif minutes > 0:
-        weekly_time = str(minutes) + " min"
+        weekly_string = str(minutes) + " min"
     else:
-        weekly_time = str(seconds) + "s"
+        weekly_string = str(seconds) + "s"
+
+    weekly_decimal = round(weekly_seconds / 60 / 60, 2)
 
     if current_user.schedule():
         progress = int((weekly_seconds / current_user.schedule()) * 100)
@@ -255,7 +257,8 @@ def weekly():
         next_week=next_week,
         previous_week=previous_week,
         events=events,
-        weekly_time=weekly_time,
+        weekly_string=weekly_string,
+        weekly_decimal=weekly_decimal,
         progress=progress,
         title=title,
     )
