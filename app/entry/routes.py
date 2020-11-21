@@ -228,7 +228,7 @@ def weekly():
         .order_by(Event.started_at.desc())
         .all()
     )
-    # daily_totals = stuff
+
     weekly_seconds = 0
     for event in events:
         if event.ended_at:
@@ -245,6 +245,20 @@ def weekly():
 
     weekly_decimal = round(weekly_seconds / 60 / 60, 2)
 
+    if weekly_seconds < current_user.schedule():
+        weekly_delta = current_user.schedule() - weekly_seconds
+    else:
+        weekly_delta = weekly_seconds - current_user.schedule()
+
+    hours, remainder = divmod(weekly_delta, 3600)
+    minutes, seconds = divmod(remainder, 60)
+    if hours > 0:
+        weekly_delta_string = str(hours) + " h " + str(minutes) + " min"
+    elif minutes > 0:
+        weekly_delta_string = str(minutes) + " min"
+    else:
+        weekly_delta_string = str(seconds) + "s"
+
     if current_user.schedule():
         progress = int((weekly_seconds / current_user.schedule()) * 100)
     else:
@@ -259,6 +273,7 @@ def weekly():
         events=events,
         weekly_string=weekly_string,
         weekly_decimal=weekly_decimal,
+        weekly_delta_string=weekly_delta_string,
         progress=progress,
         title=title,
     )

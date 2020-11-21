@@ -12,7 +12,14 @@
         <div class="progress">
             <div class="progress-bar {% if progress >= 100 %}bg-success{% endif %}" role="progressbar" aria-valuenow="{{ progress }}" aria-valuemin="0" aria-valuemax="100">{{ progress }}%</div>
         </div>
-        <p>{{ weekly_string }} of {{ current_user.schedule_string() }} ({{weekly_decimal}} of {{current_user.schedule_decimal()}})</p>
+        <p>
+            {{ weekly_string }} ({{weekly_decimal}})
+            {% if current_user.schedule_decimal() > weekly_decimal %}
+            | <i class="fas fa-chevron-down text-danger"></i> {{weekly_delta_string}} ({{ current_user.schedule_decimal() - weekly_decimal}})
+            {% else %}
+            | <i class="fas fa-chevron-up text-success"></i> {{weekly_delta_string}} ({{ weekly_decimal - current_user.schedule_decimal()}})
+            {% endif %}
+        </p>
         {% else %}
         <div class="alert alert-info" role="alert">There are no time entries for this week.</div>
         {% endif %}
