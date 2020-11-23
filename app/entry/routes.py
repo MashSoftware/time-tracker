@@ -45,7 +45,9 @@ def weekly():
 
     weekly_seconds = 0
     for event in events:
+        event.started_at = event.started_at.astimezone(pytz.timezone(current_user.timezone))
         if event.ended_at:
+            event.ended_at = event.ended_at.astimezone(pytz.timezone(current_user.timezone))
             weekly_seconds += event.duration()
 
     hours, remainder = divmod(weekly_seconds, 3600)
