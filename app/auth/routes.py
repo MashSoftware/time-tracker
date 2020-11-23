@@ -15,7 +15,7 @@ from werkzeug.urls import url_parse
 @bp.route("/signup", methods=["GET", "POST"])
 def signup():
     if current_user.is_authenticated:
-        return redirect(url_for("entry.entries"))
+        return redirect(url_for("entry.weekly"))
     form = SignupForm()
     if form.validate_on_submit():
         user = User(email_address=form.email_address.data, password=form.password.data, timezone=form.timezone.data,)
@@ -35,7 +35,7 @@ def signup():
 @bp.route("/activate", methods=["GET", "POST"])
 def activate_request():
     if current_user.is_authenticated:
-        return redirect(url_for("entry.entries"))
+        return redirect(url_for("entry.weekly"))
     form = TokenRequestForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email_address=form.email_address.data).first()
@@ -54,7 +54,7 @@ def activate_request():
 @bp.route("/activate/<token>")
 def activate(token):
     if current_user.is_authenticated:
-        return redirect(url_for("entry.entries"))
+        return redirect(url_for("entry.weekly"))
     user = User.verify_token(token)
     if not user:
         flash("The activation token is invalid, please request another.", "danger")
@@ -80,7 +80,7 @@ def login():
         db.session.commit()
         next_page = request.args.get("next")
         if not next_page or url_parse(next_page).netloc != "":
-            next_page = url_for("entry.entries")
+            next_page = url_for("entry.weekly")
         flash("You have logged in.", "success")
         return redirect(next_page)
     elif request.method == "GET" and current_user.is_authenticated:
@@ -98,7 +98,7 @@ def logout():
 @bp.route("/reset-password", methods=["GET", "POST"])
 def reset_password_request():
     if current_user.is_authenticated:
-        return redirect(url_for("entry.entries"))
+        return redirect(url_for("entry.weekly"))
     form = TokenRequestForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email_address=form.email_address.data).first()
@@ -115,7 +115,7 @@ def reset_password_request():
 @bp.route("/reset-password/<token>", methods=["GET", "POST"])
 def reset_password(token):
     if current_user.is_authenticated:
-        return redirect(url_for("entry.entries"))
+        return redirect(url_for("entry.weekly"))
     user = User.verify_token(token)
     if not user:
         flash("The password reset token is invalid, please request another.", "danger")

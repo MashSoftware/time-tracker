@@ -9,7 +9,7 @@ from werkzeug.exceptions import HTTPException
 @bp.route("/")
 def index():
     if current_user.is_authenticated:
-        return redirect(url_for("entry.entries"))
+        return redirect(url_for("entry.weekly"))
     return render_template("index.html")
 
 
