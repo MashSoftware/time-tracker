@@ -80,7 +80,8 @@ def delete():
         db.session.delete(current_user)
         db.session.commit()
         flash(
-            "Your account and all personal information has been permanently deleted.", "success",
+            "Your account and all personal information has been permanently deleted.",
+            "success",
         )
         return redirect(url_for("main.index"))
 

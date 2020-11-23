@@ -34,7 +34,8 @@ def upgrade():
     op.create_index(op.f("ix_event_tag_id"), "event", ["tag_id"], unique=False)
     op.create_foreign_key(None, "event", "tag", ["tag_id"], ["id"], ondelete="SET NULL")
     op.add_column(
-        "user_account", sa.Column("tag_limit", sa.Integer(), server_default="5", nullable=False),
+        "user_account",
+        sa.Column("tag_limit", sa.Integer(), server_default="5", nullable=False),
     )
     # ### end Alembic commands ###
 

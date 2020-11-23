@@ -54,7 +54,9 @@ class User(UserMixin, db.Model):
 
     def generate_token(self, expires_in=600):
         return jwt.encode(
-            {"id": self.id, "exp": time() + expires_in}, current_app.config["SECRET_KEY"], algorithm="HS256",
+            {"id": self.id, "exp": time() + expires_in},
+            current_app.config["SECRET_KEY"],
+            algorithm="HS256",
         ).decode("utf-8")
 
     @staticmethod
@@ -95,7 +97,12 @@ def load_user(id):
 class Event(db.Model):
     # Fields
     id = db.Column(UUID, primary_key=True)
-    user_id = db.Column(UUID, db.ForeignKey("user_account.id", ondelete="CASCADE"), nullable=False, index=True,)
+    user_id = db.Column(
+        UUID,
+        db.ForeignKey("user_account.id", ondelete="CASCADE"),
+        nullable=False,
+        index=True,
+    )
     tag_id = db.Column(UUID, db.ForeignKey("tag.id", ondelete="SET NULL"), nullable=True, index=True)
     started_at = db.Column(db.DateTime(timezone=True), nullable=False, index=True)
     ended_at = db.Column(db.DateTime(timezone=True), nullable=True)
@@ -137,7 +144,12 @@ class Event(db.Model):
 class Tag(db.Model):
     # Fields
     id = db.Column(UUID, primary_key=True)
-    user_id = db.Column(UUID, db.ForeignKey("user_account.id", ondelete="CASCADE"), nullable=False, index=True,)
+    user_id = db.Column(
+        UUID,
+        db.ForeignKey("user_account.id", ondelete="CASCADE"),
+        nullable=False,
+        index=True,
+    )
     name = db.Column(db.String(64), nullable=False)
     created_at = db.Column(db.DateTime(timezone=True), nullable=False)
     updated_at = db.Column(db.DateTime(timezone=True), nullable=True)

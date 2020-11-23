@@ -18,7 +18,11 @@ def signup():
         return redirect(url_for("entry.weekly"))
     form = SignupForm()
     if form.validate_on_submit():
-        user = User(email_address=form.email_address.data, password=form.password.data, timezone=form.timezone.data,)
+        user = User(
+            email_address=form.email_address.data,
+            password=form.password.data,
+            timezone=form.timezone.data,
+        )
         db.session.add(user)
         db.session.commit()
         send_activation_email(user)

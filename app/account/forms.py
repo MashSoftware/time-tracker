@@ -39,14 +39,22 @@ class PasswordForm(FlaskForm):
         "Current password",
         validators=[
             InputRequired(message="Current password is required"),
-            Length(min=8, max=72, message="Current password must be between 8 and 72 characters",),
+            Length(
+                min=8,
+                max=72,
+                message="Current password must be between 8 and 72 characters",
+            ),
         ],
     )
     new_password = PasswordField(
         "New password",
         validators=[
             InputRequired(message="New password is required"),
-            Length(min=8, max=72, message="New password must be between 8 and 72 characters",),
+            Length(
+                min=8,
+                max=72,
+                message="New password must be between 8 and 72 characters",
+            ),
         ],
         description="Must be between 8 and 72 characters",
     )
