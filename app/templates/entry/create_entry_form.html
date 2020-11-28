@@ -12,9 +12,6 @@
                     {% else %}
                     {{ form.started_at_date(class="form-control", type="date") }}
                     {% endif %}
-                    {% if form.started_at_date.description %}
-                    <small id="{{ form.started_at_date.id }}Help" class="form-text text-muted">{{ form.started_at_date.description }}</small>
-                    {% endif %}
                     {% for error in form.started_at_date.errors %}
                     <div class="invalid-feedback">{{error}}</div>
                     {% endfor %}
@@ -25,9 +22,6 @@
                     {{ form.started_at_time(class="form-control is-invalid", type="time") }}
                     {% else %}
                     {{ form.started_at_time(class="form-control", type="time") }}
-                    {% endif %}
-                    {% if form.started_at_time.description %}
-                    <small id="{{ form.started_at_time.id }}Help" class="form-text text-muted">{{ form.started_at_time.description }}</small>
                     {% endif %}
                     {% for error in form.started_at_time.errors %}
                     <div class="invalid-feedback">{{error}}</div>
@@ -42,9 +36,6 @@
                     {% else %}
                     {{ form.ended_at_date(class="form-control", type="date") }}
                     {% endif %}
-                    {% if form.ended_at_date.description %}
-                    <small id="{{ form.ended_at_date.id }}Help" class="form-text text-muted">{{ form.ended_at_date.description }}</small>
-                    {% endif %}
                     {% for error in form.ended_at_date.errors %}
                     <div class="invalid-feedback">{{error}}</div>
                     {% endfor %}
@@ -55,9 +46,6 @@
                     {{ form.ended_at_time(class="form-control is-invalid", type="time") }}
                     {% else %}
                     {{ form.ended_at_time(class="form-control", type="time") }}
-                    {% endif %}
-                    {% if form.ended_at_time.description %}
-                    <small id="{{ form.ended_at_time.id }}Help" class="form-text text-muted">{{ form.ended_at_time.description }}</small>
                     {% endif %}
                     {% for error in form.ended_at_time.errors %}
                     <div class="invalid-feedback">{{error}}</div>
@@ -74,7 +62,7 @@
                 {% endfor %}
             </div>
             <button class="btn btn-block btn-lg btn-primary" type="submit"><i class="fas fa-plus fa-lg fa-fw"></i> Create</button>
-            <a class="btn btn-block btn-secondary" href="{{ url_for('entry.entries') }}"><i class="fas fa-chevron-left fa-lg fa-fw"></i> Cancel</a>
+            <a class="btn btn-block btn-secondary" href="{{ url_for('entry.weekly') }}"><i class="fas fa-chevron-left fa-lg fa-fw"></i> Cancel</a>
         </form>
     </div>
 </div>

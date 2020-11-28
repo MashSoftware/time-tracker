@@ -7,6 +7,30 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased](https://github.com/MashSoftware/the-button/compare/master...develop)
 
+## [0.22.0](https://github.com/MashSoftware/the-button/compare/v0.21.1...v0.22.0) - 2020-11-28
+
+### Added
+
+- Weekly time entry view, showing time entries recorded in a specific week, along with a progress indicator of time recorded against scheduled weekly hours.
+- Manage scheduled working time per day in account settings. Used to calcuate weekly hours and track progress. Will also be used for future daily time credit/debit features.
+- Start tagged time entries immediately using the dropdown button menu
+- Open Graph Protocol metadata tags to enable better link sharing on social media.
+- ARIA attributes added to help text within forms, to improve accessibility and assistive technology user experience.
+
+### Changed
+
+- Moving into [beta](https://en.wikipedia.org/wiki/Software_release_life_cycle#Beta) after 14 releases during 18 months in [alpha](https://en.wikipedia.org/wiki/Software_release_life_cycle#Alpha).
+- Improved email address validation on sign up, log in, password reset, account activation and account update. Now provides more granular error messages if an input email address is invalid. Also checks the deliverability of the email address by resolving the domain name.
+- Delete confirmation actions changed from modal dialogs to new pages, inspired by [this tweet](https://twitter.com/adambsilver/status/1290266510334681088).
+- Increased user tag limit from 5 to 8.
+- Consistent actions, headings and confirmation messages.
+- Upgrade to Bootstrap 4.5.3.
+- Increased rate limit to allow for more user requests per second before hitting an error page.
+
+### Fixed
+
+- Bug in conversion between timestamps stored as UTC and displayed in the users selected timezone when editing an existing time entry.
+
 ## [0.21.1](https://github.com/MashSoftware/the-button/compare/v0.21.0...v0.21.1) - 2020-02-25
 
 ### Fixed

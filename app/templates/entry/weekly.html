@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+    <div class="col">
+        {% if events %}
+        <p class="lead">{{ events | length }} time entries this week.</p>
+        <style nonce="{{csp_nonce()}}">
+            .progress-bar {
+                width: {{progress}}%
+            }
+        </style>
+        <div class="progress">
+            <div class="progress-bar {% if progress >= 100 %}bg-success{% endif %}" role="progressbar" aria-valuenow="{{ progress }}" aria-valuemin="0" aria-valuemax="100">{{ progress }}%</div>
+        </div>
+        <p>
+            {{ weekly_string }} ({{weekly_decimal}})
+            {% if current_user.schedule_decimal() > weekly_decimal %}
+            | <i class="fas fa-chevron-down text-danger"></i> {{weekly_delta_string}} ({{ (current_user.schedule_decimal() - weekly_decimal)|round(2) }})
+            {% else %}
+            | <i class="fas fa-chevron-up text-success"></i> {{weekly_delta_string}} ({{ (weekly_decimal - current_user.schedule_decimal())|round(2) }})
+            {% endif %}
+        </p>
+        {% else %}
+        <div class="alert alert-info" role="alert">There are no time entries for this week.</div>
+        {% endif %}
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <div class="btn-group btn-block">
+            <a class="btn btn-primary btn-lg btn-block" href="{{ url_for('entry.auto') }}" role="button">
+                <h1>{% if start %}Start now{% else %}Stop now{% endif %}</h1>
+            </a>
+            <button type="button" class="btn btn-lg btn-primary dropdown-toggle dropdown-toggle-split"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <div class="dropdown-menu dropdown-menu-right">
+                <a class="dropdown-item {% if not start %}disabled{% endif %}" href="{{ url_for('entry.manual') }}">Manual entry</a>
+                {% if current_user.tags %}
+                <div class="dropdown-divider"></div>
+                    {% for tag in current_user.tags %}
+                    <a class="dropdown-item {% if not start %}disabled{% endif %}" href="{{ url_for('entry.auto', tag_id=tag.id) }}"><i class="fas fa-tag fa-fw"></i> Start {{tag.name}} now</a>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+        <br><br>
+    </div>
+    <div class="col-md-8">
+        {% if events %}
+            {% for event in events %}
+            {% include 'entry/_time_card.html' %}
+            <br>
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+                <li class="page-item">
+                    <a class="page-link"
+                        href="{{ url_for('entry.weekly', year=previous_week[0], week=previous_week[1]) }}"
+                        aria-label="Previous"><i class="fas fa-chevron-left"></i> Previous</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="{{ url_for('entry.weekly') }}">Current</a>
+                </li>
+                {% if request.args.get('week') == None or request.args.get('week') == today[1] %}
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Next <i class="fas fa-chevron-right"></i></a>
+                </li>
+                {% else %}
+                <li class="page-item">
+                    <a class="page-link" href="{{ url_for('entry.weekly', year=next_week[0], week=next_week[1]) }}"
+                        aria-label="Next">Next <i class="fas fa-chevron-right"></i></a>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+</div>
+        
+{% endblock %}

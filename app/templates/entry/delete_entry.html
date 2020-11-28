@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+    <div class="col-md-6">
+        <h3>Are you sure?</h3>
+        <p class="lead">This time entry will be permanently deleted.</p>
+        {% include 'entry/_time_card_view.html' %}
+        <br>
+        <form action="" method="post" novalidate>
+            <button class="btn btn-block btn-lg btn-danger" type="submit"><i class="fas fa-trash fa-lg fa-fw"></i> Yes - delete time entry</button>
+            <a class="btn btn-block btn-secondary" href="{{ url_for('entry.weekly') }}"><i class="fas fa-chevron-left fa-lg fa-fw"></i> Cancel</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

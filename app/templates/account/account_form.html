@@ -7,9 +7,9 @@
             <div class="form-group">
                 {{ form.email_address.label }}
                 {% if form.email_address.errors %}
-                {{ form.email_address(class="form-control is-invalid", type="email", spellcheck="false", autocomplete="email") }}
+                {{ form.email_address(class="form-control is-invalid", type="email", spellcheck="false", autocomplete="email", aria_describedby="emailHelp") }}
                 {% else %}
-                {{ form.email_address(class="form-control", type="email", spellcheck="false", autocomplete="email") }}
+                {{ form.email_address(class="form-control", type="email", spellcheck="false", autocomplete="email", aria_describedby="emailHelp") }}
                 {% endif %}
                 <small id="emailHelp" class="form-text text-muted">{{ form.email_address.description }}</small>
                 {% for error in form.email_address.errors %}
@@ -23,9 +23,8 @@
                 {% else %}
                 {{ form.timezone(class="custom-select") }}
                 {% endif %}
-                <small id="timezoneHelp" class="form-text text-muted">{{ form.timezone.description }}</small>
             </div>
-            <button class="btn btn-block btn-lg btn-primary" type="submit"><i class="fas fa-user-edit fa-lg fa-fw"></i> Update</button>
+            <button class="btn btn-block btn-lg btn-primary" type="submit"><i class="fas fa-check fa-lg fa-fw"></i> Save</button>
             <a class="btn btn-block btn-secondary" href="{{ url_for('account.account') }}"><i class="fas fa-chevron-left fa-lg fa-fw"></i> Cancel</a>
         </form>
     </div>

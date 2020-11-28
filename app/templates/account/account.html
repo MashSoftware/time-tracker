@@ -21,6 +21,18 @@
                 <a href="{{ url_for('account.update') }}">Change</a>
             </dd>
 
+            <dt class="col-sm-3">Schedule</dt>
+            <dd class="col-sm-7">
+                {% if user.schedule() %}
+                    {{ user.schedule_string() }} ({{user.schedule_decimal()}})
+                {% else %}
+                    No schedule set
+                {% endif %}
+            </dd>
+            <dd class="col-sm-2 text-md-right">
+                <a href="{{ url_for('account.schedule') }}">Change</a>
+            </dd>
+
             <dt class="col-sm-3">Member since</dt>
             <dd class="col-sm-9">{{ user.created_at.strftime('%A %d %B %Y %H:%M:%S %Z') }}</dd>
             
@@ -34,27 +46,7 @@
         </dl>
         <div class="row">
             <div class="col-sm-6">
-                <button type="button" class="btn btn-block btn-danger" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash fa-lg fa-fw"></i> Delete account</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="deleteModalLabel">Are you sure?</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p>Your account and all personal information will be permanently deleted.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-chevron-left fa-lg fa-fw"></i> Cancel</button>
-                <a class="btn btn-danger" href="{{ url_for('account.delete') }}" role="button"><i class="fas fa-trash fa-lg fa-fw"></i> Delete</a>
+                <a class="btn btn-block btn-danger" href="{{ url_for('account.delete') }}"><i class="fas fa-trash fa-lg fa-fw"></i> Delete account</a>
             </div>
         </div>
     </div>
