@@ -15,13 +15,18 @@ class EventForm(FlaskForm):
     tag = RadioField("Tag", validators=[InputRequired(message="Tag is required")])
 
     def validate_started_at_date(self, started_at_date):
-        current_localised_date = pytz.timezone(current_user.timezone).localize(datetime.utcnow()).date()
-
+        current_localised_date = (
+            pytz.utc.localize(datetime.utcnow()).astimezone(pytz.timezone(current_user.timezone)).date()
+        )
+        print(current_localised_date)
+        print(started_at_date.data)
         if started_at_date.data > current_localised_date:
             raise ValidationError("Start date must be today or in the past")
 
     def validate_started_at_time(self, started_at_time):
-        current_localised_datetime = pytz.timezone(current_user.timezone).localize(datetime.utcnow())
+        current_localised_datetime = pytz.utc.localize(datetime.utcnow()).astimezone(
+            pytz.timezone(current_user.timezone)
+        )
 
         try:
             started_at = datetime(
@@ -45,7 +50,9 @@ class EventForm(FlaskForm):
         if ended_at_date.data < self.started_at_date.data:
             raise ValidationError("Stop date must be the same as or after start date")
 
-        current_localised_date = pytz.timezone(current_user.timezone).localize(datetime.utcnow()).date()
+        current_localised_date = (
+            pytz.utc.localize(datetime.utcnow()).astimezone(pytz.timezone(current_user.timezone)).date()
+        )
 
         if ended_at_date.data > current_localised_date:
             raise ValidationError("Stop date must be today or in the past")
@@ -78,7 +85,9 @@ class EventForm(FlaskForm):
         if ended_at < started_at:
             raise ValidationError("Stop time must be after start time")
 
-        current_localised_datetime = pytz.timezone(current_user.timezone).localize(datetime.utcnow())
+        current_localised_datetime = pytz.utc.localize(datetime.utcnow()).astimezone(
+            pytz.timezone(current_user.timezone)
+        )
 
         if pytz.timezone(current_user.timezone).localize(ended_at) > current_localised_datetime:
             raise ValidationError("Stop time must be now or in the past")
