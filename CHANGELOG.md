@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased](https://github.com/MashSoftware/the-button/compare/master...develop)
 
+## [0.22.0](https://github.com/MashSoftware/the-button/compare/v0.21.1...v0.22.0) - 2020-11-28
+
 ### Added
 
 - Weekly time entry view, showing time entries recorded in a specific week, along with a progress indicator of time recorded against scheduled weekly hours.
