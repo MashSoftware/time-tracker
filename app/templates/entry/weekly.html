@@ -15,9 +15,9 @@
         <p>
             {{ weekly_string }} ({{weekly_decimal}})
             {% if current_user.schedule_decimal() > weekly_decimal %}
-            | <i class="fas fa-chevron-down text-danger"></i> {{weekly_delta_string}} ({{ (current_user.schedule_decimal() - weekly_decimal)|round(2) }})
+            | <span class="text-danger"><i class="fas fa-chevron-down"></i> {{weekly_delta_string}} ({{ (current_user.schedule_decimal() - weekly_decimal)|round(2) }})</span>
             {% else %}
-            | <i class="fas fa-chevron-up text-success"></i> {{weekly_delta_string}} ({{ (weekly_decimal - current_user.schedule_decimal())|round(2) }})
+            | <span class="text-success"><i class="fas fa-chevron-up"></i> {{weekly_delta_string}} ({{ (weekly_decimal - current_user.schedule_decimal())|round(2) }})</span>
             {% endif %}
         </p>
         {% else %}
