@@ -154,6 +154,7 @@ def manual():
             event.ended_at = None
         if form.tag.data != "None":
             event.tag_id = form.tag.data
+        event.comment = form.comment.data
         db.session.add(event)
         db.session.commit()
         flash("Time entry has been added.", "success")
@@ -201,6 +202,7 @@ def update(id):
             event.tag_id = form.tag.data
         else:
             event.tag_id = None
+        event.comment = form.comment.data
         db.session.add(event)
         db.session.commit()
         flash("Time entry changes have been saved.", "success")
@@ -212,8 +214,8 @@ def update(id):
         if event.ended_at:
             form.ended_at_date.data = event.ended_at.astimezone(pytz.timezone(current_user.timezone))
             form.ended_at_time.data = event.ended_at.astimezone(pytz.timezone(current_user.timezone))
-        if event.tag_id:
-            form.tag.data = event.tag_id
+        form.tag.data = event.tag_id
+        form.comment.data = event.comment
     return render_template("entry/update_entry_form.html", title="Edit time entry", form=form, event=event)
 
 

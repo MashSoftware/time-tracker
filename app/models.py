@@ -106,6 +106,7 @@ class Event(db.Model):
     tag_id = db.Column(UUID, db.ForeignKey("tag.id", ondelete="SET NULL"), nullable=True, index=True)
     started_at = db.Column(db.DateTime(timezone=True), nullable=False, index=True)
     ended_at = db.Column(db.DateTime(timezone=True), nullable=True)
+    comment = db.Column(db.String(64), nullable=True)
 
     # Methods
     def __init__(self, user_id, started_at):

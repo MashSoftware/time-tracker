@@ -3,8 +3,8 @@ from datetime import datetime
 import pytz
 from flask_login import current_user
 from flask_wtf import FlaskForm
-from wtforms import DateField, RadioField, TimeField
-from wtforms.validators import InputRequired, Optional, ValidationError
+from wtforms import DateField, RadioField, TextAreaField, TimeField
+from wtforms.validators import InputRequired, Length, Optional, ValidationError
 
 
 class EventForm(FlaskForm):
@@ -13,6 +13,11 @@ class EventForm(FlaskForm):
     ended_at_date = DateField("Stop date", validators=[Optional()])
     ended_at_time = TimeField("Stop time", validators=[Optional()])
     tag = RadioField("Tag", validators=[InputRequired(message="Tag is required")])
+    comment = TextAreaField(
+        "Comment",
+        validators=[Optional(), Length(max=64, message="Comment must be less than 64 characters")],
+        description="Must be less than 64 characters.",
+    )
 
     def validate_started_at_date(self, started_at_date):
         current_localised_date = (
