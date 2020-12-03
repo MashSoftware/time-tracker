@@ -5,6 +5,7 @@ from app import db, limiter
 from app.entry import bp
 from app.entry.forms import EventForm
 from app.models import Event
+from app.utils import seconds_to_decimal, seconds_to_string
 from flask import flash, redirect, render_template, request, url_for
 from flask_login import current_user, login_required
 from werkzeug.exceptions import Forbidden
@@ -50,35 +51,32 @@ def weekly():
             event.ended_at = event.ended_at.astimezone(pytz.timezone(current_user.timezone))
             weekly_seconds += event.duration()
 
-    hours, remainder = divmod(weekly_seconds, 3600)
-    minutes, seconds = divmod(remainder, 60)
-    if hours > 0:
-        weekly_string = str(hours) + " h " + str(minutes) + " min"
-    elif minutes > 0:
-        weekly_string = str(minutes) + " min"
-    else:
-        weekly_string = str(seconds) + "s"
-
-    weekly_decimal = round(weekly_seconds / 60 / 60, 2)
+    weekly_string = seconds_to_string(weekly_seconds)
+    weekly_decimal = seconds_to_decimal(weekly_seconds)
 
     if weekly_seconds < current_user.schedule():
         weekly_delta = current_user.schedule() - weekly_seconds
     else:
         weekly_delta = weekly_seconds - current_user.schedule()
 
-    hours, remainder = divmod(weekly_delta, 3600)
-    minutes, seconds = divmod(remainder, 60)
-    if hours > 0:
-        weekly_delta_string = str(hours) + " h " + str(minutes) + " min"
-    elif minutes > 0:
-        weekly_delta_string = str(minutes) + " min"
-    else:
-        weekly_delta_string = str(seconds) + "s"
+    weekly_delta_string = seconds_to_string(weekly_delta)
 
     if current_user.schedule():
         progress = int((weekly_seconds / current_user.schedule()) * 100)
     else:
         progress = 0
+
+    tag_totals = []
+    for tag in current_user.tags:
+        tag_total = {"total": 0}
+        for event in events:
+            if tag.id == event.tag_id:
+                tag_total["name"] = tag.name
+                tag_total["total"] += event.duration()
+        if tag_total["total"] > 0:
+            tag_total["decimal"] = seconds_to_decimal(tag_total["total"])
+            tag_total["total"] = seconds_to_string(tag_total["total"])
+            tag_totals.append(tag_total)
 
     return render_template(
         "entry/weekly.html",
@@ -91,6 +89,7 @@ def weekly():
         weekly_decimal=weekly_decimal,
         weekly_delta_string=weekly_delta_string,
         progress=progress,
+        tag_totals=tag_totals,
         title=title,
     )
 
