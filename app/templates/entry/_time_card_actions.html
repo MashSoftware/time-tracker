@@ -1,0 +1,5 @@
+{% extends "entry/_time_card_view.html" %}
+{% block actions %}
+<a href="{{ url_for('entry.update', id=event.id) }}" class="card-link"><i class="fas fa-edit fa-fw"></i> Edit</a>
+<a href="{{ url_for('entry.delete', id=event.id) }}" class="card-link text-danger"><i class="fas fa-trash fa-fw"></i> Delete</a>
+{% endblock %}
