@@ -40,7 +40,7 @@
                     }
                 </style>
                 <div class="progress">
-                    <div class="progress-bar {% if progress >= 100 %}bg-success{% endif %}" role="progressbar" aria-valuenow="{{ progress }}" aria-valuemin="0" aria-valuemax="100">{{ progress }}%</div>
+                    <div class="progress-bar progress-bar-striped {% if progress >= 100 %}bg-success{% else %}bg-info{% endif %}" role="progressbar" aria-valuenow="{{ progress }}" aria-valuemin="0" aria-valuemax="100">{{ progress }}%</div>
                 </div>
                 <p>
                     {{ weekly_string }} ({{weekly_decimal}})<br>
@@ -52,7 +52,7 @@
                 </p>
                 <hr>
                 {% for tag in tag_totals %}
-                <p><span class="badge badge-info"><i class="fas fa-tag fa-fw"></i> {{tag.name}}</span> - {{tag.total}} ({{tag.decimal}})</p>
+                <p><span class="badge badge-info"><i class="fas fa-tag fa-fw"></i> {{tag.name}}</span> {{tag.total}} ({{tag.decimal}})</p>
                 {% endfor %}
             </div>
         </div>
