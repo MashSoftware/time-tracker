@@ -9,8 +9,8 @@
                 {{event.started_at.strftime('%H:%M')}} to {{event.ended_at.strftime('%H:%M')}}
             {% endif %}
             {% if event.tag %}<br><span class="badge badge-info"><i class="fas fa-tag fa-fw"></i> {{event.tag.name}}</span>{% endif %}
-            {% if event.comment %}<p><em>"{{event.comment}}"</em></p>{% endif %}
         </p>
+        {% if event.comment %}<p class="card-text"><em>"{{event.comment}}"</em></p>{% endif %}
         {% block actions %}{% endblock %}
     </div>
 </div>
