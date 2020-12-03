@@ -1,4 +1,4 @@
-<div class="card bg-light {% if event.ended_at is none %}border-primary{% endif %} shadow">
+<div class="card bg-light {% if event.ended_at is none %}border-primary{% endif %} shadow" id="{{event.id}}">
     <div class="card-body">
         <h5 class="card-title">{{event.started_at.strftime('%A %d %B')}}</h5>
         {% if event.ended_at %}<h6 class="card-subtitle mb-2 text-muted">{{event.duration_string()}} ({{event.duration_decimal()}})</h6>{% endif %}
