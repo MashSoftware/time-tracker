@@ -7,7 +7,7 @@
 alembic==1.4.3            # via flask-migrate
 bcrypt==3.2.0             # via -r requirements.in
 brotli==1.0.9             # via flask-compress
-certifi==2020.11.8        # via requests
+certifi==2020.12.5        # via requests
 cffi==1.14.4              # via bcrypt
 chardet==3.0.4            # via requests
 click==7.1.2              # via flask
