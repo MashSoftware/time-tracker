@@ -46,3 +46,11 @@ flask db upgrade
 ```shell
 flask run
 ```
+
+## Testing
+
+Run the test suite
+
+```shell
+python tests.py
+```
