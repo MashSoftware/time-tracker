@@ -24,7 +24,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install piprot
           pip install flake8
-      - name: Check requirements are up to date
+      - name: Check dependencies are up to date
         run: piprot requirements.txt
       - name: Install dependencies
         run: if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
@@ -34,6 +34,6 @@ jobs:
           flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
           # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
           flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-      - name: Test with unittest§
+      - name: Test with unittest
         run: |
           python tests.py
