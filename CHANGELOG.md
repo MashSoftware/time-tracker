@@ -7,6 +7,26 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased](https://github.com/MashSoftware/the-button/compare/master...develop)
 
+## [0.23.0](https://github.com/MashSoftware/the-button/compare/v0.22.0...v0.23.0) - 2020-12-??
+
+### Added
+
+- Weekly summary card displaying total of time entries and progress against scheduled time, along with total time per tag used this week.
+- Short comments of up to 64 characters can be added to new or existing time entries.
+- Automated unit test suite for bespoke (non-framework/package related) and common code.
+- Set up [GitHub Actions](https://github.com/features/actions) CI/CD workflow to check dependencies are up-to-date, run code quality linting and automated unit tests prior to deployment.
+- Added unique ID to each time card, allowing for URI fragment linking within the entries page.
+
+### Changed
+
+- Moved progress bar from above time entry cards to below the "Start now" button, within the new weekly summary card.
+- Refactored repeated code into common utilities module and replaced all instances with a call to a single methods.
+- Refactored time card template to include actions block, reducing repeated code and increasing ease of change.
+
+### Fixed
+
+- Decimal hours calculation to display non-rounded floating point numbers, to two decimal places. Durations are no longer rounded, so 59 minutes and 59 seconds is represented correctly as 0.99 decimal hours, not rounded to 1.0.
+
 ## [0.22.0](https://github.com/MashSoftware/the-button/compare/v0.21.1...v0.22.0) - 2020-11-28
 
 ### Added
