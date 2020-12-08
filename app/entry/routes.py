@@ -51,7 +51,7 @@ def weekly():
             event.ended_at = event.ended_at.astimezone(pytz.timezone(current_user.timezone))
             weekly_seconds += event.duration()
 
-    weekly_string = seconds_to_string(weekly_seconds)
+    weekly_string = seconds_to_string(weekly_seconds) if weekly_seconds > 0 else None
     weekly_decimal = seconds_to_decimal(weekly_seconds)
 
     if weekly_seconds < current_user.schedule():
