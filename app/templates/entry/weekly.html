@@ -34,7 +34,7 @@
             <div class="card-body">
                 <h5 class="card-title">Weekly summary</h5><hr>
                 <h6 class="card-subtitle mb-2 text-muted">Time</h6>
-                <p class="card-text">{{ events | length }} time {% if events | length == 1%}entry{% else %}entries{% endif %}{% if weekly_string %}: {{ weekly_string }} ({{weekly_decimal}}){% endif %}</p>
+                <p class="card-text">{{ events | length }} time {% if events | length == 1%}entry{% else %}entries{% endif %}{% if weekly_string %} : {{ weekly_string }} ({{weekly_decimal}}){% endif %}</p>
                 {% if weekly_string %}
                 <style nonce="{{csp_nonce()}}">
                     .progress-bar {
@@ -59,7 +59,7 @@
                 <hr>
                 <h6 class="card-subtitle mb-2 text-muted">Tags</h6>
                 {% for tag in tag_totals %}
-                <p class="card-text"><span class="badge badge-info"><i class="fas fa-tag fa-fw"></i> {{tag.name}}</span>: {{tag.total}} ({{tag.decimal}})</p>
+                <p class="card-text"><span class="badge badge-info"><i class="fas fa-tag fa-fw"></i> {{tag.name}}</span> : {{tag.total}} ({{tag.decimal}})</p>
                 {% endfor %}
                 {% endif %}
             </div>
