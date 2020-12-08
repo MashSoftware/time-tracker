@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
-- Weekly summary card displaying total of time entries and progress against scheduled time, along with total time per tag used this week.
+- Weekly summary card displaying total of time entries and progress against scheduled time, along with total time per tag used.
 - Short comments of up to 64 characters can be added to new or existing time entries.
 - Automated unit test suite for bespoke (non-framework/package related) and common code.
 - Set up [GitHub Actions](https://github.com/features/actions) CI/CD workflow to check dependencies are up-to-date, run code quality linting and automated unit tests prior to deployment.
