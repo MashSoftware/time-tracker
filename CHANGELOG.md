@@ -12,7 +12,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 
 - Weekly summary card displaying total of time entries and progress against scheduled time, along with total time per tag used.
-- Short comments of up to 64 characters can be added to new or existing time entries.
+- Comments of up to 64 characters can be added to new or existing time entries.
 - Automated unit test suite for bespoke (non-framework/package related) and common code.
 - Set up [GitHub Actions](https://github.com/features/actions) CI/CD workflow to check dependencies are up-to-date, run code quality linting and automated unit tests prior to deployment.
 - Added unique ID to each time card, allowing for URI fragment linking within the entries page.
@@ -20,8 +20,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 
 - Moved progress bar from above time entry cards to below the "Start now" button, within the new weekly summary card.
-- Refactored repeated code into common utilities module and replaced all instances with a call to a single methods.
-- Refactored time card template to include actions block, reducing repeated code and increasing ease of change.
+- Refactored repeated code into common utilities module and replaced all instances with calls to a singular methods.
+- Refactored time card template to include actions block where appropriate, reducing repeated code and increasing ease of change.
 
 ### Fixed
 
