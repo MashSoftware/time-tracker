@@ -16,12 +16,19 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Automated unit test suite for bespoke (non-framework/package related) and common code.
 - Set up [GitHub Actions](https://github.com/features/actions) CI/CD workflow to check dependencies are up-to-date, run code quality linting and automated unit tests prior to deployment.
 - Added unique ID to each time card, allowing for URI fragment linking within the entries page.
+- Provide positive feedback for successfully validated form fields on submit.
 
 ### Changed
 
+- Updated to Bootstrap v5 Beta 1 now that new features and breaking changes have stabalised. This encompasses a large number of UI changes required to upgrade.
 - Moved progress bar from above time entry cards to below the "Start now" button, within the new weekly summary card.
 - Refactored repeated code into common utilities module and replaced all instances with calls to a singular methods.
 - Refactored time card template to include actions block where appropriate, reducing repeated code and increasing ease of change.
+- On desktop device widths buttons will space out horizontally, dropping to vertically stacked block buttons on mobile device widths.
+
+### Removed
+
+- Removed JQuery since it is no longer required by Bootstrap v5.
 
 ### Fixed
 

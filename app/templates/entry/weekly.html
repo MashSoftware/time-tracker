@@ -10,68 +10,30 @@
 {% endif %}
 <div class="row">
     <div class="col-md-4">
-        <div class="btn-group btn-block">
-            <a class="btn btn-primary btn-lg btn-block" href="{{ url_for('entry.auto') }}" role="button">
-                <h1>{% if start %}Start now{% else %}Stop now{% endif %}</h1>
-            </a>
-            <button type="button" class="btn btn-lg btn-primary dropdown-toggle dropdown-toggle-split"
-                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="sr-only">Toggle Dropdown</span>
+        <div class="btn-group w-100 mb-4">
+            <a class="btn btn-primary btn-lg w-100" href="{{ url_for('entry.auto') }}" role="button"><h1>{% if start %}Start now{% else %}Stop now{% endif %}</h1></a>
+            <button type="button" class="btn btn-lg btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                <span class="visually-hidden">Toggle Dropdown</span>
             </button>
-            <div class="dropdown-menu dropdown-menu-right">
-                <a class="dropdown-item {% if not start %}disabled{% endif %}" href="{{ url_for('entry.manual') }}">Manual entry</a>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item {% if not start %}disabled{% endif %}" href="{{ url_for('entry.manual') }}">Manual entry</a></li>
                 {% if current_user.tags %}
-                <div class="dropdown-divider"></div>
+                <li><hr class="dropdown-divider"></li>
                     {% for tag in current_user.tags %}
-                    <a class="dropdown-item {% if not start %}disabled{% endif %}" href="{{ url_for('entry.auto', tag_id=tag.id) }}"><i class="fas fa-tag fa-fw"></i> Start {{tag.name}} now</a>
+                    <li><a class="dropdown-item {% if not start %}disabled{% endif %}" href="{{ url_for('entry.auto', tag_id=tag.id) }}"><i class="fas fa-tag fa-fw"></i> Start {{tag.name}} now</a></li>
                     {% endfor %}
                 {% endif %}
-            </div>
+            </ul>
         </div>
-        <br><br>
         {% if events %}
-        <div class="card bg-light shadow">
-            <div class="card-body">
-                <h5 class="card-title">Weekly summary</h5><hr>
-                <h6 class="card-subtitle mb-2 text-muted">Time</h6>
-                <p class="card-text">{{ events | length }} time {% if events | length == 1%}entry{% else %}entries{% endif %}{% if weekly_string %} : {{ weekly_string }} ({{weekly_decimal}}){% endif %}</p>
-                {% if weekly_string %}
-                <style nonce="{{csp_nonce()}}">
-                    .progress-bar {
-                        width: {{progress}}%;
-                    }
-                    .progress {
-                        height: 20px;
-                    }
-                </style>
-                <div class="progress">
-                    <div class="progress-bar progress-bar-striped {% if progress >= 100 %}bg-success{% endif %}" role="progressbar" aria-valuenow="{{ progress }}" aria-valuemin="0" aria-valuemax="100">{{ progress }}%</div>
-                </div>
-                <p class="card-text">
-                    {% if current_user.schedule_decimal() > weekly_decimal %}
-                    <span class="text-danger"><i class="fas fa-chevron-down"></i> {{weekly_delta_string}} ({{ (current_user.schedule_decimal() - weekly_decimal)|round(2) }})</span>
-                    {% else %}
-                    <span class="text-success"><i class="fas fa-chevron-up"></i> {{weekly_delta_string}} ({{ (weekly_decimal - current_user.schedule_decimal())|round(2) }})</span>
-                    {% endif %}
-                </p>
-                {% endif %}
-                {% if tag_totals %}
-                <hr>
-                <h6 class="card-subtitle mb-2 text-muted">Tags</h6>
-                {% for tag in tag_totals %}
-                <p class="card-text"><span class="badge badge-info"><i class="fas fa-tag fa-fw"></i> {{tag.name}}</span> : {{tag.total}} ({{tag.decimal}})</p>
-                {% endfor %}
-                {% endif %}
-            </div>
-        </div>
+            {% include 'entry/_summary_card.html'%}
         {% endif %}
-        <br>
     </div>
     <div class="col-md-8">
         {% if events %}
             {% for event in events %}
             {% include 'entry/_time_card_actions.html' %}
-            <br>
             {% endfor %}
         {% endif %}
     </div>

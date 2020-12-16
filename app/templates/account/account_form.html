@@ -4,28 +4,39 @@
     <div class="col-md-6">
         <form action="" method="post" novalidate>
             {{ form.csrf_token }}
-            <div class="form-group">
-                {{ form.email_address.label }}
-                {% if form.email_address.errors %}
-                {{ form.email_address(class="form-control is-invalid", type="email", spellcheck="false", autocomplete="email", aria_describedby="emailHelp") }}
+            <div class="mb-3">
+                {{ form.email_address.label(class="form-label") }}
+                {% if form.errors %}
+                    {% if form.email_address.errors %}
+                        {{ form.email_address(class="form-control is-invalid", type="email", spellcheck="false", autocomplete="email", aria_describedby="emailHelp") }}
+                        {% for error in form.email_address.errors %}<div class="invalid-feedback">{{error}}</div>{% endfor %}
+                    {% else %}
+                        {{ form.email_address(class="form-control is-valid", type="email", spellcheck="false", autocomplete="email", aria_describedby="emailHelp") }}
+                        <div class="valid-feedback">Looks good!</div>
+                    {% endif %}
                 {% else %}
-                {{ form.email_address(class="form-control", type="email", spellcheck="false", autocomplete="email", aria_describedby="emailHelp") }}
+                    {{ form.email_address(class="form-control", type="email", spellcheck="false", autocomplete="email", aria_describedby="emailHelp") }}
                 {% endif %}
                 <small id="emailHelp" class="form-text text-muted">{{ form.email_address.description }}</small>
-                {% for error in form.email_address.errors %}
-                <div class="invalid-feedback">{{error}}</div>
-                {% endfor %}
             </div>
-            <div class="form-group">
-                {{ form.timezone.label }}
-                {% if form.timezone.errors %}
-                {{ form.timezone(class="custom-select is-invalid") }}
+            <div class="mb-3">
+                {{ form.timezone.label(class="form-label") }}
+                {% if form.errors %}
+                    {% if form.timezone.errors %}
+                        {{ form.timezone(class="form-select is-invalid") }}
+                        {% for error in form.timezone.errors %}<div class="invalid-feedback">{{error}}</div>{% endfor %}
+                    {% else %}
+                        {{ form.timezone(class="form-select is-valid") }}
+                        <div class="valid-feedback">Looks good!</div>
+                    {% endif %}
                 {% else %}
-                {{ form.timezone(class="custom-select") }}
+                    {{ form.timezone(class="form-select") }}
                 {% endif %}
             </div>
-            <button class="btn btn-block btn-lg btn-primary" type="submit"><i class="fas fa-check fa-lg fa-fw"></i> Save</button>
-            <a class="btn btn-block btn-secondary" href="{{ url_for('account.account') }}"><i class="fas fa-chevron-left fa-lg fa-fw"></i> Cancel</a>
+            <div class="d-grid gap-2 d-md-block">
+                <button class="btn btn-primary" type="submit"><i class="fas fa-check fa-lg fa-fw"></i> Save</button>
+                <a class="btn btn-secondary" href="{{ url_for('account.account') }}"><i class="fas fa-chevron-left fa-lg fa-fw"></i> Cancel</a>
+            </div>
         </form>
     </div>
 </div>

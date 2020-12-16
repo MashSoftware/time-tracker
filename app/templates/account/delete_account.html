@@ -5,8 +5,10 @@
         <h3>Are you sure?</h3>
         <p class="lead">Your account and all personal information will be permanently deleted.</p>
         <form action="" method="post" novalidate>
-            <button class="btn btn-block btn-lg btn-danger" type="submit"><i class="fas fa-trash fa-lg fa-fw"></i> Yes - delete account</button>
-            <a class="btn btn-block btn-secondary" href="{{ url_for('account.account') }}"><i class="fas fa-chevron-left fa-lg fa-fw"></i> Cancel</a>
+            <div class="d-grid gap-2 d-md-block">
+                <button class="btn btn-danger" type="submit"><i class="fas fa-trash fa-lg fa-fw"></i> Yes - delete account</button>
+                <a class="btn btn-secondary" href="{{ url_for('account.account') }}"><i class="fas fa-chevron-left fa-lg fa-fw"></i> Cancel</a>
+            </div>
         </form>
     </div>
 </div>

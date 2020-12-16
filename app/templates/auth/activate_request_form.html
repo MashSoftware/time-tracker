@@ -4,19 +4,25 @@
     <div class="col-md-6">
         <form action="" method="post" novalidate>
             {{ form.csrf_token }}
-            <div class="form-group">
-                {{ form.email_address.label }}
-                {% if form.email_address.errors %}
-                {{ form.email_address(class="form-control is-invalid", type="email", spellcheck="false", autocomplete="email") }}
+            <div class="mb-3">
+                {{ form.email_address.label(class="form-label") }}
+                {% if form.errors %}
+                    {% if form.email_address.errors %}
+                        {{ form.email_address(class="form-control is-invalid", type="email", spellcheck="false", autocomplete="email") }}
+                        {% for error in form.email_address.errors %}<div class="invalid-feedback">{{error}}</div>{% endfor %}
+                    {% else %}
+                        {{ form.email_address(class="form-control is-valid", type="email", spellcheck="false", autocomplete="email") }}
+                        <div class="valid-feedback">Looks good!</div>
+                    {% endif %}
                 {% else %}
-                {{ form.email_address(class="form-control", type="email", spellcheck="false", autocomplete="email") }}
+                    {{ form.email_address(class="form-control", type="email", spellcheck="false", autocomplete="email") }}
                 {% endif %}
-                {% for error in form.email_address.errors %}
-                <div class="invalid-feedback">{{error}}</div>
-                {% endfor %}
             </div>
-            <button class="btn btn-block btn-lg btn-primary" type="submit"><i class="fas fa-unlock fa-lg fa-fw"></i> Activate</button>
-            <a class="btn btn-block btn-secondary" href="{{ url_for('auth.login') }}"><i class="fas fa-chevron-left fa-lg fa-fw"></i> Cancel</a>            
+            <div class="d-grid gap-2 d-md-block">
+                <button class="btn btn-primary" type="submit"><i class="fas fa-unlock fa-lg fa-fw"></i> Activate</button>
+                <a class="btn btn-secondary" href="{{ url_for('auth.login') }}"><i class="fas fa-chevron-left fa-lg fa-fw"></i> Cancel</a> 
+            </div>
+                       
         </form>
     </div>
 </div>

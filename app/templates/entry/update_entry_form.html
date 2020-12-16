@@ -4,78 +4,114 @@
     <div class="col-md-6">
         <form action="" method="post" novalidate>
             {{ form.csrf_token }}
-            <div class="form-row">
-                <div class="form-group col-sm">
-                    {{ form.started_at_date.label }}
-                    {% if form.started_at_date.errors %}
-                    {{ form.started_at_date(class="form-control is-invalid", type="date") }}
+            <div class="row">
+                <div class="mb-3 col-sm">
+                    {{ form.started_at_date.label(class="form-label") }}
+                    {% if form.errors %}
+                        {% if form.started_at_date.errors %}
+                            {{ form.started_at_date(class="form-control is-invalid", type="date") }}
+                            {% for error in form.started_at_date.errors %}<div class="invalid-feedback">{{error}}</div>{% endfor %}
+                        {% else %}
+                            {{ form.started_at_date(class="form-control is-valid", type="date") }}
+                            <div class="valid-feedback">Looks good!</div>
+                        {% endif %}
                     {% else %}
-                    {{ form.started_at_date(class="form-control", type="date") }}
+                        {{ form.started_at_date(class="form-control", type="date") }}
                     {% endif %}
-                    {% for error in form.started_at_date.errors %}
-                    <div class="invalid-feedback">{{error}}</div>
-                    {% endfor %}
                 </div>
-                <div class="form-group col-sm">
-                    {{ form.started_at_time.label }}
-                    {% if form.started_at_time.errors %}
-                    {{ form.started_at_time(class="form-control is-invalid", type="time") }}
+                <div class="mb-3 col-sm">
+                    {{ form.started_at_time.label(class="form-label") }}
+                    {% if form.errors %}
+                        {% if form.started_at_time.errors %}
+                            {{ form.started_at_time(class="form-control is-invalid", type="time") }}
+                            {% for error in form.started_at_time.errors %}<div class="invalid-feedback">{{error}}</div>{% endfor %}
+                        {% else %}
+                            {{ form.started_at_time(class="form-control is-valid", type="time") }}
+                            <div class="valid-feedback">Looks good!</div>
+                        {% endif %}
                     {% else %}
-                    {{ form.started_at_time(class="form-control", type="time") }}
+                        {{ form.started_at_time(class="form-control", type="time") }}
                     {% endif %}
-                    {% for error in form.started_at_time.errors %}
-                    <div class="invalid-feedback">{{error}}</div>
-                    {% endfor %}
                 </div>
             </div>
-            <div class="form-row">
-                <div class="form-group col-sm">
-                    {{ form.ended_at_date.label }} <em>(optional)</em>
-                    {% if form.ended_at_date.errors %}
-                    {{ form.ended_at_date(class="form-control is-invalid", type="date") }}
+            <div class="row">
+                <div class="mb-3 col-sm">
+                    {{ form.ended_at_date.label(class="form-label") }} <em>(optional)</em>
+                    {% if form.errors %}
+                        {% if form.ended_at_date.errors %}
+                            {{ form.ended_at_date(class="form-control is-invalid", type="date") }}
+                            {% for error in form.ended_at_date.errors %}<div class="invalid-feedback">{{error}}</div>{% endfor %}
+                        {% else %}
+                            {{ form.ended_at_date(class="form-control is-valid", type="date") }}
+                            <div class="valid-feedback">Looks good!</div>
+                        {% endif %}
                     {% else %}
-                    {{ form.ended_at_date(class="form-control", type="date") }}
+                        {{ form.ended_at_date(class="form-control", type="date") }}
                     {% endif %}
-                    {% for error in form.ended_at_date.errors %}
-                    <div class="invalid-feedback">{{error}}</div>
-                    {% endfor %}
                 </div>
-                <div class="form-group col-sm">
-                    {{ form.ended_at_time.label }} <em>(optional)</em>
-                    {% if form.ended_at_time.errors %}
-                    {{ form.ended_at_time(class="form-control is-invalid", type="time") }}
+                <div class="mb-3 col-sm">
+                    {{ form.ended_at_time.label(class="form-label") }} <em>(optional)</em>
+                    {% if form.errors %}
+                        {% if form.ended_at_time.errors %}
+                            {{ form.ended_at_time(class="form-control is-invalid", type="time") }}
+                            {% for error in form.ended_at_time.errors %}<div class="invalid-feedback">{{error}}</div>{% endfor %}
+                        {% else %}
+                            {{ form.ended_at_time(class="form-control is-valid", type="time") }}
+                            <div class="valid-feedback">Looks good!</div>
+                        {% endif %}
                     {% else %}
-                    {{ form.ended_at_time(class="form-control", type="time") }}
+                        {{ form.ended_at_time(class="form-control", type="time") }}
                     {% endif %}
-                    {% for error in form.ended_at_time.errors %}
-                    <div class="invalid-feedback">{{error}}</div>
-                    {% endfor %}
                 </div>
             </div>
-            <div class="form-group">
-                {{ form.tag.label }}
-                {% for subfield in form.tag %}
-                <div class="custom-control custom-radio">
-                    {{ subfield(class="custom-control-input", type="radio") }}
-                    {{ subfield.label(class="custom-control-label") }}
-                </div>
-                {% endfor %}
-            </div>
-            <div class="form-group">
-                {{ form.comment.label }} <em>(optional)</em>
-                {% if form.comment.errors %}
-                {{ form.comment(class="form-control is-invalid", rows="2", spellcheck="true", aria_describedby="commentHelp") }}
+            <div class="mb-3">
+                {{ form.tag.label(class="form-label") }}
+                {% if form.errors %}
+                    {% if form.tag.errors %}
+                        {% for subfield in form.tag %}
+                        <div class="form-check">
+                            {{ subfield(class="form-check-input is-invalid", type="radio") }}
+                            <span class="badge bg-secondary"><i class="fas fa-tag fa-fw"></i> {{ subfield.label(class="form-check-label") }}</span>
+                        </div>
+                        {% endfor %}
+                        {% for error in form.tag.errors %}<div class="invalid-feedback">{{error}}</div>{% endfor %}
+                    {% else %}
+                        {% for subfield in form.tag %}
+                        <div class="form-check">
+                            {{ subfield(class="form-check-input is-valid", type="radio") }}
+                            <span class="badge bg-secondary"><i class="fas fa-tag fa-fw"></i> {{ subfield.label(class="form-check-label") }}</span>
+                        </div>
+                        {% endfor %}
+                    {% endif %}
                 {% else %}
-                {{ form.comment(class="form-control", rows="2", spellcheck="true", aria_describedby="commentHelp") }}
+                    {% for subfield in form.tag %}
+                    <div class="form-check">
+                        {{ subfield(class="form-check-input", type="radio") }}
+                        <span class="badge bg-secondary"><i class="fas fa-tag fa-fw"></i> {{ subfield.label(class="form-check-label") }}</span>
+                    </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div class="mb-3">
+                {{ form.comment.label(class="form-label") }} <em>(optional)</em>
+                {% if form.errors %}
+                    {% if form.comment.errors %}
+                    {{ form.comment(class="form-control is-invalid", rows="2", spellcheck="true", aria_describedby="commentHelp") }}
+                    {% for error in form.comment.errors %}<div class="invalid-feedback">{{error}}</div>{% endfor %}
+                    {% else %}
+                    {{ form.comment(class="form-control is-valid", rows="2", spellcheck="true", aria_describedby="commentHelp") }}
+                    <div class="valid-feedback">Looks good!</div>
+                    {% endif %}
+                {% else %}
+                    {{ form.comment(class="form-control", rows="2", spellcheck="true", aria_describedby="commentHelp") }}
                 {% endif %}
                 <small id="commentHelp" class="form-text text-muted">{{ form.comment.description }}</small>
-                {% for error in form.comment.errors %}
-                <div class="invalid-feedback">{{error}}</div>
-                {% endfor %}
             </div>
-            <button class="btn btn-block btn-lg btn-primary" type="submit"><i class="fas fa-check fa-lg fa-fw"></i> Save</button>
-            <a class="btn btn-block btn-secondary" href="{{ url_for('entry.weekly') }}"><i class="fas fa-chevron-left fa-lg fa-fw"></i> Cancel</a>
-            <a class="btn btn-block btn-danger" href="{{ url_for('entry.delete', id=event.id) }}"><i class="fas fa-trash fa-lg fa-fw"></i> Delete</a>
+            <div class="d-grid gap-2 d-md-block">
+                <button class="btn btn-primary" type="submit"><i class="fas fa-check fa-lg fa-fw"></i> Save</button>
+                <a class="btn btn-secondary" href="{{ url_for('entry.weekly') }}"><i class="fas fa-chevron-left fa-lg fa-fw"></i> Cancel</a>
+                <a class="btn btn-danger" href="{{ url_for('entry.delete', id=event.id) }}"><i class="fas fa-trash fa-lg fa-fw"></i> Delete</a>
+            </div>
         </form>
     </div>
 </div>
