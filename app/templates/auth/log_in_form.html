@@ -31,7 +31,7 @@
                 {% else %}
                     {{ form.password(class="form-control", aria_describedby="passwordHelp") }}
                 {% endif %}
-                <small id="passwordHelp" class="form-text text-muted">{{ form.password.description }}</small>
+                <div id="passwordHelp" class="form-text">{{ form.password.description }}</div>
             </div>
             <div class="mb-3">
                 <div class="form-check">

@@ -105,7 +105,7 @@
                 {% else %}
                     {{ form.comment(class="form-control", rows="2", spellcheck="true", aria_describedby="commentHelp") }}
                 {% endif %}
-                <small id="commentHelp" class="form-text text-muted">{{ form.comment.description }}</small>
+                <div id="commentHelp" class="form-text">{{ form.comment.description }}</div>
             </div>
             <div class="d-grid gap-2 d-md-block">
                 <button class="btn btn-primary" type="submit"><i class="fas fa-check fa-lg fa-fw"></i> Save</button>

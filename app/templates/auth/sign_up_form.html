@@ -17,7 +17,7 @@
                 {% else %}
                     {{ form.email_address(class="form-control", type="email", spellcheck="false", autocomplete="email", aria_describedby="emailHelp") }}
                 {% endif %}
-                <small id="emailHelp" class="form-text text-muted">{{ form.email_address.description }}</small>
+                <div id="emailHelp" class="form-text">{{ form.email_address.description }}</div>
             </div>
             <div class="mb-3">
                 {{ form.password.label(class="form-label") }}
@@ -32,7 +32,7 @@
                 {% else %}
                     {{ form.password(class="form-control", aria_describedby="passwordHelp") }}
                 {% endif %}
-                <small id="passwordHelp" class="form-text text-muted">{{ form.password.description }}</small>
+                <div id="passwordHelp" class="form-text">{{ form.password.description }}</div>
             </div>
             <div class="mb-3">
                 {{ form.confirm_password.label(class="form-label") }}

@@ -17,7 +17,7 @@
                 {% else %}
                     {{ form.email_address(class="form-control", type="email", spellcheck="false", autocomplete="email", aria_describedby="emailHelp") }}
                 {% endif %}
-                <small id="emailHelp" class="form-text text-muted">{{ form.email_address.description }}</small>
+                <div id="emailHelp" class="form-text">{{ form.email_address.description }}</div>
             </div>
             <div class="mb-3">
                 {{ form.timezone.label(class="form-label") }}
