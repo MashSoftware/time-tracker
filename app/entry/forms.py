@@ -23,8 +23,6 @@ class EventForm(FlaskForm):
         current_localised_date = (
             pytz.utc.localize(datetime.utcnow()).astimezone(pytz.timezone(current_user.timezone)).date()
         )
-        print(current_localised_date)
-        print(started_at_date.data)
         if started_at_date.data > current_localised_date:
             raise ValidationError("Start date must be today or in the past")
 
