@@ -1,34 +1,35 @@
 <div class="card bg-white shadow mb-4">
     <div class="card-body">
-        <h5 class="card-title">Weekly summary</h5><hr>
+        <h5 class="card-title">Weekly summary</h5>
+        <hr>
         <h6 class="card-subtitle mb-2 text-muted">Time</h6>
-        <p class="card-text">{{ events | length }} time {% if events | length == 1%}entry{% else %}entries{% endif %}{% if weekly_string %} : {{ weekly_string }} ({{weekly_decimal}}){% endif %}</p>
-        {% if weekly_string %}
-        <style nonce="{{csp_nonce()}}">
-            .progress-bar {
-                width: {{progress}}%;
-            }
-            .progress {
-                height: 20px;
-            }
-        </style>
-        <div class="progress">
-            <div class="progress-bar progress-bar-striped {% if progress >= 100 %}bg-success{% endif %}" role="progressbar" aria-valuenow="{{ progress }}" aria-valuemin="0" aria-valuemax="100">{{ progress }}%</div>
-        </div>
-        <p class="card-text">
-            {% if current_user.schedule_decimal() > weekly_decimal %}
-            <span class="text-danger"><i class="fas fa-chevron-down"></i> {{weekly_delta_string}} ({{ (current_user.schedule_decimal() - weekly_decimal)|round(2) }})</span>
-            {% else %}
-            <span class="text-success"><i class="fas fa-chevron-up"></i> {{weekly_delta_string}} ({{ (weekly_decimal - current_user.schedule_decimal())|round(2) }})</span>
-            {% endif %}
-        </p>
+        <p class="card-text">{{ events | length }} time {% if events | length == 1%}entry{% else %}entries{% endif %}{% if weekly_string and weekly_decimal %} : {{ weekly_string }} ({{weekly_decimal}}){% endif %}</p>
+        {% if weekly_string and current_user.schedule() > 0 %}
+            <style nonce="{{csp_nonce()}}">
+                .progress-bar {
+                    width: {{progress}}%;
+                }
+                .progress {
+                    height: 20px;
+                }
+            </style>
+            <div class="progress">
+                <div class="progress-bar progress-bar-striped {% if progress >= 100 %}bg-success{% endif %}" role="progressbar" aria-valuenow="{{ progress }}" aria-valuemin="0" aria-valuemax="100">{{ progress }}%</div>
+            </div>
+            <p class="card-text">
+                {% if current_user.schedule_decimal() > weekly_decimal %}
+                <span class="text-danger"><i class="fas fa-chevron-down"></i> {{weekly_delta_string}} ({{ (current_user.schedule_decimal() - weekly_decimal)|round(2) }})</span>
+                {% else %}
+                <span class="text-success"><i class="fas fa-chevron-up"></i> {{weekly_delta_string}} ({{ (weekly_decimal - current_user.schedule_decimal())|round(2) }})</span>
+                {% endif %}
+            </p>
         {% endif %}
         {% if tag_totals %}
-        <hr>
-        <h6 class="card-subtitle mb-2 text-muted">Tags</h6>
-        {% for tag in tag_totals %}
-        <p class="card-text"><span class="badge bg-secondary"><i class="fas fa-tag fa-fw"></i> {{tag.name}}</span> : {{tag.total}} ({{tag.decimal}})</p>
-        {% endfor %}
+            <hr>
+            <h6 class="card-subtitle mb-2 text-muted">Tags</h6>
+            {% for tag in tag_totals %}
+                <p class="card-text"><span class="badge bg-secondary"><i class="fas fa-tag fa-fw"></i> {{tag.name}}</span> : {{tag.total}} ({{tag.decimal}})</p>
+            {% endfor %}
         {% endif %}
     </div>
 </div>
