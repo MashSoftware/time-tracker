@@ -97,7 +97,7 @@
             {% if category == 'warning' %}
             <h4 class="alert-heading">Uh-oh</h4>
             {% endif %}
-            <p class="mb-0">{{ message }}</p>
+            <p class="mb-0">{{ message | safe }}</p>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         {% endfor %}

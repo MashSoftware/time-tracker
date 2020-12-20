@@ -15,6 +15,12 @@ from werkzeug.exceptions import Forbidden
 @login_required
 @limiter.limit("2 per second", key_func=lambda: current_user.id)
 def weekly():
+    if len(current_user.tags) == 0:
+        flash("You need to <a href='{0}' class='alert-link'>create a new tag</a> to start categorising your time entries.".format(url_for("tag.create")), "info")
+
+    if current_user.schedule() == 0:
+        flash("You need to <a href='{0}' class='alert-link'>set your scheduled time</a> to start tracking weekly progress.".format(url_for("account.schedule")), "info")
+
     today = date.today().isocalendar()
     year = request.args.get("year", default=str(today[0]), type=str)
     week = request.args.get("week", default=str(today[1]), type=str)
