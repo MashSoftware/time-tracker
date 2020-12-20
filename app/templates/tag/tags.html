@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="row">
-    <div class="col-md-4">
+    <div class="col">
         {% for tag in current_user.tags %}
         <p class="lead"><a href="{{ url_for('tag.update', id=tag.id)}}"><span class="badge bg-secondary"><i class="fas fa-tag fa-fw"></i> {{ tag.name }}</span></a></p>
         {% endfor %}
