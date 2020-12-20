@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Comments of up to 64 characters can be added to new or existing time entries.
 - Automated unit test suite for bespoke (non-framework/package related) and common code.
 - Set up [GitHub Actions](https://github.com/features/actions) CI/CD workflow to check dependencies are up-to-date, run code quality linting and automated unit tests prior to deployment.
+- Improved new user experience with pointers to create tags and set time schedule if an account has none.
 - Added unique ID to each time card, allowing for URI fragment linking within the entries page.
 - Provide positive feedback for successfully validated form fields on submit.
 
