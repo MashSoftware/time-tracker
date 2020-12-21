@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [0.23.0](https://github.com/MashSoftware/the-button/compare/v0.22.0...v0.23.0) - 2020-12-??
 
+### [Blog]()
+
 ### Added
 
 - Weekly summary card displaying total of time entries and progress against scheduled time, along with total time per tag used.
@@ -36,6 +38,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Decimal hours calculation to display non-rounded floating point numbers, to two decimal places. Durations are no longer rounded, so 59 minutes and 59 seconds is represented correctly as 0.99 decimal hours, not rounded to 1.0.
 
 ## [0.22.0](https://github.com/MashSoftware/the-button/compare/v0.21.1...v0.22.0) - 2020-11-28
+
+### [Blog](https://medium.com/mash-software/the-button-weekly-view-time-schedules-begining-beta-2cb451df5cff)
 
 ### Added
 
@@ -67,6 +71,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [0.21.0](https://github.com/MashSoftware/the-button/compare/v0.20.0...v0.21.0) - 2020-02-25
 
+### [Blog](https://medium.com/mash-software/the-button-native-controls-app-icons-and-performance-bbafad029257)
+
 ### Added
 
 - Favicons, Apple touch icons, Android Chrome icons and Windows 8/10 tile icons. Thanks [@joehonywill](https://github.com/joehonywill)
@@ -80,6 +86,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Accessibility and best practice fixes from Google Lighthouse analysis.
 
 ## [0.20.0](https://github.com/MashSoftware/the-button/compare/v0.19.0...v0.20.0) - 2019-08-08
+
+### [Blog](https://medium.com/mash-software/the-button-time-tags-e1979d2a0556)
 
 ### Added
 
@@ -103,6 +111,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Reverted secondary action buttons to non-outline styling, since they were visually too close to a form input field.
 
 ## [0.18.0](https://github.com/MashSoftware/the-button/compare/v0.17.0...v0.18.0) - 2019-07-11
+
+### [Blog](https://medium.com/mash-software/introducing-the-button-aef549dacfbf)
 
 ### Added
 
