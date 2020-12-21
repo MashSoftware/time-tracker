@@ -1,4 +1,4 @@
-<div class="card bg-white shadow mb-4">
+<div class="card bg-white shadow mb-3">
     <div class="card-body">
         <h5 class="card-title">Weekly summary</h5>
         <hr>
@@ -18,9 +18,11 @@
             </div>
             <p class="card-text">
                 {% if current_user.schedule_decimal() > weekly_decimal %}
-                <span class="text-danger"><i class="fas fa-chevron-down"></i> {{weekly_delta_string}} ({{ (current_user.schedule_decimal() - weekly_decimal)|round(2) }})</span>
-                {% else %}
-                <span class="text-success"><i class="fas fa-chevron-up"></i> {{weekly_delta_string}} ({{ (weekly_decimal - current_user.schedule_decimal())|round(2) }})</span>
+                <span class="text-danger"><i class="fas fa-chevron-down"></i> {{weekly_delta_string}} ({{ (current_user.schedule_decimal() - weekly_decimal)|round(2) }}) under target</span>
+                {% elif current_user.schedule_decimal() < weekly_decimal %}
+                <span class="text-success"><i class="fas fa-chevron-up"></i> {{weekly_delta_string}} ({{ (weekly_decimal - current_user.schedule_decimal())|round(2) }}) over target</span>
+                {% elif current_user.schedule_decimal() == weekly_decimal %}
+                <span class="text-success"><i class="fas fa-check"></i> on target</span>
                 {% endif %}
             </p>
         {% endif %}
