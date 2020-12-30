@@ -18,9 +18,9 @@
             </div>
             <p class="card-text">
                 {% if current_user.schedule_decimal() > weekly_decimal %}
-                <span class="text-danger"><i class="fas fa-chevron-down"></i> {{weekly_delta_string}} ({{ (current_user.schedule_decimal() - weekly_decimal)|round(2) }}) under target</span>
+                <span class="text-danger"><i class="fas fa-chevron-down"></i> {{weekly_delta_string}} ({{weekly_delta_decimal}}) under target</span>
                 {% elif current_user.schedule_decimal() < weekly_decimal %}
-                <span class="text-success"><i class="fas fa-chevron-up"></i> {{weekly_delta_string}} ({{ (weekly_decimal - current_user.schedule_decimal())|round(2) }}) over target</span>
+                <span class="text-success"><i class="fas fa-chevron-up"></i> {{weekly_delta_string}} ({{weekly_delta_decimal}}) over target</span>
                 {% elif current_user.schedule_decimal() == weekly_decimal %}
                 <span class="text-success"><i class="fas fa-check"></i> on target</span>
                 {% endif %}
