@@ -16,10 +16,20 @@ from werkzeug.exceptions import Forbidden
 @limiter.limit("2 per second", key_func=lambda: current_user.id)
 def weekly():
     if len(current_user.tags) == 0:
-        flash("You need to <a href='{0}' class='alert-link'>create a new tag</a> to start categorising your time entries.".format(url_for("tag.create")), "info")
+        flash(
+            "You need to <a href='{0}' class='alert-link'>create a new tag</a> to start categorising your time entries.".format(
+                url_for("tag.create")
+            ),
+            "info",
+        )
 
     if current_user.schedule() == 0:
-        flash("You need to <a href='{0}' class='alert-link'>set your scheduled time</a> to start tracking weekly progress.".format(url_for("account.schedule")), "info")
+        flash(
+            "You need to <a href='{0}' class='alert-link'>set your scheduled time</a> to start tracking weekly progress.".format(
+                url_for("account.schedule")
+            ),
+            "info",
+        )
 
     today = date.today().isocalendar()
     year = request.args.get("year", default=str(today[0]), type=str)
@@ -66,6 +76,7 @@ def weekly():
         weekly_delta = weekly_seconds - current_user.schedule()
 
     weekly_delta_string = seconds_to_string(weekly_delta)
+    weekly_delta_decimal = seconds_to_decimal(weekly_delta)
 
     if current_user.schedule():
         progress = int((weekly_seconds / current_user.schedule()) * 100)
@@ -94,6 +105,7 @@ def weekly():
         weekly_string=weekly_string,
         weekly_decimal=weekly_decimal,
         weekly_delta_string=weekly_delta_string,
+        weekly_delta_decimal=weekly_delta_decimal,
         progress=progress,
         tag_totals=tag_totals,
         title=title,
