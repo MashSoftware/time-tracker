@@ -10,6 +10,7 @@ from flask_login import UserMixin
 from sqlalchemy.dialects.postgresql import UUID
 
 from app import db, login
+from app.utils import seconds_to_decimal, seconds_to_string
 
 
 class User(UserMixin, db.Model):
@@ -72,21 +73,10 @@ class User(UserMixin, db.Model):
         return self.monday + self.tuesday + self.wednesday + self.thursday + self.friday + self.saturday + self.sunday
 
     def schedule_string(self):
-        """Returns the user schedule total as a string formated as either:
-
-        7 h 24 min
-        24 min
-        """
-        hours, remainder = divmod(self.schedule(), 3600)
-        minutes, seconds = divmod(remainder, 60)
-        if hours > 0:
-            return str(hours) + " h " + str(minutes) + " min"
-        elif minutes > 0:
-            return str(minutes) + " min"
+        return seconds_to_string(self.schedule())
 
     def schedule_decimal(self):
-        """Returns the user schedule total as a decimal"""
-        return self.schedule() / 60 / 60
+        return seconds_to_decimal(self.schedule())
 
 
 @login.user_loader
@@ -106,6 +96,7 @@ class Event(db.Model):
     tag_id = db.Column(UUID, db.ForeignKey("tag.id", ondelete="SET NULL"), nullable=True, index=True)
     started_at = db.Column(db.DateTime(timezone=True), nullable=False, index=True)
     ended_at = db.Column(db.DateTime(timezone=True), nullable=True)
+    comment = db.Column(db.String(64), nullable=True)
 
     # Methods
     def __init__(self, user_id, started_at):
@@ -121,24 +112,10 @@ class Event(db.Model):
             return 0
 
     def duration_string(self):
-        """Returns the duration of an event as a string formated as either:
-
-        7 h 24 min
-        24 min
-        42 s
-        """
-        hours, remainder = divmod(self.duration(), 3600)
-        minutes, seconds = divmod(remainder, 60)
-        if hours > 0:
-            return str(hours) + " h " + str(minutes) + " min"
-        elif minutes > 0:
-            return str(minutes) + " min"
-        else:
-            return str(seconds) + "s"
+        return seconds_to_string(self.duration())
 
     def duration_decimal(self):
-        """Returns the duration of an event as a decimal"""
-        return round((self.duration() / 60 / 60), 2)
+        return seconds_to_decimal(self.duration())
 
 
 class Tag(db.Model):

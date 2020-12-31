@@ -10,10 +10,10 @@ flask-wtf==0.14.3
 flask==1.1.2
 gunicorn==20.0.4
 psycopg2==2.8.6
-pyjwt==1.7.1
+pyjwt==2.0.0
 python-dotenv==0.15.0
-pytz==2020.4
+pytz==2020.5
 redis==3.5.3
-requests==2.25.0
+requests==2.25.1
 # Generated with piprot 0.9.10
 # Looks like you've been keeping up to date, time for a delicious beverage!

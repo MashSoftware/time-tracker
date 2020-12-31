@@ -4,20 +4,25 @@
     <div class="col-md-6">
         <form action="" method="post" novalidate>
             {{ form.csrf_token }}
-            <div class="form-group">
-                {{ form.name.label }}
-                {% if form.name.errors %}
-                {{ form.name(class="form-control is-invalid", type="text", spellcheck="true", aria_describedby="nameHelp") }}
+            <div class="mb-3">
+                {{ form.name.label(class="form-label") }}
+                {% if form.errors %}
+                    {% if form.name.errors %}
+                        {{ form.name(class="form-control is-invalid", type="text", spellcheck="true", aria_describedby="nameHelp") }}
+                        {% for error in form.name.errors %}<div class="invalid-feedback">{{error}}</div>{% endfor %}
+                    {% else %}
+                        {{ form.name(class="form-control is-valid", type="text", spellcheck="true", aria_describedby="nameHelp") }}
+                        <div class="valid-feedback">Looks good!</div>
+                    {% endif %}
                 {% else %}
-                {{ form.name(class="form-control", type="text", spellcheck="true", aria_describedby="nameHelp") }}
+                    {{ form.name(class="form-control", type="text", spellcheck="true", aria_describedby="nameHelp") }}
                 {% endif %}
-                <small id="nameHelp" class="form-text text-muted">{{ form.name.description }}</small>
-                {% for error in form.name.errors %}
-                <div class="invalid-feedback">{{error}}</div>
-                {% endfor %}
+                <div id="nameHelp" class="form-text">{{ form.name.description }}</div>
             </div>
-            <button class="btn btn-block btn-lg btn-primary" type="submit"><i class="fas fa-plus fa-lg fa-fw"></i> Create</button>
-            <a class="btn btn-block btn-secondary" href="{{ url_for('tag.tags') }}"><i class="fas fa-chevron-left fa-lg fa-fw"></i> Cancel</a>
+            <div class="d-grid gap-2 d-md-block">
+                <button class="btn btn-primary" type="submit"><i class="fas fa-plus fa-lg fa-fw"></i> Create</button>
+                <a class="btn btn-secondary" href="{{ url_for('tag.tags') }}"><i class="fas fa-chevron-left fa-lg fa-fw"></i> Cancel</a>
+            </div>
         </form>
     </div>
 </div>

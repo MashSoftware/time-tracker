@@ -5,6 +5,7 @@ from app import db, limiter
 from app.entry import bp
 from app.entry.forms import EventForm
 from app.models import Event
+from app.utils import seconds_to_decimal, seconds_to_string
 from flask import flash, redirect, render_template, request, url_for
 from flask_login import current_user, login_required
 from werkzeug.exceptions import Forbidden
@@ -14,6 +15,22 @@ from werkzeug.exceptions import Forbidden
 @login_required
 @limiter.limit("2 per second", key_func=lambda: current_user.id)
 def weekly():
+    if len(current_user.tags) == 0:
+        flash(
+            "You need to <a href='{0}' class='alert-link'>create a new tag</a> to start categorising your time entries.".format(
+                url_for("tag.create")
+            ),
+            "info",
+        )
+
+    if current_user.schedule() == 0:
+        flash(
+            "You need to <a href='{0}' class='alert-link'>set your scheduled time</a> to start tracking weekly progress.".format(
+                url_for("account.schedule")
+            ),
+            "info",
+        )
+
     today = date.today().isocalendar()
     year = request.args.get("year", default=str(today[0]), type=str)
     week = request.args.get("week", default=str(today[1]), type=str)
@@ -50,35 +67,33 @@ def weekly():
             event.ended_at = event.ended_at.astimezone(pytz.timezone(current_user.timezone))
             weekly_seconds += event.duration()
 
-    hours, remainder = divmod(weekly_seconds, 3600)
-    minutes, seconds = divmod(remainder, 60)
-    if hours > 0:
-        weekly_string = str(hours) + " h " + str(minutes) + " min"
-    elif minutes > 0:
-        weekly_string = str(minutes) + " min"
-    else:
-        weekly_string = str(seconds) + "s"
-
-    weekly_decimal = round(weekly_seconds / 60 / 60, 2)
+    weekly_string = seconds_to_string(weekly_seconds) if weekly_seconds > 0 else None
+    weekly_decimal = seconds_to_decimal(weekly_seconds)
 
     if weekly_seconds < current_user.schedule():
         weekly_delta = current_user.schedule() - weekly_seconds
     else:
         weekly_delta = weekly_seconds - current_user.schedule()
 
-    hours, remainder = divmod(weekly_delta, 3600)
-    minutes, seconds = divmod(remainder, 60)
-    if hours > 0:
-        weekly_delta_string = str(hours) + " h " + str(minutes) + " min"
-    elif minutes > 0:
-        weekly_delta_string = str(minutes) + " min"
-    else:
-        weekly_delta_string = str(seconds) + "s"
+    weekly_delta_string = seconds_to_string(weekly_delta)
+    weekly_delta_decimal = seconds_to_decimal(weekly_delta)
 
     if current_user.schedule():
         progress = int((weekly_seconds / current_user.schedule()) * 100)
     else:
         progress = 0
+
+    tag_totals = []
+    for tag in current_user.tags:
+        tag_total = {"total": 0}
+        for event in events:
+            if tag.id == event.tag_id:
+                tag_total["name"] = tag.name
+                tag_total["total"] += event.duration()
+        if tag_total["total"] > 0:
+            tag_total["decimal"] = seconds_to_decimal(tag_total["total"])
+            tag_total["total"] = seconds_to_string(tag_total["total"])
+            tag_totals.append(tag_total)
 
     return render_template(
         "entry/weekly.html",
@@ -90,7 +105,9 @@ def weekly():
         weekly_string=weekly_string,
         weekly_decimal=weekly_decimal,
         weekly_delta_string=weekly_delta_string,
+        weekly_delta_decimal=weekly_delta_decimal,
         progress=progress,
+        tag_totals=tag_totals,
         title=title,
     )
 
@@ -155,6 +172,7 @@ def manual():
             event.ended_at = None
         if form.tag.data != "None":
             event.tag_id = form.tag.data
+        event.comment = form.comment.data
         db.session.add(event)
         db.session.commit()
         flash("Time entry has been added.", "success")
@@ -202,6 +220,7 @@ def update(id):
             event.tag_id = form.tag.data
         else:
             event.tag_id = None
+        event.comment = form.comment.data
         db.session.add(event)
         db.session.commit()
         flash("Time entry changes have been saved.", "success")
@@ -213,8 +232,8 @@ def update(id):
         if event.ended_at:
             form.ended_at_date.data = event.ended_at.astimezone(pytz.timezone(current_user.timezone))
             form.ended_at_time.data = event.ended_at.astimezone(pytz.timezone(current_user.timezone))
-        if event.tag_id:
-            form.tag.data = event.tag_id
+        form.tag.data = event.tag_id
+        form.comment.data = event.comment
     return render_template("entry/update_entry_form.html", title="Edit time entry", form=form, event=event)
 
 

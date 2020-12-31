@@ -2,41 +2,49 @@
 {% block content %}
 <div class="row">
     <div class="col-md-6">
-        <form action="" method="post" novalidate>
+        <form action="" method="post" class="mb-3" novalidate>
             {{ form.csrf_token }}
-            <div class="form-group">
-                {{ form.email_address.label }}
-                {% if form.email_address.errors %}
-                {{ form.email_address(class="form-control is-invalid", type="email", spellcheck="false", autocomplete="email") }}
+            <div class="mb-3">
+                {{ form.email_address.label(class="form-label") }}
+                {% if form.errors %}
+                    {% if form.email_address.errors %}
+                        {{ form.email_address(class="form-control is-invalid", type="email", spellcheck="false", autocomplete="email") }}
+                        {% for error in form.email_address.errors %}<div class="invalid-feedback">{{error}}</div>{% endfor %}
+                    {% else %}
+                        {{ form.email_address(class="form-control is-valid", type="email", spellcheck="false", autocomplete="email") }}
+                        <div class="valid-feedback">Looks good!</div>
+                    {% endif %}
                 {% else %}
-                {{ form.email_address(class="form-control", type="email", spellcheck="false", autocomplete="email") }}
+                    {{ form.email_address(class="form-control", type="email", spellcheck="false", autocomplete="email") }}
                 {% endif %}
-                {% for error in form.email_address.errors %}
-                <div class="invalid-feedback">{{error}}</div>
-                {% endfor %}
             </div>
-            <div class="form-group">
-                {{ form.password.label }}
-                {% if form.password.errors %}
-                {{ form.password(class="form-control is-invalid", aria_describedby="passwordHelp") }}
+            <div class="mb-3">
+                {{ form.password.label(class="form-label") }}
+                {% if form.errors %}
+                    {% if form.password.errors %}
+                        {{ form.password(class="form-control is-invalid", aria_describedby="passwordHelp") }}
+                        {% for error in form.password.errors %}<div class="invalid-feedback">{{error}}</div>{% endfor %}
+                    {% else %}
+                        {{ form.password(class="form-control is-valid", aria_describedby="passwordHelp") }}
+                        <div class="valid-feedback">Looks good!</div>
+                    {% endif %}
                 {% else %}
-                {{ form.password(class="form-control", aria_describedby="passwordHelp") }}
+                    {{ form.password(class="form-control", aria_describedby="passwordHelp") }}
                 {% endif %}
-                <small id="passwordHelp" class="form-text text-muted">{{ form.password.description }}</small>
-                {% for error in form.password.errors %}
-                <div class="invalid-feedback">{{error}}</div>
-                {% endfor %}
+                <div id="passwordHelp" class="form-text">{{ form.password.description }}</div>
             </div>
-            <div class="form-group">
-                <div class="custom-control custom-checkbox">
-                    {{ form.remember_me(class="custom-control-input", type="checkbox") }}
-                    {{ form.remember_me.label(class="custom-control-label") }}
+            <div class="mb-3">
+                <div class="form-check">
+                    {{ form.remember_me(class="form-check-input", type="checkbox") }}
+                    {{ form.remember_me.label(class="form-check-label") }}
                 </div>
             </div>
-            <button class="btn btn-block btn-lg btn-primary" type="submit"><i class="fas fa-sign-in-alt fa-lg fa-fw"></i> Log in</button>
-            <a class="btn btn-block btn-secondary" href="{{ url_for('main.index') }}"><i class="fas fa-chevron-left fa-lg fa-fw"></i> Cancel</a>            
+            <div class="d-grid gap-2 d-md-block">
+                <button class="btn btn-primary" type="submit"><i class="fas fa-sign-in-alt fa-lg fa-fw"></i> Log in</button>
+                <a class="btn btn-secondary" href="{{ url_for('main.index') }}"><i class="fas fa-chevron-left fa-lg fa-fw"></i> Cancel</a>
+            </div>         
         </form>
-        <br><p><a href="{{ url_for('auth.reset_password_request') }}">Forgotten your password?</a></p>
+        <p><a href="{{ url_for('auth.reset_password_request') }}">Forgotten your password?</a></p>
         <p><a href="{{ url_for('auth.activate_request') }}">Resend activation email</a></p>
     </div>
 </div>
