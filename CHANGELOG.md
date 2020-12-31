@@ -7,9 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased](https://github.com/MashSoftware/the-button/compare/master...develop)
 
-## [0.23.0](https://github.com/MashSoftware/the-button/compare/v0.22.0...v0.23.0) - 2020-12-??
+## [0.23.0](https://github.com/MashSoftware/the-button/compare/v0.22.0...v0.23.0) - 2020-12-31
 
-### [Blog]()
+### [Blog](https://medium.com/mash-software/the-button-weekly-summaries-comments-and-ui-upgrade-d543945069d4)
 
 ### Added
 
