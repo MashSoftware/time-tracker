@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased](https://github.com/MashSoftware/the-button/compare/master...develop)
 
+## [0.23.1](https://github.com/MashSoftware/the-button/compare/v0.23.0...v0.23.1) - 2021-01-01
+
+### Fixed
+
+- Verification token not generated correctly preventing user sign up or password reset confirmation emails from being sent.
+
 ## [0.23.0](https://github.com/MashSoftware/the-button/compare/v0.22.0...v0.23.0) - 2020-12-31
 
 ### [Blog](https://medium.com/mash-software/the-button-weekly-summaries-comments-and-ui-upgrade-d543945069d4)
