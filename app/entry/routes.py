@@ -172,7 +172,10 @@ def manual():
             event.ended_at = None
         if form.tag.data != "None":
             event.tag_id = form.tag.data
-        event.comment = form.comment.data
+        if len(form.comment.data.strip()) == 0:
+            event.comment = None
+        else:
+            event.comment = form.comment.data.strip()
         db.session.add(event)
         db.session.commit()
         flash("Time entry has been added.", "success")
@@ -220,7 +223,10 @@ def update(id):
             event.tag_id = form.tag.data
         else:
             event.tag_id = None
-        event.comment = form.comment.data
+        if len(form.comment.data.strip()) == 0:
+            event.comment = None
+        else:
+            event.comment = form.comment.data.strip()
         db.session.add(event)
         db.session.commit()
         flash("Time entry changes have been saved.", "success")
