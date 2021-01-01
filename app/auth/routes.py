@@ -43,10 +43,11 @@ def activate_request():
     form = TokenRequestForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email_address=form.email_address.data).first()
-        if user.activated_at is None:
-            send_activation_email(user)
-        else:
-            send_confirmation_email(user)
+        if user:
+            if user.activated_at is None:
+                send_activation_email(user)
+            else:
+                send_confirmation_email(user)
         flash(
             "We've sent an email to {0} with instructions to activate your account.".format(form.email_address.data),
             "success",
