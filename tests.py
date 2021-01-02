@@ -1,5 +1,9 @@
 import unittest
 
+import jwt
+from flask import current_app
+
+from app import create_app
 from app.models import User
 from app.utils import seconds_to_decimal, seconds_to_string
 
@@ -31,12 +35,27 @@ class UtilsCase(unittest.TestCase):
 
 
 class UserModelCase(unittest.TestCase):
+    def setUp(self):
+        self.app = create_app()
+        self.app_context = self.app.app_context()
+        self.app_context.push()
+
+    def tearDown(self):
+        self.app_context.pop()
+
     def test_password_hashing(self):
         user = User(
             email_address="mash@example.com", password="8wCS0H65r@p!8%B0XxrPTbBiR%^tc##f", timezone="Europe/London"
         )
         self.assertFalse(user.check_password("Haxx0rz"))
         self.assertTrue(user.check_password("8wCS0H65r@p!8%B0XxrPTbBiR%^tc##f"))
+
+    def test_token_generation(self):
+        user = User(
+            email_address="mash@example.com", password="8wCS0H65r@p!8%B0XxrPTbBiR%^tc##f", timezone="Europe/London"
+        )
+        token = user.generate_token()
+        self.assertTrue(jwt.decode(token, current_app.config["SECRET_KEY"], algorithms=["HS256"]))
 
 
 if __name__ == "__main__":
