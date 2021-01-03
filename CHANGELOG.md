@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased](https://github.com/MashSoftware/the-button/compare/main...develop)
 
+## [0.23.2](https://github.com/MashSoftware/the-button/compare/v0.23.1...v0.23.2) - 2021-01-03
+
+### Added
+
+- Unit test to cover verification token generation bug found in previous release.
+
+### Changed
+
+- Renamed default branch from `master` to `main` and renamed all references.
+
+### Fixed
+
+- Error when requesting activation for unregistered email addresses.
+- Whitespace not stripped from comments, resulting in empty strings stored instead of null.
+
 ## [0.23.1](https://github.com/MashSoftware/the-button/compare/v0.23.0...v0.23.1) - 2021-01-01
 
 ### Fixed
