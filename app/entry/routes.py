@@ -187,7 +187,7 @@ def manual():
 @login_required
 @limiter.limit("2 per second", key_func=lambda: current_user.id)
 def update(id):
-    event = Event.query.get_or_404(str(id))
+    event = Event.query.get_or_404(str(id), description="Time entry not found")
     if event not in current_user.events:
         raise Forbidden()
     form = EventForm()
@@ -247,7 +247,7 @@ def update(id):
 @login_required
 @limiter.limit("2 per second", key_func=lambda: current_user.id)
 def delete(id):
-    event = Event.query.get_or_404(str(id))
+    event = Event.query.get_or_404(str(id), description="Time entry not found")
     if event not in current_user.events:
         raise Forbidden()
     if request.method == "GET":

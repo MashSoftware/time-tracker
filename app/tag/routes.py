@@ -1,14 +1,13 @@
 from datetime import datetime
 
 import pytz
-from flask import flash, redirect, render_template, request, url_for
-from flask_login import current_user, login_required
-from werkzeug.exceptions import Forbidden
-
 from app import db, limiter
 from app.models import Tag
 from app.tag import bp
 from app.tag.forms import TagForm
+from flask import flash, redirect, render_template, request, url_for
+from flask_login import current_user, login_required
+from werkzeug.exceptions import Forbidden
 
 
 @bp.route("/")
@@ -43,7 +42,7 @@ def create():
 @login_required
 @limiter.limit("2 per second", key_func=lambda: current_user.id)
 def update(id):
-    tag = Tag.query.get_or_404(str(id))
+    tag = Tag.query.get_or_404(str(id), description="Tag not found")
     if tag not in current_user.tags:
         raise Forbidden()
     form = TagForm()
@@ -63,7 +62,7 @@ def update(id):
 @login_required
 @limiter.limit("2 per second", key_func=lambda: current_user.id)
 def delete(id):
-    tag = Tag.query.get_or_404(str(id))
+    tag = Tag.query.get_or_404(str(id), description="Tag not found")
     if tag not in current_user.tags:
         raise Forbidden()
     if request.method == "GET":
