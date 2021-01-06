@@ -1,0 +1,7 @@
+<div class="card bg-white shadow mb-3" style="width: 18rem;">
+    <div class="card-body">
+        <h5 class="card-title"><span class="badge bg-secondary"><i class="fas fa-tag fa-fw"></i> {{ tag.name }}</span></h5>
+        <p class="card-text">Used {{tag.events | length}} times</p>
+        {% block actions %}{% endblock %}
+    </div>
+</div>

@@ -2,7 +2,7 @@ from datetime import datetime
 
 import pytz
 from app import db, limiter
-from app.models import Tag
+from app.models import Event, Tag
 from app.tag import bp
 from app.tag.forms import TagForm
 from flask import flash, redirect, render_template, request, url_for
@@ -72,3 +72,11 @@ def delete(id):
         db.session.commit()
         flash("Tag has been deleted.", "success")
         return redirect(url_for("tag.tags"))
+
+
+@bp.route("/<uuid:id>/entries", methods=["GET"])
+@login_required
+@limiter.limit("2 per second", key_func=lambda: current_user.id)
+def entries(id):
+    tag = Tag.query.get_or_404(str(id), description="Tag not found")
+    return render_template("tag/entries.html", title="{} time entries".format(tag.name), events=tag.events)
