@@ -132,7 +132,7 @@ class Tag(db.Model):
     updated_at = db.Column(db.DateTime(timezone=True), nullable=True)
 
     # Relationships
-    events = db.relationship("Event", backref="tag", lazy=True, passive_deletes=True)
+    events = db.relationship("Event", backref="tag", lazy=True, passive_deletes=True, order_by="desc(Event.started_at)")
 
     # Methods
     def __init__(self, user_id, name):
