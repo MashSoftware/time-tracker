@@ -9,9 +9,18 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [0.24.0](https://github.com/MashSoftware/the-button/compare/v0.23.2...v0.24.0) - 2021-??-??
 
+### Added
+
+- New tagged entry page showing all time entries linked to a particular tag.
+- Count of time entries and tags used vs limits on the account page.
+
 ### Changed
 
+- Tag page layout now shows tags alongside the number of times each has been used, link to view all time entries linked to that tag and links to edit or delete.
+- Tags on time entry cards are now links to the new tagged time entries page showing all entries with that tag.
+- Delete tag page now says how many time entries will be impacted, with a link to view them before confirming or cancelling the delete action.
 - Removed italic (emphasis) from time entry comments so that emojis don't look weird.
+- Improved 404 error pages where URL pattern matches the expected type, but is not a valid instance of that type.
 
 ## [0.23.2](https://github.com/MashSoftware/the-button/compare/v0.23.1...v0.23.2) - 2021-01-03
 
