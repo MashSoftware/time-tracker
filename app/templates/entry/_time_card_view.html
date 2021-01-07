@@ -8,7 +8,7 @@
             {% else %}
                 {{event.started_at.strftime('%H:%M')}} to {{event.ended_at.strftime('%H:%M')}}
             {% endif %}
-            {% if event.tag %}<br><span class="badge bg-secondary"><i class="fas fa-tag fa-fw"></i> {{event.tag.name}}</span>{% endif %}
+            {% if event.tag %}<br><a href="{{ url_for('tag.entries', id=event.tag.id) }}"><span class="badge bg-secondary"><i class="fas fa-tag fa-fw"></i> {{event.tag.name}}</span></a>{% endif %}
         </p>
         {% if event.comment %}<p class="card-text"><i class="fas fa-comment fa-fw"></i> "{{event.comment}}"</p>{% endif %}
         {% block actions %}{% endblock %}
