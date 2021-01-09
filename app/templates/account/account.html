@@ -33,10 +33,10 @@
                 <a href="{{ url_for('account.schedule') }}">Change</a>
             </dd>
 
-            <dt class="col-sm-3">Time entries used</dt>
+            <dt class="col-sm-3">Time entries</dt>
             <dd class="col-sm-9">{{ current_user.events | length }} of {{ current_user.entry_limit }}</dd>
 
-            <dt class="col-sm-3">Tags used</dt>
+            <dt class="col-sm-3">Tags</dt>
             <dd class="col-sm-9">{{ current_user.tags | length }} of {{ current_user.tag_limit }}</dd>
 
             <dt class="col-sm-3">Member since</dt>
