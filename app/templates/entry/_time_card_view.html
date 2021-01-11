@@ -1,4 +1,5 @@
 <div class="card bg-white shadow mb-3 {% if event.ended_at is none %}border-primary{% endif %}" id="{{event.id}}">
+    {% if event.ended_at is none %}<div class="card-header text-white bg-primary"><i class="fas fa-spinner fa-spin"></i> Started {{ event.current_delta_string }} ({{ event.current_delta_decimal }}) ago</div>{% endif %}
     <div class="card-body">
         <h5 class="card-title">{{event.started_at.strftime('%A %d %B')}}</h5>
         {% if event.ended_at %}<h6 class="card-subtitle mb-2 text-muted">{{event.duration_string()}} ({{event.duration_decimal()}})</h6>{% endif %}

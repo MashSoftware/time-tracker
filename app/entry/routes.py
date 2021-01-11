@@ -66,6 +66,10 @@ def weekly():
         if event.ended_at:
             event.ended_at = event.ended_at.astimezone(pytz.timezone(current_user.timezone))
             weekly_seconds += event.duration()
+        else:
+            current_delta_seconds = event.duration(end=pytz.utc.localize(datetime.utcnow()))
+            event.current_delta_string = seconds_to_string(current_delta_seconds)
+            event.current_delta_decimal = seconds_to_decimal(current_delta_seconds)
 
     weekly_string = seconds_to_string(weekly_seconds) if weekly_seconds > 0 else None
     weekly_decimal = seconds_to_decimal(weekly_seconds)
