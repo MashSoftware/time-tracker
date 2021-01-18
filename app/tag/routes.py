@@ -7,6 +7,7 @@ from app.tag import bp
 from app.tag.forms import TagForm
 from flask import flash, redirect, render_template, request, url_for
 from flask_login import current_user, login_required
+from app.utils import seconds_to_decimal, seconds_to_string
 from werkzeug.exceptions import Forbidden
 
 
@@ -79,4 +80,7 @@ def delete(id):
 @limiter.limit("2 per second", key_func=lambda: current_user.id)
 def entries(id):
     tag = Tag.query.get_or_404(str(id), description="Tag not found")
-    return render_template("tag/entries.html", title="{} time entries".format(tag.name), events=tag.events)
+
+    now = pytz.utc.localize(datetime.utcnow())
+
+    return render_template("tag/entries.html", title="{} time entries".format(tag.name), events=tag.events, now=now)
