@@ -25,6 +25,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Removed drop-down from "Stop now" button since all items on it are disabled anyway. Now only show dropdown on the "Start now" button state. Thanks [@andymantell](https://github.com/andymantell).
 - Delete account confirmation page now says how many entries and tags will be deleted along with the account.
 
+### Fixed
+
+- Tag names containing only whitespace now fail form validation, must contain some other characters.
+- Strip whitespace before checking for duplicated tag names.
+- Strip whitespace before creating or editing a tag name.
+
 ## [0.23.2](https://github.com/MashSoftware/the-button/compare/v0.23.1...v0.23.2) - 2021-01-03
 
 ### Added
