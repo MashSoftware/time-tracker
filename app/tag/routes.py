@@ -31,7 +31,7 @@ def create():
         return redirect(url_for("tag.tags"))
     form = TagForm()
     if form.validate_on_submit():
-        tag = Tag(user_id=current_user.id, name=form.name.data)
+        tag = Tag(user_id=current_user.id, name=form.name.data.strip())
         db.session.add(tag)
         db.session.commit()
         flash("Tag has been created.", "success")
@@ -48,7 +48,7 @@ def update(id):
         raise Forbidden()
     form = TagForm()
     if form.validate_on_submit():
-        tag.name = form.name.data
+        tag.name = form.name.data.strip()
         tag.updated_at = pytz.utc.localize(datetime.utcnow())
         db.session.add(tag)
         db.session.commit()
