@@ -113,11 +113,11 @@ class Event(db.Model):
         else:
             return 0
 
-    def duration_string(self):
-        return seconds_to_string(self.duration())
+    def duration_string(self, end=None):
+        return seconds_to_string(self.duration(end))
 
-    def duration_decimal(self):
-        return seconds_to_decimal(self.duration())
+    def duration_decimal(self, end=None):
+        return seconds_to_decimal(self.duration(end))
 
 
 class Tag(db.Model):
