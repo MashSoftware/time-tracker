@@ -15,6 +15,10 @@ class TagForm(FlaskForm):
     )
 
     def validate_name(self, name):
+        if len(name.data.strip()) == 0:
+            name.data = name.data.strip()
+            raise ValidationError("Name is required")
+
         for tag in current_user.tags:
             if tag.name == name.data:
                 raise ValidationError("You have already created a tag with that name")
