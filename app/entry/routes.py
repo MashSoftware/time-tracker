@@ -31,6 +31,7 @@ def weekly():
             "info",
         )
 
+    now = pytz.utc.localize(datetime.utcnow())
     today = date.today().isocalendar()
     year = request.args.get("year", default=str(today[0]), type=str)
     week = request.args.get("week", default=str(today[1]), type=str)
@@ -97,6 +98,7 @@ def weekly():
 
     return render_template(
         "entry/weekly.html",
+        now=now,
         start=start,
         today=today,
         next_week=next_week,
@@ -187,7 +189,7 @@ def manual():
 @login_required
 @limiter.limit("2 per second", key_func=lambda: current_user.id)
 def update(id):
-    event = Event.query.get_or_404(str(id))
+    event = Event.query.get_or_404(str(id), description="Time entry not found")
     if event not in current_user.events:
         raise Forbidden()
     form = EventForm()
@@ -247,11 +249,14 @@ def update(id):
 @login_required
 @limiter.limit("2 per second", key_func=lambda: current_user.id)
 def delete(id):
-    event = Event.query.get_or_404(str(id))
+    event = Event.query.get_or_404(str(id), description="Time entry not found")
     if event not in current_user.events:
         raise Forbidden()
+
+    now = pytz.utc.localize(datetime.utcnow())
+
     if request.method == "GET":
-        return render_template("entry/delete_entry.html", title="Delete time entry", event=event)
+        return render_template("entry/delete_entry.html", title="Delete time entry", event=event, now=now)
     elif request.method == "POST":
         db.session.delete(event)
         db.session.commit()

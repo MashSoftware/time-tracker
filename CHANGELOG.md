@@ -7,6 +7,30 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased](https://github.com/MashSoftware/the-button/compare/main...develop)
 
+## [0.24.0](https://github.com/MashSoftware/the-button/compare/v0.23.2...v0.24.0) - 2021-01-19
+
+### Added
+
+- New tagged entry page showing all time entries linked to a particular tag.
+- In-progress time entry cards now have a header that displays how long ago that entry started (on page load/refresh, not real-time). Thanks [@ahosgood](https://github.com/ahosgood).
+- Count of time entries and tags used vs limits on the account page.
+
+### Changed
+
+- Tag page layout now shows tags alongside the number of times each has been used, link to view all time entries linked to that tag and links to edit or delete.
+- Tags on time entry cards are now links to the new tagged time entries page showing all entries with that tag.
+- Delete tag page now says how many time entries will be impacted, with a link to view them before confirming or cancelling the delete action.
+- Removed italic (emphasis) from time entry comments so that emojis don't look weird.
+- Improved 404 error pages where URL pattern matches the expected type, but is not a valid instance of that type.
+- Removed drop-down from "Stop now" button since all items on it are disabled anyway. Now only show dropdown on the "Start now" button state. Thanks [@andymantell](https://github.com/andymantell).
+- Delete account confirmation page now says how many entries and tags will be deleted along with the account.
+
+### Fixed
+
+- Tag names containing only whitespace now fail form validation, must contain some other characters.
+- Strip whitespace before checking for duplicated tag names.
+- Strip whitespace before creating or editing a tag name.
+
 ## [0.23.2](https://github.com/MashSoftware/the-button/compare/v0.23.1...v0.23.2) - 2021-01-03
 
 ### Added

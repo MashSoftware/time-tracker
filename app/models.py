@@ -104,18 +104,20 @@ class Event(db.Model):
         self.user_id = str(uuid.UUID(user_id, version=4))
         self.started_at = started_at
 
-    def duration(self):
+    def duration(self, end=None):
         """Returns the duration of an event in seconds"""
-        if self.ended_at:
+        if end:
+            return int((end - self.started_at).total_seconds())
+        elif self.ended_at:
             return int((self.ended_at - self.started_at).total_seconds())
         else:
             return 0
 
-    def duration_string(self):
-        return seconds_to_string(self.duration())
+    def duration_string(self, end=None):
+        return seconds_to_string(self.duration(end))
 
-    def duration_decimal(self):
-        return seconds_to_decimal(self.duration())
+    def duration_decimal(self, end=None):
+        return seconds_to_decimal(self.duration(end))
 
 
 class Tag(db.Model):
@@ -132,7 +134,7 @@ class Tag(db.Model):
     updated_at = db.Column(db.DateTime(timezone=True), nullable=True)
 
     # Relationships
-    events = db.relationship("Event", backref="tag", lazy=True, passive_deletes=True)
+    events = db.relationship("Event", backref="tag", lazy=True, passive_deletes=True, order_by="desc(Event.started_at)")
 
     # Methods
     def __init__(self, user_id, name):

@@ -1,16 +1,17 @@
-<div class="card bg-white shadow mb-3 {% if event.ended_at is none %}border-primary{% endif %}" id="{{event.id}}">
+<div class="card bg-white shadow mb-3 {% if event.ended_at is none %}border-info{% endif %}" id="{{event.id}}">
+    {% if event.ended_at is none %}<div class="card-header bg-info">Started {{ event.duration_string(now) }} ({{ event.duration_decimal(now) }}) ago</div>{% endif %}
     <div class="card-body">
         <h5 class="card-title">{{event.started_at.strftime('%A %d %B')}}</h5>
         {% if event.ended_at %}<h6 class="card-subtitle mb-2 text-muted">{{event.duration_string()}} ({{event.duration_decimal()}})</h6>{% endif %}
         <p class="card-text">
             {% if event.ended_at is none %}
-                Started at {{event.started_at.strftime('%H:%M')}}
+                Since {{event.started_at.strftime('%H:%M')}}
             {% else %}
                 {{event.started_at.strftime('%H:%M')}} to {{event.ended_at.strftime('%H:%M')}}
             {% endif %}
-            {% if event.tag %}<br><span class="badge bg-secondary"><i class="fas fa-tag fa-fw"></i> {{event.tag.name}}</span>{% endif %}
+            {% if event.tag %}<br><a href="{{ url_for('tag.entries', id=event.tag.id) }}"><span class="badge bg-secondary"><i class="fas fa-tag fa-fw"></i> {{event.tag.name}}</span></a>{% endif %}
         </p>
-        {% if event.comment %}<p class="card-text"><i class="fas fa-comment fa-fw"></i> <em>"{{event.comment}}"</em></p>{% endif %}
+        {% if event.comment %}<p class="card-text"><i class="fas fa-comment fa-fw"></i> "{{event.comment}}"</p>{% endif %}
         {% block actions %}{% endblock %}
     </div>
 </div>
