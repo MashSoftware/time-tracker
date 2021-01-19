@@ -14,7 +14,7 @@
                 }
             </style>
             <div class="progress">
-                <div class="progress-bar progress-bar-striped {% if progress >= 100 %}bg-success{% endif %}" role="progressbar" aria-valuenow="{{ progress }}" aria-valuemin="0" aria-valuemax="100">{{ progress }}%</div>
+                <div class="progress-bar progress-bar-striped {% if progress >= 100 %}bg-success{% endif %}" role="progressbar" aria-valuenow="{{ progress }}" aria-valuemin="0" aria-valuemax="100"><strong>{{ progress }}%</strong></div>
             </div>
             <p class="card-text">
                 {% if current_user.schedule_decimal() > weekly_decimal %}
