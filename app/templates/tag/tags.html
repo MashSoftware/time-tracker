@@ -2,12 +2,12 @@
 {% block content %}
 <div class="row">
     <div class="col-md-6">
+        <div class="d-grid gap-2 d-md-block mb-3">
+            <a class="btn btn-primary" href="{{ url_for('tag.create') }}" role="button"><i class="fas fa-plus fa-lg fa-fw"></i> Create new tag</a>
+        </div>
         {% for tag in current_user.tags %}
             {% include 'tag/_tag_card_actions.html' %}
         {% endfor %}  
-        <div class="d-grid gap-2 d-md-block">
-            <a class="btn btn-primary" href="{{ url_for('tag.create') }}" role="button"><i class="fas fa-plus fa-lg fa-fw"></i> Create new tag</a>
-        </div>
     </div>
 </div>
 {% endblock %}
