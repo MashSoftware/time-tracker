@@ -21,7 +21,7 @@ class User(UserMixin, db.Model):
     password = db.Column(db.Binary, nullable=False)
     email_address = db.Column(db.String(256), nullable=False, unique=True, index=True)
     timezone = db.Column(db.String, nullable=False, server_default="UTC")
-    entry_limit = db.Column(db.Integer, nullable=False, server_default="120")
+    entry_history = db.Column(db.Integer, nullable=False, server_default="12")
     tag_limit = db.Column(db.Integer, nullable=False, server_default="8")
     activated_at = db.Column(db.DateTime(timezone=True), nullable=True)
     login_at = db.Column(db.DateTime(timezone=True), nullable=True)
