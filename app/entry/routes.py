@@ -123,15 +123,6 @@ def auto():
         event.ended_at = pytz.utc.localize(datetime.utcnow())
         db.session.add(event)
     else:
-        if current_user.entry_limit <= len(current_user.events):
-            oldest_event = Event.query.filter_by(user_id=current_user.id).order_by(Event.started_at.asc()).first()
-            db.session.delete(oldest_event)
-            flash(
-                "You have reached the {0} entry limit for your account. The oldest entry has been deleted.".format(
-                    current_user.entry_limit
-                ),
-                "warning",
-            )
         event = Event(user_id=current_user.id, started_at=pytz.utc.localize(datetime.utcnow()))
         event.tag_id = request.args.get("tag_id", None, type=str)
         db.session.add(event)
