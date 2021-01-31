@@ -9,7 +9,7 @@ conn = psycopg2.connect(os.environ.get("DATABASE_URL"))
 cur = conn.cursor()
 
 # Execute a command
-cur.execute("delete from event where started_at < now() - interval '12 weeks';")
+cur.execute("delete from event where started_at < now() - interval '3 months';")
 
 # Make the changes to the database persistent
 conn.commit()
