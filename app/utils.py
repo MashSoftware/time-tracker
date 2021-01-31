@@ -24,6 +24,7 @@ def seconds_to_decimal(seconds):
 
 
 def seconds_to_time(seconds):
+    """Returns a datetime.time instance for a given number of seconds"""
     hours, remainder = divmod(seconds, 3600)
     minutes, seconds = divmod(remainder, 60)
     return time(hour=hours, minute=minutes, second=seconds)
