@@ -33,8 +33,11 @@
                 <a href="{{ url_for('account.schedule') }}">Change</a>
             </dd>
 
-            <dt class="col-sm-3">Entry history</dt>
-            <dd class="col-sm-9">{{ current_user.entry_history }} months retained</dd>
+            <dt class="col-sm-3">History</dt>
+            <dd class="col-sm-9">{{ current_user.entry_history }} weeks since {{ history_date.strftime('%A %d %B %Y') }}</dd>
+
+            <dt class="col-sm-3">Time entries</dt>
+            <dd class="col-sm-9">{{ current_user.events | length }}</dd>
 
             <dt class="col-sm-3">Tags</dt>
             <dd class="col-sm-9">{{ current_user.tags | length }} of {{ current_user.tag_limit }} used</dd>

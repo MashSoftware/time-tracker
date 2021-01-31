@@ -1,5 +1,5 @@
 import time
-from datetime import date, datetime, time
+from datetime import date, datetime, time, timedelta
 
 import pytz
 from app import db, limiter
@@ -18,7 +18,8 @@ def account():
     user.created_at = user.created_at.astimezone(pytz.timezone(user.timezone))
     user.login_at = user.login_at.astimezone(pytz.timezone(user.timezone))
     user.updated_at = user.updated_at.astimezone(pytz.timezone(user.timezone)) if user.updated_at else None
-    return render_template("account/account.html", title="My Account", user=user)
+    history_date = datetime.utcnow().astimezone(pytz.timezone(user.timezone)) - timedelta(weeks=user.entry_history)
+    return render_template("account/account.html", title="My Account", user=user, history_date=history_date)
 
 
 @bp.route("/change-password", methods=["GET", "POST"])
