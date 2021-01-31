@@ -1,3 +1,6 @@
+from datetime import time
+
+
 def seconds_to_string(seconds):
     """Returns the number of seconds formated as a string"""
     hours, remainder = divmod(seconds, 3600)
@@ -18,3 +21,9 @@ def seconds_to_decimal(seconds):
     if len(decimal[1]) > 2:
         decimal[1] = decimal[1][:2]
     return float(".".join(decimal))
+
+
+def seconds_to_time(seconds):
+    hours, remainder = divmod(seconds, 3600)
+    minutes, seconds = divmod(remainder, 60)
+    return time(hour=hours, minute=minutes, second=seconds)
