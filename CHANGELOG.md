@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
-- Scheduled task to delete all time entries older than 12 weeks. This is run daily at midnight UTC and based on the start date and time of the time entry. This helps to minimise the storage requirements of the app.
+- Scheduled task to delete all time entries older than 3 months. This is run daily at midnight UTC and based on the start date and time of the time entry. This helps to minimise the storage requirements of the app.
 
 ### Changed
 
@@ -17,7 +17,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Removed
 
-- User account based limit of 120 entries. Now you can create as many time entries as you like, but they will be deleted after 12 weeks.
+- User account based limit of 120 entries. Now you can create as many time entries as you like, but they will be deleted after 3 months.
 
 ## [0.24.0](https://github.com/MashSoftware/the-button/compare/v0.23.2...v0.24.0) - 2021-01-19
 
