@@ -106,10 +106,10 @@ class Event(db.Model):
 
     def duration(self, end=None):
         """Returns the duration of an event in seconds"""
-        if end:
-            return int((end - self.started_at).total_seconds())
-        elif self.ended_at:
+        if self.ended_at:
             return int((self.ended_at - self.started_at).total_seconds())
+        elif end:
+            return int((end - self.started_at).total_seconds())
         else:
             return 0
 
