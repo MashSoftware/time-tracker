@@ -2,7 +2,8 @@ import pytz
 from app.models import User
 from flask_wtf import FlaskForm
 from wtforms import BooleanField, PasswordField, SelectField, StringField
-from wtforms.validators import Email, EqualTo, InputRequired, Length, ValidationError
+from wtforms.validators import (Email, EqualTo, InputRequired, Length,
+                                Optional, ValidationError)
 
 
 class SignupForm(FlaskForm):
@@ -64,7 +65,7 @@ class LoginForm(FlaskForm):
         ],
         description="Must be between 8 and 72 characters",
     )
-    remember_me = BooleanField("Remember me")
+    remember_me = BooleanField("Remember me", validators=[Optional()])
 
 
 class TokenRequestForm(FlaskForm):
