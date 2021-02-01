@@ -2,6 +2,7 @@
 {% block content %}
 <div class="row">
     <div class="col-md-6">
+        <p class="lead">{{ events | length}} time {%if events | length > 1%}entries{% else %}entry{% endif %} totalling {{ total_string }} ({{ total_decimal }}) in the last {{ current_user.entry_history }} weeks.</p>
         {% for event in events %}
             {% include 'entry/_time_card_actions.html' %}
         {% endfor %}  

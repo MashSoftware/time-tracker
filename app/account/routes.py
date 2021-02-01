@@ -1,11 +1,12 @@
 import time
-from datetime import date, datetime, time
+from datetime import date, datetime, time, timedelta
 
 import pytz
 from app import db, limiter
 from app.account import bp
 from app.account.forms import AccountForm, PasswordForm, ScheduleForm
 from app.main.email import send_confirmation_email
+from app.utils import seconds_to_time
 from flask import flash, redirect, render_template, request, url_for
 from flask_login import current_user, fresh_login_required, login_required
 
@@ -18,7 +19,8 @@ def account():
     user.created_at = user.created_at.astimezone(pytz.timezone(user.timezone))
     user.login_at = user.login_at.astimezone(pytz.timezone(user.timezone))
     user.updated_at = user.updated_at.astimezone(pytz.timezone(user.timezone)) if user.updated_at else None
-    return render_template("account/account.html", title="My Account", user=user)
+    history_date = datetime.utcnow().astimezone(pytz.timezone(user.timezone)) - timedelta(weeks=user.entry_history)
+    return render_template("account/account.html", title="My Account", user=user, history_date=history_date)
 
 
 @bp.route("/change-password", methods=["GET", "POST"])
@@ -105,31 +107,11 @@ def schedule():
         flash("Schedule changes have been saved", "success")
         return redirect(url_for("account.account"))
     elif request.method == "GET":
-        mon_hours, mon_remainder = divmod(current_user.monday, 3600)
-        mon_minutes, mon_seconds = divmod(mon_remainder, 60)
-        form.monday.data = time(hour=mon_hours, minute=mon_minutes, second=mon_seconds)
-
-        tue_hours, tue_remainder = divmod(current_user.tuesday, 3600)
-        tue_minutes, tue_seconds = divmod(tue_remainder, 60)
-        form.tuesday.data = time(hour=tue_hours, minute=tue_minutes, second=tue_seconds)
-
-        wed_hours, wed_remainder = divmod(current_user.wednesday, 3600)
-        wed_minutes, wed_seconds = divmod(wed_remainder, 60)
-        form.wednesday.data = time(hour=wed_hours, minute=wed_minutes, second=wed_seconds)
-
-        thu_hours, thu_remainder = divmod(current_user.thursday, 3600)
-        thu_minutes, thu_seconds = divmod(thu_remainder, 60)
-        form.thursday.data = time(hour=thu_hours, minute=thu_minutes, second=thu_seconds)
-
-        fri_hours, fri_remainder = divmod(current_user.friday, 3600)
-        fri_minutes, fri_seconds = divmod(fri_remainder, 60)
-        form.friday.data = time(hour=fri_hours, minute=fri_minutes, second=fri_seconds)
-
-        sat_hours, sat_remainder = divmod(current_user.saturday, 3600)
-        sat_minutes, sat_seconds = divmod(sat_remainder, 60)
-        form.saturday.data = time(hour=sat_hours, minute=sat_minutes, second=sat_seconds)
-
-        sun_hours, sun_remainder = divmod(current_user.sunday, 3600)
-        sun_minutes, sun_seconds = divmod(sun_remainder, 60)
-        form.sunday.data = time(hour=sun_hours, minute=sun_minutes, second=sun_seconds)
+        form.monday.data = seconds_to_time(current_user.monday)
+        form.tuesday.data = seconds_to_time(current_user.tuesday)
+        form.wednesday.data = seconds_to_time(current_user.wednesday)
+        form.thursday.data = seconds_to_time(current_user.thursday)
+        form.friday.data = seconds_to_time(current_user.friday)
+        form.saturday.data = seconds_to_time(current_user.saturday)
+        form.sunday.data = seconds_to_time(current_user.sunday)
     return render_template("account/schedule_form.html", title="Edit schedule", form=form)
