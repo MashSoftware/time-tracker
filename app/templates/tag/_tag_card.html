@@ -1,7 +1,7 @@
 <div class="card bg-white shadow mb-3" style="width: 18rem;">
     <div class="card-body">
         <h5 class="card-title"><span class="badge bg-secondary"><i class="fas fa-tag fa-fw"></i> {{ tag.name }}</span></h5>
-        <p class="card-text">Used {{tag.events | length}} times</p>
+        {% if tag.events %}<p class="card-text">{{tag.events | length}} time {% if tag.events | length > 1 %}entries{% else %}entry{% endif %} : {{ tag.total_string }} ({{ tag.total_decimal }})</p>{% endif %}
         {% block actions %}{% endblock %}
     </div>
 </div>

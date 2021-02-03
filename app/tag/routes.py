@@ -15,6 +15,15 @@ from werkzeug.exceptions import Forbidden
 @login_required
 @limiter.limit("2 per second", key_func=lambda: current_user.id)
 def tags():
+    now = pytz.utc.localize(datetime.utcnow())
+    for tag in current_user.tags:
+        total_seconds = 0
+        for event in tag.events:
+            total_seconds += event.duration(end=now)
+
+        tag.total_string = seconds_to_string(total_seconds)
+        tag.total_decimal = seconds_to_decimal(total_seconds)
+
     return render_template("tag/tags.html", title="Tags")
 
 
