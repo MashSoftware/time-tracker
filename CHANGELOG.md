@@ -10,10 +10,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 
 - Scheduled task to delete all time entries older than 12 weeks. This is run daily at midnight UTC and based on the start date and time of the time entry. This helps to minimise the storage requirements of the app.
+- Display time entry history retention period and date in user account page.
+- Total amount of time associated with each tag on both the tag list page and tagged time entry pages.
+- Date a tag was last used displayed on tag card.
 
 ### Changed
 
 - Time entry limit changed to entry history retention period in account settings.
+- Moved more code to common utils with additional unit tests.
+- Redesigned layout of tag card
 
 ### Removed
 
