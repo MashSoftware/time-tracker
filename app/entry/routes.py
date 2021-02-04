@@ -66,7 +66,7 @@ def weekly():
         event.started_at = event.started_at.astimezone(pytz.timezone(current_user.timezone))
         if event.ended_at:
             event.ended_at = event.ended_at.astimezone(pytz.timezone(current_user.timezone))
-            weekly_seconds += event.duration()
+        weekly_seconds += event.duration(end=now)
 
     weekly_string = seconds_to_string(weekly_seconds) if weekly_seconds > 0 else None
     weekly_decimal = seconds_to_decimal(weekly_seconds)
@@ -90,7 +90,7 @@ def weekly():
         for event in events:
             if tag.id == event.tag_id:
                 tag_total["name"] = tag.name
-                tag_total["total"] += event.duration()
+                tag_total["total"] += event.duration(end=now)
         if tag_total["total"] > 0:
             tag_total["decimal"] = seconds_to_decimal(tag_total["total"])
             tag_total["total"] = seconds_to_string(tag_total["total"])
