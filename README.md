@@ -4,6 +4,8 @@ A simple time tracking service.
 
 [![Requirements Status](https://requires.io/github/MashSoftware/the-button/requirements.svg?branch=main)](https://requires.io/github/MashSoftware/the-button/requirements/?branch=main)
 
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/N4N33KKEF)
+
 ## Prerequisites
 
 ### Required
