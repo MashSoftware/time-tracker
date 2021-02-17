@@ -1,6 +1,6 @@
 bcrypt==3.2.0
 email_validator==1.1.2
-flask-compress==1.8.0
+flask-compress==1.9.0
 flask-limiter==1.4
 flask-login==0.5.0
 flask-migrate==2.6.0
