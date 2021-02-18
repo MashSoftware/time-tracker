@@ -14,15 +14,15 @@ class AccountForm(FlaskForm):
     email_address = StringField(
         "Email address",
         validators=[
-            InputRequired(message="Email address is required"),
+            InputRequired(message="Enter an email address"),
             Email(granular_message=True, check_deliverability=True),
-            Length(max=256, message="Email address must be less than 256 characters"),
+            Length(max=256, message="Email address must be 256 characters or fewer"),
         ],
         description="We'll never share your email with anyone else.",
     )
     timezone = SelectField(
         "Timezone",
-        validators=[InputRequired(message="Timezone is required")],
+        validators=[InputRequired(message="Select a timezone")],
         choices=tz_tuples,
         default="Europe/London",
     )
@@ -38,7 +38,7 @@ class PasswordForm(FlaskForm):
     current_password = PasswordField(
         "Current password",
         validators=[
-            InputRequired(message="Current password is required"),
+            InputRequired(message="Enter your current password"),
             Length(
                 min=8,
                 max=72,
@@ -49,7 +49,7 @@ class PasswordForm(FlaskForm):
     new_password = PasswordField(
         "New password",
         validators=[
-            InputRequired(message="New password is required"),
+            InputRequired(message="Enter a new password"),
             Length(
                 min=8,
                 max=72,
@@ -59,9 +59,9 @@ class PasswordForm(FlaskForm):
         description="Must be between 8 and 72 characters",
     )
     confirm_password = PasswordField(
-        "Confirm password",
+        "Confirm new password",
         validators=[
-            InputRequired(message="Confirm your password"),
+            InputRequired(message="Confirm your new password"),
             EqualTo("new_password", message="Passwords must match."),
         ],
     )
@@ -72,10 +72,10 @@ class PasswordForm(FlaskForm):
 
 
 class ScheduleForm(FlaskForm):
-    monday = TimeField("Monday", validators=[InputRequired(message="Monday's time is required")])
-    tuesday = TimeField("Tuesday", validators=[InputRequired(message="Tuesday's time is required")])
-    wednesday = TimeField("Wednesday", validators=[InputRequired(message="Wednesday's time is required")])
-    thursday = TimeField("Thursday", validators=[InputRequired(message="Thursday's time is required")])
-    friday = TimeField("Friday", validators=[InputRequired(message="Friday's time is required")])
-    saturday = TimeField("Saturday", validators=[InputRequired(message="Saturday's time is required")])
-    sunday = TimeField("Sunday", validators=[InputRequired(message="Sunday's time is required")])
+    monday = TimeField("Monday", validators=[InputRequired(message="Enter Monday's time")])
+    tuesday = TimeField("Tuesday", validators=[InputRequired(message="Enter Tuesday's time")])
+    wednesday = TimeField("Wednesday", validators=[InputRequired(message="Enter Wednesday's time")])
+    thursday = TimeField("Thursday", validators=[InputRequired(message="Enter Thursday's time")])
+    friday = TimeField("Friday", validators=[InputRequired(message="Enter Friday's time")])
+    saturday = TimeField("Saturday", validators=[InputRequired(message="Enter Saturday's time")])
+    sunday = TimeField("Sunday", validators=[InputRequired(message="Enter Sunday's time")])
