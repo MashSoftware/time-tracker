@@ -39,7 +39,7 @@
 </head>
 
 <body class="bg-light">
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-3">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
         <div class="container">
             <a class="navbar-brand" href="{{ url_for('main.index') }}">The Button <span class="badge bg-info text-dark">BETA</span></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -80,28 +80,29 @@
             </div>
         </div>
     </nav>
+    {% block header %}{% endblock %}
     <div class="container">
         {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-        {% for category, message in messages %}
-        <div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
-            {% if category == 'danger' %}
-            <h4 class="alert-heading">There is a problem</h4>
+            {% if messages %}
+                {% for category, message in messages %}
+                <div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+                    {% if category == 'danger' %}
+                    <h4 class="alert-heading">There is a problem</h4>
+                    {% endif %}
+                    {% if category == 'success' %}
+                    <h4 class="alert-heading">Success</h4>
+                    {% endif %}
+                    {% if category == 'info' %}
+                    <h4 class="alert-heading">Heads up</h4>
+                    {% endif %}
+                    {% if category == 'warning' %}
+                    <h4 class="alert-heading">Uh-oh</h4>
+                    {% endif %}
+                    <p class="mb-0">{{ message | safe }}</p>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endfor %}
             {% endif %}
-            {% if category == 'success' %}
-            <h4 class="alert-heading">Success</h4>
-            {% endif %}
-            {% if category == 'info' %}
-            <h4 class="alert-heading">Heads up</h4>
-            {% endif %}
-            {% if category == 'warning' %}
-            <h4 class="alert-heading">Uh-oh</h4>
-            {% endif %}
-            <p class="mb-0">{{ message | safe }}</p>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        {% endfor %}
-        {% endif %}
         {% endwith %}
         {% if form and form.errors %}
         <div class="alert alert-danger" role="alert">
@@ -111,14 +112,6 @@
             <p class="mb-0">{{ error }}</p>
             {% endfor %}
             {% endfor %}
-        </div>
-        {% endif %}
-        {% if title %}
-        <div class="row">
-            <div class="col">
-                <h1>{{ title }}</h1>
-                <hr>
-            </div>
         </div>
         {% endif %}
         {% block content %}{% endblock %}
