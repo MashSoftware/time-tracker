@@ -1,9 +1,8 @@
 {% extends "base.html" %}
 {% block header %}
-<div class="bg-white border-bottom py-3 mb-3">
-    <div class="container">
-        <h1>{{ title }}</h1>
-    </div>
+<div class="container">
+    {{ super() }}
+    <h1>{{ title }}</h1>
 </div>
 {% endblock %}
 {% block content %}

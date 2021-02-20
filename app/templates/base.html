@@ -4,14 +4,14 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="The Button - Time tracking made simple.">
+    <meta name="description" content="The Button - Simple, quick and easy time tracking.">
     <meta name="keywords" content="time, timing, timer, track, tracking, tracker, clocking, clock, clock-in, clock-out, log, logging, logger, record, recording, simple, easy, quick">
     <meta name="author" content="Matthew Shaw">
 
     <!-- Open Graph Metadata -->
     <meta property="og:site_name" content="The Button"/>
     <meta property="og:title" content="{{title}}"/>
-    <meta property="og:description" content="Time tracking made simple"/>
+    <meta property="og:description" content="Simple, quick and easy time tracking"/>
     <meta property="og:type" content="website"/>
     <meta property="og:url" content="{{ request.url }}"/>
     <meta property="og:image" content="{{ url_for('static', filename='android-chrome-192x192.png', _external=True) }}"/>
@@ -80,41 +80,46 @@
             </div>
         </div>
     </nav>
-    {% block header %}{% endblock %}
-    <div class="container">
-        {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                {% for category, message in messages %}
-                <div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
-                    {% if category == 'danger' %}
-                    <h4 class="alert-heading">There is a problem</h4>
-                    {% endif %}
-                    {% if category == 'success' %}
-                    <h4 class="alert-heading">Success</h4>
-                    {% endif %}
-                    {% if category == 'info' %}
-                    <h4 class="alert-heading">Heads up</h4>
-                    {% endif %}
-                    {% if category == 'warning' %}
-                    <h4 class="alert-heading">Uh-oh</h4>
-                    {% endif %}
-                    <p class="mb-0">{{ message | safe }}</p>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
+    <div class="bg-white border-bottom py-3 mb-4">
+        <div class="container">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                    <div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+                        {% if category == 'danger' %}
+                        <h4 class="alert-heading">There is a problem</h4>
+                        {% endif %}
+                        {% if category == 'success' %}
+                        <h4 class="alert-heading">Success</h4>
+                        {% endif %}
+                        {% if category == 'info' %}
+                        <h4 class="alert-heading">Heads up</h4>
+                        {% endif %}
+                        {% if category == 'warning' %}
+                        <h4 class="alert-heading">Uh-oh</h4>
+                        {% endif %}
+                        <p class="mb-0">{{ message | safe }}</p>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            {% if form and form.errors %}
+            <div class="alert alert-danger" role="alert">
+                <h4 class="alert-heading">There is a problem</h4>
+                {% for field, errors in form.errors.items() %}
+                {% for error in errors %}
+                <p class="mb-0">{{ error }}</p>
                 {% endfor %}
+                {% endfor %}
+            </div>
             {% endif %}
-        {% endwith %}
-        {% if form and form.errors %}
-        <div class="alert alert-danger" role="alert">
-            <h4 class="alert-heading">There is a problem</h4>
-            {% for field, errors in form.errors.items() %}
-            {% for error in errors %}
-            <p class="mb-0">{{ error }}</p>
-            {% endfor %}
-            {% endfor %}
         </div>
-        {% endif %}
+        {% block header %}{% endblock %}
+    </div>
+    <div class="container">
         {% block content %}{% endblock %}
+    </div>
     </div>
     <footer class="container">
         <hr>

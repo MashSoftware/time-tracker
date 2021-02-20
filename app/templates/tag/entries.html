@@ -1,10 +1,9 @@
 {% extends "base.html" %}
 {% block header %}
-<div class="bg-white border-bottom py-3 mb-3">
-    <div class="container">
-        <h1>{{ title }}</h1>
-        <p class="lead">{{ events | length }} time {% if events | length > 1 %}entries{% else %}entry{% endif %} : {{ total_string }} ({{ total_decimal }}) in the last {{ current_user.entry_history }} weeks.</p>
-    </div>
+<div class="container">
+    {{ super() }}
+    <h1>{{ title }}</h1>
+    <p class="lead">{{ events | length }} time {% if events | length > 1 %}entries{% else %}entry{% endif %} : {{ total_string }} ({{ total_decimal }}) in the last {{ current_user.entry_history }} weeks.</p>
 </div>
 {% endblock %}
 {% block content %}
