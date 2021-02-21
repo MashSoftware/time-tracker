@@ -51,7 +51,9 @@ class EventForm(FlaskForm):
             raise ValidationError("Enter a start date and time")
 
         if ended_at_date.data < self.started_at_date.data:
-            raise ValidationError("Stop date must be the same as or after {}".format(self.started_at_date.data.strftime("%d/%m/%Y")))
+            raise ValidationError(
+                "Stop date must be the same as or after {}".format(self.started_at_date.data.strftime("%d/%m/%Y"))
+            )
 
         current_localised_date = (
             pytz.utc.localize(datetime.utcnow()).astimezone(pytz.timezone(current_user.timezone)).date()
