@@ -18,8 +18,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - Time entry limit changed to entry history retention period in account settings.
 - Weekly summary now includes the current duration of in-progress time entries in both time and tag totals.
+- Redesigned home page and re-written selling-points.
+- Redesigned page title headers.
+- Redesigned layout of tag card.
 - Moved more code to common utils with additional unit tests.
-- Redesigned layout of tag card
 
 ### Removed
 
