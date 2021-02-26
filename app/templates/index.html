@@ -3,18 +3,18 @@
 <div class="container text-center pb-2">
     <h1 class="display-4">The Button</h1>
     <p class="lead">Simple, quick and easy time tracking.</p>
-    <a class="btn btn-primary btn-lg" href="{{ url_for('auth.signup') }}" role="button"><i
-        class="fas fa-user-plus fa-lg fa-fw"></i> Sign up</a>
-    <a class="btn btn-secondary btn-lg" href="{{ url_for('auth.login') }}" role="button"><i
-        class="fas fa-sign-in-alt fa-lg fa-fw"></i> Log in</a>
+    <div class="d-grid gap-2 d-md-block">
+        <a class="btn btn-primary btn-lg" href="{{ url_for('auth.signup') }}" role="button"><i class="fas fa-user-plus fa-lg"></i> Sign up</a>
+        <a class="btn btn-secondary btn-lg" href="{{ url_for('auth.login') }}" role="button"><i class="fas fa-sign-in-alt fa-lg"></i> Log in</a>
+    </div>
 </div>
 {% endblock %}
 {% block content %}
-<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
     <div class="col">
         <div class="card bg-white h-100">
             <div class="card-body">
-                <h2 class="card-title"><i class="fas fa-stopwatch fa-lg fa-fw"></i> Simple</h2>
+                <h2 class="card-title"><i class="fas fa-stopwatch fa-lg"></i> Simple</h2>
                 <p class="card-text lead">Clear, quick and easy to use. Just click to start, click again to finish, done!</p>
             </div>
         </div>
@@ -22,7 +22,7 @@
     <div class="col">
         <div class="card bg-white h-100">
             <div class="card-body">
-                <h2 class="card-title"><i class="fas fa-thumbs-up fa-lg fa-fw"></i> Flexible</h2>
+                <h2 class="card-title"><i class="fas fa-thumbs-up fa-lg"></i> Flexible</h2>
                 <p class="card-text lead">Create your own tags to categorise your time entries. Manually create or adjust time entries if you need to.</p>
             </div>
         </div>
@@ -30,7 +30,7 @@
     <div class="col">
         <div class="card bg-white h-100">
             <div class="card-body">
-                <h2 class="card-title"><i class="fas fa-tachometer-alt fa-lg fa-fw"></i> Fast</h2>
+                <h2 class="card-title"><i class="fas fa-tachometer-alt fa-lg"></i> Fast</h2>
                 <p class="card-text lead">A lightweight and fast user interface, perfect for mobile networks.</p>
             </div>
         </div>
@@ -38,7 +38,7 @@
     <div class="col">
         <div class="card bg-white h-100">
             <div class="card-body">
-                <h2 class="card-title"><i class="fas fa-shield-alt fa-lg fa-fw"></i> Secure</h2>
+                <h2 class="card-title"><i class="fas fa-shield-alt fa-lg"></i> Secure</h2>
                 <p class="card-text lead">Uses strict security standards and policies to protect from common attacks.</p>
             </div>
         </div>
@@ -46,7 +46,7 @@
     <div class="col">
         <div class="card bg-white h-100">
             <div class="card-body">
-                <h2 class="card-title"><i class="fas fa-user-secret fa-lg fa-fw"></i> Protected</h2>
+                <h2 class="card-title"><i class="fas fa-user-secret fa-lg"></i> Protected</h2>
                 <p class="card-text lead">Stores the least amount of personal data possible, only an email address. You are in full control of your data and can permanently delete everything at any time.</p>
             </div>
         </div>
@@ -54,7 +54,7 @@
     <div class="col">
         <div class="card bg-white h-100">
             <div class="card-body">
-                <h2 class="card-title"><i class="fas fa-globe-europe fa-lg fa-fw"></i> Web first</h2>
+                <h2 class="card-title"><i class="fas fa-globe-europe fa-lg"></i> Web first</h2>
                 <p class="card-text lead">We treat the browser as a first-class citizen, not a fallback option. The web is open, democratic and free in a way that app stores tend not to be.</p>
             </div>
         </div>
@@ -62,7 +62,7 @@
     <div class="col">
         <div class="card bg-white h-100">
             <div class="card-body">
-                <h2 class="card-title"><i class="fas fa-mobile-alt fa-lg fa-fw"></i> Responsive</h2>
+                <h2 class="card-title"><i class="fas fa-mobile-alt fa-lg"></i> Responsive</h2>
                 <p class="card-text lead">Mobile-first design means it works perfectly and looks great on any size device.</p>
             </div>
         </div>
@@ -70,7 +70,7 @@
     <div class="col">
         <div class="card bg-white h-100">
             <div class="card-body">
-                <h2 class="card-title"><i class="fab fa-osi fa-lg fa-fw"></i> Open</h2>
+                <h2 class="card-title"><i class="fab fa-osi fa-lg"></i> Open</h2>
                 <p class="card-text lead">Fully open source code, all hosted and run within the EU.</p>
             </div>
         </div>
