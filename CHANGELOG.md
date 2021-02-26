@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased](https://github.com/MashSoftware/the-button/compare/main...develop)
 
+## [0.25.0](https://github.com/MashSoftware/the-button/compare/v0.24.0...v0.25.0) - 2021-02-26
+
 ### Added
 
 - Scheduled task to delete all time entries older than 12 weeks. This is run daily at midnight UTC and based on the start date and time of the time entry. This helps to minimise the storage requirements of the app.
