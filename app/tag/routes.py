@@ -110,6 +110,7 @@ def entries(id):
     return render_template(
         "tag/entries.html",
         title="All {} time entries".format(tag.name),
+        now=now,
         events=tag.events,
         total_string=total_string,
         total_decimal=total_decimal,
