@@ -1,4 +1,10 @@
 {% extends "base.html" %}
+{% block header %}
+<div class="container">
+    {{ super() }}
+    <h1>{{ title }}</h1>
+</div>
+{% endblock %}
 {% block content %}
 <div class="row">
     <div class="col-md-5">
@@ -31,6 +37,32 @@
                 </div>
             </div>
         {% endif %}
+        <div class="row">
+            <div class="col">
+                <nav aria-label="Page navigation">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item">
+                            <a class="page-link"
+                                href="{{ url_for('entry.weekly', year=previous_week[0], week=previous_week[1]) }}"
+                                aria-label="Previous"><i class="fas fa-chevron-left"></i> Previous</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="{{ url_for('entry.weekly') }}">Current</a>
+                        </li>
+                        {% if request.args.get('week') == None or request.args.get('week') == today[1] %}
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Next <i class="fas fa-chevron-right"></i></a>
+                        </li>
+                        {% else %}
+                        <li class="page-item">
+                            <a class="page-link" href="{{ url_for('entry.weekly', year=next_week[0], week=next_week[1]) }}"
+                                aria-label="Next">Next <i class="fas fa-chevron-right"></i></a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </div>
+        </div>
     </div>
     <div class="col-md-7">
         {% if events %}
@@ -38,32 +70,6 @@
                 {% include 'entry/_time_card_actions.html' %}
             {% endfor %}
         {% endif %}
-    </div>
-</div>
-<div class="row">
-    <div class="col">
-        <nav aria-label="Page navigation">
-            <ul class="pagination justify-content-center">
-                <li class="page-item">
-                    <a class="page-link"
-                        href="{{ url_for('entry.weekly', year=previous_week[0], week=previous_week[1]) }}"
-                        aria-label="Previous"><i class="fas fa-chevron-left"></i> Previous</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="{{ url_for('entry.weekly') }}">Current</a>
-                </li>
-                {% if request.args.get('week') == None or request.args.get('week') == today[1] %}
-                <li class="page-item disabled">
-                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Next <i class="fas fa-chevron-right"></i></a>
-                </li>
-                {% else %}
-                <li class="page-item">
-                    <a class="page-link" href="{{ url_for('entry.weekly', year=next_week[0], week=next_week[1]) }}"
-                        aria-label="Next">Next <i class="fas fa-chevron-right"></i></a>
-                </li>
-                {% endif %}
-            </ul>
-        </nav>
     </div>
 </div>
 {% endblock %}

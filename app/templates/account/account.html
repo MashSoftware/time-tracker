@@ -1,4 +1,10 @@
 {% extends "base.html" %}
+{% block header %}
+<div class="container">
+    {{ super() }}
+    <h1>{{ title }}</h1>
+</div>
+{% endblock %}
 {% block content %}
 <div class="row">
     <div class="col-md-8">
@@ -33,11 +39,14 @@
                 <a href="{{ url_for('account.schedule') }}">Change</a>
             </dd>
 
+            <dt class="col-sm-3">History</dt>
+            <dd class="col-sm-9">{{ current_user.entry_history }} weeks since {{ history_date.strftime('%A %d %B %Y') }}</dd>
+
             <dt class="col-sm-3">Time entries</dt>
-            <dd class="col-sm-9">{{ current_user.events | length }} of {{ current_user.entry_limit }}</dd>
+            <dd class="col-sm-9">{{ current_user.events | length }}</dd>
 
             <dt class="col-sm-3">Tags</dt>
-            <dd class="col-sm-9">{{ current_user.tags | length }} of {{ current_user.tag_limit }}</dd>
+            <dd class="col-sm-9">{{ current_user.tags | length }} of {{ current_user.tag_limit }} used</dd>
 
             <dt class="col-sm-3">Member since</dt>
             <dd class="col-sm-9">{{ user.created_at.strftime('%A %d %B %Y %H:%M:%S %Z') }}</dd>

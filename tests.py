@@ -1,11 +1,12 @@
 import unittest
+from datetime import time
 
 import jwt
 from flask import current_app
 
 from app import create_app
 from app.models import User
-from app.utils import seconds_to_decimal, seconds_to_string
+from app.utils import seconds_to_decimal, seconds_to_string, seconds_to_time
 
 
 class UtilsCase(unittest.TestCase):
@@ -32,6 +33,15 @@ class UtilsCase(unittest.TestCase):
         self.assertEqual(seconds_to_decimal(86400), 24.0)
         self.assertEqual(seconds_to_decimal(604799), 167.99)
         self.assertEqual(seconds_to_decimal(604800), 168.0)
+
+    def test_seconds_to_time(self):
+        self.assertEqual(seconds_to_time(0), time(second=0))
+        self.assertEqual(seconds_to_time(1), time(second=1))
+        self.assertEqual(seconds_to_time(59), time(second=59))
+        self.assertEqual(seconds_to_time(60), time(minute=1))
+        self.assertEqual(seconds_to_time(3599), time(minute=59, second=59))
+        self.assertEqual(seconds_to_time(3600), time(hour=1))
+        self.assertEqual(seconds_to_time(86399), time(hour=23, minute=59, second=59))
 
 
 class UserModelCase(unittest.TestCase):

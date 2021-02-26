@@ -8,15 +8,15 @@ class TagForm(FlaskForm):
     name = StringField(
         "Name",
         validators=[
-            InputRequired(message="Name is required"),
-            Length(max=64, message="Name must be less than 64 characters"),
+            InputRequired(message="Enter a name"),
+            Length(max=64, message="Name must be 64 characters or fewer"),
         ],
-        description="Must be less than 64 characters.",
+        description="Must be 64 characters or fewer.",
     )
 
     def validate_name(self, name):
         if len(name.data.strip()) == 0:
-            raise ValidationError("Name is required")
+            raise ValidationError("Enter a name")
 
         for tag in current_user.tags:
             if tag.name == name.data.strip():

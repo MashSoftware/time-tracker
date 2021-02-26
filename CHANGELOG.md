@@ -7,6 +7,28 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased](https://github.com/MashSoftware/the-button/compare/main...develop)
 
+## [0.25.0](https://github.com/MashSoftware/the-button/compare/v0.24.0...v0.25.0) - 2021-02-26
+
+### Added
+
+- Scheduled task to delete all time entries older than 12 weeks. This is run daily at midnight UTC and based on the start date and time of the time entry. This helps to minimise the storage requirements of the app.
+- Display time entry history retention period and date in user account page.
+- Total amount of time associated with each tag on both the tag list page and tagged time entry pages.
+- Date a tag was last used displayed on tag card.
+
+### Changed
+
+- Time entry limit changed to entry history retention period in account settings.
+- Weekly summary now includes the current duration of in-progress time entries in both time and tag totals.
+- Redesigned home page and re-written selling-points.
+- Redesigned page title headers.
+- Redesigned layout of tag card.
+- Moved more code to common utils with additional unit tests.
+
+### Removed
+
+- User account based limit of 120 entries. Now you can create as many time entries as you like, but they will be deleted after 12 weeks.
+
 ## [0.24.0](https://github.com/MashSoftware/the-button/compare/v0.23.2...v0.24.0) - 2021-01-19
 
 ### Added

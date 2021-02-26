@@ -4,14 +4,14 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="The Button - Time tracking made simple.">
+    <meta name="description" content="The Button - Simple, quick and easy time tracking.">
     <meta name="keywords" content="time, timing, timer, track, tracking, tracker, clocking, clock, clock-in, clock-out, log, logging, logger, record, recording, simple, easy, quick">
     <meta name="author" content="Matthew Shaw">
 
     <!-- Open Graph Metadata -->
     <meta property="og:site_name" content="The Button"/>
     <meta property="og:title" content="{{title}}"/>
-    <meta property="og:description" content="Time tracking made simple"/>
+    <meta property="og:description" content="Simple, quick and easy time tracking"/>
     <meta property="og:type" content="website"/>
     <meta property="og:url" content="{{ request.url }}"/>
     <meta property="og:image" content="{{ url_for('static', filename='android-chrome-192x192.png', _external=True) }}"/>
@@ -33,13 +33,13 @@
     <meta name="msapplication-config" content="{{ url_for('static', filename='browserconfig.xml') }}">
     <meta name="theme-color" content="#212529">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <link href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" rel="stylesheet" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <title>The Button{% if title %} | {{ title }}{% endif %}</title>
 </head>
 
 <body class="bg-light">
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-3">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
         <div class="container">
             <a class="navbar-brand" href="{{ url_for('main.index') }}">The Button <span class="badge bg-info text-dark">BETA</span></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -80,61 +80,60 @@
             </div>
         </div>
     </nav>
-    <div class="container">
-        {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-        {% for category, message in messages %}
-        <div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
-            {% if category == 'danger' %}
-            <h4 class="alert-heading">There is a problem</h4>
-            {% endif %}
-            {% if category == 'success' %}
-            <h4 class="alert-heading">Success</h4>
-            {% endif %}
-            {% if category == 'info' %}
-            <h4 class="alert-heading">Heads up</h4>
-            {% endif %}
-            {% if category == 'warning' %}
-            <h4 class="alert-heading">Uh-oh</h4>
-            {% endif %}
-            <p class="mb-0">{{ message | safe }}</p>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        {% endfor %}
-        {% endif %}
-        {% endwith %}
-        {% if form and form.errors %}
-        <div class="alert alert-danger" role="alert">
-            <h4 class="alert-heading">There is a problem</h4>
-            {% for field, errors in form.errors.items() %}
-            {% for error in errors %}
-            <p class="mb-0">{{ error }}</p>
-            {% endfor %}
-            {% endfor %}
-        </div>
-        {% endif %}
-        {% if title %}
-        <div class="row">
-            <div class="col">
-                <h1>{{ title }}</h1>
-                <hr>
+    <div class="bg-white border-bottom py-3 mb-3">
+        <div class="container">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                    <div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+                        {% if category == 'danger' %}
+                        <h4 class="alert-heading">There is a problem</h4>
+                        {% endif %}
+                        {% if category == 'success' %}
+                        <h4 class="alert-heading">Success</h4>
+                        {% endif %}
+                        {% if category == 'info' %}
+                        <h4 class="alert-heading">Heads up</h4>
+                        {% endif %}
+                        {% if category == 'warning' %}
+                        <h4 class="alert-heading">Uh-oh</h4>
+                        {% endif %}
+                        <p class="mb-0">{{ message | safe }}</p>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            {% if form and form.errors %}
+            <div class="alert alert-danger" role="alert">
+                <h4 class="alert-heading">There is a problem</h4>
+                {% for field, errors in form.errors.items() %}
+                {% for error in errors %}
+                <p class="mb-0">{{ error }}</p>
+                {% endfor %}
+                {% endfor %}
             </div>
+            {% endif %}
         </div>
-        {% endif %}
+        {% block header %}{% endblock %}
+    </div>
+    <div class="container">
         {% block content %}{% endblock %}
+    </div>
     </div>
     <footer class="container">
         <hr>
         <p>
-            <a href="https://github.com/MashSoftware/the-button/blob/main/CHANGELOG.md" target="blank" rel="noopener">{{ config['VERSION_NUMBER'] }}</a> - {{ config['RELEASE_DATE'] }}<br>
-            <i class="far fa-copyright"></i> <a href="https://www.mashsoftware.com/" target="blank" rel="noopener">Mash Software</a> 2019 - 2021<br>
-            <i class="fab fa-facebook"></i> <a href="https://www.facebook.com/MashSW/" target="blank" rel="noopener">Facebook</a> | 
-            <i class="fab fa-twitter"></i> <a href="https://twitter.com/mashsoftware" target="blank" rel="noopener">Twitter</a> | 
-            <i class="fab fa-github"></i> <a href="https://github.com/MashSoftware/the-button" target="blank" rel="noopener">GitHub</a> | 
-            <i class="fas fa-envelope"></i> <a href="mailto:hello@mashsoftware.com" target="blank" rel="noopener">Email</a>
+            <a href="https://github.com/MashSoftware/the-button/releases" target="blank" rel="noopener">{{ config['VERSION_NUMBER'] }}</a> - {{ config['RELEASE_DATE'] }}<br>
+            <i class="far fa-copyright fa-fw"></i> <a href="https://www.mashsoftware.com/" target="blank" rel="noopener">Mash Software</a> 2019 - 2021<br>
+            <i class="fas fa-coffee fa-fw"></i> <a href="https://ko-fi.com/mashsoftware">Buy me a coffee</a><br>
+            <i class="fab fa-facebook fa-fw"></i> <a href="https://www.facebook.com/MashSW/" target="blank" rel="noopener">Facebook</a> | 
+            <i class="fab fa-twitter fa-fw"></i> <a href="https://twitter.com/mashsoftware" target="blank" rel="noopener">Twitter</a> | 
+            <i class="fab fa-github fa-fw"></i> <a href="https://github.com/MashSoftware/the-button" target="blank" rel="noopener">GitHub</a> | 
+            <i class="fas fa-envelope fa-fw"></i> <a href="mailto:hello@mashsoftware.com" target="blank" rel="noopener">Email</a>
         </p>
     </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
 </body>
 
 </html>

@@ -8,15 +8,15 @@ from wtforms.validators import InputRequired, Length, Optional, ValidationError
 
 
 class EventForm(FlaskForm):
-    started_at_date = DateField("Start date", validators=[InputRequired(message="Start date is required")])
-    started_at_time = TimeField("Start time", validators=[InputRequired(message="Start time is required")])
+    started_at_date = DateField("Start date", validators=[InputRequired(message="Enter a start date")])
+    started_at_time = TimeField("Start time", validators=[InputRequired(message="Enter a start time")])
     ended_at_date = DateField("Stop date", validators=[Optional()])
     ended_at_time = TimeField("Stop time", validators=[Optional()])
-    tag = RadioField("Tag", validators=[InputRequired(message="Tag is required")])
+    tag = RadioField("Tag", validators=[InputRequired(message="Select a tag")])
     comment = TextAreaField(
         "Comment",
-        validators=[Optional(), Length(max=64, message="Comment must be less than 64 characters")],
-        description="Must be less than 64 characters.",
+        validators=[Optional(), Length(max=64, message="Comment must be 64 characters or fewer")],
+        description="Must be 64 characters or fewer.",
     )
 
     def validate_started_at_date(self, started_at_date):
@@ -41,17 +41,19 @@ class EventForm(FlaskForm):
                 started_at_time.data.second,
             )
         except AttributeError:
-            raise ValidationError("Start date is required")
+            raise ValidationError("Enter a start date")
 
         if pytz.timezone(current_user.timezone).localize(started_at) > current_localised_datetime:
             raise ValidationError("Start time must be now or in the past")
 
     def validate_ended_at_date(self, ended_at_date):
         if self.started_at_date.data is None:
-            raise ValidationError("Start date and time are also required")
+            raise ValidationError("Enter a start date and time")
 
         if ended_at_date.data < self.started_at_date.data:
-            raise ValidationError("Stop date must be the same as or after start date")
+            raise ValidationError(
+                "Stop date must be the same as or after {}".format(self.started_at_date.data.strftime("%d/%m/%Y"))
+            )
 
         current_localised_date = (
             pytz.utc.localize(datetime.utcnow()).astimezone(pytz.timezone(current_user.timezone)).date()
@@ -71,7 +73,7 @@ class EventForm(FlaskForm):
                 self.started_at_time.data.second,
             )
         except AttributeError:
-            raise ValidationError("Start date and time are also required")
+            raise ValidationError("Enter a start date and time")
 
         try:
             ended_at = datetime(
@@ -83,10 +85,10 @@ class EventForm(FlaskForm):
                 ended_at_time.data.second,
             )
         except AttributeError:
-            raise ValidationError("Stop date is required")
+            raise ValidationError("Enter a stop date")
 
         if ended_at < started_at:
-            raise ValidationError("Stop time must be after start time")
+            raise ValidationError("Stop time must be after {}".format(started_at.strftime("%H:%M")))
 
         current_localised_datetime = pytz.utc.localize(datetime.utcnow()).astimezone(
             pytz.timezone(current_user.timezone)

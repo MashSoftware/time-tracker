@@ -15,6 +15,15 @@ from werkzeug.exceptions import Forbidden
 @login_required
 @limiter.limit("2 per second", key_func=lambda: current_user.id)
 def tags():
+    now = pytz.utc.localize(datetime.utcnow())
+    for tag in current_user.tags:
+        total_seconds = 0
+        for event in tag.events:
+            total_seconds += event.duration(end=now)
+
+        tag.total_string = seconds_to_string(total_seconds)
+        tag.total_decimal = seconds_to_decimal(total_seconds)
+
     return render_template("tag/tags.html", title="Tags")
 
 
@@ -67,6 +76,14 @@ def delete(id):
     if tag not in current_user.tags:
         raise Forbidden()
     if request.method == "GET":
+        now = pytz.utc.localize(datetime.utcnow())
+        total_seconds = 0
+        for event in tag.events:
+            total_seconds += event.duration(end=now)
+
+        tag.total_string = seconds_to_string(total_seconds)
+        tag.total_decimal = seconds_to_decimal(total_seconds)
+
         return render_template("tag/delete_tag.html", title="Delete tag", tag=tag)
     elif request.method == "POST":
         db.session.delete(tag)
@@ -83,4 +100,18 @@ def entries(id):
 
     now = pytz.utc.localize(datetime.utcnow())
 
-    return render_template("tag/entries.html", title="{} time entries".format(tag.name), events=tag.events, now=now)
+    total_seconds = 0
+    for event in tag.events:
+        total_seconds += event.duration(end=now)
+
+    total_string = seconds_to_string(total_seconds)
+    total_decimal = seconds_to_decimal(total_seconds)
+
+    return render_template(
+        "tag/entries.html",
+        title="All {} time entries".format(tag.name),
+        now=now,
+        events=tag.events,
+        total_string=total_string,
+        total_decimal=total_decimal,
+    )

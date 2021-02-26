@@ -1,4 +1,10 @@
 {% extends "base.html" %}
+{% block header %}
+<div class="container">
+    {{ super() }}
+    <h1>{{ title }}</h1>
+</div>
+{% endblock %}
 {% block content %}
 <div class="row">
     <div class="col-md-6">
