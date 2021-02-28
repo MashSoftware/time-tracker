@@ -29,7 +29,7 @@
         </form>
     </div>
 </div>
-{% if results %}
+{% if form.query.data %}
 <div class="row">
     <div class="col">
         <p class="lead">{{ results | length }} {% if results | length == 1 %}result{% else %}results{% endif %}</p>
