@@ -10,6 +10,7 @@ from flask_login import current_user, login_required
 @login_required
 @limiter.limit("2 per second", key_func=lambda: current_user.id)
 def search():
+    results = []
     form = SearchForm()
     if form.validate_on_submit():
         results = (
@@ -17,5 +18,4 @@ def search():
             .order_by(Event.started_at.desc())
             .all()
         )
-        return render_template("search/search.html", title="Search", form=form, results=results)
-    return render_template("search/search.html", title="Search", form=form)
+    return render_template("search/search.html", title="Search", form=form, results=results)
