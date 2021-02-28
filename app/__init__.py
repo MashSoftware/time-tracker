@@ -62,6 +62,10 @@ def create_app(config_class=Config):
 
     app.register_blueprint(tag_bp, url_prefix="/tags")
 
+    from app.search import bp as search_bp
+
+    app.register_blueprint(search_bp, url_prefix="/search")
+
     return app
 
 

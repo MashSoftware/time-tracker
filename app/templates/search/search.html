@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block header %}
+<div class="container">
+    {{ super() }}
+    <h1>{{ title }}</h1>
+</div>
+{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col-md-6">
+        <form action="" method="post" novalidate>
+            {{ form.csrf_token }}
+            <div class="mb-3">
+                {% if form.errors %}
+                    {% if form.query.errors %}
+                        <div class="input-group has-validation">
+                            {{ form.query(class="form-control is-invalid", type="search") }}
+                            <button class="btn btn-primary" type="submit" id="search"><i class="fas fa-search fa-lg fa-fw"></i> Search</button>
+                            {% for error in form.query.errors %}<div class="invalid-feedback">{{error}}</div>{% endfor %}
+                        </div>
+                    {% endif %}
+                {% else %}
+                <div class="input-group">
+                    {{ form.query(class="form-control", type="search") }}
+                    <button class="btn btn-primary" type="submit" id="search"><i class="fas fa-search fa-lg fa-fw"></i> Search</button>
+                </div>
+                {% endif %}
+            </div>
+        </form>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <p>{{ results | length }} results</p>
+        {% for event in results %}
+            {% include 'entry/_time_card_actions.html' %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
