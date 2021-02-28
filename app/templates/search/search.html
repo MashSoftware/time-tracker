@@ -29,12 +29,14 @@
         </form>
     </div>
 </div>
+{% if results %}
 <div class="row">
     <div class="col">
-        <p>{{ results | length }} results</p>
+        <p class="lead">{{ results | length }} {% if results | length == 1 %}result{% else %}results{% endif %}</p>
         {% for event in results %}
             {% include 'entry/_time_card_actions.html' %}
         {% endfor %}
     </div>
 </div>
+{% endif %}
 {% endblock %}
