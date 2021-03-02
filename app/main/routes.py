@@ -38,4 +38,4 @@ def help():
 
 @bp.app_errorhandler(HTTPException)
 def http_error(error):
-    return render_template("error.html", title="Oops!", error=error), error.code
+    return render_template("error.html", title=error.name, error=error), error.code
