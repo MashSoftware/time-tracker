@@ -1,7 +1,7 @@
 import os
 
 from app.main import bp
-from flask import current_app, redirect, render_template, send_from_directory, url_for
+from flask import current_app, redirect, render_template, request, send_from_directory, url_for
 from flask_login import current_user
 from werkzeug.exceptions import HTTPException
 
@@ -38,4 +38,5 @@ def help():
 
 @bp.app_errorhandler(HTTPException)
 def http_error(error):
+    current_app.logger.error("{}: {} - {}".format(error.code, error.name, request.url))
     return render_template("error.html", title=error.name, error=error), error.code
