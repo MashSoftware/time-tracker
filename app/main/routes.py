@@ -1,7 +1,14 @@
 import os
 
 from app.main import bp
-from flask import current_app, redirect, render_template, request, send_from_directory, url_for
+from flask import (
+    current_app,
+    redirect,
+    render_template,
+    request,
+    send_from_directory,
+    url_for,
+)
 from flask_login import current_user
 from werkzeug.exceptions import HTTPException
 

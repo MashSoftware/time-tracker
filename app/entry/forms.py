@@ -15,7 +15,10 @@ class EventForm(FlaskForm):
     tag = RadioField("Tag", validators=[InputRequired(message="Select a tag")])
     comment = TextAreaField(
         "Comment",
-        validators=[Optional(), Length(max=64, message="Comment must be 64 characters or fewer")],
+        validators=[
+            Optional(),
+            Length(max=64, message="Comment must be 64 characters or fewer"),
+        ],
         description="Must be 64 characters or fewer.",
     )
 
