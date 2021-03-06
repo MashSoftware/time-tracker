@@ -135,8 +135,7 @@ def auto():
 @limiter.limit("2 per second", key_func=lambda: current_user.id)
 def manual():
     form = EventForm()
-    form.tag.choices = [(tag.id, tag.name) for tag in current_user.tags]
-    form.tag.choices.insert(0, ("None", "None"))
+    form.tag.choices += [(tag.id, tag.name) for tag in current_user.tags]
     if form.validate_on_submit():
         started_at = datetime(
             form.started_at_date.data.year,
@@ -184,8 +183,7 @@ def update(id):
     if event not in current_user.events:
         raise Forbidden()
     form = EventForm()
-    form.tag.choices = [(tag.id, tag.name) for tag in current_user.tags]
-    form.tag.choices.insert(0, ("None", "None"))
+    form.tag.choices += [(tag.id, tag.name) for tag in current_user.tags]
     if form.validate_on_submit():
         started_at = datetime(
             form.started_at_date.data.year,
@@ -231,7 +229,10 @@ def update(id):
         if event.ended_at:
             form.ended_at_date.data = event.ended_at.astimezone(pytz.timezone(current_user.timezone))
             form.ended_at_time.data = event.ended_at.astimezone(pytz.timezone(current_user.timezone))
-        form.tag.data = event.tag_id
+        if event.tag_id is None:
+            form.tag.data = "None"
+        else:
+            form.tag.data = event.tag_id
         form.comment.data = event.comment
     return render_template("entry/update_entry_form.html", title="Edit time entry", form=form, event=event)
 

@@ -12,7 +12,12 @@ class EventForm(FlaskForm):
     started_at_time = TimeField("Start time", validators=[InputRequired(message="Enter a start time")])
     ended_at_date = DateField("Stop date", validators=[Optional()])
     ended_at_time = TimeField("Stop time", validators=[Optional()])
-    tag = RadioField("Tag", validators=[InputRequired(message="Select a tag")])
+    tag = RadioField(
+        "Tag",
+        validators=[InputRequired(message="Select a tag")],
+        choices=[("None", "None")],
+        default="None",
+    )
     comment = TextAreaField(
         "Comment",
         validators=[
