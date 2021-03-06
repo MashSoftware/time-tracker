@@ -1,6 +1,7 @@
 {
     "name": "The Button",
     "short_name": "The Button",
+    "description": "Simple, quick and easy time tracking.",
     "icons": [
         {
             "src": "/static/android-chrome-192x192.png",
@@ -16,5 +17,13 @@
     "theme_color": "#343a40",
     "background_color": "#2196f3",
     "display": "standalone",
-    "start_url": "/entries/"
+    "start_url": "/entries/",
+    "scope": "/",
+    "shortcuts": [
+        {
+            "name": "Start / stop now",
+            "url": "/entries/auto",
+            "description": "Start or stop a time entry now"
+        }
+    ]
 }
