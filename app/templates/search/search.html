@@ -31,7 +31,7 @@
 </div>
 {% if form.query.data %}
 <div class="row">
-    <div class="col">
+    <div class="col-md-6">
         <p class="lead">{{ results | length }} {% if results | length == 1 %}result{% else %}results{% endif %}</p>
         {% for event in results %}
             {% include 'entry/_time_card_actions.html' %}
