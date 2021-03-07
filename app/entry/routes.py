@@ -6,7 +6,7 @@ from app.entry import bp
 from app.entry.forms import EventForm
 from app.models import Event
 from app.utils import seconds_to_decimal, seconds_to_string
-from flask import flash, redirect, render_template, request, url_for
+from flask import current_app, flash, redirect, render_template, request, url_for
 from flask_login import current_user, login_required
 from werkzeug.exceptions import Forbidden
 
@@ -122,10 +122,12 @@ def auto():
     if event and event.ended_at is None:
         event.ended_at = pytz.utc.localize(datetime.utcnow())
         db.session.add(event)
+        current_app.logger.info("User {} stopped entry {}".format(current_user.id, event.id))
     else:
         event = Event(user_id=current_user.id, started_at=pytz.utc.localize(datetime.utcnow()))
         event.tag_id = request.args.get("tag_id", None, type=str)
         db.session.add(event)
+        current_app.logger.info("User {} started entry {} with tag {}".format(current_user.id, event.id, event.tag_id))
     db.session.commit()
     return redirect(url_for("entry.weekly"))
 
@@ -170,6 +172,7 @@ def manual():
             event.comment = form.comment.data.strip()
         db.session.add(event)
         db.session.commit()
+        current_app.logger.info("User {} created entry {} with tag {}".format(current_user.id, event.id, event.tag_id))
         flash("Time entry has been added.", "success")
         return redirect(url_for("entry.weekly"))
     elif request.method == "GET":
@@ -225,6 +228,7 @@ def update(id):
             event.comment = form.comment.data.strip()
         db.session.add(event)
         db.session.commit()
+        current_app.logger.info("User {} updated entry {} with tag {}".format(current_user.id, event.id, event.tag_id))
         flash("Time entry changes have been saved.", "success")
         return redirect(url_for("entry.weekly"))
     elif request.method == "GET":
@@ -255,6 +259,7 @@ def delete(id):
     if request.method == "GET":
         return render_template("entry/delete_entry.html", title="Delete time entry", event=event, now=now)
     elif request.method == "POST":
+        current_app.logger.info("User {} deleted entry {} with tag {}".format(current_user.id, event.id, event.tag_id))
         db.session.delete(event)
         db.session.commit()
         flash("Time entry has been deleted.", "success")

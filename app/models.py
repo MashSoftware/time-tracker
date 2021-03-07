@@ -50,11 +50,14 @@ class User(UserMixin, db.Model):
 
     def set_password(self, password):
         self.password = bcrypt.hashpw(password.encode("UTF-8"), bcrypt.gensalt())
+        current_app.logger.info("User {} set password".format(self.id))
 
     def check_password(self, password):
+        current_app.logger.info("User {} password check".format(self.id))
         return bcrypt.checkpw(password.encode("UTF-8"), self.password)
 
     def generate_token(self, expires_in=600):
+        current_app.logger.info("User {} generated token".format(self.id))
         return jwt.encode(
             {"id": self.id, "exp": time() + expires_in},
             current_app.config["SECRET_KEY"],

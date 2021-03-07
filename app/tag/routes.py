@@ -6,7 +6,7 @@ from app.models import Tag
 from app.tag import bp
 from app.tag.forms import DefaultForm, TagForm
 from app.utils import seconds_to_decimal, seconds_to_string
-from flask import flash, redirect, render_template, request, url_for
+from flask import current_app, flash, redirect, render_template, request, url_for
 from flask_login import current_user, login_required
 from werkzeug.exceptions import Forbidden
 
@@ -43,6 +43,7 @@ def create():
         tag = Tag(user_id=current_user.id, name=form.name.data.strip())
         db.session.add(tag)
         db.session.commit()
+        current_app.logger.info("User {} created tag {}".format(current_user.id, tag.id))
         flash("Tag has been created.", "success")
         return redirect(url_for("tag.tags"))
     return render_template("tag/create_tag_form.html", title="Create tag", form=form)
@@ -61,6 +62,7 @@ def update(id):
         tag.updated_at = pytz.utc.localize(datetime.utcnow())
         db.session.add(tag)
         db.session.commit()
+        current_app.logger.info("User {} updated tag {}".format(current_user.id, tag.id))
         flash("Tag has been saved.", "success")
         return redirect(url_for("tag.tags"))
     elif request.method == "GET":
@@ -86,6 +88,7 @@ def delete(id):
 
         return render_template("tag/delete_tag.html", title="Delete tag", tag=tag)
     elif request.method == "POST":
+        current_app.logger.info("User {} deleted tag {}".format(current_user.id, tag.id))
         db.session.delete(tag)
         db.session.commit()
         flash("Tag has been deleted.", "success")
@@ -131,6 +134,7 @@ def default():
             current_user.default_tag_id = form.tag.data
         db.session.add(current_user)
         db.session.commit()
+        current_app.logger.info("User {} set default tag to {}".format(current_user.id, tag.id))
         flash("Your default tag has been changed.", "success")
         return redirect(url_for("tag.tags"))
     elif request.method == "GET":

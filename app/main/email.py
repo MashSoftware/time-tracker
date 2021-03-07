@@ -15,6 +15,7 @@ def send_activation_email(user):
             "html": render_template("email/activation.html", token=token),
         },
     )
+    current_app.logger.info("Sent user {} activation email".format(user.id))
 
 
 def send_confirmation_email(user):
@@ -30,6 +31,7 @@ def send_confirmation_email(user):
             "html": render_template("email/confirmation.html", token=token),
         },
     )
+    current_app.logger.info("Sent user {} confirmation email".format(user.id))
 
 
 def send_reset_password_email(user):
@@ -45,3 +47,4 @@ def send_reset_password_email(user):
             "html": render_template("email/reset_password.html", token=token),
         },
     )
+    current_app.logger.info("Sent user {} reset password email".format(user.id))
