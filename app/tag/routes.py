@@ -134,7 +134,7 @@ def default():
             current_user.default_tag_id = form.tag.data
         db.session.add(current_user)
         db.session.commit()
-        current_app.logger.info("User {} set default tag to {}".format(current_user.id, tag.id))
+        current_app.logger.info("User {} set default tag to {}".format(current_user.id, current_user.default_tag_id))
         flash("Your default tag has been changed.", "success")
         return redirect(url_for("tag.tags"))
     elif request.method == "GET":
