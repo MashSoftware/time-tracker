@@ -10,7 +10,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 
 - Search for time entries based on comment contents.
+- Set a default tag to use for all new time entries. Tag page now highlights which tag is the current default. This will be used by the "Start now" button, and pre-selected on the manual time entry form. Thanks [@ahosgood](https://github.com/ahosgood).
 - Use webmanifest shortcuts to expose start / stop now function to OS. Thanks [@andymantell](https://github.com/andymantell).
+- Better logging to `stdout` and `stderror` to aid app monitoring.
 
 ### Changed
 
