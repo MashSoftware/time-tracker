@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 
 - Search for time entries based on comment contents.
-- #49 Use webmanifest shortcuts to expose start / stop now function to OS. Thanks [@andymantell](https://github.com/andymantell).
+- Use webmanifest shortcuts to expose start / stop now function to OS. Thanks [@andymantell](https://github.com/andymantell).
 
 ### Changed
 
