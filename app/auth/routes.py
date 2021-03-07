@@ -66,6 +66,7 @@ def activate(token):
         return redirect(url_for("entry.weekly"))
     user = User.verify_token(token)
     if not user:
+        current_app.logger.warning("Activation token is invalid")
         flash("The activation token is invalid, please request another.", "danger")
         return redirect(url_for("main.index"))
     user.activated_at = pytz.utc.localize(datetime.utcnow())
@@ -81,6 +82,7 @@ def login():
     if form.validate_on_submit():
         user = User.query.filter_by(email_address=form.email_address.data).first()
         if user is None or not user.check_password(form.password.data) or user.activated_at is None:
+            current_app.logger.warning("Failed login attempt")
             flash("Invalid email address or password.", "danger")
             return redirect(url_for("auth.login"))
         login_user(user, remember=form.remember_me.data)
@@ -129,6 +131,7 @@ def reset_password(token):
         return redirect(url_for("entry.weekly"))
     user = User.verify_token(token)
     if not user:
+        current_app.logger.warning("Password reset token is invalid")
         flash("The password reset token is invalid, please request another.", "danger")
         return redirect(url_for("main.index"))
     form = ResetPasswordForm()
