@@ -81,6 +81,21 @@ class UserModelCase(unittest.TestCase):
         self.assertFalse(user.check_password("8wCS0H65r@p!8%B0XxrPTbBiR%^tc##f"))
         self.assertTrue(user.check_password("yxxItMC*217XjWbz*a4&W@vK8h^qy!eZ"))
 
+    def test_schedule(self):
+        user = User(
+            email_address="mash@example.com",
+            password="8wCS0H65r@p!8%B0XxrPTbBiR%^tc##f",
+            timezone="Europe/London",
+        )
+        user.monday = 1
+        user.tuesday = 2
+        user.wednesday = 3
+        user.thursday = 4
+        user.friday = 5
+        user.saturday = 6
+        user.sunday = 7
+        self.assertEqual(user.schedule(), 28)
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
