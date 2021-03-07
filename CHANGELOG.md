@@ -7,9 +7,19 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased](https://github.com/MashSoftware/the-button/compare/main...develop)
 
-# Added
+### Added
 
-- Search for time entries based on comment contents
+- Search for time entries based on comment contents.
+- #49 Use webmanifest shortcuts to expose start / stop now function to OS. Thanks [@andymantell](https://github.com/andymantell).
+
+### Changed
+
+- Default to "None" tag on manual time entry form.
+
+### Fixed
+
+- Select "None" tag when editing and existing entry if no tag was previously selected. Thanks [@ahosgood](https://github.com/ahosgood).
+- Prevent viewing other users tagged time entries pages if you knew the UUID of the tag.
 
 ## [0.25.0](https://github.com/MashSoftware/the-button/compare/v0.24.0...v0.25.0) - 2021-02-26
 
