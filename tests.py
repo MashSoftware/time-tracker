@@ -71,6 +71,16 @@ class UserModelCase(unittest.TestCase):
         token = user.generate_token()
         self.assertTrue(jwt.decode(token, current_app.config["SECRET_KEY"], algorithms=["HS256"]))
 
+    def test_change_password(self):
+        user = User(
+            email_address="mash@example.com",
+            password="8wCS0H65r@p!8%B0XxrPTbBiR%^tc##f",
+            timezone="Europe/London",
+        )
+        user.set_password("yxxItMC*217XjWbz*a4&W@vK8h^qy!eZ")
+        self.assertFalse(user.check_password("8wCS0H65r@p!8%B0XxrPTbBiR%^tc##f"))
+        self.assertTrue(user.check_password("yxxItMC*217XjWbz*a4&W@vK8h^qy!eZ"))
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
