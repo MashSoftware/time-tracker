@@ -16,7 +16,6 @@ class EventForm(FlaskForm):
         "Tag",
         validators=[InputRequired(message="Select a tag")],
         choices=[("None", "None")],
-        default="None",
     )
     comment = TextAreaField(
         "Comment",

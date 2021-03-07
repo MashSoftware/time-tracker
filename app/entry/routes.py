@@ -172,6 +172,11 @@ def manual():
         db.session.commit()
         flash("Time entry has been added.", "success")
         return redirect(url_for("entry.weekly"))
+    elif request.method == "GET":
+        if current_user.default_tag_id is None:
+            form.tag.data = "None"
+        else:
+            form.tag.data = current_user.default_tag_id
     return render_template("entry/create_entry_form.html", title="Create time entry", form=form)
 
 

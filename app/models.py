@@ -34,6 +34,7 @@ class User(UserMixin, db.Model):
     thursday = db.Column(db.Integer, nullable=False, server_default="0")
     friday = db.Column(db.Integer, nullable=False, server_default="0")
     saturday = db.Column(db.Integer, nullable=False, server_default="0")
+    default_tag_id = db.Column(UUID, nullable=True)
 
     # Relationships
     events = db.relationship("Event", backref="user", lazy=True, passive_deletes=True)

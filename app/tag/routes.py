@@ -4,7 +4,7 @@ import pytz
 from app import db, limiter
 from app.models import Tag
 from app.tag import bp
-from app.tag.forms import TagForm
+from app.tag.forms import DefaultForm, TagForm
 from app.utils import seconds_to_decimal, seconds_to_string
 from flask import flash, redirect, render_template, request, url_for
 from flask_login import current_user, login_required
@@ -116,3 +116,24 @@ def entries(id):
         total_string=total_string,
         total_decimal=total_decimal,
     )
+
+
+@bp.route("/default", methods=["GET", "POST"])
+@login_required
+@limiter.limit("2 per second", key_func=lambda: current_user.id)
+def default():
+    form = DefaultForm()
+    form.tag.choices += [(tag.id, tag.name) for tag in current_user.tags]
+    if form.validate_on_submit():
+        if form.tag.data == "None":
+            current_user.default_tag_id = None
+        else:
+            current_user.default_tag_id = form.tag.data
+        db.session.add(current_user)
+        db.session.commit()
+        flash("Your default tag has been changed.", "success")
+        return redirect(url_for("tag.tags"))
+    elif request.method == "GET":
+        form.tag.data = current_user.default_tag_id
+
+    return render_template("tag/default_form.html", title="Default tag", form=form)

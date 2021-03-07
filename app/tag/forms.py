@@ -1,6 +1,6 @@
 from flask_login import current_user
 from flask_wtf import FlaskForm
-from wtforms import StringField
+from wtforms import RadioField, StringField
 from wtforms.validators import InputRequired, Length, ValidationError
 
 
@@ -21,3 +21,13 @@ class TagForm(FlaskForm):
         for tag in current_user.tags:
             if tag.name == name.data.strip():
                 raise ValidationError("You have already created a tag with that name")
+
+
+class DefaultForm(FlaskForm):
+    tag = RadioField(
+        "Default tag",
+        validators=[InputRequired(message="Select a default tag")],
+        choices=[("None", "None")],
+        default="None",
+        description="This tag will be used on all new time entries.",
+    )

@@ -10,7 +10,7 @@
     <div class="col-md-5">
         {% if start %}
         <div class="btn-group w-100 mb-3">
-            <a class="btn btn-primary btn-lg w-100" href="{{ url_for('entry.auto') }}" role="button"><h1>Start now</h1></a>
+            <a class="btn btn-primary btn-lg w-100" href="{{ url_for('entry.auto', tag_id=current_user.default_tag_id) }}" role="button"><h1>Start now</h1></a>
             <button type="button" class="btn btn-lg btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown"
                 aria-expanded="false">
                 <span class="visually-hidden">Toggle Dropdown</span>
