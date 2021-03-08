@@ -59,12 +59,12 @@ python tests.py
 
 ## Contributors
 
-- @matthew-shaw (Owner and maintainer)
-- @ahosgood
-- @andymantell
-- @annie-birchall
-- @joehonywill
-- @LlamaComedian
-- @mattgirdler
-- @russwillis
-- @skipster2k2
+- [@matthew-shaw](https://github.com/matthew-shaw) (Owner and maintainer)
+- [@ahosgood](https://github.com/ahosgood)
+- [@andymantell](https://github.com/andymantell)
+- [@annie-birchall](https://github.com/annie-birchall)
+- [@joehonywill](https://github.com/joehonywill)
+- [@LlamaComedian](https://github.com/LlamaComedian)
+- [@mattgirdler](https://github.com/mattgirdler)
+- [@russwillis](https://github.com/russwillis)
+- [@skipster2k2](https://github.com/skipster2k2)
