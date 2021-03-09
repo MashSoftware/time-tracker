@@ -7,22 +7,27 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased](https://github.com/MashSoftware/the-button/compare/main...develop)
 
+## [0.26.0](https://github.com/MashSoftware/the-button/compare/v0.25.0...v0.26.0) - 2021-03-09
+
 ### Added
 
 - Search for time entries based on comment contents.
 - Set a default tag to use for all new time entries created with the "Start now" button. Thanks [@ahosgood](https://github.com/ahosgood).
 - Use webmanifest shortcuts to expose start / stop now function to OS. Thanks [@andymantell](https://github.com/andymantell).
-- Better logging to `stdout` and `stderror` to aid app monitoring.
+- Better logging to `stdout` and `stderr` to aid app monitoring.
 - More unit tests.
+- Versioning, contributors, support to the [README](README.md)
+- [Contributor Covenant Code of Conduct](CODE_OF_CONDUCT.md)
+- [Contribution guidelines](CONTRIBUTING.md)
 
 ### Changed
 
-- Pre-select users default tag, or "none" if not set, on manual time entry form.
+- Pre-select users default tag, or "None" if not set, on manual time entry form.
 - Tag page highlights which tag is the current default.
 
 ### Fixed
 
-- Select "None" tag when editing and existing entry if no tag was previously selected. Thanks [@ahosgood](https://github.com/ahosgood).
+- Pre-select "None" tag when editing and existing entry if no tag was previously selected. Thanks [@ahosgood](https://github.com/ahosgood).
 - Prevent viewing other users tagged time entries pages if you knew the UUID of the tag.
 
 ## [0.25.0](https://github.com/MashSoftware/the-button/compare/v0.24.0...v0.25.0) - 2021-02-26
