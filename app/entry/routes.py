@@ -6,7 +6,7 @@ from app.entry import bp
 from app.entry.forms import EventForm
 from app.models import Event
 from app.utils import seconds_to_decimal, seconds_to_string
-from flask import flash, redirect, render_template, request, url_for
+from flask import current_app, flash, redirect, render_template, request, url_for
 from flask_login import current_user, login_required
 from werkzeug.exceptions import Forbidden
 
@@ -122,10 +122,12 @@ def auto():
     if event and event.ended_at is None:
         event.ended_at = pytz.utc.localize(datetime.utcnow())
         db.session.add(event)
+        current_app.logger.info("User {} stopped entry {}".format(current_user.id, event.id))
     else:
         event = Event(user_id=current_user.id, started_at=pytz.utc.localize(datetime.utcnow()))
         event.tag_id = request.args.get("tag_id", None, type=str)
         db.session.add(event)
+        current_app.logger.info("User {} started entry {} with tag {}".format(current_user.id, event.id, event.tag_id))
     db.session.commit()
     return redirect(url_for("entry.weekly"))
 
@@ -135,8 +137,7 @@ def auto():
 @limiter.limit("2 per second", key_func=lambda: current_user.id)
 def manual():
     form = EventForm()
-    form.tag.choices = [(tag.id, tag.name) for tag in current_user.tags]
-    form.tag.choices.insert(0, ("None", "None"))
+    form.tag.choices += [(tag.id, tag.name) for tag in current_user.tags]
     if form.validate_on_submit():
         started_at = datetime(
             form.started_at_date.data.year,
@@ -171,8 +172,14 @@ def manual():
             event.comment = form.comment.data.strip()
         db.session.add(event)
         db.session.commit()
+        current_app.logger.info("User {} created entry {} with tag {}".format(current_user.id, event.id, event.tag_id))
         flash("Time entry has been added.", "success")
         return redirect(url_for("entry.weekly"))
+    elif request.method == "GET":
+        if current_user.default_tag_id is None:
+            form.tag.data = "None"
+        else:
+            form.tag.data = current_user.default_tag_id
     return render_template("entry/create_entry_form.html", title="Create time entry", form=form)
 
 
@@ -184,8 +191,7 @@ def update(id):
     if event not in current_user.events:
         raise Forbidden()
     form = EventForm()
-    form.tag.choices = [(tag.id, tag.name) for tag in current_user.tags]
-    form.tag.choices.insert(0, ("None", "None"))
+    form.tag.choices += [(tag.id, tag.name) for tag in current_user.tags]
     if form.validate_on_submit():
         started_at = datetime(
             form.started_at_date.data.year,
@@ -222,6 +228,7 @@ def update(id):
             event.comment = form.comment.data.strip()
         db.session.add(event)
         db.session.commit()
+        current_app.logger.info("User {} updated entry {} with tag {}".format(current_user.id, event.id, event.tag_id))
         flash("Time entry changes have been saved.", "success")
         return redirect(url_for("entry.weekly"))
     elif request.method == "GET":
@@ -231,7 +238,10 @@ def update(id):
         if event.ended_at:
             form.ended_at_date.data = event.ended_at.astimezone(pytz.timezone(current_user.timezone))
             form.ended_at_time.data = event.ended_at.astimezone(pytz.timezone(current_user.timezone))
-        form.tag.data = event.tag_id
+        if event.tag_id is None:
+            form.tag.data = "None"
+        else:
+            form.tag.data = event.tag_id
         form.comment.data = event.comment
     return render_template("entry/update_entry_form.html", title="Edit time entry", form=form, event=event)
 
@@ -249,6 +259,7 @@ def delete(id):
     if request.method == "GET":
         return render_template("entry/delete_entry.html", title="Delete time entry", event=event, now=now)
     elif request.method == "POST":
+        current_app.logger.info("User {} deleted entry {} with tag {}".format(current_user.id, event.id, event.tag_id))
         db.session.delete(event)
         db.session.commit()
         flash("Time entry has been deleted.", "success")

@@ -77,7 +77,7 @@
                         {% for subfield in form.tag %}
                         <div class="form-check">
                             {{ subfield(class="form-check-input is-invalid", type="radio") }}
-                            <span class="badge bg-secondary"><i class="fas fa-tag fa-fw"></i> {{ subfield.label(class="form-check-label") }}</span>
+                            <span class="badge bg-secondary"><i class="fas fa-tag fa-fw"></i> {{ subfield.label(class="form-check-label") }}</span> {% if subfield.data == current_user.default_tag_id %}<em>(default)</em>{% endif %}
                         </div>
                         {% endfor %}
                         {% for error in form.tag.errors %}<div class="invalid-feedback">{{error}}</div>{% endfor %}
@@ -85,7 +85,7 @@
                         {% for subfield in form.tag %}
                         <div class="form-check">
                             {{ subfield(class="form-check-input is-valid", type="radio") }}
-                            <span class="badge bg-secondary"><i class="fas fa-tag fa-fw"></i> {{ subfield.label(class="form-check-label") }}</span>
+                            <span class="badge bg-secondary"><i class="fas fa-tag fa-fw"></i> {{ subfield.label(class="form-check-label") }}</span> {% if subfield.data == current_user.default_tag_id %}<em>(default)</em>{% endif %}
                         </div>
                         {% endfor %}
                     {% endif %}
@@ -93,7 +93,7 @@
                     {% for subfield in form.tag %}
                     <div class="form-check">
                         {{ subfield(class="form-check-input", type="radio") }}
-                        <span class="badge bg-secondary"><i class="fas fa-tag fa-fw"></i> {{ subfield.label(class="form-check-label") }}</span>
+                        <span class="badge bg-secondary"><i class="fas fa-tag fa-fw"></i> {{ subfield.label(class="form-check-label") }}</span> {% if subfield.data == current_user.default_tag_id %}<em>(default)</em>{% endif %}
                     </div>
                     {% endfor %}
                 {% endif %}

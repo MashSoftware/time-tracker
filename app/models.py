@@ -34,6 +34,7 @@ class User(UserMixin, db.Model):
     thursday = db.Column(db.Integer, nullable=False, server_default="0")
     friday = db.Column(db.Integer, nullable=False, server_default="0")
     saturday = db.Column(db.Integer, nullable=False, server_default="0")
+    default_tag_id = db.Column(UUID, nullable=True)
 
     # Relationships
     events = db.relationship("Event", backref="user", lazy=True, passive_deletes=True)
@@ -49,11 +50,14 @@ class User(UserMixin, db.Model):
 
     def set_password(self, password):
         self.password = bcrypt.hashpw(password.encode("UTF-8"), bcrypt.gensalt())
+        current_app.logger.info("User {} set password".format(self.id))
 
     def check_password(self, password):
+        current_app.logger.info("User {} password check".format(self.id))
         return bcrypt.checkpw(password.encode("UTF-8"), self.password)
 
     def generate_token(self, expires_in=600):
+        current_app.logger.info("User {} generated token".format(self.id))
         return jwt.encode(
             {"id": self.id, "exp": time() + expires_in},
             current_app.config["SECRET_KEY"],
@@ -134,7 +138,13 @@ class Tag(db.Model):
     updated_at = db.Column(db.DateTime(timezone=True), nullable=True)
 
     # Relationships
-    events = db.relationship("Event", backref="tag", lazy=True, passive_deletes=True, order_by="desc(Event.started_at)")
+    events = db.relationship(
+        "Event",
+        backref="tag",
+        lazy=True,
+        passive_deletes=True,
+        order_by="desc(Event.started_at)",
+    )
 
     # Methods
     def __init__(self, user_id, name):

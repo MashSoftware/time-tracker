@@ -1,5 +1,4 @@
-import time
-from datetime import date, datetime, time, timedelta
+from datetime import date, datetime, timedelta
 
 import pytz
 from app import db, limiter
@@ -7,7 +6,7 @@ from app.account import bp
 from app.account.forms import AccountForm, PasswordForm, ScheduleForm
 from app.main.email import send_confirmation_email
 from app.utils import seconds_to_time
-from flask import flash, redirect, render_template, request, url_for
+from flask import current_app, flash, redirect, render_template, request, url_for
 from flask_login import current_user, fresh_login_required, login_required
 
 
@@ -35,9 +34,10 @@ def change_password():
             db.session.add(current_user)
             db.session.commit()
             flash("Your password has been changed.", "success")
+            current_app.logger.info("User {} changed password".format(current_user.id))
         else:
-            time.sleep(1)
             flash("Invalid password.", "danger")
+            current_app.logger.warning("User {} change password failed".format(current_user.id))
             return redirect(url_for("account.change_password"))
         return redirect(url_for("account.account"))
 
@@ -65,6 +65,7 @@ def update():
         db.session.add(current_user)
         db.session.commit()
         flash("Account changes have been saved.", "success")
+        current_app.logger.info("User {} updated account".format(current_user.id))
         return redirect(url_for("account.account"))
     elif request.method == "GET":
         form.email_address.data = current_user.email_address
@@ -79,6 +80,7 @@ def delete():
     if request.method == "GET":
         return render_template("account/delete_account.html", title="Delete account")
     elif request.method == "POST":
+        current_app.logger.info("User {} deleted account".format(current_user.id))
         db.session.delete(current_user)
         db.session.commit()
         flash(
@@ -104,6 +106,7 @@ def schedule():
         current_user.updated_at = pytz.utc.localize(datetime.utcnow())
         db.session.add(current_user)
         db.session.commit()
+        current_app.logger.info("User {} updated schedule".format(current_user.id))
         flash("Schedule changes have been saved", "success")
         return redirect(url_for("account.account"))
     elif request.method == "GET":

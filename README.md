@@ -10,12 +10,12 @@ A simple time tracking service.
 
 ### Required
 
-- Python 3.6.x or higher
-- Postgres 9.5.x or higher
+- Python 3.6.13 or higher
+- Postgres 10.x.x or higher
 
 ### Optional
 
-- Redis 5.0.x or higher (for rate limiting, otherwise in-memory storage is used)
+- Redis 4.0.x or higher (for rate limiting, otherwise in-memory storage is used)
 
 ## Getting started
 
@@ -56,3 +56,27 @@ Run the test suite
 ```shell
 python tests.py
 ```
+
+## Versioning
+
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/MashSoftware/the-button/tags).
+
+## How to contribute
+
+If you want to contribute to this project, please review the [code of conduct](CODE_OF_CONDUCT.md) and [contribution guidelines](CONTRIBUTING.md).
+
+## Contributors
+
+- [@matthew-shaw](https://github.com/matthew-shaw) (Owner and maintainer)
+- [@ahosgood](https://github.com/ahosgood)
+- [@andymantell](https://github.com/andymantell)
+- [@annie-birchall](https://github.com/annie-birchall)
+- [@joehonywill](https://github.com/joehonywill)
+- [@LlamaComedian](https://github.com/LlamaComedian)
+- [@mattgirdler](https://github.com/mattgirdler)
+- [@russwillis](https://github.com/russwillis)
+- [@skipster2k2](https://github.com/skipster2k2)
+
+## Support
+
+This software is provided "as-is" without warranty. Support is provided on a "best endeavours" basis by the maintainers and open source community. Please see the [contribution guidelines](CONTRIBUTING.md) for how to raise a bug report or feature request.

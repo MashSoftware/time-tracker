@@ -1,3 +1,5 @@
+import logging
+
 from config import Config
 from flask import Flask
 from flask_compress import Compress
@@ -61,6 +63,16 @@ def create_app(config_class=Config):
     from app.tag import bp as tag_bp
 
     app.register_blueprint(tag_bp, url_prefix="/tags")
+
+    from app.search import bp as search_bp
+
+    app.register_blueprint(search_bp, url_prefix="/search")
+
+    stream_handler = logging.StreamHandler()
+    stream_handler.setLevel(logging.INFO)
+    app.logger.addHandler(stream_handler)
+    app.logger.setLevel(logging.INFO)
+    app.logger.info("Startup")
 
     return app
 

@@ -7,6 +7,7 @@
     <meta name="description" content="The Button - Simple, quick and easy time tracking.">
     <meta name="keywords" content="time, timing, timer, track, tracking, tracker, clocking, clock, clock-in, clock-out, log, logging, logger, record, recording, simple, easy, quick">
     <meta name="author" content="Matthew Shaw">
+    <link rel="canonical" href="{{ request.url }}">
 
     <!-- Open Graph Metadata -->
     <meta property="og:site_name" content="The Button"/>
@@ -54,6 +55,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('tag.tags') }}"><i class="fas fa-tags fa-lg fa-fw"></i> Tags</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('search.search') }}"><i class="fas fa-search fa-lg fa-fw"></i> Search</a>
                     </li>
                     {% endif %}
                 </ul>

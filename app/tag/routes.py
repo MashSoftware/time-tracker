@@ -2,12 +2,12 @@ from datetime import datetime
 
 import pytz
 from app import db, limiter
-from app.models import Event, Tag
+from app.models import Tag
 from app.tag import bp
-from app.tag.forms import TagForm
-from flask import flash, redirect, render_template, request, url_for
-from flask_login import current_user, login_required
+from app.tag.forms import DefaultForm, TagForm
 from app.utils import seconds_to_decimal, seconds_to_string
+from flask import current_app, flash, redirect, render_template, request, url_for
+from flask_login import current_user, login_required
 from werkzeug.exceptions import Forbidden
 
 
@@ -43,6 +43,7 @@ def create():
         tag = Tag(user_id=current_user.id, name=form.name.data.strip())
         db.session.add(tag)
         db.session.commit()
+        current_app.logger.info("User {} created tag {}".format(current_user.id, tag.id))
         flash("Tag has been created.", "success")
         return redirect(url_for("tag.tags"))
     return render_template("tag/create_tag_form.html", title="Create tag", form=form)
@@ -61,6 +62,7 @@ def update(id):
         tag.updated_at = pytz.utc.localize(datetime.utcnow())
         db.session.add(tag)
         db.session.commit()
+        current_app.logger.info("User {} updated tag {}".format(current_user.id, tag.id))
         flash("Tag has been saved.", "success")
         return redirect(url_for("tag.tags"))
     elif request.method == "GET":
@@ -86,6 +88,7 @@ def delete(id):
 
         return render_template("tag/delete_tag.html", title="Delete tag", tag=tag)
     elif request.method == "POST":
+        current_app.logger.info("User {} deleted tag {}".format(current_user.id, tag.id))
         db.session.delete(tag)
         db.session.commit()
         flash("Tag has been deleted.", "success")
@@ -97,7 +100,8 @@ def delete(id):
 @limiter.limit("2 per second", key_func=lambda: current_user.id)
 def entries(id):
     tag = Tag.query.get_or_404(str(id), description="Tag not found")
-
+    if tag not in current_user.tags:
+        raise Forbidden()
     now = pytz.utc.localize(datetime.utcnow())
 
     total_seconds = 0
@@ -115,3 +119,25 @@ def entries(id):
         total_string=total_string,
         total_decimal=total_decimal,
     )
+
+
+@bp.route("/default", methods=["GET", "POST"])
+@login_required
+@limiter.limit("2 per second", key_func=lambda: current_user.id)
+def default():
+    form = DefaultForm()
+    form.tag.choices += [(tag.id, tag.name) for tag in current_user.tags]
+    if form.validate_on_submit():
+        if form.tag.data == "None":
+            current_user.default_tag_id = None
+        else:
+            current_user.default_tag_id = form.tag.data
+        db.session.add(current_user)
+        db.session.commit()
+        current_app.logger.info("User {} set default tag to {}".format(current_user.id, current_user.default_tag_id))
+        flash("Your default tag has been changed.", "success")
+        return redirect(url_for("tag.tags"))
+    elif request.method == "GET":
+        form.tag.data = current_user.default_tag_id
+
+    return render_template("tag/default_form.html", title="Default tag", form=form)
