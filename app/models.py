@@ -18,7 +18,7 @@ class User(UserMixin, db.Model):
 
     # Fields
     id = db.Column(UUID, primary_key=True)
-    password = db.Column(db.Binary, nullable=False)
+    password = db.Column(db.LargeBinary, nullable=False)
     email_address = db.Column(db.String(256), nullable=False, unique=True, index=True)
     timezone = db.Column(db.String, nullable=False, server_default="UTC")
     entry_history = db.Column(db.Integer, nullable=False, server_default="12")
