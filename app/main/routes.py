@@ -3,6 +3,7 @@ import os
 from app.main import bp
 from flask import (
     current_app,
+    flash,
     redirect,
     render_template,
     request,
@@ -10,6 +11,7 @@ from flask import (
     url_for,
 )
 from flask_login import current_user
+from flask_wtf.csrf import CSRFError
 from werkzeug.exceptions import HTTPException
 
 
@@ -47,3 +49,9 @@ def help():
 def http_error(error):
     current_app.logger.error("{}: {} - {}".format(error.code, error.name, request.url))
     return render_template("error.html", title=error.name, error=error), error.code
+
+
+@bp.app_errorhandler(CSRFError)
+def handle_csrf_error(error):
+    flash("The form you were submitting has expired. Please try again.", "info")
+    return redirect(request.full_path)

@@ -9,7 +9,9 @@ from flask_login import LoginManager
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from flask_talisman import Talisman
+from flask_wtf.csrf import CSRFProtect
 
+csrf = CSRFProtect()
 db = SQLAlchemy()
 migrate = Migrate()
 login = LoginManager()
@@ -29,6 +31,7 @@ def create_app(config_class=Config):
     app.jinja_env.trim_blocks = True
     app.jinja_env.lstrip_blocks = True
 
+    csrf.init_app(app)
     db.init_app(app)
     migrate.init_app(app, db)
     login.init_app(app)
