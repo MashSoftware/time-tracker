@@ -7,7 +7,7 @@
             {% if event.ended_at is none %}
                 Since {{event.started_at.strftime('%H:%M')}}
             {% else %}
-                {{event.started_at.strftime('%H:%M')}} to {{event.ended_at.strftime('%H:%M')}}
+                {{event.started_at.strftime('%H:%M')}} to {% if event.started_at.strftime('%x') != event.ended_at.strftime('%x') %}{{ event.ended_at.strftime('%d/%m/%Y %H:%M') }}{% else %}{{ event.ended_at.strftime('%H:%M')}}{% endif %}
             {% endif %}
             {% if event.tag %}<br><a href="{{ url_for('tag.entries', id=event.tag.id) }}"><span class="badge bg-secondary"><i class="fas fa-tag fa-fw"></i> {{event.tag.name}}</span></a>{% endif %}
         </p>
