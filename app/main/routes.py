@@ -53,5 +53,6 @@ def http_error(error):
 
 @bp.app_errorhandler(CSRFError)
 def handle_csrf_error(error):
+    current_app.logger.error("{}: {} - {}".format(error.code, error.description, request.url))
     flash("The form you were submitting has expired. Please try again.", "info")
     return redirect(request.full_path)
