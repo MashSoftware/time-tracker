@@ -1,7 +1,7 @@
 from datetime import date, datetime, timedelta
 
 import pytz
-from app import db, limiter
+from app import csrf, db, limiter
 from app.account import bp
 from app.account.forms import AccountForm, PasswordForm, ScheduleForm
 from app.main.email import send_confirmation_email
@@ -74,6 +74,7 @@ def update():
 
 
 @bp.route("/delete", methods=["GET", "POST"])
+@csrf.exempt
 @fresh_login_required
 @limiter.limit("2 per second", key_func=lambda: current_user.id)
 def delete():

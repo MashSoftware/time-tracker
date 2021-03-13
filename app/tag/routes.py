@@ -1,7 +1,7 @@
 from datetime import datetime
 
 import pytz
-from app import db, limiter
+from app import csrf, db, limiter
 from app.models import Tag
 from app.tag import bp
 from app.tag.forms import DefaultForm, TagForm
@@ -71,6 +71,7 @@ def update(id):
 
 
 @bp.route("/<uuid:id>/delete", methods=["GET", "POST"])
+@csrf.exempt
 @login_required
 @limiter.limit("2 per second", key_func=lambda: current_user.id)
 def delete(id):
