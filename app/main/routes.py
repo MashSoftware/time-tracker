@@ -13,6 +13,7 @@ from flask import (
 from flask_login import current_user
 from flask_wtf.csrf import CSRFError
 from werkzeug.exceptions import HTTPException
+from app.main.forms import CookiesForm
 
 
 @bp.route("/")
@@ -43,6 +44,14 @@ def apple_touch_icon():
 @bp.route("/help")
 def help():
     return render_template("help.html", title="Help")
+
+
+@bp.route("/cookies", methods=["GET", "POST"])
+def cookies():
+    form = CookiesForm()
+    if form.validate_on_submit():
+        flash("You’ve set your cookie preferences.", "success")
+    return render_template("cookies.html", form=form, title="Cookies")
 
 
 @bp.app_errorhandler(HTTPException)
