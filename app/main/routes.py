@@ -1,9 +1,12 @@
 import os
 
 from app.main import bp
+from app.main.forms import CookiesForm
 from flask import (
     current_app,
     flash,
+    json,
+    make_response,
     redirect,
     render_template,
     request,
@@ -13,7 +16,6 @@ from flask import (
 from flask_login import current_user
 from flask_wtf.csrf import CSRFError
 from werkzeug.exceptions import HTTPException
-from app.main.forms import CookiesForm
 
 
 @bp.route("/")
@@ -49,9 +51,31 @@ def help():
 @bp.route("/cookies", methods=["GET", "POST"])
 def cookies():
     form = CookiesForm()
+    # Default cookies policy to reject all categories of cookie
+    cookies_policy = {"functional": "no"}
+
     if form.validate_on_submit():
+        # Update cookies policy consent from form data
+        cookies_policy["functional"] = form.functional.data
+
+        # Create flash message confirmation before rendering template
         flash("You’ve set your cookie preferences.", "success")
-    return render_template("cookies.html", form=form, title="Cookies")
+
+        # Create the response so we can set the cookie before returning
+        response = make_response(render_template("cookies.html", title="Cookies", form=form))
+
+        # Set cookies policy for one year
+        response.set_cookie("cookies_policy", json.dumps(cookies_policy), max_age=31557600)
+        return response
+    elif request.method == "GET":
+        if request.cookies.get("cookies_policy"):
+            # Set cookie consent radios to current consent
+            cookies_policy = json.loads(request.cookies.get("cookies_policy"))
+            form.functional.data = cookies_policy["functional"]
+        else:
+            # If conset not previously set, use default "no" policy
+            form.functional.data = cookies_policy["functional"]
+    return render_template("cookies.html", title="Cookies", form=form)
 
 
 @bp.app_errorhandler(HTTPException)
