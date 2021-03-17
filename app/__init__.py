@@ -39,9 +39,9 @@ def create_app(config_class=Config):
     compress.init_app(app)
     csp = {
         "default-src": "'self'",
-        "style-src": ["cdn.jsdelivr.net", "use.fontawesome.com"],
-        "font-src": "use.fontawesome.com",
-        "script-src": "cdn.jsdelivr.net",
+        "style-src": ["https://cdn.jsdelivr.net", "https://use.fontawesome.com"],
+        "font-src": "https://use.fontawesome.com",
+        "script-src": "https://cdn.jsdelivr.net",
         "img-src": ["data:", "'self'"],
     }
     talisman.init_app(app, content_security_policy=csp, content_security_policy_nonce_in=["style-src"])
