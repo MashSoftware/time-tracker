@@ -10,6 +10,7 @@ class Config(object):
     REMEMBER_COOKIE_HTTPONLY = True
     REMEMBER_COOKIE_SECURE = True
     SECRET_KEY = os.environ.get("SECRET_KEY") or "!DAyH2qdEqmGzriZMvxU!wzTWql6UJ4P"
+    SESSION_COOKIE_HTTPONLY = True
     SESSION_COOKIE_SECURE = True
     SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL") or "postgresql://mash:mash@localhost:5432/button"
     SQLALCHEMY_ENGINE_OPTIONS = {"pool_size": 20}
