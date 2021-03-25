@@ -7,7 +7,7 @@ from app.tag import bp
 from app.tag.forms import DefaultForm, TagForm
 from app.utils import seconds_to_decimal, seconds_to_string
 from flask import current_app, flash, redirect, render_template, request, url_for
-from flask_login import current_user, login_required
+from flask_login import current_user, fresh_login_required, login_required
 from werkzeug.exceptions import Forbidden
 
 
@@ -72,7 +72,7 @@ def update(id):
 
 @bp.route("/<uuid:id>/delete", methods=["GET", "POST"])
 @csrf.exempt
-@login_required
+@fresh_login_required
 @limiter.limit("2 per second", key_func=lambda: current_user.id)
 def delete(id):
     tag = Tag.query.get_or_404(str(id), description="Tag not found")
