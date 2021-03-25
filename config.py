@@ -3,7 +3,7 @@ import os
 
 class Config(object):
     SECRET_KEY = os.environ.get("SECRET_KEY") or "!DAyH2qdEqmGzriZMvxU!wzTWql6UJ4P"
-    SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL") or "postgres://mash:mash@localhost:5432/button"
+    SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL") or "postgresql://mash:mash@localhost:5432/button"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_ENGINE_OPTIONS = {"pool_size": 20}
     RATELIMIT_STORAGE_URL = os.environ.get("REDIS_URL") or "memory://"
