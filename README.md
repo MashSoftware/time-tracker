@@ -34,7 +34,7 @@ grant all privileges on database button to mash;
 ```shell
 python3 -m venv venv
 source venv/bin/activate
-pip3 install -r requirements.txt
+pip3 install -r requirements.txt ; pip3 install -r requirements_dev.txt
 ```
 
 ### Run database migrations
