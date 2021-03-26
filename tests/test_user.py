@@ -57,3 +57,33 @@ class UserModelCase(unittest.TestCase):
         user.saturday = 6
         user.sunday = 7
         self.assertEqual(user.schedule(), 28)
+
+    def test_schedule_string(self):
+        user = User(
+            email_address="mash@example.com",
+            password="8wCS0H65r@p!8%B0XxrPTbBiR%^tc##f",
+            timezone="Europe/London",
+        )
+        user.monday = 1
+        user.tuesday = 2
+        user.wednesday = 3
+        user.thursday = 4
+        user.friday = 5
+        user.saturday = 6
+        user.sunday = 7
+        self.assertEqual(user.schedule_string(), "28s")
+
+    def test_schedule_decimal(self):
+        user = User(
+            email_address="mash@example.com",
+            password="8wCS0H65r@p!8%B0XxrPTbBiR%^tc##f",
+            timezone="Europe/London",
+        )
+        user.monday = 1
+        user.tuesday = 2
+        user.wednesday = 3
+        user.thursday = 4
+        user.friday = 5
+        user.saturday = 6
+        user.sunday = 7
+        self.assertEqual(user.schedule_decimal(), 0.0)
