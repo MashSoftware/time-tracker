@@ -2,6 +2,7 @@ black==20.8b1
 flake8==3.9.0
 pip-tools==6.0.1
 piprot==0.9.11
+pytest-cov==2.11.1
 pytest==6.2.2
 safety==1.10.3
 # Generated with piprot 0.9.10

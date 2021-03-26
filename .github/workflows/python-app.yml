@@ -22,7 +22,7 @@ jobs:
       - name: Set up pip
         run: |
           python -m pip install --upgrade pip
-          pip install piprot safety flake8 pytest
+          pip install piprot safety flake8 pytest pytest-cov
       - name: Check dependencies are up to date
         run: piprot requirements.in
       - name: Check dependencies for security vulnerabilities
@@ -37,4 +37,4 @@ jobs:
           flake8 . --count --exit-zero --max-complexity=10 --max-line-length=120 --statistics
       - name: Test with pytest
         run: |
-          python -m pytest
+          python -m pytest --cov=app --cov-report=term-missing --cov-branch

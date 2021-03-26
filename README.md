@@ -54,7 +54,7 @@ flask run
 Run the test suite
 
 ```shell
-python -m pytest
+python -m pytest --cov=app --cov-report=term-missing --cov-branch
 ```
 
 ## Versioning
