@@ -49,7 +49,7 @@ flask==1.1.2
     #   flask-wtf
 greenlet==1.0.0
     # via sqlalchemy
-gunicorn==20.0.4
+gunicorn==20.1.0
     # via -r requirements.in
 idna==2.10
     # via
@@ -78,7 +78,7 @@ pyjwt==2.0.1
     # via -r requirements.in
 python-dateutil==2.8.1
     # via alembic
-python-dotenv==0.15.0
+python-dotenv==0.16.0
     # via -r requirements.in
 python-editor==1.0.4
     # via alembic
