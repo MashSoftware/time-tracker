@@ -53,34 +53,34 @@
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     {% if current_user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="{{ url_for('entry.weekly') }}"><i class="fas fa-clock fa-lg fa-fw"></i> Time</a>
+                        <a class="nav-link {% if url_for('entry.weekly') == request.path %}active{% endif %}" aria-current="page" href="{{ url_for('entry.weekly') }}"><i class="fas fa-clock fa-lg fa-fw"></i> Time</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('tag.tags') }}"><i class="fas fa-tags fa-lg fa-fw"></i> Tags</a>
+                        <a class="nav-link {% if url_for('tag.tags') == request.path %}active{% endif %}" href="{{ url_for('tag.tags') }}"><i class="fas fa-tags fa-lg fa-fw"></i> Tags</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('search.search') }}"><i class="fas fa-search fa-lg fa-fw"></i> Search</a>
+                        <a class="nav-link {% if url_for('search.search') == request.path %}active{% endif %}" href="{{ url_for('search.search') }}"><i class="fas fa-search fa-lg fa-fw"></i> Search</a>
                     </li>
                     {% endif %}
                 </ul>
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     {% if current_user.is_anonymous %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('auth.signup') }}"><i class="fas fa-user-plus fa-lg fa-fw"></i> Sign up</a>
+                        <a class="nav-link {% if url_for('auth.signup') == request.path %}active{% endif %}" href="{{ url_for('auth.signup') }}"><i class="fas fa-user-plus fa-lg fa-fw"></i> Sign up</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('auth.login') }}"><i class="fas fa-sign-in-alt fa-lg fa-fw"></i> Log in</a>
+                        <a class="nav-link {% if url_for('auth.login') == request.path %}active{% endif %}" href="{{ url_for('auth.login') }}"><i class="fas fa-sign-in-alt fa-lg fa-fw"></i> Log in</a>
                     </li>
                     {% else %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('account.account') }}"><i class="fas fa-user fa-lg fa-fw"></i> Account</a>
+                        <a class="nav-link {% if url_for('account.account') == request.path %}active{% endif %}" href="{{ url_for('account.account') }}"><i class="fas fa-user fa-lg fa-fw"></i> Account</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('auth.logout') }}"><i class="fas fa-sign-out-alt fa-lg fa-fw"></i> Log out</a>
+                        <a class="nav-link {% if url_for('auth.logout') == request.path %}active{% endif %}" href="{{ url_for('auth.logout') }}"><i class="fas fa-sign-out-alt fa-lg fa-fw"></i> Log out</a>
                     </li>
                     {% endif %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('main.help') }}"><i class="fas fa-question-circle fa-lg fa-fw"></i> Help</a>
+                        <a class="nav-link {% if url_for('main.help') == request.path %}active{% endif %}" href="{{ url_for('main.help') }}"><i class="fas fa-question-circle fa-lg fa-fw"></i> Help</a>
                     </li>
                 </ul>
             </div>
