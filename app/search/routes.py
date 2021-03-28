@@ -14,7 +14,8 @@ def search():
     form = SearchForm()
     if form.validate_on_submit():
         results = (
-            Event.query.filter(Event.comment.ilike("%{}%".format(form.query.data)))
+            Event.query.filter_by(user_id=current_user.id)
+            .filter(Event.comment.ilike("%{}%".format(form.query.data)))
             .order_by(Event.started_at.desc())
             .all()
         )
