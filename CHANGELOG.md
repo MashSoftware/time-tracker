@@ -7,6 +7,36 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased](https://github.com/MashSoftware/the-button/compare/main...develop)
 
+### Added
+
+- Cookie page detailing what cookies the app uses and the ability to accept or reject non-essential cookies. Link also added to footer.
+- Persistent `cookies_policy` cookie is set to store preferences with an expiry of one year.
+- App-wide CSRF protection. All forms were already CRSF protected using WTForms, but this setting protects every route unless explicitly exempt.
+- Highlight active navigation item in navbar.
+- Development-only requirements containing packages used for linting, formatting, testing and requirements management.
+- Using Pytest Coverage to measure unit test coverage, including in branching code.
+- Restructured and added more unit tests.
+- Error handling if email send request to service providers API fails for any reason. Re-raised as a 500 internal server error and logged.
+- Error pages contain a back link taking the user back to the referring page if there was one.
+
+### Changed
+
+- Time entries spanning multiple days now add the date to the end time e.g. instead of _"22:00 to 06:00"_ it's now _"22:00 to 28/03/2021 06:00"_.
+- Content Security Policy (CSP) updated to require HTTPS connection to all sources.
+- Require a fresh login (not a restored session) prior to any delete action.
+- `session` and `remember_token` cookies are set to `HttpOnly` and `Secure` to prevent access over non-HTTPS connections or via JavaScript to mitigate cookie theft via cross-site scripting (XSS) or eavesdropping.
+- Reduced `remember_token` cookie expiration from one year, to thirty days.
+- CSRF errors are now explicitly handled with a flash message to inform the user to try again, rather than a form validation error.
+- Flash messages have been simplified to three categories; error, important and success. Error messages are used for form validation and are not dismissable. Important and success messages are dismissable contextual confirmation of user actions.
+- Footer layout redesigned for multiple columns on desktop and single column on mobile.
+- Reduce header content margin.
+
+### Fixed
+
+- Prevent other users time entries from appearing in search results. Other users entries could not be edited or deleted, this resulted in a 403 forbidden error.
+- Pre-select "None" when changing default tag and user has no tags.
+- Database URI using deprecated scheme designator.
+
 ## [0.26.0](https://github.com/MashSoftware/the-button/compare/v0.25.0...v0.26.0) - 2021-03-09
 
 ### Added
