@@ -69,7 +69,7 @@ def cookies():
             response.delete_cookie("remember_token")
 
         # Set cookies policy for one year
-        response.set_cookie("cookies_policy", json.dumps(cookies_policy), max_age=31557600)
+        response.set_cookie("cookies_policy", json.dumps(cookies_policy), max_age=31557600, secure=True)
         return response
     elif request.method == "GET":
         if request.cookies.get("cookies_policy"):
