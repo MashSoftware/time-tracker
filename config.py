@@ -7,6 +7,7 @@ class Config(object):
     RATELIMIT_HEADERS_ENABLED = True
     RATELIMIT_STORAGE_URL = os.environ.get("REDIS_URL") or "memory://"
     RELEASE_DATE = os.environ.get("RELEASE_DATE")
+    REMEMBER_COOKIE_DURATION = 2592000
     REMEMBER_COOKIE_HTTPONLY = True
     REMEMBER_COOKIE_SECURE = True
     SECRET_KEY = os.environ.get("SECRET_KEY") or "!DAyH2qdEqmGzriZMvxU!wzTWql6UJ4P"
