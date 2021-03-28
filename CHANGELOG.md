@@ -31,7 +31,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Footer layout redesigned for multiple columns on desktop and single column on mobile.
 - Reduce header content margin.
 
-### Fixed
+### Fixed
 
 - Prevent other users time entries from appearing in search results. Other users entries could not be edited or deleted, this resulted in a 403 forbidden error.
 - Pre-select "None" when changing default tag and user has no tags.
