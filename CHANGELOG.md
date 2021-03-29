@@ -28,7 +28,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Reduced `remember_token` cookie expiration from one year, to thirty days.
 - CSRF errors are now explicitly handled with a flash message to inform the user to try again, rather than a form validation error.
 - Flash messages have been simplified to three categories; error, important and success. Error messages are used for form validation and are not dismissable. Important and success messages are dismissable contextual confirmation of user actions.
-- Form fields validation error messages are now added to the aria-describedby attribute.
+- Form fields validation error messages are now added to the `aria-describedby` attribute.
 - Footer layout redesigned for multiple columns on desktop and single column on mobile.
 - Reduce header content margin.
 
