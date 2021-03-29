@@ -42,20 +42,18 @@
 </head>
 
 <body class="bg-light">
-    {% if not request.cookies.get("cookies_policy") %}
-        <div class="alert alert-secondary m-0" role="alert">
-            <div class="container">
-                <h4 class="alert-heading"><i class="fas fa-cookie-bite fa-lg fa-fw"></i> Cookies</h4>
-                <p>We use some essential cookies to make this service work.</p>
-                <p>We’d like to set additional cookies so we can remember your settings.</p>
-                <div class="d-grid gap-2 d-md-block">
-                    <button class="btn btn-primary" type="button" name="cookies" value="accept"><i class="fas fa-check fa-lg fa-fw"></i> Accept additional cookies</button>
-                    <button class="btn btn-primary" type="button" name="cookies" value="reject"><i class="fas fa-times fa-lg fa-fw"></i> Reject additional cookies</button>
-                    <a class="alert-link mx-auto" href="{{ url_for('main.cookies') }}">View cookies</a>
-                </div>
+    <div class="alert alert-secondary m-0" id="cookie-banner" role="alert">
+        <div class="container">
+            <h4 class="alert-heading"><i class="fas fa-cookie-bite fa-lg fa-fw"></i> Cookies</h4>
+            <p>We use some essential cookies to make this service work.</p>
+            <p>We’d like to set additional cookies so we can remember your settings.</p>
+            <div class="d-grid gap-2 d-md-block">
+                <button class="btn btn-primary" id="accept-cookies" type="button"><i class="fas fa-check fa-lg fa-fw"></i> Accept additional cookies</button>
+                <button class="btn btn-primary" id="reject-cookies" type="button"><i class="fas fa-times fa-lg fa-fw"></i> Reject additional cookies</button>
+                <a class="alert-link mx-auto" href="{{ url_for('main.cookies') }}">View cookies</a>
             </div>
         </div>
-    {% endif %}
+    </div>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
         <div class="container">
             <a class="navbar-brand" href="{{ url_for('main.index') }}">The Button <span class="badge bg-info text-dark">BETA</span></a>
@@ -154,6 +152,7 @@
         </div>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+    {% assets "js" %}<script type="text/javascript" src="{{ ASSET_URL }}"></script>{% endassets %}
 </body>
 
 </html>
