@@ -14,8 +14,8 @@
                 {{ form.name.label(class="form-label") }}
                 {% if form.errors %}
                     {% if form.name.errors %}
-                        {{ form.name(class="form-control is-invalid", type="text", spellcheck="true", aria_describedby="nameHelp") }}
-                        {% for error in form.name.errors %}<div class="invalid-feedback">{{error}}</div>{% endfor %}
+                        {{ form.name(class="form-control is-invalid", type="text", spellcheck="true", aria_describedby="nameHelp nameError") }}
+                        {% for error in form.name.errors %}<div class="invalid-feedback" id="nameError">{{error}}</div>{% endfor %}
                     {% else %}
                         {{ form.name(class="form-control is-valid", type="text", spellcheck="true", aria_describedby="nameHelp") }}
                         <div class="valid-feedback">Looks good!</div>

@@ -2,7 +2,8 @@
 {% block header %}
 <div class="container">
     {{ super() }}
-    <h1 class="mb-0">{{ title }}</h1>
+    <h1>{{ title }}</h1>
+    <p class="lead mb-0">Enter the duration in hours and minutes you are scheduled to work on each day</p>
 </div>
 {% endblock %}
 {% block content %}
@@ -14,8 +15,8 @@
                 {{ form.monday.label(class="form-label") }}
                 {% if form.errors %}
                     {% if form.monday.errors %}
-                        {{ form.monday(class="form-control is-invalid", type="time") }}
-                        {% for error in form.monday.errors %}<div class="invalid-feedback">{{error}}</div>{% endfor %}
+                        {{ form.monday(class="form-control is-invalid", aria_describedby="mondayError", type="time") }}
+                        {% for error in form.monday.errors %}<div class="invalid-feedback" id="mondayError">{{error}}</div>{% endfor %}
                     {% else %}
                         {{ form.monday(class="form-control is-valid", type="time") }}
                         <div class="valid-feedback">Looks good!</div>
@@ -28,8 +29,8 @@
                 {{ form.tuesday.label(class="form-label") }}
                 {% if form.errors %}
                     {% if form.tuesday.errors %}
-                        {{ form.tuesday(class="form-control is-invalid", type="time") }}
-                        {% for error in form.tuesday.errors %}<div class="invalid-feedback">{{error}}</div>{% endfor %}
+                        {{ form.tuesday(class="form-control is-invalid", aria_describedby="tuesdayError", type="time") }}
+                        {% for error in form.tuesday.errors %}<div class="invalid-feedback" id="tuesdayError">{{error}}</div>{% endfor %}
                     {% else %}
                         {{ form.tuesday(class="form-control is-valid", type="time") }}
                         <div class="valid-feedback">Looks good!</div>
@@ -42,8 +43,8 @@
                 {{ form.wednesday.label(class="form-label") }}
                 {% if form.errors %}
                     {% if form.wednesday.errors %}
-                        {{ form.wednesday(class="form-control is-invalid", type="time") }}
-                        {% for error in form.wednesday.errors %}<div class="invalid-feedback">{{error}}</div>{% endfor %}
+                        {{ form.wednesday(class="form-control is-invalid", aria_describedby="wednesdayError", type="time") }}
+                        {% for error in form.wednesday.errors %}<div class="invalid-feedback" id="wednesdayError">{{error}}</div>{% endfor %}
                     {% else %}
                         {{ form.wednesday(class="form-control is-valid", type="time") }}
                         <div class="valid-feedback">Looks good!</div>
@@ -56,8 +57,8 @@
                 {{ form.thursday.label(class="form-label") }}
                 {% if form.errors %}
                     {% if form.thursday.errors %}
-                        {{ form.thursday(class="form-control is-invalid", type="time") }}
-                        {% for error in form.thursday.errors %}<div class="invalid-feedback">{{error}}</div>{% endfor %}
+                        {{ form.thursday(class="form-control is-invalid", aria_describedby="thursdayError", type="time") }}
+                        {% for error in form.thursday.errors %}<div class="invalid-feedback" id="thursdayError">{{error}}</div>{% endfor %}
                     {% else %}
                         {{ form.thursday(class="form-control is-valid", type="time") }}
                         <div class="valid-feedback">Looks good!</div>
@@ -70,8 +71,8 @@
                 {{ form.friday.label(class="form-label") }}
                 {% if form.errors %}
                     {% if form.friday.errors %}
-                        {{ form.friday(class="form-control is-invalid", type="time") }}
-                        {% for error in form.friday.errors %}<div class="invalid-feedback">{{error}}</div>{% endfor %}
+                        {{ form.friday(class="form-control is-invalid", aria_describedby="fridayError", type="time") }}
+                        {% for error in form.friday.errors %}<div class="invalid-feedback" id="fridayError">{{error}}</div>{% endfor %}
                     {% else %}
                         {{ form.friday(class="form-control is-valid", type="time") }}
                         <div class="valid-feedback">Looks good!</div>
@@ -84,8 +85,8 @@
                 {{ form.saturday.label(class="form-label") }}
                 {% if form.errors %}
                     {% if form.saturday.errors %}
-                        {{ form.saturday(class="form-control is-invalid", type="time") }}
-                        {% for error in form.saturday.errors %}<div class="invalid-feedback">{{error}}</div>{% endfor %}
+                        {{ form.saturday(class="form-control is-invalid", aria_describedby="saturdayError", type="time") }}
+                        {% for error in form.saturday.errors %}<div class="invalid-feedback" id="saturdayError">{{error}}</div>{% endfor %}
                     {% else %}
                         {{ form.saturday(class="form-control is-valid", type="time") }}
                         <div class="valid-feedback">Looks good!</div>
@@ -98,8 +99,8 @@
                 {{ form.sunday.label(class="form-label") }}
                 {% if form.errors %}
                     {% if form.sunday.errors %}
-                        {{ form.sunday(class="form-control is-invalid", type="time") }}
-                        {% for error in form.sunday.errors %}<div class="invalid-feedback">{{error}}</div>{% endfor %}
+                        {{ form.sunday(class="form-control is-invalid", aria_describedby="sundayError", type="time") }}
+                        {% for error in form.sunday.errors %}<div class="invalid-feedback" id="sundayError">{{error}}</div>{% endfor %}
                     {% else %}
                         {{ form.sunday(class="form-control is-valid", type="time") }}
                         <div class="valid-feedback">Looks good!</div>

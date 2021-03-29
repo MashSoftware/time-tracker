@@ -14,8 +14,8 @@
                 {{ form.email_address.label(class="form-label") }}
                 {% if form.errors %}
                     {% if form.email_address.errors %}
-                        {{ form.email_address(class="form-control is-invalid", type="email", spellcheck="false", autocomplete="email", aria_describedby="emailHelp") }}
-                        {% for error in form.email_address.errors %}<div class="invalid-feedback">{{error}}</div>{% endfor %}
+                        {{ form.email_address(class="form-control is-invalid", type="email", spellcheck="false", autocomplete="email", aria_describedby="emailHelp emailError") }}
+                        {% for error in form.email_address.errors %}<div class="invalid-feedback" id="emailError">{{error}}</div>{% endfor %}
                     {% else %}
                         {{ form.email_address(class="form-control is-valid", type="email", spellcheck="false", autocomplete="email", aria_describedby="emailHelp") }}
                         <div class="valid-feedback">Looks good!</div>
@@ -29,8 +29,8 @@
                 {{ form.timezone.label(class="form-label") }}
                 {% if form.errors %}
                     {% if form.timezone.errors %}
-                        {{ form.timezone(class="form-select is-invalid") }}
-                        {% for error in form.timezone.errors %}<div class="invalid-feedback">{{error}}</div>{% endfor %}
+                        {{ form.timezone(class="form-select is-invalid", aria_describedby="timezoneError") }}
+                        {% for error in form.timezone.errors %}<div class="invalid-feedback" id="timezoneError">{{error}}</div>{% endfor %}
                     {% else %}
                         {{ form.timezone(class="form-select is-valid") }}
                         <div class="valid-feedback">Looks good!</div>

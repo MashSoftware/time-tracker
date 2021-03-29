@@ -14,23 +14,23 @@
                 {{ form.email_address.label(class="form-label") }}
                 {% if form.errors %}
                     {% if form.email_address.errors %}
-                        {{ form.email_address(class="form-control is-invalid", type="email", spellcheck="false", autocomplete="email", aria_describedby="emailHelp") }}
-                        {% for error in form.email_address.errors %}<div class="invalid-feedback">{{error}}</div>{% endfor %}
+                        {{ form.email_address(class="form-control is-invalid", type="email", spellcheck="false", autocomplete="email", aria_describedby="emailAddressHelp emailAddressError") }}
+                        {% for error in form.email_address.errors %}<div class="invalid-feedback" id="emailAddressError">{{error}}</div>{% endfor %}
                     {% else %}
-                        {{ form.email_address(class="form-control is-valid", type="email", spellcheck="false", autocomplete="email", aria_describedby="emailHelp") }}
+                        {{ form.email_address(class="form-control is-valid", type="email", spellcheck="false", autocomplete="email", aria_describedby="emailAddressHelp") }}
                         <div class="valid-feedback">Looks good!</div>
                     {% endif %}
                 {% else %}
-                    {{ form.email_address(class="form-control", type="email", spellcheck="false", autocomplete="email", aria_describedby="emailHelp") }}
+                    {{ form.email_address(class="form-control", type="email", spellcheck="false", autocomplete="email", aria_describedby="emailAddressHelp") }}
                 {% endif %}
-                <div id="emailHelp" class="form-text">{{ form.email_address.description }}</div>
+                <div id="emailAddressHelp" class="form-text">{{ form.email_address.description }}</div>
             </div>
             <div class="mb-3">
                 {{ form.password.label(class="form-label") }}
                 {% if form.errors %}
                     {% if form.password.errors %}
-                        {{ form.password(class="form-control is-invalid", aria_describedby="passwordHelp") }}
-                        {% for error in form.password.errors %}<div class="invalid-feedback">{{error}}</div>{% endfor %}
+                        {{ form.password(class="form-control is-invalid", aria_describedby="passwordHelp passwordError") }}
+                        {% for error in form.password.errors %}<div class="invalid-feedback" id="passwordError">{{error}}</div>{% endfor %}
                     {% else %}
                         {{ form.password(class="form-control is-valid", aria_describedby="passwordHelp") }}
                         <div class="valid-feedback">Looks good!</div>
@@ -44,8 +44,8 @@
                 {{ form.confirm_password.label(class="form-label") }}
                 {% if form.errors %}
                     {% if form.confirm_password.errors %}
-                        {{ form.confirm_password(class="form-control is-invalid") }}
-                        {% for error in form.confirm_password.errors %}<div class="invalid-feedback">{{error}}</div>{% endfor %}
+                        {{ form.confirm_password(class="form-control is-invalid", aria_describedby="confirmPasswordError") }}
+                        {% for error in form.confirm_password.errors %}<div class="invalid-feedback" id="confirmPasswordError">{{error}}</div>{% endfor %}
                     {% else %}
                         {{ form.confirm_password(class="form-control is-valid") }}
                         <div class="valid-feedback">Looks good!</div>
@@ -58,8 +58,8 @@
                 {{ form.timezone.label(class="form-label") }}
                 {% if form.errors %}
                     {% if form.timezone.errors %}
-                        {{ form.timezone(class="form-select is-invalid") }}
-                        {% for error in form.timezone.errors %}<div class="invalid-feedback">{{error}}</div>{% endfor %}
+                        {{ form.timezone(class="form-select is-invalid", aria_describedby="timezoneError") }}
+                        {% for error in form.timezone.errors %}<div class="invalid-feedback" id="timezoneError">{{error}}</div>{% endfor %}
                     {% else %}
                         {{ form.timezone(class="form-select is-valid") }}
                         <div class="valid-feedback">Looks good!</div>

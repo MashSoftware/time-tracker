@@ -14,9 +14,9 @@
                 {% if form.errors %}
                     {% if form.query.errors %}
                         <div class="input-group has-validation">
-                            {{ form.query(class="form-control is-invalid", type="search") }}
+                            {{ form.query(class="form-control is-invalid", aria_describedby="queryError", type="search") }}
                             <button class="btn btn-primary" type="submit" id="search"><i class="fas fa-search fa-lg fa-fw"></i></button>
-                            {% for error in form.query.errors %}<div class="invalid-feedback">{{error}}</div>{% endfor %}
+                            {% for error in form.query.errors %}<div class="invalid-feedback" id="queryError">{{error}}</div>{% endfor %}
                         </div>
                     {% endif %}
                 {% else %}

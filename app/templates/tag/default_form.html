@@ -17,11 +17,11 @@
                     {% if form.tag.errors %}
                         {% for subfield in form.tag %}
                         <div class="form-check">
-                            {{ subfield(class="form-check-input is-invalid", type="radio") }}
+                            {{ subfield(class="form-check-input is-invalid", aria_describedby="tagError", type="radio") }}
                             <span class="badge bg-secondary"><i class="fas fa-tag fa-fw"></i> {{ subfield.label(class="form-check-label") }}</span>
                         </div>
                         {% endfor %}
-                        {% for error in form.tag.errors %}<div class="invalid-feedback">{{error}}</div>{% endfor %}
+                        {% for error in form.tag.errors %}<div class="invalid-feedback" id="tagError">{{error}}</div>{% endfor %}
                     {% else %}
                         {% for subfield in form.tag %}
                         <div class="form-check">
