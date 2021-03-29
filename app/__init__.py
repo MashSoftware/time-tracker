@@ -2,6 +2,7 @@ import logging
 
 from config import Config
 from flask import Flask
+from flask_assets import Bundle, Environment
 from flask_compress import Compress
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
@@ -23,6 +24,7 @@ login.needs_refresh_message = "To protect your account, please log in again to a
 limiter = Limiter(key_func=get_remote_address, default_limits=["2 per second", "60 per minute"])
 compress = Compress()
 talisman = Talisman()
+assets = Environment()
 
 
 def create_app(config_class=Config):
@@ -31,6 +33,7 @@ def create_app(config_class=Config):
     app.jinja_env.trim_blocks = True
     app.jinja_env.lstrip_blocks = True
 
+    assets.init_app(app)
     csrf.init_app(app)
     db.init_app(app)
     migrate.init_app(app, db)
@@ -41,10 +44,13 @@ def create_app(config_class=Config):
         "default-src": "'self'",
         "style-src": ["https://cdn.jsdelivr.net", "https://use.fontawesome.com"],
         "font-src": "https://use.fontawesome.com",
-        "script-src": "https://cdn.jsdelivr.net",
+        "script-src": ["https://cdn.jsdelivr.net", "'self'"],
         "img-src": ["data:", "'self'"],
     }
     talisman.init_app(app, content_security_policy=csp, content_security_policy_nonce_in=["style-src"])
+
+    js = Bundle("src/js/*.js", filters="jsmin", output="dist/js/custom-%(version)s.js")
+    assets.register("js", js)
 
     # Register blueprints
     from app.main import bp as main_bp
