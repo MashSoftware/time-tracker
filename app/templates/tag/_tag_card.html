@@ -1,4 +1,4 @@
-<div class="card bg-white shadow mb-3 {% if tag.id == current_user.default_tag_id %}border-info{% endif %}" style="width: 18rem;">
+<div class="card bg-white shadow mb-3 {% if tag.id == current_user.default_tag_id %}border-info{% endif %}">
     {% if tag.id == current_user.default_tag_id %}<div class="card-header bg-info">Default tag</div>{% endif %}
     <div class="card-body">
         <h5 class="card-title"><i class="fas fa-tag fa-fw"></i> {{ tag.name }}</h5>
