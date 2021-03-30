@@ -39,12 +39,14 @@
                 {% endif %}
                 <div id="passwordHelp" class="form-text">{{ form.password.description }}</div>
             </div>
+            {% if request.cookies.get("cookies_policy") and request.cookies.get("cookies_policy") == "{\"functional\": \"yes\"}" %}
             <div class="mb-3">
                 <div class="form-check">
                     {{ form.remember_me(class="form-check-input", type="checkbox") }}
                     {{ form.remember_me.label(class="form-check-label") }}
                 </div>
             </div>
+            {% endif %}
             <div class="d-grid gap-2 d-md-block">
                 <button class="btn btn-primary" type="submit"><i class="fas fa-sign-in-alt fa-lg fa-fw"></i> Log in</button>
                 <a class="btn btn-secondary" href="{{ url_for('main.index') }}"><i class="fas fa-chevron-left fa-lg fa-fw"></i> Cancel</a>
