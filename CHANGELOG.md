@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 
 - Cookie page detailing what cookies the app uses and the ability to accept or reject non-essential cookies. Link also added to footer.
+- Cookie banner to allow users to accept or reject non-essential cookies.
 - Persistent `cookies_policy` cookie is set to store preferences with an expiry of one year.
 - App-wide CSRF protection. All forms were already CRSF protected using WTForms, but this setting protects every route unless explicitly exempt.
 - Highlight active navigation item in navbar.
@@ -22,10 +23,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 
 - Time entries spanning multiple days now add the date to the end time e.g. instead of _"22:00 to 06:00"_ it's now _"22:00 to 28/03/2021 06:00"_.
-- Content Security Policy (CSP) updated to require HTTPS connection to all sources.
-- Require a fresh login (not a restored session) prior to any delete action.
+- "Remember me" checkbox is removed from the login page if the user has not accepted non-essential cookies.
 - `session` and `remember_token` cookies are set to `HttpOnly` and `Secure` to prevent access over non-HTTPS connections or via JavaScript to mitigate cookie theft via cross-site scripting (XSS) or eavesdropping.
 - Reduced `remember_token` cookie expiration from one year, to thirty days.
+- Content Security Policy (CSP) updated to require HTTPS connection to all sources.
+- Require a fresh login (not a restored session) prior to any delete action.
 - CSRF errors are now explicitly handled with a flash message to inform the user to try again, rather than a form validation error.
 - Flash messages have been simplified to three categories; error, important and success. Error messages are used for form validation and are not dismissable. Important and success messages are dismissable contextual confirmation of user actions.
 - Form fields validation error messages are now added to the `aria-describedby` attribute.
