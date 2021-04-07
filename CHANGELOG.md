@@ -31,6 +31,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - CSRF errors are now explicitly handled with a flash message to inform the user to try again, rather than a form validation error.
 - Flash messages have been simplified to three categories; error, important and success. Error messages are used for form validation and are not dismissable. Important and success messages are dismissable contextual confirmation of user actions.
 - Form fields validation error messages are now added to the `aria-describedby` attribute.
+- Non-primary action buttons now use the "outline" style.
 - Footer layout redesigned for multiple columns on desktop and single column on mobile.
 - Reduce header content margin.
 
