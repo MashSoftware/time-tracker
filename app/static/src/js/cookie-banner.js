@@ -31,14 +31,14 @@
 
     // Accept additional cookies
     document.getElementById("accept-cookies").addEventListener("click", function () {
-      document.cookie = 'cookies_policy={"functional": "yes"}; max-age=31557600; path=/; secure';
+      document.cookie = 'cookies_policy={"functional": "yes"}; max-age=31557600; path=/; secure; samesite=lax';
       defaultMessage.hidden = true;
       acceptedMessage.hidden = false;
     });
 
     // Reject additional cookies
     document.getElementById("reject-cookies").addEventListener("click", function () {
-      document.cookie = 'cookies_policy={"functional": "no"}; max-age=31557600; path=/; secure';
+      document.cookie = 'cookies_policy={"functional": "no"}; max-age=31557600; path=/; secure; samesite=lax';
       defaultMessage.hidden = true;
       rejectedMessage.hidden = false;
     });
