@@ -3,7 +3,6 @@ import unittest
 import jwt
 from app import create_app
 from app.models import User
-from flask import current_app
 
 
 class UserModelCase(unittest.TestCase):
@@ -21,8 +20,8 @@ class UserModelCase(unittest.TestCase):
             password="8wCS0H65r@p!8%B0XxrPTbBiR%^tc##f",
             timezone="Europe/London",
         )
-        self.assertFalse(user.check_password("Haxx0rz"))
-        self.assertTrue(user.check_password("8wCS0H65r@p!8%B0XxrPTbBiR%^tc##f"))
+        assert user.check_password("Haxx0rz") is False
+        assert user.check_password("8wCS0H65r@p!8%B0XxrPTbBiR%^tc##f") is True
 
     def test_token_generation(self):
         user = User(
@@ -31,7 +30,7 @@ class UserModelCase(unittest.TestCase):
             timezone="Europe/London",
         )
         token = user.generate_token()
-        self.assertTrue(jwt.decode(token, current_app.config["SECRET_KEY"], algorithms=["HS256"]))
+        assert jwt.decode(token, "!DAyH2qdEqmGzriZMvxU!wzTWql6UJ4P", algorithms=["HS256"]) is True
 
     def test_change_password(self):
         user = User(
@@ -40,8 +39,8 @@ class UserModelCase(unittest.TestCase):
             timezone="Europe/London",
         )
         user.set_password("yxxItMC*217XjWbz*a4&W@vK8h^qy!eZ")
-        self.assertFalse(user.check_password("8wCS0H65r@p!8%B0XxrPTbBiR%^tc##f"))
-        self.assertTrue(user.check_password("yxxItMC*217XjWbz*a4&W@vK8h^qy!eZ"))
+        assert user.check_password("8wCS0H65r@p!8%B0XxrPTbBiR%^tc##f") is False
+        assert user.check_password("yxxItMC*217XjWbz*a4&W@vK8h^qy!eZ") is True
 
     def test_schedule(self):
         user = User(
@@ -56,7 +55,7 @@ class UserModelCase(unittest.TestCase):
         user.friday = 5
         user.saturday = 6
         user.sunday = 7
-        self.assertEqual(user.schedule(), 28)
+        assert user.schedule() == 28
 
     def test_schedule_string(self):
         user = User(
@@ -71,7 +70,7 @@ class UserModelCase(unittest.TestCase):
         user.friday = 5
         user.saturday = 6
         user.sunday = 7
-        self.assertEqual(user.schedule_string(), "28s")
+        assert user.schedule_string() == "28s"
 
     def test_schedule_decimal(self):
         user = User(
@@ -86,4 +85,4 @@ class UserModelCase(unittest.TestCase):
         user.friday = 5
         user.saturday = 6
         user.sunday = 7
-        self.assertEqual(user.schedule_decimal(), 0.0)
+        assert user.schedule_decimal() == 0.0
