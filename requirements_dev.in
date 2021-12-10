@@ -1,9 +1,10 @@
-black==20.8b1
-flake8==3.9.0
-pip-tools==6.0.1
+bandit==1.7.1
+black==21.12b0
+flake8-bugbear==21.11.29
+hacking==4.1.0
+isort==5.10.1
+pep8-naming<0.12.0
+pip-tools==6.4.0
 piprot==0.9.11
-pytest-cov==2.11.1
-pytest==6.2.2
+pytest-cov==3.0.0
 safety==1.10.3
-# Generated with piprot 0.9.10
-# Looks like you've been keeping up to date, time for a delicious beverage!
