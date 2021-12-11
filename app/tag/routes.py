@@ -1,14 +1,15 @@
 from datetime import datetime
 
 import pytz
+from flask import current_app, flash, redirect, render_template, request, url_for
+from flask_login import current_user, fresh_login_required, login_required
+from werkzeug.exceptions import Forbidden
+
 from app import csrf, db, limiter
 from app.models import Tag
 from app.tag import bp
 from app.tag.forms import DefaultForm, TagForm
 from app.utils import seconds_to_decimal, seconds_to_string
-from flask import current_app, flash, redirect, render_template, request, url_for
-from flask_login import current_user, fresh_login_required, login_required
-from werkzeug.exceptions import Forbidden
 
 
 @bp.route("/")

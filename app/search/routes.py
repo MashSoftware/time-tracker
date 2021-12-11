@@ -1,9 +1,10 @@
+from flask import render_template
+from flask_login import current_user, login_required
+
 from app import limiter
 from app.models import Event
 from app.search import bp
 from app.search.forms import SearchForm
-from flask import render_template
-from flask_login import current_user, login_required
 
 
 @bp.route("/", methods=["GET", "POST"])

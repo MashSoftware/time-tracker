@@ -1,7 +1,5 @@
 import os
 
-from app.main import bp
-from app.main.forms import CookiesForm
 from flask import (
     current_app,
     flash,
@@ -16,6 +14,9 @@ from flask import (
 from flask_login import current_user
 from flask_wtf.csrf import CSRFError
 from werkzeug.exceptions import HTTPException
+
+from app.main import bp
+from app.main.forms import CookiesForm
 
 
 @bp.route("/")
@@ -69,7 +70,13 @@ def cookies():
             response.delete_cookie("remember_token")
 
         # Set cookies policy for one year
-        response.set_cookie("cookies_policy", json.dumps(cookies_policy), max_age=31557600, secure=True, samesite="Lax")
+        response.set_cookie(
+            "cookies_policy",
+            json.dumps(cookies_policy),
+            max_age=31557600,
+            secure=True,
+            samesite="Lax",
+        )
         return response
     elif request.method == "GET":
         if request.cookies.get("cookies_policy"):

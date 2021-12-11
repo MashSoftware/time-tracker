@@ -1,14 +1,15 @@
 from datetime import date, datetime, timedelta
 
 import pytz
+from flask import current_app, flash, redirect, render_template, request, url_for
+from flask_login import current_user, fresh_login_required, login_required
+from werkzeug.exceptions import Forbidden
+
 from app import csrf, db, limiter
 from app.entry import bp
 from app.entry.forms import EventForm
 from app.models import Event
 from app.utils import seconds_to_decimal, seconds_to_string
-from flask import current_app, flash, redirect, render_template, request, url_for
-from flask_login import current_user, fresh_login_required, login_required
-from werkzeug.exceptions import Forbidden
 
 
 @bp.route("/")

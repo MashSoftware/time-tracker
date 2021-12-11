@@ -1,6 +1,7 @@
 import unittest
 
 import jwt
+
 from app import create_app
 from app.models import User
 

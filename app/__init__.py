@@ -1,6 +1,5 @@
 import logging
 
-from config import Config
 from flask import Flask
 from flask_assets import Bundle, Environment
 from flask_compress import Compress
@@ -11,6 +10,8 @@ from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from flask_talisman import Talisman
 from flask_wtf.csrf import CSRFProtect
+
+from config import Config
 
 assets = Environment()
 compress = Compress()
@@ -50,8 +51,8 @@ def create_app(config_class=Config):
     talisman.init_app(app, content_security_policy=csp, content_security_policy_nonce_in=["style-src"])
 
     js = Bundle("src/js/*.js", filters="jsmin", output="dist/js/custom-%(version)s.js")
-    if 'js' not in assets:
-        assets.register('js', js)
+    if "js" not in assets:
+        assets.register("js", js)
 
     # Register blueprints
     from app.main import bp as main_bp

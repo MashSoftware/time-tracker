@@ -14,7 +14,7 @@ class AccountFormsCase(unittest.TestCase):
         self.app_context.pop()
 
     def test_account_form(self):
-        with self.app.test_request_context('/'):
+        with self.app.test_request_context("/"):
             form = AccountForm()
             form.email_address.data = "mash@example.com"
             form.timezone = "Europe/London"

@@ -1,13 +1,14 @@
 from datetime import date, datetime, timedelta
 
 import pytz
+from flask import current_app, flash, redirect, render_template, request, url_for
+from flask_login import current_user, fresh_login_required, login_required
+
 from app import csrf, db, limiter
 from app.account import bp
 from app.account.forms import AccountForm, PasswordForm, ScheduleForm
 from app.main.email import send_confirmation_email
 from app.utils import seconds_to_time
-from flask import current_app, flash, redirect, render_template, request, url_for
-from flask_login import current_user, fresh_login_required, login_required
 
 
 @bp.route("/")
