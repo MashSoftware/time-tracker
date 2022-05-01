@@ -25,7 +25,7 @@ def tags():
         tag.total_string = seconds_to_string(total_seconds)
         tag.total_decimal = seconds_to_decimal(total_seconds)
 
-    return render_template("tag/tags.html", title="Tags")
+    return render_template("tags.html", title="Tags")
 
 
 @bp.route("/new", methods=["GET", "POST"])
@@ -47,7 +47,7 @@ def create():
         current_app.logger.info("User {} created tag {}".format(current_user.id, tag.id))
         flash("Tag has been created.", "success")
         return redirect(url_for("tag.tags"))
-    return render_template("tag/create_tag_form.html", title="Create tag", form=form)
+    return render_template("create_tag_form.html", title="Create tag", form=form)
 
 
 @bp.route("/<uuid:id>", methods=["GET", "POST"])
@@ -68,7 +68,7 @@ def update(id):
         return redirect(url_for("tag.tags"))
     elif request.method == "GET":
         form.name.data = tag.name
-    return render_template("tag/update_tag_form.html", title="Edit tag", form=form, tag=tag)
+    return render_template("update_tag_form.html", title="Edit tag", form=form, tag=tag)
 
 
 @bp.route("/<uuid:id>/delete", methods=["GET", "POST"])
@@ -88,7 +88,7 @@ def delete(id):
         tag.total_string = seconds_to_string(total_seconds)
         tag.total_decimal = seconds_to_decimal(total_seconds)
 
-        return render_template("tag/delete_tag.html", title="Delete tag", tag=tag)
+        return render_template("delete_tag.html", title="Delete tag", tag=tag)
     elif request.method == "POST":
         current_app.logger.info("User {} deleted tag {}".format(current_user.id, tag.id))
         db.session.delete(tag)
@@ -114,7 +114,7 @@ def entries(id):
     total_decimal = seconds_to_decimal(total_seconds)
 
     return render_template(
-        "tag/entries.html",
+        "entries.html",
         title="All {} time entries".format(tag.name),
         now=now,
         events=tag.events,
@@ -143,4 +143,4 @@ def default():
         if current_user.default_tag_id:
             form.tag.data = current_user.default_tag_id
 
-    return render_template("tag/default_form.html", title="Default tag", form=form)
+    return render_template("default_form.html", title="Default tag", form=form)

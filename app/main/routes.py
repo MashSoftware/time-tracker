@@ -23,7 +23,7 @@ from app.main.forms import CookiesForm
 def index():
     if current_user.is_authenticated:
         return redirect(url_for("entry.weekly"))
-    return render_template("main/index.html")
+    return render_template("index.html")
 
 
 @bp.route("/favicon.ico")
@@ -46,7 +46,7 @@ def apple_touch_icon():
 
 @bp.route("/help")
 def help():
-    return render_template("main/help.html", title="Help")
+    return render_template("help.html", title="Help")
 
 
 @bp.route("/cookies", methods=["GET", "POST"])
@@ -63,7 +63,7 @@ def cookies():
         flash("You’ve set your cookie preferences.", "success")
 
         # Create the response so we can set the cookie before returning
-        response = make_response(render_template("main/cookies.html", title="Cookies", form=form))
+        response = make_response(render_template("cookies.html", form=form))
 
         # If cookies have been declined, remove any existing ones from previous acceptances
         if form.functional.data == "no":
@@ -86,13 +86,13 @@ def cookies():
         else:
             # If conset not previously set, use default "no" policy
             form.functional.data = cookies_policy["functional"]
-    return render_template("main/cookies.html", title="Cookies", form=form)
+    return render_template("cookies.html", title="Cookies", form=form)
 
 
 @bp.app_errorhandler(HTTPException)
 def http_error(error):
     current_app.logger.error("{}: {} - {}".format(error.code, error.name, request.url))
-    return render_template("main/error.html", title=error.name, error=error), error.code
+    return render_template("error.html", title=error.name, error=error), error.code
 
 
 @bp.app_errorhandler(CSRFError)

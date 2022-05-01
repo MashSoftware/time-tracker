@@ -34,7 +34,7 @@ def signup():
             "success",
         )
         return redirect(url_for("main.index"))
-    return render_template("auth/sign_up_form.html", title="Sign up", form=form)
+    return render_template("sign_up_form.html", title="Sign up", form=form)
 
 
 @bp.route("/activate", methods=["GET", "POST"])
@@ -54,7 +54,7 @@ def activate_request():
             "success",
         )
         return redirect(url_for("main.index"))
-    return render_template("auth/activate_request_form.html", title="Activate account", form=form)
+    return render_template("activate_request_form.html", title="Activate account", form=form)
 
 
 @bp.route("/activate/<token>")
@@ -94,7 +94,7 @@ def login():
         return redirect(next_page)
     elif request.method == "GET" and current_user.is_authenticated:
         form.email_address.data = current_user.email_address
-    return render_template("auth/log_in_form.html", title="Log in", form=form)
+    return render_template("log_in_form.html", title="Log in", form=form)
 
 
 @bp.route("/logout")
@@ -119,7 +119,7 @@ def reset_password_request():
             "success",
         )
         return redirect(url_for("auth.login"))
-    return render_template("auth/reset_password_request_form.html", title="Reset password", form=form)
+    return render_template("reset_password_request_form.html", title="Reset password", form=form)
 
 
 @bp.route("/reset-password/<token>", methods=["GET", "POST"])
@@ -139,4 +139,4 @@ def reset_password(token):
         current_app.logger.info("User {} reset password".format(current_user.id))
         flash("Your password has been reset, you may now log in.", "success")
         return redirect(url_for("auth.login"))
-    return render_template("auth/reset_password_form.html", title="Reset password", form=form)
+    return render_template("reset_password_form.html", title="Reset password", form=form)

@@ -20,4 +20,4 @@ def search():
             .order_by(Event.started_at.desc())
             .all()
         )
-    return render_template("search/search.html", title="Search", form=form, results=results)
+    return render_template("search.html", title="Search", form=form, results=results)

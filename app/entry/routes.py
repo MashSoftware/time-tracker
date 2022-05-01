@@ -98,7 +98,7 @@ def weekly():
             tag_totals.append(tag_total)
 
     return render_template(
-        "entry/weekly.html",
+        "weekly.html",
         now=now,
         start=start,
         today=today,
@@ -181,7 +181,7 @@ def manual():
             form.tag.data = "None"
         else:
             form.tag.data = current_user.default_tag_id
-    return render_template("entry/create_entry_form.html", title="Create time entry", form=form)
+    return render_template("create_entry_form.html", title="Create time entry", form=form)
 
 
 @bp.route("/<uuid:id>", methods=["GET", "POST"])
@@ -244,7 +244,7 @@ def update(id):
         else:
             form.tag.data = event.tag_id
         form.comment.data = event.comment
-    return render_template("entry/update_entry_form.html", title="Edit time entry", form=form, event=event)
+    return render_template("update_entry_form.html", title="Edit time entry", form=form, event=event)
 
 
 @bp.route("/<uuid:id>/delete", methods=["GET", "POST"])
@@ -259,7 +259,7 @@ def delete(id):
     now = pytz.utc.localize(datetime.utcnow())
 
     if request.method == "GET":
-        return render_template("entry/delete_entry.html", title="Delete time entry", event=event, now=now)
+        return render_template("delete_entry.html", title="Delete time entry", event=event, now=now)
     elif request.method == "POST":
         current_app.logger.info("User {} deleted entry {} with tag {}".format(current_user.id, event.id, event.tag_id))
         db.session.delete(event)
