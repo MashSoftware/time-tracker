@@ -34,13 +34,7 @@ def create_app(config_class=Config):
     app.jinja_env.trim_blocks = True
     app.jinja_env.lstrip_blocks = True
 
-    assets.init_app(app)
-    compress.init_app(app)
-    csrf.init_app(app)
-    db.init_app(app)
-    limiter.init_app(app)
-    login.init_app(app)
-    migrate.init_app(app, db)
+    # Set content security policy
     csp = {
         "default-src": "'self'",
         "style-src": ["https://cdn.jsdelivr.net", "https://use.fontawesome.com"],
@@ -48,36 +42,36 @@ def create_app(config_class=Config):
         "script-src": ["https://cdn.jsdelivr.net", "'self'"],
         "img-src": ["data:", "'self'"],
     }
+
+    # Initialise app extensions
+    assets.init_app(app)
+    compress.init_app(app)
+    csrf.init_app(app)
+    db.init_app(app)
+    limiter.init_app(app)
+    login.init_app(app)
+    migrate.init_app(app, db)
     talisman.init_app(app, content_security_policy=csp, content_security_policy_nonce_in=["style-src"])
 
-    js = Bundle("src/js/*.js", filters="jsmin", output="dist/js/custom-%(version)s.js")
+    # Create static asset bundles
+    js = Bundle("src/js/*.js", filters="jsmin", output="dist/js/custom-%(version)s.min.js")
     if "js" not in assets:
         assets.register("js", js)
 
     # Register blueprints
-    from app.main import bp as main_bp
-
-    app.register_blueprint(main_bp)
-
-    from app.auth import bp as auth_bp
-
-    app.register_blueprint(auth_bp)
-
     from app.account import bp as account_bp
-
-    app.register_blueprint(account_bp, url_prefix="/account")
-
+    from app.auth import bp as auth_bp
     from app.entry import bp as entry_bp
-
-    app.register_blueprint(entry_bp, url_prefix="/entries")
-
+    from app.main import bp as main_bp
+    from app.search import bp as search_bp
     from app.tag import bp as tag_bp
 
-    app.register_blueprint(tag_bp, url_prefix="/tags")
-
-    from app.search import bp as search_bp
-
+    app.register_blueprint(account_bp, url_prefix="/account")
+    app.register_blueprint(auth_bp)
+    app.register_blueprint(entry_bp, url_prefix="/entries")
+    app.register_blueprint(main_bp)
     app.register_blueprint(search_bp, url_prefix="/search")
+    app.register_blueprint(tag_bp, url_prefix="/tags")
 
     stream_handler = logging.StreamHandler()
     stream_handler.setLevel(logging.INFO)
