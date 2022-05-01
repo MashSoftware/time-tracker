@@ -10,12 +10,12 @@ A simple time tracking service.
 
 ### Required
 
-- Python 3.6.13 or higher
-- Postgres 10.x.x or higher
+- Python 3.7.x or higher
+- Postgres 11.x.x or higher
 
 ### Optional
 
-- Redis 4.0.x or higher (for rate limiting, otherwise in-memory storage is used)
+- Redis 6.0.x or higher (for rate limiting, otherwise in-memory storage is used)
 
 ## Getting started
 
