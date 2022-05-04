@@ -9,7 +9,7 @@
 <div class="row">
     <div class="col-md-8">
         <p class="lead"><strong>Error {{ error.code }}:</strong> {{ error.description }}</p>
-        {% if request.referrer %}<a class="btn btn-secondary" href="{{ request.referrer }}"><i class="fas fa-chevron-left fa-lg fa-fw"></i> Back</a>{% endif %} 
+        {% if request.referrer %}<a class="btn btn-secondary" href="{{ request.referrer }}"><i class="bi bi-chevron-left"></i> Back</a>{% endif %} 
     </div>
 </div>
 {% endblock %}

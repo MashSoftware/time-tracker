@@ -48,8 +48,8 @@
             </div>
             {% endif %}
             <div class="d-grid gap-2 d-md-block">
-                <button class="btn btn-primary" type="submit"><i class="fas fa-sign-in-alt fa-lg fa-fw"></i> Log in</button>
-                <a class="btn btn-secondary" href="{{ url_for('main.index') }}"><i class="fas fa-chevron-left fa-lg fa-fw"></i> Cancel</a>
+                <button class="btn btn-primary" type="submit"><i class="bi bi-box-arrow-in-right"></i> Log in</button>
+                <a class="btn btn-secondary" href="{{ url_for('main.index') }}"><i class="bi bi-chevron-left"></i> Cancel</a>
             </div>         
         </form>
         <p><a href="{{ url_for('auth.reset_password_request') }}">Forgotten your password?</a></p>
