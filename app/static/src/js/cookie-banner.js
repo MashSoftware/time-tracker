@@ -1,14 +1,11 @@
 (function () {
-  const cookieBanner = document.getElementById("cookie-banner");
-
   // Dont display if cookies policy already set
   if (
-    document.cookie
+    !document.cookie
       .split(";")
       .some((item) => item.trim().startsWith("cookies_policy="))
   ) {
-    cookieBanner.hidden = true;
-  } else {
+    const cookieBanner = document.getElementById("cookie-banner");
     const defaultMessage = document.getElementById("default-message");
     const acceptedMessage = document.getElementById("accepted-message");
     const rejectedMessage = document.getElementById("rejected-message");
@@ -19,7 +16,7 @@
       .addEventListener("click", function () {
         // If only using one category of cookie, ammend the policy content as appropriate
         document.cookie =
-          'cookies_policy={"functional": "yes"}; max-age=31557600; path=/; secure; samesite=lax';
+          'cookies_policy={"analytics": "yes", "functional": "yes"}; max-age=31557600; path=/; secure; samesite=lax';
         defaultMessage.hidden = true;
         acceptedMessage.hidden = false;
       });
@@ -30,7 +27,7 @@
       .addEventListener("click", function () {
         // If only using one category of cookie, ammend the policy content as appropriate
         document.cookie =
-          'cookies_policy={"functional": "no"}; max-age=31557600; path=/; secure; samesite=lax';
+          'cookies_policy={"analytics": "no", "functional": "no"}; max-age=31557600; path=/; secure; samesite=lax';
         defaultMessage.hidden = true;
         rejectedMessage.hidden = false;
       });
