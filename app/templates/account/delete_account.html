@@ -11,7 +11,7 @@
         <h3>Are you sure?</h3>
         <p class="lead">All personal information, {{ current_user.events | length }} time entries and {{ current_user.tags | length }} tags will be permanently deleted.</p>
         <form action="" method="post" novalidate>
-            <div class="d-grid gap-2 d-md-block">
+            <div class="d-grid gap-3 d-sm-block">
                 <button class="btn btn-danger" type="submit"><i class="bi bi-trash-fill"></i> Yes - delete account</button>
                 <a class="btn btn-secondary" href="{{ url_for('account.account') }}"><i class="bi bi-chevron-left"></i> Cancel</a>
             </div>
