@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## [Unreleased](https://github.com/MashSoftware/the-button/compare/main...develop)
+## [Unreleased](https://github.com/MashSoftware/time-tracker/compare/main...develop)
 
 ### Added
 
@@ -48,7 +48,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Pre-select "None" when changing default tag and user has no tags.
 - Database URI using deprecated scheme designator.
 
-## [0.26.0](https://github.com/MashSoftware/the-button/compare/v0.25.0...v0.26.0) - 2021-03-09
+## [0.26.0](https://github.com/MashSoftware/time-tracker/compare/v0.25.0...v0.26.0) - 2021-03-09
 
 ### Added
 
@@ -71,7 +71,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Pre-select "None" tag when editing and existing entry if no tag was previously selected. Thanks [@ahosgood](https://github.com/ahosgood).
 - Prevent viewing other users tagged time entries pages if you knew the UUID of the tag.
 
-## [0.25.0](https://github.com/MashSoftware/the-button/compare/v0.24.0...v0.25.0) - 2021-02-26
+## [0.25.0](https://github.com/MashSoftware/time-tracker/compare/v0.24.0...v0.25.0) - 2021-02-26
 
 ### Added
 
@@ -93,7 +93,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - User account based limit of 120 entries. Now you can create as many time entries as you like, but they will be deleted after 12 weeks.
 
-## [0.24.0](https://github.com/MashSoftware/the-button/compare/v0.23.2...v0.24.0) - 2021-01-19
+## [0.24.0](https://github.com/MashSoftware/time-tracker/compare/v0.23.2...v0.24.0) - 2021-01-19
 
 ### Added
 
@@ -117,7 +117,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Strip whitespace before checking for duplicated tag names.
 - Strip whitespace before creating or editing a tag name.
 
-## [0.23.2](https://github.com/MashSoftware/the-button/compare/v0.23.1...v0.23.2) - 2021-01-03
+## [0.23.2](https://github.com/MashSoftware/time-tracker/compare/v0.23.1...v0.23.2) - 2021-01-03
 
 ### Added
 
@@ -132,15 +132,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Error when requesting activation for unregistered email addresses.
 - Whitespace not stripped from comments, resulting in empty strings stored instead of null.
 
-## [0.23.1](https://github.com/MashSoftware/the-button/compare/v0.23.0...v0.23.1) - 2021-01-01
+## [0.23.1](https://github.com/MashSoftware/time-tracker/compare/v0.23.0...v0.23.1) - 2021-01-01
 
 ### Fixed
 
 - Verification token not generated correctly preventing user sign up or password reset confirmation emails from being sent.
 
-## [0.23.0](https://github.com/MashSoftware/the-button/compare/v0.22.0...v0.23.0) - 2020-12-31
+## [0.23.0](https://github.com/MashSoftware/time-tracker/compare/v0.22.0...v0.23.0) - 2020-12-31
 
-### [Blog](https://medium.com/mash-software/the-button-weekly-summaries-comments-and-ui-upgrade-d543945069d4)
+### [Blog](https://medium.com/mash-software/time-tracker-weekly-summaries-comments-and-ui-upgrade-d543945069d4)
 
 ### Added
 
@@ -168,9 +168,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - Decimal hours calculation to display non-rounded floating point numbers, to two decimal places. Durations are no longer rounded, so 59 minutes and 59 seconds is represented correctly as 0.99 decimal hours, not rounded to 1.0.
 
-## [0.22.0](https://github.com/MashSoftware/the-button/compare/v0.21.1...v0.22.0) - 2020-11-28
+## [0.22.0](https://github.com/MashSoftware/time-tracker/compare/v0.21.1...v0.22.0) - 2020-11-28
 
-### [Blog](https://medium.com/mash-software/the-button-weekly-view-time-schedules-begining-beta-2cb451df5cff)
+### [Blog](https://medium.com/mash-software/time-tracker-weekly-view-time-schedules-begining-beta-2cb451df5cff)
 
 ### Added
 
@@ -194,15 +194,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - Bug in conversion between timestamps stored as UTC and displayed in the users selected timezone when editing an existing time entry.
 
-## [0.21.1](https://github.com/MashSoftware/the-button/compare/v0.21.0...v0.21.1) - 2020-02-25
+## [0.21.1](https://github.com/MashSoftware/time-tracker/compare/v0.21.0...v0.21.1) - 2020-02-25
 
 ### Fixed
 
 - Large pagination controls did not fit on mobile display widths. Reverted to standard size.
 
-## [0.21.0](https://github.com/MashSoftware/the-button/compare/v0.20.0...v0.21.0) - 2020-02-25
+## [0.21.0](https://github.com/MashSoftware/time-tracker/compare/v0.20.0...v0.21.0) - 2020-02-25
 
-### [Blog](https://medium.com/mash-software/the-button-native-controls-app-icons-and-performance-bbafad029257)
+### [Blog](https://medium.com/mash-software/time-tracker-native-controls-app-icons-and-performance-bbafad029257)
 
 ### Added
 
@@ -216,9 +216,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Upgrade to Bootstrap 4.4.1.
 - Accessibility and best practice fixes from Google Lighthouse analysis.
 
-## [0.20.0](https://github.com/MashSoftware/the-button/compare/v0.19.0...v0.20.0) - 2019-08-08
+## [0.20.0](https://github.com/MashSoftware/time-tracker/compare/v0.19.0...v0.20.0) - 2019-08-08
 
-### [Blog](https://medium.com/mash-software/the-button-time-tags-e1979d2a0556)
+### [Blog](https://medium.com/mash-software/time-tracker-time-tags-e1979d2a0556)
 
 ### Added
 
@@ -227,7 +227,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Display tags on cards in the time entry view.
 - Help topics relating to tags.
 
-## [0.19.0](https://github.com/MashSoftware/the-button/compare/v0.18.0...v0.19.0) - 2019-07-25
+## [0.19.0](https://github.com/MashSoftware/time-tracker/compare/v0.18.0...v0.19.0) - 2019-07-25
 
 ### Added
 
@@ -241,9 +241,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Updated help page with categories questions and answers.
 - Reverted secondary action buttons to non-outline styling, since they were visually too close to a form input field.
 
-## [0.18.0](https://github.com/MashSoftware/the-button/compare/v0.17.0...v0.18.0) - 2019-07-11
+## [0.18.0](https://github.com/MashSoftware/time-tracker/compare/v0.17.0...v0.18.0) - 2019-07-11
 
-### [Blog](https://medium.com/mash-software/introducing-the-button-aef549dacfbf)
+### [Blog](https://medium.com/mash-software/introducing-time-tracker-aef549dacfbf)
 
 ### Added
 
@@ -260,7 +260,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Wording on link to resend account activation email.
 - If a user requests another activation email and they have never activated before, they will receive the original activation email. Otherwise they will receive the confirmation email used when changing email address.
 
-## [0.17.0](https://github.com/MashSoftware/the-button/compare/v0.16.0...v0.17.0) - 2019-06-18
+## [0.17.0](https://github.com/MashSoftware/time-tracker/compare/v0.16.0...v0.17.0) - 2019-06-18
 
 ### Added
 
@@ -281,11 +281,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Enabled browser autocompletion of email address fields.
 - Display email address to the user to confirm email sending actions.
 
-## [0.16.0](https://github.com/MashSoftware/the-button/compare/v0.15.0...v0.16.0) - 2019-06-13
+## [0.16.0](https://github.com/MashSoftware/time-tracker/compare/v0.15.0...v0.16.0) - 2019-06-13
 
 ### Added
 
-- HTTP security headers via [Talisman](https://github.com/GoogleCloudPlatform/flask-talisman), gaining an [A+ rating](https://securityheaders.com/?q=https%3A%2F%2Fmash-the-button.herokuapp.com%2F&followRedirects=on).
+- HTTP security headers via [Talisman](https://github.com/GoogleCloudPlatform/flask-talisman), gaining an [A+ rating](https://securityheaders.com/?q=https%3A%2F%2Fmash-time-tracker.herokuapp.com%2F&followRedirects=on).
 - Defined Content Security Policy. Thanks [@andymantell](https://github.com/andymantell).
 - Ability to request a password reset from the login page. Thanks [@skipster2k2](https://github.com/skipster2k2).
 - Send a reset password email via [Mailgun](https://www.mailgun.com) to the user with a unique URL containing a JSON Web Token (JWT) that can be decoded to the user's ID.
@@ -300,7 +300,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Refactored URLs to remove reference to `push` resource in favour of `entry` for consistency of language.
 - Dropped `/update` from the update entry URL since there is no non-updaing view of the resource.
 
-## [0.15.0](https://github.com/MashSoftware/the-button/compare/v0.14.1...v0.15.0) - 2019-05-24
+## [0.15.0](https://github.com/MashSoftware/time-tracker/compare/v0.14.1...v0.15.0) - 2019-05-24
 
 ### Changed
 
@@ -308,7 +308,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Given greater visual identification to in-progress time entries, highlighting with the "info" contextual class and added wording.
 - Removed seconds from time card display to improve readability. Thanks [@LlamaComedian](https://github.com/LlamaComedian).
 
-## [0.14.1](https://github.com/MashSoftware/the-button/compare/v0.14.0...v0.14.1) - 2019-05-22
+## [0.14.1](https://github.com/MashSoftware/time-tracker/compare/v0.14.0...v0.14.1) - 2019-05-22
 
 ### Fixed
 
@@ -316,7 +316,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - An unsuccessful login attempt hit the rate limiter due to the redirect to the same page, added a 1 second sleep to overcome.
 - Spacing between the new split button and the first date entry on mobile was a little close, added some padding.
 
-## [0.14.0](https://github.com/MashSoftware/the-button/compare/v0.13.0...v0.14.0) - 2019-05-21
+## [0.14.0](https://github.com/MashSoftware/time-tracker/compare/v0.13.0...v0.14.0) - 2019-05-21
 
 ### Added
 
@@ -324,7 +324,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Controls to navigate paginated time entries.
 - Manual time entry form, accessible via dropdown on split start/stop button. Thanks [@annie-birchall](https://github.com/annie-birchall).
 
-## [0.13.0](https://github.com/MashSoftware/the-button/compare/v0.12.0...v0.13.0) - 2019-05-17
+## [0.13.0](https://github.com/MashSoftware/time-tracker/compare/v0.12.0...v0.13.0) - 2019-05-17
 
 ### Added
 
@@ -342,7 +342,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - Fixed an error that occurred when editing a time entry with no end timestamp due to null timezone conversion.
 
-## [0.12.0](https://github.com/MashSoftware/the-button/compare/v0.11.0...v0.12.0) - 2019-05-14
+## [0.12.0](https://github.com/MashSoftware/time-tracker/compare/v0.11.0...v0.12.0) - 2019-05-14
 
 ### Added
 
@@ -369,7 +369,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Updating account details and _not_ changing email address generated a validation error, because the email address is already in use. Now if the email address is not changed no validation error occurrs.
 - Fixed error when trying to localise a non-existant timestamp for accounts that have never been updated.
 
-## [0.11.0](https://github.com/MashSoftware/the-button/compare/v0.10.1...v0.11.0) - 2019-05-07
+## [0.11.0](https://github.com/MashSoftware/time-tracker/compare/v0.10.1...v0.11.0) - 2019-05-07
 
 ### Added
 
@@ -389,13 +389,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - Editing times in Chrome resulted in an error due to the `datetime-local` picker tool removing seconds. Changed inputs to `text` type rather than HTML5 `datetime-local` to improve compatibility at the expense of browser/device native pickers. Needs further investigation to improve user experience. Thanks [@mattgirdler](https://github.com/mattgirdler).
 
-## [0.10.1](https://github.com/MashSoftware/the-button/compare/v0.10.0...v0.10.1) - 2019-05-01
+## [0.10.1](https://github.com/MashSoftware/time-tracker/compare/v0.10.0...v0.10.1) - 2019-05-01
 
 ### Fixed
 
 - User account dates and times missing localisation
 
-## [0.10.0](https://github.com/MashSoftware/the-button/compare/v0.9.0...v0.10.0) - 2019-05-01
+## [0.10.0](https://github.com/MashSoftware/time-tracker/compare/v0.9.0...v0.10.0) - 2019-05-01
 
 ### Added
 
@@ -409,14 +409,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - Raise Forbidden (403) exception when attempting to edit or delete time entries not belonging to the current user
 
-## [0.9.0](https://github.com/MashSoftware/the-button/compare/v0.8.0...v0.9.0) - 2019-04-26
+## [0.9.0](https://github.com/MashSoftware/time-tracker/compare/v0.8.0...v0.9.0) - 2019-04-26
 
 ### Added
 
 - Delete time entries
 - Edit time entries
 
-## [0.8.0](https://github.com/MashSoftware/the-button/compare/v0.7.0...v0.8.0) - 2019-04-24
+## [0.8.0](https://github.com/MashSoftware/time-tracker/compare/v0.7.0...v0.8.0) - 2019-04-24
 
 ### Added
 
@@ -426,7 +426,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - Sign up or log in links in homepage text
 
-## [0.7.0](https://github.com/MashSoftware/the-button/compare/v0.6.0...v0.7.0) - 2019-04-24
+## [0.7.0](https://github.com/MashSoftware/time-tracker/compare/v0.6.0...v0.7.0) - 2019-04-24
 
 ### Added
 
@@ -436,13 +436,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - Include sub-template for events
 
-## [0.6.0](https://github.com/MashSoftware/the-button/compare/v0.5.0...v0.6.0) - 2019-04-23
+## [0.6.0](https://github.com/MashSoftware/time-tracker/compare/v0.5.0...v0.6.0) - 2019-04-23
 
 ### Removed
 
 - User first name and last name
 
-## [0.5.0](https://github.com/MashSoftware/the-button/compare/v0.4.0...v0.5.0) - 2019-04-23
+## [0.5.0](https://github.com/MashSoftware/time-tracker/compare/v0.4.0...v0.5.0) - 2019-04-23
 
 ### Added
 
@@ -455,13 +455,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Consistent datetime formatting
 - Updated meta tags
 
-## [0.4.0](https://github.com/MashSoftware/the-button/compare/v0.3.0...v0.4.0) - 2019-04-18
+## [0.4.0](https://github.com/MashSoftware/time-tracker/compare/v0.3.0...v0.4.0) - 2019-04-18
 
 ### Added
 
 - Delete user account
 
-## [0.3.0](https://github.com/MashSoftware/the-button/compare/v0.2.0...v0.3.0) - 2019-04-18
+## [0.3.0](https://github.com/MashSoftware/time-tracker/compare/v0.2.0...v0.3.0) - 2019-04-18
 
 ### Added
 
@@ -469,7 +469,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Record time user last logged in
 - Redirect protection after log in
 
-## [0.2.0](https://github.com/MashSoftware/the-button/compare/v0.1.0...v0.2.0) - 2019-04-18
+## [0.2.0](https://github.com/MashSoftware/time-tracker/compare/v0.1.0...v0.2.0) - 2019-04-18
 
 ### Added
 
@@ -481,7 +481,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Navigation based on authentication status
 - Flash message formatting
 
-## [0.1.0](https://github.com/MashSoftware/the-button/compare/4b9057c8b8b4d110496dfabf9dd31b9e86070d4a...v0.1.0) - 2019-04-18
+## [0.1.0](https://github.com/MashSoftware/time-tracker/compare/4b9057c8b8b4d110496dfabf9dd31b9e86070d4a...v0.1.0) - 2019-04-18
 
 ### Added
 

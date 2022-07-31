@@ -1,6 +1,6 @@
 Hi,
 
-Thanks for signing up to "The Button".
+Thanks for signing up to "Mash Time Tracker".
 
 Please use the following link to confirm your email address and activate your account:
 
@@ -10,5 +10,5 @@ This link is only valid for the next hour.
 
 Thanks,
 
-The Button Team
+Mash Time Tracker Team
 Mash Software

@@ -1,1 +1,1 @@
-web: flask db upgrade; gunicorn the_button:app --log-file -
+web: flask db upgrade; gunicorn time_tracker:app --log-file -
