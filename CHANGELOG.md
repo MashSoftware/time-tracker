@@ -34,6 +34,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Non-primary action buttons now use the "outline" style.
 - Footer layout redesigned for multiple columns on desktop and single column on mobile.
 - Reduce header content margin.
+- Swapped Fontawesome icons out for Bootstrap icons
+
+### Removed
+
+- Python 3.6 support
+- Postgres 10 support
+- Redis 5 support
 
 ### Fixed
 
