@@ -16,7 +16,7 @@ def search():
     if form.validate_on_submit():
         results = (
             Event.query.filter_by(user_id=current_user.id)
-            .filter(Event.comment.ilike("%{}%".format(form.query.data)))
+            .filter(Event.comment.ilike(f"%{form.query.data}%"))
             .order_by(Event.started_at.desc())
             .all()
         )
