@@ -20,3 +20,7 @@ class Config(object):
     SQLALCHEMY_ENGINE_OPTIONS = {"pool_size": 20}
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     VERSION_NUMBER = os.environ.get("VERSION_NUMBER")
+
+
+class TestConfig(Config):
+    TESTING = True
