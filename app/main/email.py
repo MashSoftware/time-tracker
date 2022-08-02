@@ -8,7 +8,7 @@ def send_activation_email(user):
     token = user.generate_token(expires_in=3600)
     try:
         requests.post(
-            "{0}/messages".format(current_app.config["MAILGUN_API_URL"]),
+            f"{current_app.config['MAILGUN_API_URL']}/messages",
             auth=("api", current_app.config["MAILGUN_API_KEY"]),
             data={
                 "from": "The Button <thebutton@mashsoftware.com>",
@@ -18,9 +18,9 @@ def send_activation_email(user):
                 "html": render_template("email/activation.html", token=token),
             },
         )
-        current_app.logger.info("Sent user {} activation email".format(user.id))
+        current_app.logger.info(f"Sent user {user.id} activation email")
     except RequestException:
-        current_app.logger.error("Error sending user {} activation email".format(user.id))
+        current_app.logger.error(f"Error sending user {user.id} activation email")
         raise InternalServerError
 
 
@@ -28,7 +28,7 @@ def send_confirmation_email(user):
     token = user.generate_token(expires_in=3600)
     try:
         requests.post(
-            "{0}/messages".format(current_app.config["MAILGUN_API_URL"]),
+            f"{current_app.config['MAILGUN_API_URL']}/messages",
             auth=("api", current_app.config["MAILGUN_API_KEY"]),
             data={
                 "from": "The Button <thebutton@mashsoftware.com>",
@@ -38,9 +38,9 @@ def send_confirmation_email(user):
                 "html": render_template("email/confirmation.html", token=token),
             },
         )
-        current_app.logger.info("Sent user {} confirmation email".format(user.id))
+        current_app.logger.info(f"Sent user {user.id} confirmation email")
     except RequestException:
-        current_app.logger.error("Error sending user {} confirmation email".format(user.id))
+        current_app.logger.error(f"Error sending user {user.id} confirmation email")
         raise InternalServerError
 
 
@@ -48,7 +48,7 @@ def send_reset_password_email(user):
     token = user.generate_token()
     try:
         requests.post(
-            "{0}/messages".format(current_app.config["MAILGUN_API_URL"]),
+            f"{current_app.config['MAILGUN_API_URL']}/messages",
             auth=("api", current_app.config["MAILGUN_API_KEY"]),
             data={
                 "from": "The Button <thebutton@mashsoftware.com>",
@@ -58,7 +58,7 @@ def send_reset_password_email(user):
                 "html": render_template("email/reset_password.html", token=token),
             },
         )
-        current_app.logger.info("Sent user {} reset password email".format(user.id))
+        current_app.logger.info(f"Sent user {user.id} reset password email")
     except RequestException:
-        current_app.logger.error("Error sending user {} reset password email".format(user.id))
+        current_app.logger.error(f"Error sending user {user.id} reset password email")
         raise InternalServerError
