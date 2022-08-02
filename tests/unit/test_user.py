@@ -1,7 +1,7 @@
 import jwt
 
 
-def test_new_user(new_user):
+def test_new_user(client, new_user):
     assert new_user.email_address == "mash@example.com"
     assert new_user.timezone == "Europe/London"
 
