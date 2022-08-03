@@ -1,3 +1,6 @@
+import datetime
+from unittest.mock import patch
+import freezegun
 import jwt
 
 
@@ -11,9 +14,16 @@ def test_password_hashing(new_user):
     assert new_user.check_password("8wCS0H65r@p!8%B0XxrPTbBiR%^tc##f") is True
 
 
+@freezegun.freeze_time(datetime.datetime(2022, 1, 1, 12, 1, 0))
 def test_token_generation(new_user):
-    token = new_user.generate_token()
-    assert jwt.decode(token, "!DAyH2qdEqmGzriZMvxU!wzTWql6UJ4P", algorithms=["HS256"]) is True
+    new_key = "secret"
+    with patch("app.models.current_app.config", {"SECRET_KEY": new_key}):
+        token = new_user.generate_token()
+        payload = jwt.decode(token, new_key, algorithms=["HS256"])
+        assert payload == {
+            "id": new_user.id,
+            "exp": (datetime.datetime.now() + datetime.timedelta(seconds=600)).timestamp(),
+        }
 
 
 def test_change_password(new_user):
