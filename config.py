@@ -1,7 +1,12 @@
 import os
 
+from dotenv import load_dotenv
+
+basedir = os.path.abspath(os.path.dirname(__file__))
+
 
 class Config(object):
+    load_dotenv(os.path.join(basedir, ".flaskenv"))
     MAILGUN_API_KEY = os.environ.get("MAILGUN_API_KEY")
     MAILGUN_API_URL = os.environ.get("MAILGUN_API_URL")
     RATELIMIT_HEADERS_ENABLED = True

@@ -1,7 +1,9 @@
+from unittest.mock import patch
+
 import jwt
 
 
-def test_new_user(new_user):
+def test_new_user(client, new_user):
     assert new_user.email_address == "mash@example.com"
     assert new_user.timezone == "Europe/London"
 
@@ -12,8 +14,11 @@ def test_password_hashing(new_user):
 
 
 def test_token_generation(new_user):
-    token = new_user.generate_token()
-    assert jwt.decode(token, "!DAyH2qdEqmGzriZMvxU!wzTWql6UJ4P", algorithms=["HS256"]) is True
+    secret_key = "b09bc10d70ad76c505ad920d708dc1918d4d9d047cc9d1fbb5b8d78eeef3a5e7"
+    with patch("app.models.current_app.config", {"SECRET_KEY": secret_key}):
+        token = new_user.generate_token()
+        id = jwt.decode(token, secret_key, algorithms=["HS256"])["id"]
+        assert id == new_user.id
 
 
 def test_change_password(new_user):

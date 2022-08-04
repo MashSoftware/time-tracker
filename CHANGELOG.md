@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased](https://github.com/MashSoftware/time-tracker/compare/main...develop)
 
+## [0.27.0](https://github.com/MashSoftware/the-button/compare/v0.26.0...v0.27.0) - 2022-08-04
+
 ### Added
 
 - Cookie page detailing what cookies the app uses and the ability to accept or reject non-essential cookies. Link also added to footer.
@@ -16,7 +18,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Highlight active navigation item in navbar.
 - Development-only requirements containing packages used for linting, formatting, testing and requirements management.
 - Using Pytest Coverage to measure unit test coverage, including in branching code.
-- Restructured and added more unit tests.
+- Refactored unit and functional tests. Thanks [@jonodrew](https://github.com/jonodrew).
 - Error handling if email send request to service providers API fails for any reason. Re-raised as a 500 internal server error and logged.
 - Error pages contain a back link taking the user back to the referring page if there was one.
 
@@ -35,6 +37,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Footer layout redesigned for multiple columns on desktop and single column on mobile.
 - Reduce header content margin.
 - Swapped Fontawesome icons out for Bootstrap icons
+- Upgraded to Bootstrap v5.2.0
 
 ### Removed
 
