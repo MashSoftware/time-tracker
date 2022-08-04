@@ -1,4 +1,4 @@
-FLASK_APP=the_button.py
+FLASK_APP=time_tracker.py
 FLASK_ENV=development
 FLASK_RUN_PORT=5000
 MAILGUN_API_KEY=
