@@ -18,7 +18,7 @@ class User(UserMixin, db.Model):
 
     # Fields
     id = db.Column(UUID, primary_key=True)
-    password = db.Column(db.Binary, nullable=False)
+    password = db.Column(db.LargeBinary, nullable=False)
     email_address = db.Column(db.String(256), nullable=False, unique=True, index=True)
     timezone = db.Column(db.String, nullable=False, server_default="UTC")
     entry_history = db.Column(db.Integer, nullable=False, server_default="12")
@@ -50,14 +50,14 @@ class User(UserMixin, db.Model):
 
     def set_password(self, password):
         self.password = bcrypt.hashpw(password.encode("UTF-8"), bcrypt.gensalt())
-        current_app.logger.info("User {} set password".format(self.id))
+        current_app.logger.info(f"User {self.id} set password")
 
     def check_password(self, password):
-        current_app.logger.info("User {} password check".format(self.id))
+        current_app.logger.info(f"User {self.id} password check")
         return bcrypt.checkpw(password.encode("UTF-8"), self.password)
 
     def generate_token(self, expires_in=600):
-        current_app.logger.info("User {} generated token".format(self.id))
+        current_app.logger.info(f"User {self.id} generated token")
         return jwt.encode(
             {"id": self.id, "exp": time() + expires_in},
             current_app.config["SECRET_KEY"],

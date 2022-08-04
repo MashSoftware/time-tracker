@@ -1,7 +1,7 @@
-<div class="card bg-white shadow mb-3 {% if tag.id == current_user.default_tag_id %}border-info{% endif %}" style="width: 18rem;">
+<div class="card bg-white shadow mb-3 {% if tag.id == current_user.default_tag_id %}border-info{% endif %}">
     {% if tag.id == current_user.default_tag_id %}<div class="card-header bg-info">Default tag</div>{% endif %}
     <div class="card-body">
-        <h5 class="card-title"><i class="fas fa-tag fa-fw"></i> {{ tag.name }}</h5>
+        <h5 class="card-title"><i class="bi bi-tag"></i> {{ tag.name }}</h5>
         {% if tag.events %}<h6 class="card-subtitle mb-2 text-muted">{{tag.events | length}} time {% if tag.events | length > 1 %}entries{% else %}entry{% endif %} : {{ tag.total_string }} ({{ tag.total_decimal }})</h6>{% endif %}
         <p class="card-text">
             {% if tag.events %}

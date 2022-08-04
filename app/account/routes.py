@@ -1,13 +1,14 @@
 from datetime import date, datetime, timedelta
 
 import pytz
-from app import db, limiter
+from flask import current_app, flash, redirect, render_template, request, url_for
+from flask_login import current_user, fresh_login_required, login_required
+
+from app import csrf, db, limiter
 from app.account import bp
 from app.account.forms import AccountForm, PasswordForm, ScheduleForm
 from app.main.email import send_confirmation_email
 from app.utils import seconds_to_time
-from flask import current_app, flash, redirect, render_template, request, url_for
-from flask_login import current_user, fresh_login_required, login_required
 
 
 @bp.route("/")
@@ -19,7 +20,7 @@ def account():
     user.login_at = user.login_at.astimezone(pytz.timezone(user.timezone))
     user.updated_at = user.updated_at.astimezone(pytz.timezone(user.timezone)) if user.updated_at else None
     history_date = datetime.utcnow().astimezone(pytz.timezone(user.timezone)) - timedelta(weeks=user.entry_history)
-    return render_template("account/account.html", title="My Account", user=user, history_date=history_date)
+    return render_template("account.html", title="My Account", user=user, history_date=history_date)
 
 
 @bp.route("/change-password", methods=["GET", "POST"])
@@ -41,7 +42,7 @@ def change_password():
             return redirect(url_for("account.change_password"))
         return redirect(url_for("account.account"))
 
-    return render_template("account/change_password_form.html", title="Change password", form=form)
+    return render_template("change_password_form.html", title="Change password", form=form)
 
 
 @bp.route("/update", methods=["GET", "POST"])
@@ -70,15 +71,16 @@ def update():
     elif request.method == "GET":
         form.email_address.data = current_user.email_address
         form.timezone.data = current_user.timezone
-    return render_template("account/account_form.html", title="Edit account", form=form)
+    return render_template("account_form.html", title="Edit account", form=form)
 
 
 @bp.route("/delete", methods=["GET", "POST"])
+@csrf.exempt
 @fresh_login_required
 @limiter.limit("2 per second", key_func=lambda: current_user.id)
 def delete():
     if request.method == "GET":
-        return render_template("account/delete_account.html", title="Delete account")
+        return render_template("delete_account.html", title="Delete account")
     elif request.method == "POST":
         current_app.logger.info("User {} deleted account".format(current_user.id))
         db.session.delete(current_user)
@@ -117,4 +119,4 @@ def schedule():
         form.friday.data = seconds_to_time(current_user.friday)
         form.saturday.data = seconds_to_time(current_user.saturday)
         form.sunday.data = seconds_to_time(current_user.sunday)
-    return render_template("account/schedule_form.html", title="Edit schedule", form=form)
+    return render_template("schedule_form.html", title="Edit schedule", form=form)

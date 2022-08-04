@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% block header %}
+<div class="container">
+    {{ super() }}
+    <h1>{{ title }}</h1>
+    <p class="lead mb-0">Cookies are small files saved on your phone, tablet or computer when you visit a website. We use
+        cookies to make this site work.</p>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+        <h2>Essential cookies</h2>
+        <p>Essential cookies keep your information secure while you use this service. We do not need to ask permission
+            to use them.</p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Purpose</th>
+                    <th scope="col">Expires</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>session</td>
+                    <td>Temporary storage</td>
+                    <td>On browser close</td>
+                </tr>
+                <tr>
+                    <td>cookie_policy</td>
+                    <td>Saves your cookie consent settings</td>
+                    <td>1 year</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Functional cookies</h2>
+        <p>Functional cookies allow you to take advantage of some functionality, for example remembering settings
+            between visits. The service will work without them.</p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Purpose</th>
+                    <th scope="col">Expires</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>remember_token</td>
+                    <td>Used to keep you signed in</td>
+                    <td>30 days</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Change your cookie settings</h2>
+        <form action="" method="post" novalidate>
+            {{ form.csrf_token }}
+            <div class="mb-3">
+                {{ form.functional.label(class="form-label") }}
+                {% if form.errors %}
+                    {% if form.functional.errors %}
+                        {% for subfield in form.functional %}
+                        <div class="form-check">
+                            {{ subfield(class="form-check-input is-invalid", aria_describedby="functionalError", type="radio") }}
+                            {{ subfield.label(class="form-check-label") }}
+                        </div>
+                        {% endfor %}
+                        {% for error in form.functional.errors %}<div class="invalid-feedback" id="functionalError">{{error}}</div>{% endfor %}
+                    {% else %}
+                        {% for subfield in form.functional %}
+                        <div class="form-check">
+                            {{ subfield(class="form-check-input is-valid", type="radio") }}
+                            {{ subfield.label(class="form-check-label") }}
+                        </div>
+                        {% endfor %}
+                    {% endif %}
+                {% else %}
+                    {% for subfield in form.functional %}
+                    <div class="form-check">
+                        {{ subfield(class="form-check-input", type="radio") }}
+                        {{ subfield.label(class="form-check-label") }}
+                    </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div class="d-grid gap-3 d-sm-block">
+                <button class="btn btn-primary" type="submit"><i class="bi bi-save"></i> Save cookie settings</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

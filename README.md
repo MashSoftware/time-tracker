@@ -10,12 +10,12 @@ A simple time tracking service.
 
 ### Required
 
-- Python 3.6.13 or higher
-- Postgres 10.x.x or higher
+- Python 3.7.x or higher
+- Postgres 11.x.x or higher
 
 ### Optional
 
-- Redis 4.0.x or higher (for rate limiting, otherwise in-memory storage is used)
+- Redis 6.0.x or higher (for rate limiting, otherwise in-memory storage is used)
 
 ## Getting started
 
@@ -34,7 +34,7 @@ grant all privileges on database button to mash;
 ```shell
 python3 -m venv venv
 source venv/bin/activate
-pip3 install -r requirements.txt
+pip3 install -r requirements.txt ; pip3 install -r requirements_dev.txt
 ```
 
 ### Run database migrations
@@ -54,7 +54,7 @@ flask run
 Run the test suite
 
 ```shell
-python tests.py
+python -m pytest --cov=app --cov-report=term-missing --cov-branch
 ```
 
 ## Versioning
@@ -68,6 +68,10 @@ If you want to contribute to this project, please review the [code of conduct](C
 ## Contributors
 
 - [@matthew-shaw](https://github.com/matthew-shaw) (Owner and maintainer)
+- [@jonodrew](https://github.com/jonodrew)
+
+## Thanks
+
 - [@ahosgood](https://github.com/ahosgood)
 - [@andymantell](https://github.com/andymantell)
 - [@annie-birchall](https://github.com/annie-birchall)

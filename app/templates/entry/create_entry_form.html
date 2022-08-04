@@ -2,7 +2,7 @@
 {% block header %}
 <div class="container">
     {{ super() }}
-    <h1>{{ title }}</h1>
+    <h1 class="mb-0">{{ title }}</h1>
 </div>
 {% endblock %}
 {% block content %}
@@ -15,8 +15,8 @@
                     {{ form.started_at_date.label(class="form-label") }}
                     {% if form.errors %}
                         {% if form.started_at_date.errors %}
-                            {{ form.started_at_date(class="form-control is-invalid", type="date") }}
-                            {% for error in form.started_at_date.errors %}<div class="invalid-feedback">{{error}}</div>{% endfor %}
+                            {{ form.started_at_date(class="form-control is-invalid", aria_describedby="startedAtDateError", type="date") }}
+                            {% for error in form.started_at_date.errors %}<div class="invalid-feedback" id="startedAtDateError">{{error}}</div>{% endfor %}
                         {% else %}
                             {{ form.started_at_date(class="form-control is-valid", type="date") }}
                             <div class="valid-feedback">Looks good!</div>
@@ -29,8 +29,8 @@
                     {{ form.started_at_time.label(class="form-label") }}
                     {% if form.errors %}
                         {% if form.started_at_time.errors %}
-                            {{ form.started_at_time(class="form-control is-invalid", type="time") }}
-                            {% for error in form.started_at_time.errors %}<div class="invalid-feedback">{{error}}</div>{% endfor %}
+                            {{ form.started_at_time(class="form-control is-invalid", aria_describedby="startedAtTimeError", type="time") }}
+                            {% for error in form.started_at_time.errors %}<div class="invalid-feedback" id="startedAtTimeError">{{error}}</div>{% endfor %}
                         {% else %}
                             {{ form.started_at_time(class="form-control is-valid", type="time") }}
                             <div class="valid-feedback">Looks good!</div>
@@ -45,8 +45,8 @@
                     {{ form.ended_at_date.label(class="form-label") }} <em>(optional)</em>
                     {% if form.errors %}
                         {% if form.ended_at_date.errors %}
-                            {{ form.ended_at_date(class="form-control is-invalid", type="date") }}
-                            {% for error in form.ended_at_date.errors %}<div class="invalid-feedback">{{error}}</div>{% endfor %}
+                            {{ form.ended_at_date(class="form-control is-invalid", aria_describedby="endedAtDateError", type="date") }}
+                            {% for error in form.ended_at_date.errors %}<div class="invalid-feedback" id="endedAtDateError">{{error}}</div>{% endfor %}
                         {% else %}
                             {{ form.ended_at_date(class="form-control is-valid", type="date") }}
                             <div class="valid-feedback">Looks good!</div>
@@ -59,8 +59,8 @@
                     {{ form.ended_at_time.label(class="form-label") }} <em>(optional)</em>
                     {% if form.errors %}
                         {% if form.ended_at_time.errors %}
-                            {{ form.ended_at_time(class="form-control is-invalid", type="time") }}
-                            {% for error in form.ended_at_time.errors %}<div class="invalid-feedback">{{error}}</div>{% endfor %}
+                            {{ form.ended_at_time(class="form-control is-invalid", aria_describedby="endedAtTimeError", type="time") }}
+                            {% for error in form.ended_at_time.errors %}<div class="invalid-feedback" id="endedAtTimeError">{{error}}</div>{% endfor %}
                         {% else %}
                             {{ form.ended_at_time(class="form-control is-valid", type="time") }}
                             <div class="valid-feedback">Looks good!</div>
@@ -76,16 +76,16 @@
                     {% if form.tag.errors %}
                         {% for subfield in form.tag %}
                         <div class="form-check">
-                            {{ subfield(class="form-check-input is-invalid", type="radio") }}
-                            <span class="badge bg-secondary"><i class="fas fa-tag fa-fw"></i> {{ subfield.label(class="form-check-label") }}</span> {% if subfield.data == current_user.default_tag_id %}<em>(default)</em>{% endif %}
+                            {{ subfield(class="form-check-input is-invalid", aria_describedby="tagError", type="radio") }}
+                            <span class="badge bg-secondary"><i class="bi bi-tag"></i> {{ subfield.label(class="form-check-label") }}</span> {% if subfield.data == current_user.default_tag_id %}<em>(default)</em>{% endif %}
                         </div>
                         {% endfor %}
-                        {% for error in form.tag.errors %}<div class="invalid-feedback">{{error}}</div>{% endfor %}
+                        {% for error in form.tag.errors %}<div class="invalid-feedback" id="tagError">{{error}}</div>{% endfor %}
                     {% else %}
                         {% for subfield in form.tag %}
                         <div class="form-check">
                             {{ subfield(class="form-check-input is-valid", type="radio") }}
-                            <span class="badge bg-secondary"><i class="fas fa-tag fa-fw"></i> {{ subfield.label(class="form-check-label") }}</span> {% if subfield.data == current_user.default_tag_id %}<em>(default)</em>{% endif %}
+                            <span class="badge bg-secondary"><i class="bi bi-tag"></i> {{ subfield.label(class="form-check-label") }}</span> {% if subfield.data == current_user.default_tag_id %}<em>(default)</em>{% endif %}
                         </div>
                         {% endfor %}
                     {% endif %}
@@ -93,7 +93,7 @@
                     {% for subfield in form.tag %}
                     <div class="form-check">
                         {{ subfield(class="form-check-input", type="radio") }}
-                        <span class="badge bg-secondary"><i class="fas fa-tag fa-fw"></i> {{ subfield.label(class="form-check-label") }}</span> {% if subfield.data == current_user.default_tag_id %}<em>(default)</em>{% endif %}
+                        <span class="badge bg-secondary"><i class="bi bi-tag"></i> {{ subfield.label(class="form-check-label") }}</span> {% if subfield.data == current_user.default_tag_id %}<em>(default)</em>{% endif %}
                     </div>
                     {% endfor %}
                 {% endif %}
@@ -102,8 +102,8 @@
                 {{ form.comment.label(class="form-label") }} <em>(optional)</em>
                 {% if form.errors %}
                     {% if form.comment.errors %}
-                    {{ form.comment(class="form-control is-invalid", rows="2", spellcheck="true", aria_describedby="commentHelp") }}
-                    {% for error in form.comment.errors %}<div class="invalid-feedback">{{error}}</div>{% endfor %}
+                    {{ form.comment(class="form-control is-invalid", rows="2", spellcheck="true", aria_describedby="commentHelp commentError") }}
+                    {% for error in form.comment.errors %}<div class="invalid-feedback" id="commentError">{{error}}</div>{% endfor %}
                     {% else %}
                     {{ form.comment(class="form-control is-valid", rows="2", spellcheck="true", aria_describedby="commentHelp") }}
                     <div class="valid-feedback">Looks good!</div>
@@ -113,9 +113,9 @@
                 {% endif %}
                 <div id="commentHelp" class="form-text">{{ form.comment.description }}</div>
             </div>
-            <div class="d-grid gap-2 d-md-block">
-                <button class="btn btn-primary" type="submit"><i class="fas fa-plus fa-lg fa-fw"></i> Create</button>
-                <a class="btn btn-secondary" href="{{ url_for('entry.weekly') }}"><i class="fas fa-chevron-left fa-lg fa-fw"></i> Cancel</a>
+            <div class="d-grid gap-3 d-sm-block">
+                <button class="btn btn-primary" type="submit"><i class="bi bi-plus-lg"></i> Create</button>
+                <a class="btn btn-secondary" href="{{ url_for('entry.weekly') }}"><i class="bi bi-chevron-left"></i> Cancel</a>
             </div>
         </form>
     </div>

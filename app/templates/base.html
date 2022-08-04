@@ -34,12 +34,15 @@
     <meta name="msapplication-config" content="{{ url_for('static', filename='browserconfig.xml') }}">
     <meta name="theme-color" content="#212529">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-    <link href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" rel="stylesheet" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <title>The Button{% if title %} | {{ title }}{% endif %}</title>
 </head>
 
 <body class="bg-light">
+    {% if "cookies_policy" not in request.cookies %}
+    {% include '_cookie_banner.html' %}
+    {% endif %}
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
         <div class="container">
             <a class="navbar-brand" href="{{ url_for('main.index') }}">The Button <span class="badge bg-info text-dark">BETA</span></a>
@@ -51,34 +54,34 @@
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     {% if current_user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="{{ url_for('entry.weekly') }}"><i class="fas fa-clock fa-lg fa-fw"></i> Time</a>
+                        <a class="nav-link {% if url_for('entry.weekly') == request.path %}active{% endif %}" aria-current="page" href="{{ url_for('entry.weekly') }}"><i class="bi bi-clock-fill"></i> Time</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('tag.tags') }}"><i class="fas fa-tags fa-lg fa-fw"></i> Tags</a>
+                        <a class="nav-link {% if url_for('tag.tags') == request.path %}active{% endif %}" href="{{ url_for('tag.tags') }}"><i class="bi bi-tags-fill"></i> Tags</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('search.search') }}"><i class="fas fa-search fa-lg fa-fw"></i> Search</a>
+                        <a class="nav-link {% if url_for('search.search') == request.path %}active{% endif %}" href="{{ url_for('search.search') }}"><i class="bi bi-search"></i> Search</a>
                     </li>
                     {% endif %}
                 </ul>
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     {% if current_user.is_anonymous %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('auth.signup') }}"><i class="fas fa-user-plus fa-lg fa-fw"></i> Sign up</a>
+                        <a class="nav-link {% if url_for('auth.signup') == request.path %}active{% endif %}" href="{{ url_for('auth.signup') }}"><i class="bi bi-person-plus-fill"></i> Sign up</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('auth.login') }}"><i class="fas fa-sign-in-alt fa-lg fa-fw"></i> Log in</a>
+                        <a class="nav-link {% if url_for('auth.login') == request.path %}active{% endif %}" href="{{ url_for('auth.login') }}"><i class="bi bi-box-arrow-in-right"></i> Log in</a>
                     </li>
                     {% else %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('account.account') }}"><i class="fas fa-user fa-lg fa-fw"></i> Account</a>
+                        <a class="nav-link {% if url_for('account.account') == request.path %}active{% endif %}" href="{{ url_for('account.account') }}"><i class="bi bi-person"></i> Account</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('auth.logout') }}"><i class="fas fa-sign-out-alt fa-lg fa-fw"></i> Log out</a>
+                        <a class="nav-link {% if url_for('auth.logout') == request.path %}active{% endif %}" href="{{ url_for('auth.logout') }}"><i class="bi bi-box-arrow-right"></i> Log out</a>
                     </li>
                     {% endif %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('main.help') }}"><i class="fas fa-question-circle fa-lg fa-fw"></i> Help</a>
+                        <a class="nav-link {% if url_for('main.help') == request.path %}active{% endif %}" href="{{ url_for('main.help') }}"><i class="bi bi-question-circle-fill"></i> Help</a>
                     </li>
                 </ul>
             </div>
@@ -89,34 +92,29 @@
             {% with messages = get_flashed_messages(with_categories=true) %}
                 {% if messages %}
                     {% for category, message in messages %}
-                    <div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
-                        {% if category == 'danger' %}
-                        <h4 class="alert-heading">There is a problem</h4>
-                        {% endif %}
-                        {% if category == 'success' %}
-                        <h4 class="alert-heading">Success</h4>
-                        {% endif %}
-                        {% if category == 'info' %}
-                        <h4 class="alert-heading">Heads up</h4>
-                        {% endif %}
-                        {% if category == 'warning' %}
-                        <h4 class="alert-heading">Uh-oh</h4>
-                        {% endif %}
-                        <p class="mb-0">{{ message | safe }}</p>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
+                        <div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+                            {% if category == 'danger' %}
+                                <h4 class="alert-heading">There is a problem</h4>
+                            {% elif category == 'success' %}
+                                <h4 class="alert-heading">Success</h4>
+                            {% elif category == 'info' %}
+                                <h4 class="alert-heading">Important</h4>
+                            {% endif %}
+                            <p class="mb-0">{{ message | safe }}</p>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
                     {% endfor %}
                 {% endif %}
             {% endwith %}
             {% if form and form.errors %}
-            <div class="alert alert-danger" role="alert">
-                <h4 class="alert-heading">There is a problem</h4>
-                {% for field, errors in form.errors.items() %}
-                {% for error in errors %}
-                <p class="mb-0">{{ error }}</p>
-                {% endfor %}
-                {% endfor %}
-            </div>
+                <div class="alert alert-danger" role="alert">
+                    <h4 class="alert-heading">There is a problem</h4>
+                    {% for field, errors in form.errors.items() %}
+                        {% for error in errors %}
+                            <p class="mb-0">{{ error }}</p>
+                        {% endfor %}
+                    {% endfor %}
+                </div>
             {% endif %}
         </div>
         {% block header %}{% endblock %}
@@ -124,20 +122,25 @@
     <div class="container">
         {% block content %}{% endblock %}
     </div>
-    </div>
     <footer class="container">
         <hr>
-        <p>
-            <a href="https://github.com/MashSoftware/the-button/releases" target="blank" rel="noopener">{{ config['VERSION_NUMBER'] }}</a> - {{ config['RELEASE_DATE'] }}<br>
-            <i class="far fa-copyright fa-fw"></i> <a href="https://www.mashsoftware.com/" target="blank" rel="noopener">Mash Software</a> 2019 - 2021<br>
-            <i class="fas fa-coffee fa-fw"></i> <a href="https://ko-fi.com/mashsoftware">Buy me a coffee</a><br>
-            <i class="fab fa-facebook fa-fw"></i> <a href="https://www.facebook.com/MashSW/" target="blank" rel="noopener">Facebook</a> | 
-            <i class="fab fa-twitter fa-fw"></i> <a href="https://twitter.com/mashsoftware" target="blank" rel="noopener">Twitter</a> | 
-            <i class="fab fa-github fa-fw"></i> <a href="https://github.com/MashSoftware/the-button" target="blank" rel="noopener">GitHub</a> | 
-            <i class="fas fa-envelope fa-fw"></i> <a href="mailto:hello@mashsoftware.com" target="blank" rel="noopener">Email</a>
-        </p>
+        <div class="row">
+            <div class="col-md-6">
+                <p class="mb-0">Version <a href="https://github.com/MashSoftware/the-button/releases" target="blank" rel="noopener">{{ config['VERSION_NUMBER'] }}</a></p>
+                <p class="mb-0"><i class="bi bi-c-circle"></i> <a href="https://www.mashsoftware.com/" target="blank" rel="noopener">Mash Software</a> 2019 - 2022</p>
+                <p class="mb-0"><i class="bi bi-cup-hot-fill"></i> <a href="https://ko-fi.com/mashsoftware">Buy me a coffee</a></p>
+                <p class="mb-0"><a href="{{ url_for('main.cookies') }}">Cookies</a></p>
+            </div>
+            <div class="col-md-6">
+                <p class="mb-0"><i class="bi bi-facebook"></i> <a href="https://www.facebook.com/MashSW/" target="blank" rel="noopener">Facebook</a></p>
+                <p class="mb-0"><i class="bi bi-twitter"></i> <a href="https://twitter.com/mashsoftware" target="blank" rel="noopener">Twitter</a></p>
+                <p class="mb-0"><i class="bi bi-github"></i> <a href="https://github.com/MashSoftware/the-button" target="blank" rel="noopener">GitHub</a></p>
+                <p class="mb-0"><i class="bi bi-envelope-fill"></i> <a href="mailto:hello@mashsoftware.com" target="blank" rel="noopener">Email</a></p>
+            </div>
+        </div>
     </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+    {% assets "js" %}<script type="application/javascript" src="{{ ASSET_URL }}"></script>{% endassets %}
 </body>
 
 </html>

@@ -1,5 +1,5 @@
 <div class="card bg-white shadow mb-3 {% if event.ended_at is none %}border-info{% endif %}" id="{{event.id}}">
-    {% if event.ended_at is none %}<div class="card-header bg-info">Started {{ event.duration_string(now) }} ({{ event.duration_decimal(now) }}) ago</div>{% endif %}
+    {% if event.ended_at is none %}<div class="card-header bg-info"><div class="spinner-border spinner-border-sm" role="status"><span class="visually-hidden">In progress</span></div> Started {{ event.duration_string(now) }} ({{ event.duration_decimal(now) }}) ago</div>{% endif %}
     <div class="card-body">
         <h5 class="card-title">{{event.started_at.strftime('%A %d %B')}}</h5>
         {% if event.ended_at %}<h6 class="card-subtitle mb-2 text-muted">{{event.duration_string()}} ({{event.duration_decimal()}})</h6>{% endif %}
@@ -7,11 +7,11 @@
             {% if event.ended_at is none %}
                 Since {{event.started_at.strftime('%H:%M')}}
             {% else %}
-                {{event.started_at.strftime('%H:%M')}} to {{event.ended_at.strftime('%H:%M')}}
+                {{event.started_at.strftime('%H:%M')}} to {% if event.started_at.strftime('%x') != event.ended_at.strftime('%x') %}{{ event.ended_at.strftime('%d/%m/%Y %H:%M') }}{% else %}{{ event.ended_at.strftime('%H:%M')}}{% endif %}
             {% endif %}
-            {% if event.tag %}<br><a href="{{ url_for('tag.entries', id=event.tag.id) }}"><span class="badge bg-secondary"><i class="fas fa-tag fa-fw"></i> {{event.tag.name}}</span></a>{% endif %}
+            {% if event.tag %}<br><a href="{{ url_for('tag.entries', id=event.tag.id) }}"><span class="badge bg-secondary"><i class="bi bi-tag"></i> {{event.tag.name}}</span></a>{% endif %}
         </p>
-        {% if event.comment %}<p class="card-text"><i class="fas fa-comment fa-fw"></i> "{{event.comment}}"</p>{% endif %}
+        {% if event.comment %}<p class="card-text"><i class="bi bi-chat"></i> "{{event.comment}}"</p>{% endif %}
         {% block actions %}{% endblock %}
     </div>
 </div>

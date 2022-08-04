@@ -2,7 +2,7 @@
 {% block header %}
 <div class="container">
     {{ super() }}
-    <h1>{{ title }}</h1>
+    <h1 class="mb-0">{{ title }}</h1>
 </div>
 {% endblock %}
 {% block content %}
@@ -12,9 +12,9 @@
         <p class="lead">This time entry will be permanently deleted.</p>
         {% include 'entry/_time_card_view.html' %}
         <form action="" method="post" novalidate>
-            <div class="d-grid gap-2 d-md-block">
-                <button class="btn btn-danger" type="submit"><i class="fas fa-trash fa-lg fa-fw"></i> Yes - delete time entry</button>
-                <a class="btn btn-secondary" href="{{ url_for('entry.weekly') }}"><i class="fas fa-chevron-left fa-lg fa-fw"></i> Cancel</a>
+            <div class="d-grid gap-3 d-sm-block">
+                <button class="btn btn-danger" type="submit"><i class="bi bi-trash-fill"></i> Yes - delete time entry</button>
+                <a class="btn btn-secondary" href="{{ url_for('entry.weekly') }}"><i class="bi bi-chevron-left"></i> Cancel</a>
             </div>
         </form>
     </div>

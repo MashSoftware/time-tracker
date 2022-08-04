@@ -1,18 +1,15 @@
 from datetime import datetime
 
 import pytz
-from app import db
-from app.auth import bp
-from app.auth.forms import LoginForm, ResetPasswordForm, SignupForm, TokenRequestForm
-from app.main.email import (
-    send_activation_email,
-    send_confirmation_email,
-    send_reset_password_email,
-)
-from app.models import User
 from flask import current_app, flash, redirect, render_template, request, url_for
 from flask_login import current_user, login_user, logout_user
 from werkzeug.urls import url_parse
+
+from app import db
+from app.auth import bp
+from app.auth.forms import LoginForm, ResetPasswordForm, SignupForm, TokenRequestForm
+from app.main.email import send_activation_email, send_confirmation_email, send_reset_password_email
+from app.models import User
 
 
 @bp.route("/signup", methods=["GET", "POST"])
@@ -37,7 +34,7 @@ def signup():
             "success",
         )
         return redirect(url_for("main.index"))
-    return render_template("auth/sign_up_form.html", title="Sign up", form=form)
+    return render_template("sign_up_form.html", title="Sign up", form=form)
 
 
 @bp.route("/activate", methods=["GET", "POST"])
@@ -57,7 +54,7 @@ def activate_request():
             "success",
         )
         return redirect(url_for("main.index"))
-    return render_template("auth/activate_request_form.html", title="Activate account", form=form)
+    return render_template("activate_request_form.html", title="Activate account", form=form)
 
 
 @bp.route("/activate/<token>")
@@ -97,7 +94,7 @@ def login():
         return redirect(next_page)
     elif request.method == "GET" and current_user.is_authenticated:
         form.email_address.data = current_user.email_address
-    return render_template("auth/log_in_form.html", title="Log in", form=form)
+    return render_template("log_in_form.html", title="Log in", form=form)
 
 
 @bp.route("/logout")
@@ -122,7 +119,7 @@ def reset_password_request():
             "success",
         )
         return redirect(url_for("auth.login"))
-    return render_template("auth/reset_password_request_form.html", title="Reset password", form=form)
+    return render_template("reset_password_request_form.html", title="Reset password", form=form)
 
 
 @bp.route("/reset-password/<token>", methods=["GET", "POST"])
@@ -142,4 +139,4 @@ def reset_password(token):
         current_app.logger.info("User {} reset password".format(current_user.id))
         flash("Your password has been reset, you may now log in.", "success")
         return redirect(url_for("auth.login"))
-    return render_template("auth/reset_password_form.html", title="Reset password", form=form)
+    return render_template("reset_password_form.html", title="Reset password", form=form)

@@ -2,7 +2,7 @@
 {% block header %}
 <div class="container">
     {{ super() }}
-    <h1>{{ title }}</h1>
+    <h1 class="mb-0">{{ title }}</h1>
 </div>
 {% endblock %}
 {% block content %}
@@ -14,8 +14,8 @@
                 {{ form.email_address.label(class="form-label") }}
                 {% if form.errors %}
                     {% if form.email_address.errors %}
-                        {{ form.email_address(class="form-control is-invalid", type="email", spellcheck="false", autocomplete="email") }}
-                        {% for error in form.email_address.errors %}<div class="invalid-feedback">{{error}}</div>{% endfor %}
+                        {{ form.email_address(class="form-control is-invalid", aria_describedby="emailAddressError", type="email", spellcheck="false", autocomplete="email") }}
+                        {% for error in form.email_address.errors %}<div class="invalid-feedback" id="emailAddressError">{{error}}</div>{% endfor %}
                     {% else %}
                         {{ form.email_address(class="form-control is-valid", type="email", spellcheck="false", autocomplete="email") }}
                         <div class="valid-feedback">Looks good!</div>
@@ -24,9 +24,9 @@
                     {{ form.email_address(class="form-control", type="email", spellcheck="false", autocomplete="email") }}
                 {% endif %}
             </div>
-            <div class="d-grid gap-2 d-md-block">
-                <button class="btn btn-primary" type="submit"><i class="fas fa-unlock fa-lg fa-fw"></i> Activate</button>
-                <a class="btn btn-secondary" href="{{ url_for('auth.login') }}"><i class="fas fa-chevron-left fa-lg fa-fw"></i> Cancel</a> 
+            <div class="d-grid gap-3 d-sm-block">
+                <button class="btn btn-primary" type="submit"><i class="bi bi-unlock-fill"></i> Activate</button>
+                <a class="btn btn-secondary" href="{{ url_for('auth.login') }}"><i class="bi bi-chevron-left"></i> Cancel</a> 
             </div>
                        
         </form>

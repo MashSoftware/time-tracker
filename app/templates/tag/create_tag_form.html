@@ -2,7 +2,7 @@
 {% block header %}
 <div class="container">
     {{ super() }}
-    <h1>{{ title }}</h1>
+    <h1 class="mb-0">{{ title }}</h1>
 </div>
 {% endblock %}
 {% block content %}
@@ -14,8 +14,8 @@
                 {{ form.name.label(class="form-label") }}
                 {% if form.errors %}
                     {% if form.name.errors %}
-                        {{ form.name(class="form-control is-invalid", type="text", spellcheck="true", aria_describedby="nameHelp") }}
-                        {% for error in form.name.errors %}<div class="invalid-feedback">{{error}}</div>{% endfor %}
+                        {{ form.name(class="form-control is-invalid", type="text", spellcheck="true", aria_describedby="nameHelp nameError") }}
+                        {% for error in form.name.errors %}<div class="invalid-feedback" id="nameError">{{error}}</div>{% endfor %}
                     {% else %}
                         {{ form.name(class="form-control is-valid", type="text", spellcheck="true", aria_describedby="nameHelp") }}
                         <div class="valid-feedback">Looks good!</div>
@@ -25,9 +25,9 @@
                 {% endif %}
                 <div id="nameHelp" class="form-text">{{ form.name.description }}</div>
             </div>
-            <div class="d-grid gap-2 d-md-block">
-                <button class="btn btn-primary" type="submit"><i class="fas fa-plus fa-lg fa-fw"></i> Create</button>
-                <a class="btn btn-secondary" href="{{ url_for('tag.tags') }}"><i class="fas fa-chevron-left fa-lg fa-fw"></i> Cancel</a>
+            <div class="d-grid gap-3 d-sm-block">
+                <button class="btn btn-primary" type="submit"><i class="bi bi-plus-lg"></i> Create</button>
+                <a class="btn btn-secondary" href="{{ url_for('tag.tags') }}"><i class="bi bi-chevron-left"></i> Cancel</a>
             </div>
         </form>
     </div>

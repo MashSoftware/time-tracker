@@ -2,7 +2,7 @@
 {% block header %}
 <div class="container">
     {{ super() }}
-    <h1>{{ title }}</h1>
+    <h1 class="mb-0">{{ title }}</h1>
 </div>
 {% endblock %}
 {% block content %}
@@ -14,8 +14,8 @@
                 {{ form.email_address.label(class="form-label") }}
                 {% if form.errors %}
                     {% if form.email_address.errors %}
-                        {{ form.email_address(class="form-control is-invalid", type="email", spellcheck="false", autocomplete="email", aria_describedby="emailHelp") }}
-                        {% for error in form.email_address.errors %}<div class="invalid-feedback">{{error}}</div>{% endfor %}
+                        {{ form.email_address(class="form-control is-invalid", type="email", spellcheck="false", autocomplete="email", aria_describedby="emailHelp emailError") }}
+                        {% for error in form.email_address.errors %}<div class="invalid-feedback" id="emailError">{{error}}</div>{% endfor %}
                     {% else %}
                         {{ form.email_address(class="form-control is-valid", type="email", spellcheck="false", autocomplete="email", aria_describedby="emailHelp") }}
                         <div class="valid-feedback">Looks good!</div>
@@ -29,8 +29,8 @@
                 {{ form.timezone.label(class="form-label") }}
                 {% if form.errors %}
                     {% if form.timezone.errors %}
-                        {{ form.timezone(class="form-select is-invalid") }}
-                        {% for error in form.timezone.errors %}<div class="invalid-feedback">{{error}}</div>{% endfor %}
+                        {{ form.timezone(class="form-select is-invalid", aria_describedby="timezoneError") }}
+                        {% for error in form.timezone.errors %}<div class="invalid-feedback" id="timezoneError">{{error}}</div>{% endfor %}
                     {% else %}
                         {{ form.timezone(class="form-select is-valid") }}
                         <div class="valid-feedback">Looks good!</div>
@@ -39,9 +39,9 @@
                     {{ form.timezone(class="form-select") }}
                 {% endif %}
             </div>
-            <div class="d-grid gap-2 d-md-block">
-                <button class="btn btn-primary" type="submit"><i class="fas fa-check fa-lg fa-fw"></i> Save</button>
-                <a class="btn btn-secondary" href="{{ url_for('account.account') }}"><i class="fas fa-chevron-left fa-lg fa-fw"></i> Cancel</a>
+            <div class="d-grid gap-3 d-sm-block">
+                <button class="btn btn-primary" type="submit"><i class="bi bi-save"></i> Save</button>
+                <a class="btn btn-secondary" href="{{ url_for('account.account') }}"><i class="bi bi-chevron-left"></i> Cancel</a>
             </div>
         </form>
     </div>

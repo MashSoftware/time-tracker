@@ -1,9 +1,10 @@
+from flask import render_template
+from flask_login import current_user, login_required
+
 from app import limiter
 from app.models import Event
 from app.search import bp
 from app.search.forms import SearchForm
-from flask import render_template
-from flask_login import current_user, login_required
 
 
 @bp.route("/", methods=["GET", "POST"])
@@ -14,8 +15,9 @@ def search():
     form = SearchForm()
     if form.validate_on_submit():
         results = (
-            Event.query.filter(Event.comment.ilike("%{}%".format(form.query.data)))
+            Event.query.filter_by(user_id=current_user.id)
+            .filter(Event.comment.ilike(f"%{form.query.data}%"))
             .order_by(Event.started_at.desc())
             .all()
         )
-    return render_template("search/search.html", title="Search", form=form, results=results)
+    return render_template("search.html", title="Search", form=form, results=results)

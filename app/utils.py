@@ -15,6 +15,7 @@ def seconds_to_string(seconds):
 
 def seconds_to_decimal(seconds):
     """Returns the number of seconds as a float.
+
     Decimal places are cut off at two, with no rounding.
     """
     decimal = str(round(seconds / 60 / 60, 4)).split(".")
