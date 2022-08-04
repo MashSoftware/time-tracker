@@ -68,6 +68,10 @@ If you want to contribute to this project, please review the [code of conduct](C
 ## Contributors
 
 - [@matthew-shaw](https://github.com/matthew-shaw) (Owner and maintainer)
+- [@jonodrew](https://github.com/jonodrew)
+
+## Thanks
+
 - [@ahosgood](https://github.com/ahosgood)
 - [@andymantell](https://github.com/andymantell)
 - [@annie-birchall](https://github.com/annie-birchall)
