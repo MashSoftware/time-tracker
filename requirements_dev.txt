@@ -36,8 +36,6 @@ flake8-bugbear==22.7.1
     # via -r requirements_dev.in
 flake8-polyfill==1.0.2
     # via pep8-naming
-freezegun==1.2.1
-    # via -r requirements_dev.in
 gitdb==4.0.9
     # via gitpython
 gitpython==3.1.27
@@ -88,8 +86,6 @@ pytest==7.1.2
     # via pytest-cov
 pytest-cov==3.0.0
     # via -r requirements_dev.in
-python-dateutil==2.8.2
-    # via freezegun
 pyyaml==6.0
     # via
     #   bandit
@@ -108,9 +104,7 @@ ruamel-yaml-clib==0.2.6
 safety==2.1.1
     # via -r requirements_dev.in
 six==1.16.0
-    # via
-    #   piprot
-    #   python-dateutil
+    # via piprot
 smmap==5.0.0
     # via gitdb
 stevedore==4.0.0
