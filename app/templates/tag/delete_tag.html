@@ -1,13 +1,10 @@
 {% extends "base.html" %}
-{% block header %}
-<div class="container">
-    {{ super() }}
-    <h1 class="mb-0">{{ title }}</h1>
-</div>
-{% endblock %}
 {% block content %}
 <div class="row">
     <div class="col-md-6">
+        {{ super() }}
+        <h1 class="text-truncate">{{ title }}</h1>
+        <hr>
         <h3>Are you sure?</h3>
         <p class="lead">This tag will be permanently deleted and removed from <a href="{{ url_for('tag.entries', id=tag.id) }}">{{ tag.events | length }} time entries</a>.</p>
         {% include 'tag/_tag_card.html' %}

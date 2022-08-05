@@ -1,14 +1,11 @@
 {% extends "base.html" %}
-{% block header %}
-<div class="container">
-    {{ super() }}
-    <h1>{{ title }}</h1>
-    <p class="lead mb-0">Select the tag to be used on all new time entries.</p>
-</div>
-{% endblock %}
 {% block content %}
 <div class="row">
     <div class="col-md-6">
+        {{ super() }}
+        <h1 class="text-truncate">{{ title }}</h1>
+        <p class="lead mb-0">Select the tag to be used on all new time entries.</p>
+        <hr>
         <form action="" method="post" novalidate>
             {{ form.csrf_token }}
             <div class="mb-3">

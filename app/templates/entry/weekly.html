@@ -1,11 +1,12 @@
 {% extends "base.html" %}
-{% block header %}
-<div class="container">
-    {{ super() }}
-    <h1 class="mb-0">{{ title }}</h1>
-</div>
-{% endblock %}
 {% block content %}
+<div class="row">
+    <div class="col">
+        {{ super() }}
+        <h1 class="mb-0">{{ title }}</h1>
+        <hr>
+    </div>
+</div>
 <div class="row">
     <div class="col-md-5">
         {% if start %}

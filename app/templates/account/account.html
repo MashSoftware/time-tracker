@@ -1,13 +1,10 @@
 {% extends "base.html" %}
-{% block header %}
-<div class="container">
-    {{ super() }}
-    <h1 class="mb-0">{{ title }}</h1>
-</div>
-{% endblock %}
 {% block content %}
 <div class="row">
     <div class="col-md-8">
+        {{ super() }}
+        <h1 class="text-truncate">{{ title }}</h1>
+        <hr>
         <dl class="row">
             <dt class="col-sm-3">Email Address</dt>
             <dd class="col-sm-7">{{ user.email_address }}</dd>

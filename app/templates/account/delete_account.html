@@ -1,13 +1,10 @@
 {% extends "base.html" %}
-{% block header %}
-<div class="container">
-    {{ super() }}
-    <h1 class="mb-0">{{ title }}</h1>
-</div>
-{% endblock %}
 {% block content %}
 <div class="row">
     <div class="col-md-6">
+        {{ super() }}
+        <h1 class="text-truncate">{{ title }}</h1>
+        <hr>
         <h3>Are you sure?</h3>
         <p class="lead">All personal information, {{ current_user.events | length }} time entries and {{ current_user.tags | length }} tags will be permanently deleted.</p>
         <form action="" method="post" novalidate>

@@ -1,14 +1,11 @@
 {% extends "base.html" %}
-{% block header %}
-<div class="container">
-    {{ super() }}
-    <h1>{{ title }}</h1>
-    <p class="lead mb-0">{{ events | length }} time {% if events | length > 1 %}entries{% else %}entry{% endif %} : {{ total_string }} ({{ total_decimal }}) in the last {{ current_user.entry_history }} weeks.</p>
-</div>
-{% endblock %}
 {% block content %}
 <div class="row">
     <div class="col-md-6">
+        {{ super() }}
+        <h1 class="text-truncate">{{ title }}</h1>
+        <p class="lead mb-0">{{ events | length }} time {% if events | length > 1 %}entries{% else %}entry{% endif %} : {{ total_string }} ({{ total_decimal }}) in the last {{ current_user.entry_history }} weeks.</p>
+        <hr>
         {% for event in events %}
             {% include 'entry/_time_card_actions.html' %}
         {% endfor %}  
