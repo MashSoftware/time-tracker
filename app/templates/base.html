@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Mash Time Tracker - Simple, quick and easy time tracking.">
-    <meta name="keywords" content="time, timing, timer, track, tracking, tracker, clocking, clock, clock-in, clock-out, log, logging, logger, record, recording, simple, easy, quick">
+    <meta name="keywords" content="clock, clocking, clock-in, clock-out, easy, free, hour, hours, log, logger, logging, project, project management, projects, quick, record, recording, simple, tag, tagging, tags, task, tasks, time, time card, time sheet, timecard, timer, timesheet, timing, track, tracker, tracking, week, weekly">
     <meta name="author" content="Matthew Shaw">
     <link rel="canonical" href="{{ request.url }}">
 
@@ -87,8 +87,8 @@
             </div>
         </div>
     </nav>
-    <div class="bg-white border-bottom py-3 mb-3">
-        <div class="container">
+    <main class="container py-3 mb-3">
+        {% block content %}
             {% with messages = get_flashed_messages(with_categories=true) %}
                 {% if messages %}
                     {% for category, message in messages %}
@@ -116,22 +116,18 @@
                     {% endfor %}
                 </div>
             {% endif %}
-        </div>
-        {% block header %}{% endblock %}
-    </div>
-    <div class="container">
-        {% block content %}{% endblock %}
-    </div>
+        {% endblock %}
+    </main>
+    <hr>
     <footer class="container">
-        <hr>
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-sm-6">
                 <p class="mb-0">Version <a href="https://github.com/MashSoftware/mash-time-tracker/releases" target="blank" rel="noopener">{{ config['VERSION_NUMBER'] }}</a></p>
                 <p class="mb-0"><i class="bi bi-c-circle"></i> <a href="https://www.mashsoftware.com/" target="blank" rel="noopener">Mash Software</a> 2019 - 2022</p>
                 <p class="mb-0"><i class="bi bi-cup-hot-fill"></i> <a href="https://ko-fi.com/mashsoftware">Buy me a coffee</a></p>
                 <p class="mb-0"><a href="{{ url_for('main.cookies') }}">Cookies</a></p>
             </div>
-            <div class="col-md-6">
+            <div class="col-sm-6">
                 <p class="mb-0"><i class="bi bi-facebook"></i> <a href="https://www.facebook.com/MashSW/" target="blank" rel="noopener">Facebook</a></p>
                 <p class="mb-0"><i class="bi bi-twitter"></i> <a href="https://twitter.com/mashsoftware" target="blank" rel="noopener">Twitter</a></p>
                 <p class="mb-0"><i class="bi bi-github"></i> <a href="https://github.com/MashSoftware/time-tracker" target="blank" rel="noopener">GitHub</a></p>
