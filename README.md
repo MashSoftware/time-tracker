@@ -24,9 +24,9 @@ A simple time tracking service.
 ```shell
 sudo service postgresql start
 sudo su - postgres -c "create user mash with password mash"
-sudo su - postgres -c "createdb button"
+sudo su - postgres -c "createdb time_tracker"
 sudo -u postgres psql
-grant all privileges on database button to mash;
+grant all privileges on database time_tracker to mash;
 ```
 
 ### Create venv and install requirements
