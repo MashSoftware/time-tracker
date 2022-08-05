@@ -1,15 +1,14 @@
 {% extends "base.html" %}
-{% block header %}
-<div class="container text-center pb-2">
-    <h1 class="display-4">Mash Time Tracker</h1>
-    <p class="lead">Simple, quick and easy time tracking.</p>
+{% block content %}
+<div class="container px-4 py-5 text-center">
+    <img class="d-block mx-auto mb-4 rounded" src="{{ url_for('static', filename='android-chrome-512x512.png') }}" width="72">
+    <h1 class="display-5 fw-bold">Mash Time Tracker</h1>
+    <p class="lead mb-4">Simple, quick and easy time tracking.</p>
     <div class="d-grid gap-3 d-sm-block">
-        <a class="btn btn-primary btn-lg" href="{{ url_for('auth.signup') }}" role="button"><i class="bi bi-person-plus-fill"></i> Sign up</a>
-        <a class="btn btn-secondary btn-lg" href="{{ url_for('auth.login') }}" role="button"><i class="bi bi-box-arrow-in-right"></i> Log in</a>
+        <a class="btn btn-primary btn-lg px-4" href="{{ url_for('auth.signup') }}" role="button"><i class="bi bi-person-plus-fill"></i> Sign up</a>
+        <a class="btn btn-outline-secondary btn-lg px-4" href="{{ url_for('auth.login') }}" role="button"><i class="bi bi-box-arrow-in-right"></i> Log in</a>
     </div>
 </div>
-{% endblock %}
-{% block content %}
 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
     <div class="col">
         <div class="card bg-white h-100">
