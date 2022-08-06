@@ -87,6 +87,7 @@
             </div>
         </div>
     </nav>
+    {% block hero %}{% endblock %}
     <main class="container py-3 mb-3">
         {% block content %}
             {% with messages = get_flashed_messages(with_categories=true) %}
