@@ -1,7 +1,9 @@
 {% extends "base.html" %}
 {% block hero %}
-<div class="container-fluid shadow bg-white px-4 py-5 mb-4 text-center">
-    <img class="d-block mx-auto mb-4 rounded shadow" src="{{ url_for('static', filename='android-chrome-512x512.png') }}" width="72">
+<div class="container-fluid shadow bg-white px-4 py-5 mb-3 text-center">
+    <div class="rounded-4 shadow-lg d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
+        <i class="bi bi-clock-history display-1 px-3 py-2"></i>
+    </div>
     <h1 class="display-5 fw-bold">Mash Time Tracker</h1>
     <p class="lead mb-4">Simple, quick and easy time tracking.</p>
     <div class="d-grid gap-3 d-sm-block">
@@ -12,69 +14,106 @@
 {% endblock %}
 {% block content %}
 {{ super() }}
-<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+<h2>Features</h2>
+<div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
     <div class="col">
-        <div class="card bg-white h-100">
-            <div class="card-body">
-                <h2 class="card-title"><i class="bi bi-stopwatch"></i> Simple</h2>
-                <p class="card-text lead">Clear, quick and easy to use. Just click to start, click again to finish, done!</p>
-            </div>
+        <div class="rounded d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
+            <i class="bi bi-stopwatch-fill px-3 py-2"></i>
         </div>
+        <h2>Time</h2>
+        <p>Something about time goes here...</p>
     </div>
     <div class="col">
-        <div class="card bg-white h-100">
-            <div class="card-body">
-                <h2 class="card-title"><i class="bi bi-hand-thumbs-up"></i> Flexible</h2>
-                <p class="card-text lead">Create your own tags to categorise your time entries. Manually create or adjust time entries if you need to.</p>
-            </div>
+        <div class="rounded d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
+            <i class="bi bi-tags-fill px-3 py-2"></i>
         </div>
+        <h2>Tags</h2>
+        <p>Something about tags goes here...</p>
     </div>
     <div class="col">
-        <div class="card bg-white h-100">
-            <div class="card-body">
-                <h2 class="card-title"><i class="bi bi-speedometer"></i> Fast</h2>
-                <p class="card-text lead">A lightweight and fast user interface, perfect for mobile networks.</p>
-            </div>
+        <div class="rounded d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
+            <i class="bi bi-geo-fill px-3 py-2"></i>
         </div>
+        <h2>Locations</h2>
+        <p>Something about locations goes here...</p>
     </div>
     <div class="col">
-        <div class="card bg-white h-100">
-            <div class="card-body">
-                <h2 class="card-title"><i class="bi bi-shield-lock"></i> Secure</h2>
-                <p class="card-text lead">Uses strict security standards and policies to protect from common attacks.</p>
-            </div>
+        <div class="rounded d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
+            <i class="bi bi-chat-fill px-3 py-2"></i>
         </div>
+        <h2>Comments</h2>
+        <p>Something about comments goes here...</p>
     </div>
     <div class="col">
-        <div class="card bg-white h-100">
-            <div class="card-body">
-                <h2 class="card-title"><i class="bi bi-incognito"></i> Protected</h2>
-                <p class="card-text lead">Stores the least amount of personal data possible, only an email address. You are in full control of your data and can permanently delete everything at any time.</p>
-            </div>
+        <div class="rounded d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
+            <i class="bi bi-calendar-week px-3 py-2"></i>
         </div>
+        <h2>Weekly summary</h2>
+        <p>Something about weekly summaries goes here...</p>
     </div>
     <div class="col">
-        <div class="card bg-white h-100">
-            <div class="card-body">
-                <h2 class="card-title"><i class="bi bi-globe"></i> Web first</h2>
-                <p class="card-text lead">We treat the browser as a first-class citizen, not a fallback option. The web is open, democratic and free in a way that app stores tend not to be.</p>
-            </div>
+        <div class="rounded d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
+            <i class="bi bi-box2-heart-fill px-3 py-2"></i>
+        </div>
+        <h2>Something else</h2>
+        <p>Something about something else goes here...</p>
+    </div>
+</div>
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 py-5">
+    <div class="col d-flex align-items-start">
+        <i class="bi bi-speedometer text-muted flex-shrink-0 me-3 fs-4"></i>
+        <div>
+            <h4 class="fw-bold mb-0">Fast</h4>
+            <p>A lightweight and fast user interface, perfect for mobile networks.</p>
         </div>
     </div>
-    <div class="col">
-        <div class="card bg-white h-100">
-            <div class="card-body">
-                <h2 class="card-title"><i class="bi bi-phone"></i> Responsive</h2>
-                <p class="card-text lead">Mobile-first design means it works perfectly and looks great on any size device.</p>
-            </div>
+    <div class="col d-flex align-items-start">
+        <i class="bi bi-shield-lock-fill text-muted flex-shrink-0 me-3 fs-4"></i>
+        <div>
+            <h4 class="fw-bold mb-0">Secure</h4>
+            <p>Uses strict security standards and policies to protect from common attacks.</p>
         </div>
     </div>
-    <div class="col">
-        <div class="card bg-white h-100">
-            <div class="card-body">
-                <h2 class="card-title"><i class="bi bi-unlock"></i> Open</h2>
-                <p class="card-text lead">Fully open source code, all hosted and run within the EU.</p>
-            </div>
+    <div class="col d-flex align-items-start">
+        <i class="bi bi-phone-fill text-muted flex-shrink-0 me-3 fs-4"></i>
+        <div>
+            <h4 class="fw-bold mb-0">Responsive</h4>
+            <p>Mobile-first design means it works perfectly and looks great on any size device.</p>
+        </div>
+    </div>
+    <div class="col d-flex align-items-start">
+        <i class="bi bi-server text-muted flex-shrink-0 me-3 fs-4"></i>
+        <div>
+            <h4 class="fw-bold mb-0">Open source</h4>
+            <p>Fully open source code, all hosted and run within the EU.</p>
+        </div>
+    </div>
+    <div class="col d-flex align-items-start">
+        <i class="bi bi-globe text-muted flex-shrink-0 me-3 fs-4"></i>
+        <div>
+            <h4 class="fw-bold mb-0">Web first</h4>
+            <p>We treat the browser as a first-class citizen, not a fallback option.</p>
+        </div>
+    </div>
+    <div class="col d-flex align-items-start">
+        <i class="bi bi-person-bounding-box text-muted flex-shrink-0 me-3 fs-4"></i>
+        <div>
+            <h4 class="fw-bold mb-0">Low profile</h4>
+            <p>Stores the least amount of personal data possible, only an email address.</p>
+        </div>
+    </div>
+    <div class="col d-flex align-items-start">
+        <i class="bi bi-toggles2 text-muted flex-shrink-0 me-3 fs-4"></i>
+        <div>
+            <h4 class="fw-bold mb-0">Control</h4>
+            <p>You have full control of your data and can permanently delete everything at any time.</p>
+        </div>
+    </div>
+    <div class="col d-flex align-items-start">
+        <i class="bi bi-tools text-muted flex-shrink-0 me-3 fs-4"></i>
+        <div>
+            <h4 class="fw-bold mb-0">Something else</h4>
+            <p>Paragraph of text beneath the heading to explain the heading.</p>
         </div>
     </div>
 </div>
