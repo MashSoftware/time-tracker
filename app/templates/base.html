@@ -54,7 +54,7 @@
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     {% if current_user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link {% if url_for('entry.weekly') == request.path %}active{% endif %}" aria-current="page" href="{{ url_for('entry.weekly') }}"><i class="bi bi-clock-fill"></i> Time</a>
+                        <a class="nav-link {% if url_for('entry.weekly') == request.path %}active{% endif %}" aria-current="page" href="{{ url_for('entry.weekly') }}"><i class="bi bi-clock-history"></i> Time</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {% if url_for('tag.tags') == request.path %}active{% endif %}" href="{{ url_for('tag.tags') }}"><i class="bi bi-tags-fill"></i> Tags</a>
