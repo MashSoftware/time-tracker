@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+    <div class="col-md-6">
+        {{ super() }}
+        <h1 class="text-truncate">{{ title }}</h1>
+        <p class="lead mb-0">Select the location to be used on all new time entries.</p>
+        <hr>
+        <form action="" method="post" novalidate>
+            {{ form.csrf_token }}
+            <div class="mb-3">
+                {{ form.location.label(class="form-label") }}
+                {% if form.errors %}
+                    {% if form.location.errors %}
+                        {% for subfield in form.location %}
+                        <div class="form-check">
+                            {{ subfield(class="form-check-input is-invalid", aria_describedby="locationError", type="radio") }}
+                            {{ subfield.label(class="form-check-label") }}
+                        </div>
+                        {% endfor %}
+                        {% for error in form.location.errors %}<div class="invalid-feedback" id="locationError">{{error}}</div>{% endfor %}
+                    {% else %}
+                        {% for subfield in form.location %}
+                        <div class="form-check">
+                            {{ subfield(class="form-check-input is-valid", type="radio") }}
+                            {{ subfield.label(class="form-check-label") }}
+                        </div>
+                        {% endfor %}
+                    {% endif %}
+                {% else %}
+                    {% for subfield in form.location %}
+                    <div class="form-check">
+                        {{ subfield(class="form-check-input", type="radio") }}
+                        {{ subfield.label(class="form-check-label") }}
+                    </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div class="d-grid gap-3 d-sm-block">
+                <button class="btn btn-primary" type="submit"><i class="bi bi-save"></i> Save</button>
+                <a class="btn btn-secondary" href="{{ url_for('location.locations') }}"><i class="bi bi-chevron-left"></i> Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

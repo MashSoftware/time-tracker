@@ -143,4 +143,4 @@ def default():
         if current_user.default_tag_id:
             form.tag.data = current_user.default_tag_id
 
-    return render_template("default_form.html", title="Default tag", form=form)
+    return render_template("default_tag_form.html", title="Default tag", form=form)

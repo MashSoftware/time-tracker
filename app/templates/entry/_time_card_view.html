@@ -1,17 +1,18 @@
-<div class="card bg-white shadow mb-3 {% if event.ended_at is none %}border-info{% endif %}" id="{{event.id}}">
+<div class="card text-bg-white shadow mb-3 {% if event.ended_at is none %}border-info{% endif %}" id="{{event.id}}">
     {% if event.ended_at is none %}<div class="card-header text-bg-info"><div class="spinner-border spinner-border-sm" role="status"><span class="visually-hidden">In progress</span></div> Started {{ event.duration_string(now) }} ({{ event.duration_decimal(now) }}) ago</div>{% endif %}
     <div class="card-body">
-        <h5 class="card-title">{{event.started_at.strftime('%A %d %B')}}</h5>
-        {% if event.ended_at %}<h6 class="card-subtitle mb-2 text-muted">{{event.duration_string()}} ({{event.duration_decimal()}})</h6>{% endif %}
-        <p class="card-text">
+        <h5 class="card-title"><i class="bi bi-calendar-event"></i> {{event.started_at.strftime('%A %d %B')}}</h5>
+        <p class="card-text mb-2">
+            <i class="bi bi-clock-history"></i>
             {% if event.ended_at is none %}
                 Since {{event.started_at.strftime('%H:%M')}}
             {% else %}
-                {{event.started_at.strftime('%H:%M')}} to {% if event.started_at.strftime('%x') != event.ended_at.strftime('%x') %}{{ event.ended_at.strftime('%d/%m/%Y %H:%M') }}{% else %}{{ event.ended_at.strftime('%H:%M')}}{% endif %}
-            {% endif %}
-            {% if event.tag %}<br><a href="{{ url_for('tag.entries', id=event.tag.id) }}"><span class="badge bg-secondary"><i class="bi bi-tag"></i> {{event.tag.name}}</span></a>{% endif %}
+                {{event.duration_string()}} from {{event.started_at.strftime('%H:%M')}} to {% if event.started_at.strftime('%x') != event.ended_at.strftime('%x') %}{{ event.ended_at.strftime('%d/%m/%Y %H:%M') }}{% else %}{{ event.ended_at.strftime('%H:%M')}}{% endif %}
+            {% endif %} 
         </p>
-        {% if event.comment %}<p class="card-text"><i class="bi bi-chat"></i> "{{event.comment}}"</p>{% endif %}
+        {% if event.tag %}<p class="card-text mb-2"><i class="bi bi-tag"></i> {{event.tag.name}}</p>{% endif %}
+        {% if event.location %}<p class="card-text mb-2"><i class="bi bi-building"></i> {{event.location.name}}</p>{% endif %}
+        {% if event.comment %}<p class="card-text mb-2"><i class="bi bi-chat-text"></i> "{{event.comment}}"</p>{% endif %}
         {% block actions %}{% endblock %}
     </div>
 </div>

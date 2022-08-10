@@ -1,0 +1,8 @@
+{% extends "location/_location_card.html" %}
+{% block actions %}
+{% if location.events | length > 0 %}
+<a href="{{ url_for('location.entries', id=location.id) }}" class="card-link"><i class="bi bi-search"></i> View entries</a>
+{% endif %}
+<a href="{{ url_for('location.update', id=location.id) }}" class="card-link"><i class="bi bi-pencil-square"></i> Edit</a>
+<a href="{{ url_for('location.delete', id=location.id) }}" class="card-link text-danger"><i class="bi bi-trash-fill"></i></i> Delete</a>
+{% endblock %}

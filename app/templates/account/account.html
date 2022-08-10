@@ -45,6 +45,9 @@
             <dt class="col-sm-3">Tags</dt>
             <dd class="col-sm-9">{{ current_user.tags | length }} of {{ current_user.tag_limit }} used</dd>
 
+            <dt class="col-sm-3">Locations</dt>
+            <dd class="col-sm-9">{{ current_user.locations | length }} of {{ current_user.location_limit }} used</dd>
+
             <dt class="col-sm-3">Member since</dt>
             <dd class="col-sm-9">{{ user.created_at.strftime('%A %d %B %Y %H:%M:%S %Z') }}</dd>
             

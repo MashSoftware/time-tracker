@@ -17,6 +17,11 @@ class EventForm(FlaskForm):
         validators=[InputRequired(message="Select a tag")],
         choices=[("None", "None")],
     )
+    location = RadioField(
+        "Location",
+        validators=[InputRequired(message="Select a location")],
+        choices=[("None", "None")],
+    )
     comment = TextAreaField(
         "Comment",
         validators=[

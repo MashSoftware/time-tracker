@@ -62,6 +62,7 @@ def create_app(config_class=Config):
     from app.account import bp as account_bp
     from app.auth import bp as auth_bp
     from app.entry import bp as entry_bp
+    from app.location import bp as location_bp
     from app.main import bp as main_bp
     from app.search import bp as search_bp
     from app.tag import bp as tag_bp
@@ -69,6 +70,7 @@ def create_app(config_class=Config):
     app.register_blueprint(account_bp, url_prefix="/account")
     app.register_blueprint(auth_bp)
     app.register_blueprint(entry_bp, url_prefix="/entries")
+    app.register_blueprint(location_bp, url_prefix="/locations")
     app.register_blueprint(main_bp)
     app.register_blueprint(search_bp, url_prefix="/search")
     app.register_blueprint(tag_bp, url_prefix="/tags")

@@ -3,7 +3,7 @@
     <div class="card-body">
         <h5 class="card-title"><i class="bi bi-tag"></i> {{ tag.name }}</h5>
         {% if tag.events %}<h6 class="card-subtitle mb-2 text-muted">{{tag.events | length}} time {% if tag.events | length > 1 %}entries{% else %}entry{% endif %} : {{ tag.total_string }} ({{ tag.total_decimal }})</h6>{% endif %}
-        <p class="card-text">
+        <p class="card-text mb-2">
             {% if tag.events %}
                 Last used: {{ tag.events[0].started_at.strftime('%A %d %B %Y') }}
             {% else %}

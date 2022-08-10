@@ -23,6 +23,7 @@ class User(UserMixin, db.Model):
     timezone = db.Column(db.String, nullable=False, server_default="UTC")
     entry_history = db.Column(db.Integer, nullable=False, server_default="12")
     tag_limit = db.Column(db.Integer, nullable=False, server_default="8")
+    location_limit = db.Column(db.Integer, nullable=False, server_default="3")
     activated_at = db.Column(db.DateTime(timezone=True), nullable=True)
     login_at = db.Column(db.DateTime(timezone=True), nullable=True)
     created_at = db.Column(db.DateTime(timezone=True), nullable=False)
@@ -35,10 +36,18 @@ class User(UserMixin, db.Model):
     friday = db.Column(db.Integer, nullable=False, server_default="0")
     saturday = db.Column(db.Integer, nullable=False, server_default="0")
     default_tag_id = db.Column(UUID, nullable=True)
+    default_location_id = db.Column(UUID, nullable=True)
 
     # Relationships
     events = db.relationship("Event", backref="user", lazy=True, passive_deletes=True)
     tags = db.relationship("Tag", backref="user", lazy=True, passive_deletes=True, order_by="asc(Tag.name)")
+    locations = db.relationship(
+        "Location",
+        backref="user",
+        lazy=True,
+        passive_deletes=True,
+        order_by="asc(Location.name)",
+    )
 
     # Methods
     def __init__(self, password, email_address, timezone):
@@ -98,6 +107,12 @@ class Event(db.Model):
         index=True,
     )
     tag_id = db.Column(UUID, db.ForeignKey("tag.id", ondelete="SET NULL"), nullable=True, index=True)
+    location_id = db.Column(
+        UUID,
+        db.ForeignKey("location.id", ondelete="SET NULL"),
+        nullable=True,
+        index=True,
+    )
     started_at = db.Column(db.DateTime(timezone=True), nullable=False, index=True)
     ended_at = db.Column(db.DateTime(timezone=True), nullable=True)
     comment = db.Column(db.String(64), nullable=True)
@@ -151,4 +166,34 @@ class Tag(db.Model):
         self.id = str(uuid.uuid4())
         self.user_id = str(uuid.UUID(user_id, version=4))
         self.name = name
+        self.created_at = pytz.utc.localize(datetime.utcnow())
+
+
+class Location(db.Model):
+    # Fields
+    id = db.Column(UUID, primary_key=True)
+    user_id = db.Column(
+        UUID,
+        db.ForeignKey("user_account.id", ondelete="CASCADE"),
+        nullable=False,
+        index=True,
+    )
+    name = db.Column(db.String(64), nullable=False)
+    created_at = db.Column(db.DateTime(timezone=True), nullable=False)
+    updated_at = db.Column(db.DateTime(timezone=True), nullable=True)
+
+    # Relationships
+    events = db.relationship(
+        "Event",
+        backref="location",
+        lazy=True,
+        passive_deletes=True,
+        order_by="desc(Event.started_at)",
+    )
+
+    # Methods
+    def __init__(self, user_id, name):
+        self.id = str(uuid.uuid4())
+        self.user_id = str(uuid.UUID(user_id, version=4))
+        self.name = name.strip()
         self.created_at = pytz.utc.localize(datetime.utcnow())
