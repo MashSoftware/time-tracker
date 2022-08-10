@@ -1,6 +1,6 @@
 <div class="card text-bg-white shadow mb-3">
     <div class="card-body">
-        <h5 class="card-title">Weekly summary</h5>
+        <h5 class="card-title"><i class="bi bi-calendar-week"></i> Weekly summary</h5>
         <hr>
         <h6 class="card-subtitle mb-2 text-muted">Time</h6>
         <p class="card-text mb-2">{{ events | length }} time {% if events | length == 1%}entry{% else %}entries{% endif %}{% if weekly_string and weekly_decimal %}: {{ weekly_string }} ({{weekly_decimal}}){% endif %}</p>
