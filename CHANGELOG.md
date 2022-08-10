@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased](https://github.com/MashSoftware/time-tracker/compare/main...develop)
 
+## [0.28.0](https://github.com/MashSoftware/time-tracker/compare/v0.27.0...v0.28.0) - 2022-08-xx
+
+### Added
+
+- Custom locations can be created and added to time entries, allowing tracking of working from multiple places.
+- New URL: [time-tracker.mashsoftware.com](https://time-tracker.mashsoftware.com)
+
+### Changed
+
+- Renamed application from "The Button" to "Mash Time Tracker", following a new naming convention for Mash Software projects.
+- Application now doesn't go to sleep after a period of inactivity.
+
+### Removed
+
+### Fixed
+
 ## [0.27.0](https://github.com/MashSoftware/time-tracker/compare/v0.26.0...v0.27.0) - 2022-08-04
 
 ### Added
