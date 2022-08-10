@@ -7,12 +7,12 @@
             {% if event.ended_at is none %}
                 Since {{event.started_at.strftime('%H:%M')}}
             {% else %}
-                {{event.duration_string()}} from {{event.started_at.strftime('%H:%M')}} to {% if event.started_at.strftime('%x') != event.ended_at.strftime('%x') %}{{ event.ended_at.strftime('%d/%m/%Y %H:%M') }}{% else %}{{ event.ended_at.strftime('%H:%M')}}{% endif %}
+                {{event.duration_string()}} from {{event.started_at.strftime('%H:%M')}} to {% if event.started_at.strftime('%x') != event.ended_at.strftime('%x') %}{{ event.ended_at.strftime('%d/%m/%Y') }} at {{ event.ended_at.strftime('%H:%M') }}{% else %}{{ event.ended_at.strftime('%H:%M')}}{% endif %}
             {% endif %} 
         </p>
         {% if event.tag %}<p class="card-text mb-2"><i class="bi bi-tag"></i> {{event.tag.name}}</p>{% endif %}
         {% if event.location %}<p class="card-text mb-2"><i class="bi bi-building"></i> {{event.location.name}}</p>{% endif %}
         {% if event.comment %}<p class="card-text mb-2"><i class="bi bi-chat-text"></i> "{{event.comment}}"</p>{% endif %}
-        {% block actions %}{% endblock %}
     </div>
+    {% block actions %}{% endblock %}
 </div>
