@@ -1,8 +1,10 @@
 {% extends "tag/_tag_card.html" %}
 {% block actions %}
-{% if tag.events | length > 0 %}
-<a href="{{ url_for('tag.entries', id=tag.id) }}" class="card-link"><i class="bi bi-search"></i> View entries</a>
-{% endif %}
-<a href="{{ url_for('tag.update', id=tag.id) }}" class="card-link"><i class="bi bi-pencil-square"></i> Edit</a>
-<a href="{{ url_for('tag.delete', id=tag.id) }}" class="card-link text-danger"><i class="bi bi-trash-fill"></i></i> Delete</a>
+<div class="card-footer">
+    {% if tag.events | length > 0 %}
+    <a href="{{ url_for('tag.entries', id=tag.id) }}" class="card-link"><i class="bi bi-search"></i> View entries</a>
+    {% endif %}
+    <a href="{{ url_for('tag.update', id=tag.id) }}" class="card-link"><i class="bi bi-pencil-square"></i> Edit</a>
+    <a href="{{ url_for('tag.delete', id=tag.id) }}" class="card-link text-danger"><i class="bi bi-trash-fill"></i></i> Delete</a>
+</div>
 {% endblock %}
