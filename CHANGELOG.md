@@ -12,16 +12,23 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 
 - Custom locations can be created and added to time entries, allowing tracking of working from multiple places.
-- New URL: [time-tracker.mashsoftware.com](https://time-tracker.mashsoftware.com)
+- New URL: [time-tracker.mashsoftware.com](https://time-tracker.mashsoftware.com).
+- Aria labels on icons where needed, i.e. where used decoratively without additional text.
+- More meta keywords for better search engine indexing.
 
 ### Changed
 
 - Renamed application from "The Button" to "Mash Time Tracker", following a new naming convention for Mash Software projects.
+- Redesigned home page highlighting main features of the app and secondary technical features.
 - Application now doesn't go to sleep after a period of inactivity.
+- Actions on cards (entries, tags and locations) now appear in a card footer.
+- Increased gap between block level buttons in mobile widths for easier tap targets.
 
 ### Removed
 
 ### Fixed
+
+- Time entries recorded on Sundays were saved and accounted for in totals, but not displayed in the weekly view. Thanks [@ahosgood](https://github.com/ahosgood).
 
 ## [0.27.0](https://github.com/MashSoftware/time-tracker/compare/v0.26.0...v0.27.0) - 2022-08-04
 
