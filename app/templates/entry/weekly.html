@@ -21,7 +21,7 @@
                 {% if current_user.tags %}
                 <li><hr class="dropdown-divider"></li>
                     {% for tag in current_user.tags %}
-                    <li><a class="dropdown-item" href="{{ url_for('entry.auto', tag_id=tag.id) }}"><i class="bi bi-tag"></i> Start {{tag.name}} now</a></li>
+                    <li><a class="dropdown-item" href="{{ url_for('entry.auto', tag_id=tag.id) }}"><i class="bi bi-tag" aria-label="Tag"></i> Start {{tag.name}} now</a></li>
                     {% endfor %}
                 {% endif %}
             </ul>

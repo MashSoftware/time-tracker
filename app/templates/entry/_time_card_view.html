@@ -1,18 +1,18 @@
 <div class="card text-bg-white shadow mb-3 {% if event.ended_at is none %}border-info{% endif %}" id="{{event.id}}">
     {% if event.ended_at is none %}<div class="card-header text-bg-info"><div class="spinner-border spinner-border-sm" role="status"><span class="visually-hidden">In progress</span></div> Started {{ event.duration_string(now) }} ({{ event.duration_decimal(now) }}) ago</div>{% endif %}
     <div class="card-body">
-        <h5 class="card-title"><i class="bi bi-calendar-event"></i> {{event.started_at.strftime('%A %d %B')}}</h5>
+        <h5 class="card-title"><i class="bi bi-calendar-event" aria-label="Date"></i> {{event.started_at.strftime('%A %d %B')}}</h5>
         <p class="card-text mb-2">
-            <i class="bi bi-clock-history"></i>
+            <i class="bi bi-clock-history" aria-label="Time"></i>
             {% if event.ended_at is none %}
                 Since {{event.started_at.strftime('%H:%M')}}
             {% else %}
                 {{event.duration_string()}} from {{event.started_at.strftime('%H:%M')}} to {% if event.started_at.strftime('%x') != event.ended_at.strftime('%x') %}{{ event.ended_at.strftime('%d/%m/%Y') }} at {{ event.ended_at.strftime('%H:%M') }}{% else %}{{ event.ended_at.strftime('%H:%M')}}{% endif %}
             {% endif %} 
         </p>
-        {% if event.tag %}<p class="card-text mb-2"><i class="bi bi-tag"></i> {{event.tag.name}}</p>{% endif %}
-        {% if event.location %}<p class="card-text mb-2"><i class="bi bi-building"></i> {{event.location.name}}</p>{% endif %}
-        {% if event.comment %}<p class="card-text mb-2"><i class="bi bi-chat-text"></i> "{{event.comment}}"</p>{% endif %}
+        {% if event.tag %}<p class="card-text mb-2"><i class="bi bi-tag" aria-label="Tag"></i> {{event.tag.name}}</p>{% endif %}
+        {% if event.location %}<p class="card-text mb-2"><i class="bi bi-building" aria-label="Location"></i> {{event.location.name}}</p>{% endif %}
+        {% if event.comment %}<p class="card-text mb-2"><i class="bi bi-chat-text" aria-label="Comment"></i> "{{event.comment}}"</p>{% endif %}
     </div>
     {% block actions %}{% endblock %}
 </div>
