@@ -37,7 +37,7 @@ def weekly():
     year = request.args.get("year", default=str(today[0]), type=str)
     week = request.args.get("week", default=str(today[1]), type=str)
     first_day = datetime.strptime(year + week + "1", "%G%V%u")
-    last_day = datetime.strptime(year + week + "7", "%G%V%u")
+    last_day = datetime.strptime(year + week + "7", "%G%V%u") + timedelta(hours=23, minutes=59, seconds=59)
     next_week = (first_day + timedelta(weeks=1)).isocalendar()
     previous_week = (first_day - timedelta(weeks=1)).isocalendar()
 
