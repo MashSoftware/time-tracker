@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased](https://github.com/MashSoftware/time-tracker/compare/main...develop)
 
-## [0.28.0](https://github.com/MashSoftware/time-tracker/compare/v0.27.0...v0.28.0) - 2022-08-xx
+## [0.28.0](https://github.com/MashSoftware/time-tracker/compare/v0.27.0...v0.28.0) - 2022-08-12
 
 ### Added
 
@@ -23,8 +23,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Application now doesn't go to sleep after a period of inactivity.
 - Actions on cards (entries, tags and locations) now appear in a card footer.
 - Increased gap between block level buttons in mobile widths for easier tap targets.
-
-### Removed
 
 ### Fixed
 
