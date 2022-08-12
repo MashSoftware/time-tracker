@@ -1,14 +1,11 @@
 {% extends "base.html" %}
-{% block header %}
-<div class="container">
-    {{ super() }}
-    <h1>{{ title }}</h1>
-    <p class="lead mb-0">Enter the duration in hours and minutes that you are scheduled to work on each day</p>
-</div>
-{% endblock %}
 {% block content %}
 <div class="row">
     <div class="col-md-6">
+        {{ super() }}
+        <h1 class="text-truncate">{{ title }}</h1>
+        <p class="lead mb-0">Enter the duration in hours and minutes that you are scheduled to work on each day</p>
+        <hr>
         <form action="" method="post" novalidate>
             {{ form.csrf_token }}
             <div class="mb-3">

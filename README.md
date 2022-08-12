@@ -1,8 +1,8 @@
-# The Button
+# Mash Time Tracker
 
 A simple time tracking service.
 
-[![Requirements Status](https://requires.io/github/MashSoftware/the-button/requirements.svg?branch=main)](https://requires.io/github/MashSoftware/the-button/requirements/?branch=main)
+[![Requirements Status](https://requires.io/github/MashSoftware/time-tracker/requirements.svg?branch=main)](https://requires.io/github/MashSoftware/time-tracker/requirements/?branch=main)
 
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/N4N33KKEF)
 
@@ -24,9 +24,9 @@ A simple time tracking service.
 ```shell
 sudo service postgresql start
 sudo su - postgres -c "create user mash with password mash"
-sudo su - postgres -c "createdb button"
+sudo su - postgres -c "createdb time_tracker"
 sudo -u postgres psql
-grant all privileges on database button to mash;
+grant all privileges on database time_tracker to mash;
 ```
 
 ### Create venv and install requirements
@@ -59,7 +59,7 @@ python -m pytest --cov=app --cov-report=term-missing --cov-branch
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/MashSoftware/the-button/tags).
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/MashSoftware/time-tracker/tags).
 
 ## How to contribute
 

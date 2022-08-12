@@ -4,13 +4,13 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="The Button - Simple, quick and easy time tracking.">
-    <meta name="keywords" content="time, timing, timer, track, tracking, tracker, clocking, clock, clock-in, clock-out, log, logging, logger, record, recording, simple, easy, quick">
+    <meta name="description" content="Mash Time Tracker - Simple, quick and easy time tracking.">
+    <meta name="keywords" content="clock, clocking, clock-in, clock-out, easy, free, hour, hours, log, logger, logging, project, project management, projects, quick, record, recording, simple, tag, tagging, tags, task, tasks, time, time card, time sheet, timecard, timer, timesheet, timing, track, tracker, tracking, week, weekly">
     <meta name="author" content="Matthew Shaw">
     <link rel="canonical" href="{{ request.url }}">
 
     <!-- Open Graph Metadata -->
-    <meta property="og:site_name" content="The Button"/>
+    <meta property="og:site_name" content="Mash Time Tracker"/>
     <meta property="og:title" content="{{title}}"/>
     <meta property="og:description" content="Simple, quick and easy time tracking"/>
     <meta property="og:type" content="website"/>
@@ -28,15 +28,15 @@
     <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='favicon-16x16.png') }}">
     <link rel="manifest" href="{{ url_for('static', filename='site.webmanifest') }}">
     <link rel="mask-icon" href="{{ url_for('static', filename='safari-pinned-tab.svg') }}" color="#2196f3">
-    <meta name="apple-mobile-web-app-title" content="The Button">
-    <meta name="application-name" content="The Button">
+    <meta name="apple-mobile-web-app-title" content="Mash Time Tracker">
+    <meta name="application-name" content="Mash Time Tracker">
     <meta name="msapplication-TileColor" content="#2196f3">
     <meta name="msapplication-config" content="{{ url_for('static', filename='browserconfig.xml') }}">
     <meta name="theme-color" content="#212529">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-    <title>The Button{% if title %} | {{ title }}{% endif %}</title>
+    <title>Mash Time Tracker{% if title %} | {{ title }}{% endif %}</title>
 </head>
 
 <body class="bg-light">
@@ -45,7 +45,7 @@
     {% endif %}
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
         <div class="container">
-            <a class="navbar-brand" href="{{ url_for('main.index') }}">The Button <span class="badge bg-info text-dark">BETA</span></a>
+            <a class="navbar-brand" href="{{ url_for('main.index') }}">Mash Time Tracker <span class="badge bg-secondary">BETA</span></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -54,10 +54,13 @@
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     {% if current_user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link {% if url_for('entry.weekly') == request.path %}active{% endif %}" aria-current="page" href="{{ url_for('entry.weekly') }}"><i class="bi bi-clock-fill"></i> Time</a>
+                        <a class="nav-link {% if url_for('entry.weekly') == request.path %}active{% endif %}" aria-current="page" href="{{ url_for('entry.weekly') }}"><i class="bi bi-clock-history"></i> Time</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {% if url_for('tag.tags') == request.path %}active{% endif %}" href="{{ url_for('tag.tags') }}"><i class="bi bi-tags-fill"></i> Tags</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if url_for('location.locations') == request.path %}active{% endif %}" href="{{ url_for('location.locations') }}"><i class="bi bi-building"></i> Locations</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {% if url_for('search.search') == request.path %}active{% endif %}" href="{{ url_for('search.search') }}"><i class="bi bi-search"></i> Search</a>
@@ -74,7 +77,7 @@
                     </li>
                     {% else %}
                     <li class="nav-item">
-                        <a class="nav-link {% if url_for('account.account') == request.path %}active{% endif %}" href="{{ url_for('account.account') }}"><i class="bi bi-person"></i> Account</a>
+                        <a class="nav-link {% if url_for('account.account') == request.path %}active{% endif %}" href="{{ url_for('account.account') }}"><i class="bi bi-person-fill"></i> Account</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {% if url_for('auth.logout') == request.path %}active{% endif %}" href="{{ url_for('auth.logout') }}"><i class="bi bi-box-arrow-right"></i> Log out</a>
@@ -87,8 +90,15 @@
             </div>
         </div>
     </nav>
-    <div class="bg-white border-bottom py-3 mb-3">
-        <div class="container">
+    {% block hero %}{% endblock %}
+    <main class="container py-3 mb-3">
+        {% block content %}
+            {% if "time-tracker.mashsoftware.com" not in request.host %}
+            <div class="alert alert-info" role="alert">
+                <h4 class="alert-heading">The Button is now Mash Time Tracker!</h4>
+                <p>We've got a new name and a new address at <a href="https://time-tracker.mashsoftware.com" class="alert-link" target="blank" rel="noopener">time-tracker.mashsoftware.com</a>. Your account and all data is still available on the new address. Please update your bookmarks.</p>
+            </div>
+            {% endif %}
             {% with messages = get_flashed_messages(with_categories=true) %}
                 {% if messages %}
                     {% for category, message in messages %}
@@ -116,25 +126,21 @@
                     {% endfor %}
                 </div>
             {% endif %}
-        </div>
-        {% block header %}{% endblock %}
-    </div>
-    <div class="container">
-        {% block content %}{% endblock %}
-    </div>
+        {% endblock %}
+    </main>
+    <hr>
     <footer class="container">
-        <hr>
         <div class="row">
-            <div class="col-md-6">
-                <p class="mb-0">Version <a href="https://github.com/MashSoftware/the-button/releases" target="blank" rel="noopener">{{ config['VERSION_NUMBER'] }}</a></p>
+            <div class="col-sm-6">
+                <p class="mb-0">Version <a href="https://github.com/MashSoftware/mash-time-tracker/releases" target="blank" rel="noopener">{{ config['VERSION_NUMBER'] }}</a></p>
                 <p class="mb-0"><i class="bi bi-c-circle"></i> <a href="https://www.mashsoftware.com/" target="blank" rel="noopener">Mash Software</a> 2019 - 2022</p>
                 <p class="mb-0"><i class="bi bi-cup-hot-fill"></i> <a href="https://ko-fi.com/mashsoftware">Buy me a coffee</a></p>
                 <p class="mb-0"><a href="{{ url_for('main.cookies') }}">Cookies</a></p>
             </div>
-            <div class="col-md-6">
+            <div class="col-sm-6">
                 <p class="mb-0"><i class="bi bi-facebook"></i> <a href="https://www.facebook.com/MashSW/" target="blank" rel="noopener">Facebook</a></p>
                 <p class="mb-0"><i class="bi bi-twitter"></i> <a href="https://twitter.com/mashsoftware" target="blank" rel="noopener">Twitter</a></p>
-                <p class="mb-0"><i class="bi bi-github"></i> <a href="https://github.com/MashSoftware/the-button" target="blank" rel="noopener">GitHub</a></p>
+                <p class="mb-0"><i class="bi bi-github"></i> <a href="https://github.com/MashSoftware/time-tracker" target="blank" rel="noopener">GitHub</a></p>
                 <p class="mb-0"><i class="bi bi-envelope-fill"></i> <a href="mailto:hello@mashsoftware.com" target="blank" rel="noopener">Email</a></p>
             </div>
         </div>

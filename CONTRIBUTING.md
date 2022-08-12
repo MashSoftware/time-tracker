@@ -8,9 +8,9 @@ There are two main types of contribution that we welcome; issues and pull reques
 
 If you want to raise a bug report to help us improve, or a feature request to suggest an idea for the project, then follow these guidelines:
 
-1. Check the [current issues](https://github.com/MashSoftware/the-button/issues) first to see if anyone else has already found the same issue/bug or suggested the same feature/enhancement. If they have, please add a comment to the existing issue to help us understand the scale, impact or demand for that change.
+1. Check the [current issues](https://github.com/MashSoftware/time-tracker/issues) first to see if anyone else has already found the same issue/bug or suggested the same feature/enhancement. If they have, please add a comment to the existing issue to help us understand the scale, impact or demand for that change.
 
-2. If your contribution is not already covered in an existing issue, please [create a new bug report or feature request](https://github.com/MashSoftware/the-button/issues/new/choose) using the appropriate issue templates. Please fill out as much of the template as possible to help us understand the details.
+2. If your contribution is not already covered in an existing issue, please [create a new bug report or feature request](https://github.com/MashSoftware/time-tracker/issues/new/choose) using the appropriate issue templates. Please fill out as much of the template as possible to help us understand the details.
 
 3. Your new issue will be reviewed by one of the project maintainers, who may ask for more detail, suggest another course of action, or prioritise and allocate it to a future milestone.
 
@@ -18,7 +18,7 @@ If you want to raise a bug report to help us improve, or a feature request to su
 
 If you want to contribute code directly to the project in order to fix a bug or add a feature, then follow these guidelines:
 
-1. Check the [current issues](https://github.com/MashSoftware/the-button/issues) and [pull requests](https://github.com/MashSoftware/the-button/pulls) first to see if anyone else is already working on the same bug or feature. If they are, consider contributing to that existing issue or pull request first, rather than duplicating effort.
+1. Check the [current issues](https://github.com/MashSoftware/time-tracker/issues) and [pull requests](https://github.com/MashSoftware/time-tracker/pulls) first to see if anyone else is already working on the same bug or feature. If they are, consider contributing to that existing issue or pull request first, rather than duplicating effort.
 
 2. If your proposed contribution is a new one, please [create a fork](https://guides.github.com/activities/forking/) of the repositiory.
 

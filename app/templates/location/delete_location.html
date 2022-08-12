@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+    <div class="col-md-6">
+        {{ super() }}
+        <h1 class="text-truncate">{{ title }}</h1>
+        <hr>
+        <h3>Are you sure?</h3>
+        <p class="lead">This location will be permanently deleted{% if location.events %} and removed from <a href="{{ url_for('location.entries', id=location.id) }}">{{ location.events | length }} time entries</a>{% endif %}.</p>
+        {% include 'location/_location_card.html' %}
+        <form action="" method="post" novalidate>
+            <div class="d-grid gap-3 d-sm-block">
+                <button class="btn btn-danger" type="submit"><i class="bi bi-trash-fill"></i> Yes - delete location</button>
+                <a class="btn btn-secondary" href="{{ url_for('location.locations') }}"><i class="bi bi-chevron-left"></i> Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

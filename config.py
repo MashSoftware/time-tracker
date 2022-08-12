@@ -20,7 +20,7 @@ class Config(object):
     SQLALCHEMY_DATABASE_URI = (
         os.environ.get("DATABASE_URL").replace("postgres://", "postgresql://")
         if os.environ.get("DATABASE_URL")
-        else "postgresql://mash:mash@localhost:5432/button"
+        else "postgresql://mash:mash@localhost:5432/time_tracker"
     )
     SQLALCHEMY_ENGINE_OPTIONS = {"pool_size": 20}
     SQLALCHEMY_TRACK_MODIFICATIONS = False

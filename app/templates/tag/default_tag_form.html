@@ -1,14 +1,11 @@
 {% extends "base.html" %}
-{% block header %}
-<div class="container">
-    {{ super() }}
-    <h1>{{ title }}</h1>
-    <p class="lead mb-0">Select the tag to be used on all new time entries.</p>
-</div>
-{% endblock %}
 {% block content %}
 <div class="row">
     <div class="col-md-6">
+        {{ super() }}
+        <h1 class="text-truncate">{{ title }}</h1>
+        <p class="lead mb-0">Select the tag to be used on all new time entries.</p>
+        <hr>
         <form action="" method="post" novalidate>
             {{ form.csrf_token }}
             <div class="mb-3">
@@ -18,7 +15,7 @@
                         {% for subfield in form.tag %}
                         <div class="form-check">
                             {{ subfield(class="form-check-input is-invalid", aria_describedby="tagError", type="radio") }}
-                            <span class="badge bg-secondary"><i class="bi bi-tag"></i> {{ subfield.label(class="form-check-label") }}</span>
+                            {{ subfield.label(class="form-check-label") }}
                         </div>
                         {% endfor %}
                         {% for error in form.tag.errors %}<div class="invalid-feedback" id="tagError">{{error}}</div>{% endfor %}
@@ -26,7 +23,7 @@
                         {% for subfield in form.tag %}
                         <div class="form-check">
                             {{ subfield(class="form-check-input is-valid", type="radio") }}
-                            <span class="badge bg-secondary"><i class="bi bi-tag"></i> {{ subfield.label(class="form-check-label") }}</span>
+                            {{ subfield.label(class="form-check-label") }}
                         </div>
                         {% endfor %}
                     {% endif %}
@@ -34,7 +31,7 @@
                     {% for subfield in form.tag %}
                     <div class="form-check">
                         {{ subfield(class="form-check-input", type="radio") }}
-                        <span class="badge bg-secondary"><i class="bi bi-tag"></i> {{ subfield.label(class="form-check-label") }}</span>
+                        {{ subfield.label(class="form-check-label") }}
                     </div>
                     {% endfor %}
                 {% endif %}

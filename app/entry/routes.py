@@ -37,7 +37,7 @@ def weekly():
     year = request.args.get("year", default=str(today[0]), type=str)
     week = request.args.get("week", default=str(today[1]), type=str)
     first_day = datetime.strptime(year + week + "1", "%G%V%u")
-    last_day = datetime.strptime(year + week + "7", "%G%V%u")
+    last_day = datetime.strptime(year + week + "7", "%G%V%u") + timedelta(hours=23, minutes=59, seconds=59)
     next_week = (first_day + timedelta(weeks=1)).isocalendar()
     previous_week = (first_day - timedelta(weeks=1)).isocalendar()
 
@@ -97,6 +97,18 @@ def weekly():
             tag_total["total"] = seconds_to_string(tag_total["total"])
             tag_totals.append(tag_total)
 
+    location_totals = []
+    for location in current_user.locations:
+        location_total = {"total": 0}
+        for event in events:
+            if location.id == event.location_id:
+                location_total["name"] = location.name
+                location_total["total"] += event.duration(end=now)
+        if location_total["total"] > 0:
+            location_total["decimal"] = seconds_to_decimal(location_total["total"])
+            location_total["total"] = seconds_to_string(location_total["total"])
+            location_totals.append(location_total)
+
     return render_template(
         "weekly.html",
         now=now,
@@ -111,6 +123,7 @@ def weekly():
         weekly_delta_decimal=weekly_delta_decimal,
         progress=progress,
         tag_totals=tag_totals,
+        location_totals=location_totals,
         title=title,
     )
 
@@ -126,7 +139,15 @@ def auto():
         current_app.logger.info("User {} stopped entry {}".format(current_user.id, event.id))
     else:
         event = Event(user_id=current_user.id, started_at=pytz.utc.localize(datetime.utcnow()))
-        event.tag_id = request.args.get("tag_id", None, type=str)
+
+        if request.args.get("tag_id", None, type=str):
+            event.tag_id = request.args.get("tag_id", None, type=str)
+        else:
+            event.tag_id = current_user.default_tag_id
+
+        if current_user.default_location_id:
+            event.location_id = current_user.default_location_id
+
         db.session.add(event)
         current_app.logger.info("User {} started entry {} with tag {}".format(current_user.id, event.id, event.tag_id))
     db.session.commit()
@@ -139,6 +160,7 @@ def auto():
 def manual():
     form = EventForm()
     form.tag.choices += [(tag.id, tag.name) for tag in current_user.tags]
+    form.location.choices += [(location.id, location.name) for location in current_user.locations]
     if form.validate_on_submit():
         started_at = datetime(
             form.started_at_date.data.year,
@@ -167,13 +189,19 @@ def manual():
             event.ended_at = None
         if form.tag.data != "None":
             event.tag_id = form.tag.data
+        if form.location.data != "None":
+            event.location_id = form.location.data
         if len(form.comment.data.strip()) == 0:
             event.comment = None
         else:
             event.comment = form.comment.data.strip()
         db.session.add(event)
         db.session.commit()
-        current_app.logger.info("User {} created entry {} with tag {}".format(current_user.id, event.id, event.tag_id))
+        current_app.logger.info(
+            "User {} created entry {} with tag {} in location {}".format(
+                current_user.id, event.id, event.tag_id, event.location_id
+            )
+        )
         flash("Time entry has been added.", "success")
         return redirect(url_for("entry.weekly"))
     elif request.method == "GET":
@@ -181,6 +209,11 @@ def manual():
             form.tag.data = "None"
         else:
             form.tag.data = current_user.default_tag_id
+
+        if current_user.default_location_id is None:
+            form.location.data = "None"
+        else:
+            form.location.data = current_user.default_location_id
     return render_template("create_entry_form.html", title="Create time entry", form=form)
 
 
@@ -193,6 +226,7 @@ def update(id):
         raise Forbidden()
     form = EventForm()
     form.tag.choices += [(tag.id, tag.name) for tag in current_user.tags]
+    form.location.choices += [(location.id, location.name) for location in current_user.locations]
     if form.validate_on_submit():
         started_at = datetime(
             form.started_at_date.data.year,
@@ -219,10 +253,17 @@ def update(id):
             event.ended_at = utc_ended_at
         else:
             event.ended_at = None
+
         if form.tag.data != "None":
             event.tag_id = form.tag.data
         else:
             event.tag_id = None
+
+        if form.location.data != "None":
+            event.location_id = form.location.data
+        else:
+            event.location_id = None
+
         if len(form.comment.data.strip()) == 0:
             event.comment = None
         else:
@@ -239,10 +280,17 @@ def update(id):
         if event.ended_at:
             form.ended_at_date.data = event.ended_at.astimezone(pytz.timezone(current_user.timezone))
             form.ended_at_time.data = event.ended_at.astimezone(pytz.timezone(current_user.timezone))
+
         if event.tag_id is None:
             form.tag.data = "None"
         else:
             form.tag.data = event.tag_id
+
+        if event.location_id is None:
+            form.location.data = "None"
+        else:
+            form.location.data = event.location_id
+
         form.comment.data = event.comment
     return render_template("update_entry_form.html", title="Edit time entry", form=form, event=event)
 
@@ -261,7 +309,11 @@ def delete(id):
     if request.method == "GET":
         return render_template("delete_entry.html", title="Delete time entry", event=event, now=now)
     elif request.method == "POST":
-        current_app.logger.info("User {} deleted entry {} with tag {}".format(current_user.id, event.id, event.tag_id))
+        current_app.logger.info(
+            "User {} deleted entry {} with tag {} in location {}".format(
+                current_user.id, event.id, event.tag_id, event.location_id
+            )
+        )
         db.session.delete(event)
         db.session.commit()
         flash("Time entry has been deleted.", "success")

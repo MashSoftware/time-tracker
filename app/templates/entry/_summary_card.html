@@ -1,9 +1,9 @@
-<div class="card bg-white shadow mb-3">
+<div class="card text-bg-white shadow mb-3">
     <div class="card-body">
-        <h5 class="card-title">Weekly summary</h5>
+        <h5 class="card-title"><i class="bi bi-calendar-week"></i> Weekly summary</h5>
         <hr>
         <h6 class="card-subtitle mb-2 text-muted">Time</h6>
-        <p class="card-text">{{ events | length }} time {% if events | length == 1%}entry{% else %}entries{% endif %}{% if weekly_string and weekly_decimal %} : {{ weekly_string }} ({{weekly_decimal}}){% endif %}</p>
+        <p class="card-text mb-2">{{ events | length }} time {% if events | length == 1%}entry{% else %}entries{% endif %}{% if weekly_string and weekly_decimal %}: {{ weekly_string }} ({{weekly_decimal}}){% endif %}</p>
         {% if current_user.schedule() > 0 %}
             <style nonce="{{csp_nonce()}}">
                 .progress-bar {
@@ -30,7 +30,14 @@
             <hr>
             <h6 class="card-subtitle mb-2 text-muted">Tags</h6>
             {% for tag in tag_totals %}
-                <p class="card-text"><span class="badge bg-secondary"><i class="bi bi-tag"></i> {{tag.name}}</span> : {{tag.total}} ({{tag.decimal}})</p>
+                <p class="card-text mb-2"><i class="bi bi-tag" aria-label="Tag"></i> {{tag.name}}: {{tag.total}} ({{tag.decimal}})</p>
+            {% endfor %}
+        {% endif %}
+        {% if location_totals %}
+            <hr>
+            <h6 class="card-subtitle mb-2 text-muted">Locations</h6>
+            {% for location in location_totals %}
+                <p class="card-text mb-2"><i class="bi bi-building" aria-label="Location"></i> {{location.name}}: {{location.total}} ({{location.decimal}})</p>
             {% endfor %}
         {% endif %}
     </div>

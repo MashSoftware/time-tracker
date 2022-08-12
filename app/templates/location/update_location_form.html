@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+    <div class="col-md-6">
+        {{ super() }}
+        <h1 class="text-truncate">{{ title }}</h1>
+        <p class="lead mb-0">A location can be anywhere you regularly work, such as at home, at the office or a co-working space.</p>
+        <hr>
+        <form action="" method="post" novalidate>
+            {{ form.csrf_token }}
+            <div class="mb-3">
+                {{ form.name.label(class="form-label") }}
+                {% if form.errors %}
+                    {% if form.name.errors %}
+                        {{ form.name(class="form-control is-invalid", aria_describedby="nameError", type="text", spellcheck="true", aria_describedby="nameHelp") }}
+                        {% for error in form.name.errors %}<div class="invalid-feedback" id="nameError">{{error}}</div>{% endfor %}
+                    {% else %}
+                        {{ form.name(class="form-control is-valid", type="text", spellcheck="true", aria_describedby="nameHelp") }}
+                        <div class="valid-feedback">Looks good!</div>
+                    {% endif %}
+                {% else %}
+                    {{ form.name(class="form-control", type="text", spellcheck="true", aria_describedby="nameHelp") }}
+                {% endif %}
+                <div id="nameHelp" class="form-text">{{ form.name.description }}</div>
+            </div>
+            <div class="d-grid gap-3 d-sm-block">
+                <button class="btn btn-primary" type="submit"><i class="bi bi-save"></i> Save</button>
+                <a class="btn btn-secondary" href="{{ url_for('location.locations') }}"><i class="bi bi-chevron-left"></i> Cancel</a>
+                <a class="btn btn-danger" href="{{ url_for('location.delete', id=location.id) }}"><i class="bi bi-trash-fill"></i> Delete</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

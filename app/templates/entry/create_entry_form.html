@@ -1,18 +1,15 @@
 {% extends "base.html" %}
-{% block header %}
-<div class="container">
-    {{ super() }}
-    <h1 class="mb-0">{{ title }}</h1>
-</div>
-{% endblock %}
 {% block content %}
 <div class="row">
     <div class="col-md-6">
+        {{ super() }}
+        <h1 class="text-truncate">{{ title }}</h1>
+        <hr>
         <form action="" method="post" novalidate>
             {{ form.csrf_token }}
             <div class="row">
                 <div class="mb-3 col-sm">
-                    {{ form.started_at_date.label(class="form-label") }}
+                    <i class="bi bi-calendar-event"></i> {{ form.started_at_date.label(class="form-label") }}
                     {% if form.errors %}
                         {% if form.started_at_date.errors %}
                             {{ form.started_at_date(class="form-control is-invalid", aria_describedby="startedAtDateError", type="date") }}
@@ -26,7 +23,7 @@
                     {% endif %}
                 </div>
                 <div class="mb-3 col-sm">
-                    {{ form.started_at_time.label(class="form-label") }}
+                    <i class="bi bi-clock"></i> {{ form.started_at_time.label(class="form-label") }}
                     {% if form.errors %}
                         {% if form.started_at_time.errors %}
                             {{ form.started_at_time(class="form-control is-invalid", aria_describedby="startedAtTimeError", type="time") }}
@@ -42,7 +39,7 @@
             </div>
             <div class="row">
                 <div class="mb-3 col-sm">
-                    {{ form.ended_at_date.label(class="form-label") }} <em>(optional)</em>
+                    <i class="bi bi-calendar-event"></i> {{ form.ended_at_date.label(class="form-label") }} <em>(optional)</em>
                     {% if form.errors %}
                         {% if form.ended_at_date.errors %}
                             {{ form.ended_at_date(class="form-control is-invalid", aria_describedby="endedAtDateError", type="date") }}
@@ -56,7 +53,7 @@
                     {% endif %}
                 </div>
                 <div class="mb-3 col-sm">
-                    {{ form.ended_at_time.label(class="form-label") }} <em>(optional)</em>
+                    <i class="bi bi-clock"></i> {{ form.ended_at_time.label(class="form-label") }} <em>(optional)</em>
                     {% if form.errors %}
                         {% if form.ended_at_time.errors %}
                             {{ form.ended_at_time(class="form-control is-invalid", aria_describedby="endedAtTimeError", type="time") }}
@@ -71,13 +68,13 @@
                 </div>
             </div>
             <div class="mb-3">
-                {{ form.tag.label(class="form-label") }}
+                <i class="bi bi-tag"></i> {{ form.tag.label(class="form-label") }}
                 {% if form.errors %}
                     {% if form.tag.errors %}
                         {% for subfield in form.tag %}
                         <div class="form-check">
                             {{ subfield(class="form-check-input is-invalid", aria_describedby="tagError", type="radio") }}
-                            <span class="badge bg-secondary"><i class="bi bi-tag"></i> {{ subfield.label(class="form-check-label") }}</span> {% if subfield.data == current_user.default_tag_id %}<em>(default)</em>{% endif %}
+                            {{ subfield.label(class="form-check-label") }} {% if subfield.data == current_user.default_tag_id %}<em>(default)</em>{% endif %}
                         </div>
                         {% endfor %}
                         {% for error in form.tag.errors %}<div class="invalid-feedback" id="tagError">{{error}}</div>{% endfor %}
@@ -85,7 +82,7 @@
                         {% for subfield in form.tag %}
                         <div class="form-check">
                             {{ subfield(class="form-check-input is-valid", type="radio") }}
-                            <span class="badge bg-secondary"><i class="bi bi-tag"></i> {{ subfield.label(class="form-check-label") }}</span> {% if subfield.data == current_user.default_tag_id %}<em>(default)</em>{% endif %}
+                            {{ subfield.label(class="form-check-label") }} {% if subfield.data == current_user.default_tag_id %}<em>(default)</em>{% endif %}
                         </div>
                         {% endfor %}
                     {% endif %}
@@ -93,13 +90,41 @@
                     {% for subfield in form.tag %}
                     <div class="form-check">
                         {{ subfield(class="form-check-input", type="radio") }}
-                        <span class="badge bg-secondary"><i class="bi bi-tag"></i> {{ subfield.label(class="form-check-label") }}</span> {% if subfield.data == current_user.default_tag_id %}<em>(default)</em>{% endif %}
+                        {{ subfield.label(class="form-check-label") }} {% if subfield.data == current_user.default_tag_id %}<em>(default)</em>{% endif %}
                     </div>
                     {% endfor %}
                 {% endif %}
             </div>
             <div class="mb-3">
-                {{ form.comment.label(class="form-label") }} <em>(optional)</em>
+                <i class="bi bi-building"></i> {{ form.location.label(class="form-label") }}
+                {% if form.errors %}
+                    {% if form.location.errors %}
+                        {% for subfield in form.location %}
+                        <div class="form-check">
+                            {{ subfield(class="form-check-input is-invalid", aria_describedby="locationError", type="radio") }}
+                            {{ subfield.label(class="form-check-label") }} {% if subfield.data == current_user.default_location_id %}<em>(default)</em>{% endif %}
+                        </div>
+                        {% endfor %}
+                        {% for error in form.location.errors %}<div class="invalid-feedback" id="locationError">{{error}}</div>{% endfor %}
+                    {% else %}
+                        {% for subfield in form.location %}
+                        <div class="form-check">
+                            {{ subfield(class="form-check-input is-valid", type="radio") }}
+                            {{ subfield.label(class="form-check-label") }} {% if subfield.data == current_user.default_location_id %}<em>(default)</em>{% endif %}
+                        </div>
+                        {% endfor %}
+                    {% endif %}
+                {% else %}
+                    {% for subfield in form.location %}
+                    <div class="form-check">
+                        {{ subfield(class="form-check-input", type="radio") }}
+                        {{ subfield.label(class="form-check-label") }} {% if subfield.data == current_user.default_location_id %}<em>(default)</em>{% endif %}
+                    </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div class="mb-3">
+                <i class="bi bi-chat-text"></i> {{ form.comment.label(class="form-label") }} <em>(optional)</em>
                 {% if form.errors %}
                     {% if form.comment.errors %}
                     {{ form.comment(class="form-control is-invalid", rows="2", spellcheck="true", aria_describedby="commentHelp commentError") }}

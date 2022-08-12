@@ -1,14 +1,11 @@
 {% extends "base.html" %}
-{% block header %}
-<div class="container">
-    {{ super() }}
-    <h1 class="mb-0">{{ title }}</h1>
-</div>
-{% endblock %}
 {% block content %}
 <div class="row">
     <div class="col-md-6">
-        <div class="d-grid gap-2 d-md-block mb-3">
+        {{ super() }}
+        <h1 class="text-truncate">{{ title }}</h1>
+        <hr>
+        <div class="d-grid gap-3 d-md-block mb-3">
             <a class="btn btn-primary" href="{{ url_for('tag.create') }}" role="button"><i class="bi bi-plus-lg"></i> Create new tag</a>
             <a class="btn btn-secondary" href="{{ url_for('tag.default') }}"><i class="bi bi-gear-fill"></i> Change default tag</a>
         </div>
