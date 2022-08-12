@@ -30,7 +30,7 @@ dnspython==2.2.1
     # via email-validator
 email-validator==1.2.1
     # via -r requirements.in
-flask==2.2.1
+flask==2.2.2
     # via
     #   -r requirements.in
     #   flask-assets
@@ -44,7 +44,7 @@ flask-assets==2.0
     # via -r requirements.in
 flask-compress==1.12
     # via -r requirements.in
-flask-limiter==2.5.0
+flask-limiter==2.6.0
     # via -r requirements.in
 flask-login==0.6.2
     # via -r requirements.in
@@ -110,7 +110,7 @@ requests==2.28.1
     # via -r requirements.in
 rich==12.5.1
     # via flask-limiter
-sqlalchemy==1.4.39
+sqlalchemy==1.4.40
     # via
     #   alembic
     #   flask-sqlalchemy
@@ -122,7 +122,7 @@ urllib3==1.26.11
     # via requests
 webassets==2.0
     # via flask-assets
-werkzeug==2.2.1
+werkzeug==2.2.2
     # via
     #   flask
     #   flask-login
