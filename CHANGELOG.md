@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased](https://github.com/MashSoftware/time-tracker/compare/main...develop)
 
-## [0.28.1](https://github.com/MashSoftware/time-tracker/compare/v0.28.0...v0.28.1) - 2022-08-xx
+## [0.28.1](https://github.com/MashSoftware/time-tracker/compare/v0.28.0...v0.28.1) - 2022-08-13
 
 ### Changed
 
