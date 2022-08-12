@@ -67,8 +67,9 @@ def activate(token):
         flash("The activation token is invalid, please request another.", "danger")
         return redirect(url_for("main.index"))
     user.activated_at = pytz.utc.localize(datetime.utcnow())
+    db.session.add(user)
     db.session.commit()
-    current_app.logger.info("User {} activated".format(current_user.id))
+    current_app.logger.info("User {} activated".format(user.id))
     flash("Your account has been activated. Please log in to continue.", "success")
     return redirect(url_for("auth.login"))
 
