@@ -50,7 +50,7 @@
                         <li class="page-item">
                             <a class="page-link" href="{{ url_for('entry.weekly') }}">Current</a>
                         </li>
-                        {% if request.args.get('week') == None or request.args.get('week') == today[1] %}
+                        {% if request.args.get('week') == None or request.args.get('week') == today[1]|string %}
                         <li class="page-item disabled">
                             <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Next <i class="bi bi-chevron-right"></i></a>
                         </li>
