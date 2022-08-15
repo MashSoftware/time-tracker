@@ -140,7 +140,7 @@
             </div>
             <div class="d-grid gap-3 d-sm-block">
                 <button class="btn btn-primary" type="submit"><i class="bi bi-plus-lg"></i> Create</button>
-                <a class="btn btn-secondary" href="{{ url_for('entry.weekly') }}"><i class="bi bi-chevron-left"></i> Cancel</a>
+                <a class="btn btn-secondary" href="{{ request.referrer }}"><i class="bi bi-chevron-left"></i> Cancel</a>
             </div>
         </form>
     </div>
