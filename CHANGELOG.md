@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased](https://github.com/MashSoftware/time-tracker/compare/main...develop)
 
+## [0.29.0](https://github.com/MashSoftware/time-tracker/compare/v0.28.1...v0.29.0) - 2022-xx-xx
+
+### Changed
+
+- Cancel button on time entry forms now goes back to the referring page with url query strings, instead of the latest weekly page.
+- Next page navigation button is removed on the current week page.
+- Previous page navigation button is removed on the 12th week page, as per the users time entry history limit.
+- Tests follow redirects to login page where authentication is required.
+
 ## [0.28.1](https://github.com/MashSoftware/time-tracker/compare/v0.28.0...v0.28.1) - 2022-08-13
 
 ### Changed
