@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  the_button:
+    build: .
+    container_name: time-tracker
+    restart: unless-stopped
+    environment:
+      - DATABASE_URL=postgresql://mash:mash@db:5432/time_tracker
+      - FLASK_APP=time_tracker.py
+      - FLASK_RUN_PORT=5000
+      - SECRET_KEY=b09bc10d70ad76c505ad920d708dc1918d4d9d047cc9d1fbb5b8d78eeef3a5e7
+    ports:
+      - 5000:5000
+    depends_on:
+      - db
+
+  db:
+    image: postgres:15
+    container_name: postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=mash
+      - POSTGRES_PASSWORD=mash
+      - POSTGRES_DB=time_tracker
+    ports:
+      - 5432:5432

@@ -49,6 +49,14 @@ flask db upgrade
 flask run
 ```
 
+## Run with docker-compose
+
+Run the app and Postgres with docker-compose
+
+```shell
+docker-compose up -d
+```
+
 ## Testing
 
 Run the test suite
