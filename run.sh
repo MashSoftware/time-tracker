@@ -1,1 +1,5 @@
-flask db upgrade && gunicorn -b 0.0.0.0:$FLASK_RUN_PORT time_tracker:app
+flask db upgrade
+exec gunicorn time_tracker:app \
+    --bind :$FLASK_RUN_PORT \
+    --threads $GUNICORN_THREADS \
+    --timeout $GUNICORN_TIMEOUT
