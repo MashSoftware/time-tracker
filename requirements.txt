@@ -12,7 +12,7 @@ bcrypt==3.2.2
     # via -r requirements.in
 brotli==1.0.9
     # via flask-compress
-certifi==2022.6.15
+certifi==2022.12.7
     # via requests
 cffi==1.15.1
     # via bcrypt
@@ -66,8 +66,6 @@ idna==3.3
     # via
     #   email-validator
     #   requests
-importlib-metadata==4.12.0
-    # via flask
 itsdangerous==2.1.2
     # via
     #   flask
@@ -130,8 +128,6 @@ wrapt==1.14.1
     # via deprecated
 wtforms==3.0.1
     # via flask-wtf
-zipp==3.8.1
-    # via importlib-metadata
 
 # The following packages are considered to be unsafe in a requirements file:
 # setuptools
