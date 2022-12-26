@@ -116,11 +116,9 @@ tomli==2.0.1
     #   coverage
     #   pep517
     #   pytest
-typing-extensions==4.3.0
-    # via black
 urllib3==1.26.11
     # via requests
-wheel==0.37.1
+wheel==0.38.1
     # via pip-tools
 
 # The following packages are considered to be unsafe in a requirements file:
