@@ -66,8 +66,6 @@ idna==3.3
     # via
     #   email-validator
     #   requests
-importlib-metadata==4.12.0
-    # via flask
 itsdangerous==2.1.2
     # via
     #   flask
@@ -122,7 +120,7 @@ urllib3==1.26.11
     # via requests
 webassets==2.0
     # via flask-assets
-werkzeug==2.2.2
+werkzeug==2.2.3
     # via
     #   flask
     #   flask-login
@@ -130,8 +128,6 @@ wrapt==1.14.1
     # via deprecated
 wtforms==3.0.1
     # via flask-wtf
-zipp==3.8.1
-    # via importlib-metadata
 
 # The following packages are considered to be unsafe in a requirements file:
 # setuptools
