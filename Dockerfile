@@ -1,4 +1,4 @@
-FROM python:3.10
+FROM python:3.11
 ENV PYTHONDONTWRITEBYTECODE 1 \
     PYTHONUNBUFFERED 1
 COPY --chown=app run.sh /usr/local/bin/run-app
