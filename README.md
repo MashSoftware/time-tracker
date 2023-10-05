@@ -10,8 +10,8 @@ A simple time tracking service.
 
 ### Required
 
-- Python 3.7.x or higher
-- Postgres 11.x.x or higher
+- Python 3.8.x or higher
+- Postgres 15.x.x or higher
 
 ### Optional
 
@@ -32,9 +32,9 @@ grant all privileges on database time_tracker to mash;
 ### Create venv and install requirements
 
 ```shell
-python3 -m venv venv
+python -m venv venv
 source venv/bin/activate
-pip3 install -r requirements.txt ; pip3 install -r requirements_dev.txt
+pip install -r requirements.txt ; pip install -r requirements_dev.txt
 ```
 
 ### Run database migrations
