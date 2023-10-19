@@ -1,0 +1,32 @@
+services:
+  web:
+    container_name: time-tracker
+    build: .
+    restart: always
+    environment:
+      - REDIS_URL=redis://redis:6379
+      - DATABASE_URL="postgresql://mash:mash@db:5432/time_tracker"
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/home/containeruser
+    depends_on:
+      - db
+      - cache
+  cache:
+    container_name: redis
+    image: "redis:7.0-alpine"
+    restart: always
+    ports:
+      - 6379:6379
+  db:
+    container_name: postgres
+    image: postgres:15-alpine
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: mash
+      POSTGRES_PASSWORD: mash
+      POSTGRES_DB: capability
+  
