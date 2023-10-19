@@ -4,7 +4,7 @@ services:
     build: .
     restart: always
     environment:
-      - REDIS_URL=redis://redis:6379
+      - REDIS_URL=redis://cache:6379
       - DATABASE_URL=postgresql://mash:mash@db:5432/time_tracker
     ports:
       - "8000:8000"
