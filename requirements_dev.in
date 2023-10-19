@@ -1,9 +1,9 @@
 bandit==1.7.5
-black==22.12.0
-flake8-bugbear==22.12.6
+black==23.10.0
+flake8-bugbear==23.9.16
 isort==5.12.0
 pep8-naming==0.13.3
-pip-tools==6.14.0
+pip-tools==7.3.0
 pur==7.3.1
-pytest-cov==3.0.0
-safety==2.3.5
+pytest-cov==4.1.0
+safety==2.3.4

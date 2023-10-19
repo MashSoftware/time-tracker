@@ -8,7 +8,7 @@ attrs==23.1.0
     # via flake8-bugbear
 bandit==1.7.5
     # via -r requirements_dev.in
-black==22.12.0
+black==23.10.0
     # via -r requirements_dev.in
 build==1.0.3
     # via pip-tools
@@ -32,7 +32,7 @@ flake8==6.1.0
     # via
     #   flake8-bugbear
     #   pep8-naming
-flake8-bugbear==22.12.6
+flake8-bugbear==23.9.16
     # via -r requirements_dev.in
 gitdb==4.0.10
     # via gitpython
@@ -52,8 +52,9 @@ mdurl==0.1.2
     # via markdown-it-py
 mypy-extensions==1.0.0
     # via black
-packaging==21.3
+packaging==23.2
     # via
+    #   black
     #   build
     #   dparse
     #   pytest
@@ -64,7 +65,7 @@ pbr==5.11.1
     # via stevedore
 pep8-naming==0.13.3
     # via -r requirements_dev.in
-pip-tools==6.14.0
+pip-tools==7.3.0
     # via -r requirements_dev.in
 platformdirs==3.11.0
     # via black
@@ -78,13 +79,11 @@ pyflakes==3.1.0
     # via flake8
 pygments==2.16.1
     # via rich
-pyparsing==3.1.1
-    # via packaging
 pyproject-hooks==1.0.0
     # via build
 pytest==7.4.2
     # via pytest-cov
-pytest-cov==3.0.0
+pytest-cov==4.1.0
     # via -r requirements_dev.in
 pyyaml==6.0.1
     # via bandit
@@ -92,11 +91,11 @@ requests==2.31.0
     # via safety
 rich==13.6.0
     # via bandit
-ruamel-yaml==0.17.38
+ruamel-yaml==0.17.39
     # via safety
 ruamel-yaml-clib==0.2.8
     # via ruamel-yaml
-safety==2.3.5
+safety==2.3.4
     # via -r requirements_dev.in
 smmap==5.0.1
     # via gitdb
