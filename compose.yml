@@ -5,7 +5,7 @@ services:
     restart: always
     environment:
       - REDIS_URL=redis://redis:6379
-      - DATABASE_URL="postgresql://mash:mash@db:5432/time_tracker"
+      - DATABASE_URL=postgresql://mash:mash@db:5432/time_tracker
     ports:
       - "8000:8000"
     volumes:
