@@ -1,0 +1,47 @@
+version: '3'
+
+services:
+  app:
+    build: .
+    container_name: time-tracker-app
+    restart: unless-stopped
+    environment:
+      - DATABASE_URL=postgresql://mash:mash@postgres:5432/time_tracker
+      - FLASK_RUN_PORT=5000
+      - GUNICORN_THREADS=2
+      - GUNICORN_TIMEOUT=120
+      - MAILGUN_API_KEY=""
+      - MAILGUN_API_URL=""
+      - REDIS_URL=redis://redis:6379/0
+      - SECRET_KEY=0123456789
+    ports:
+      - "5000:5000"
+    networks:
+      - time-tracker
+    depends_on:
+      - postgres
+      - redis
+
+  postgres:
+    image: postgres:15.1
+    container_name: time-tracker-postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=mash
+      - POSTGRES_PASSWORD=mash
+      - POSTGRES_DB=time_tracker
+    networks:
+      - time-tracker
+
+  redis:
+    image: redis:7.0
+    container_name: time-tracker-redis
+    restart: always
+    environment:
+      - REDIS_PASSWORD=mash
+    networks:
+      - time-tracker
+
+networks:
+  time-tracker:
+    driver: bridge
