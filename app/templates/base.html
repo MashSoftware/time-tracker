@@ -93,12 +93,6 @@
     {% block hero %}{% endblock %}
     <main class="container py-3 mb-3">
         {% block content %}
-            {% if "time-tracker.mashsoftware.com" not in request.host %}
-            <div class="alert alert-info" role="alert">
-                <h4 class="alert-heading">The Button is now Mash Time Tracker!</h4>
-                <p>We've got a new name and a new address at <a href="https://time-tracker.mashsoftware.com" class="alert-link" target="blank" rel="noopener">time-tracker.mashsoftware.com</a>. Your account and all data is still available on the new address. Please update your bookmarks.</p>
-            </div>
-            {% endif %}
             {% with messages = get_flashed_messages(with_categories=true) %}
                 {% if messages %}
                     {% for category, message in messages %}
