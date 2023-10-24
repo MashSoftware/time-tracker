@@ -14,14 +14,9 @@ RUN pip install -r requirements.txt \
     && chown -R containeruser:containeruser ./
 
 # Set environment variables
-ENV DATABASE_URL="postgresql://mash:mash@db:5432/time_tracker" \
-    MAILGUN_API_KEY="" \
-    MAILGUN_API_URL="" \
+ENV FLASK_APP=time_tracker.py \
     PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONUNBUFFERED=1 \
-    REDIS_URL="redis://cache:6379" \
-    SECRET_KEY=27a832aa91849382e326b5200f2c3d748a78bac4587e6ffd626dd87d73438f44 \
-    VERSION_NUMBER=Development
+    PYTHONUNBUFFERED=1
 
 USER containeruser
 
