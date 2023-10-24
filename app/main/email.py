@@ -17,6 +17,7 @@ def send_activation_email(user):
                 "text": render_template("email/activation.txt", token=token),
                 "html": render_template("email/activation.html", token=token),
             },
+            timeout=10,
         )
         current_app.logger.info(f"Sent user {user.id} activation email")
     except RequestException:
@@ -37,6 +38,7 @@ def send_confirmation_email(user):
                 "text": render_template("email/confirmation.txt", token=token),
                 "html": render_template("email/confirmation.html", token=token),
             },
+            timeout=10,
         )
         current_app.logger.info(f"Sent user {user.id} confirmation email")
     except RequestException:
@@ -57,6 +59,7 @@ def send_reset_password_email(user):
                 "text": render_template("email/reset_password.txt", token=token),
                 "html": render_template("email/reset_password.html", token=token),
             },
+            timeout=10,
         )
         current_app.logger.info(f"Sent user {user.id} reset password email")
     except RequestException:

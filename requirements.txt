@@ -8,13 +8,13 @@ alembic==1.12.0
     # via flask-migrate
 bcrypt==4.0.1
     # via -r requirements.in
-blinker==1.6.2
+blinker==1.6.3
     # via flask
 brotli==1.1.0
     # via flask-compress
 certifi==2023.7.22
     # via requests
-charset-normalizer==3.3.0
+charset-normalizer==3.3.1
     # via requests
 click==8.1.7
     # via flask
@@ -22,7 +22,7 @@ deprecated==1.2.14
     # via limits
 dnspython==2.4.2
     # via email-validator
-email-validator==2.0.0.post2
+email-validator==2.1.0.post1
     # via -r requirements.in
 flask==2.3.3
     # via
@@ -34,12 +34,14 @@ flask==2.3.3
     #   flask-migrate
     #   flask-sqlalchemy
     #   flask-wtf
-flask-assets==2.0
+flask-assets==2.1.0
     # via -r requirements.in
 flask-compress==1.14
     # via -r requirements.in
-flask-limiter==3.5.0
-    # via -r requirements.in
+flask-limiter[redis]==3.5.0
+    # via
+    #   -r requirements.in
+    #   flask-limiter
 flask-login==0.6.2
     # via -r requirements.in
 flask-migrate==4.0.5
@@ -70,7 +72,7 @@ jinja2==3.1.2
     # via flask
 jsmin==3.0.1
     # via -r requirements.in
-limits==3.6.0
+limits[redis]==3.6.0
     # via flask-limiter
 mako==1.2.4
     # via alembic
@@ -96,17 +98,15 @@ pygments==2.16.1
     # via rich
 pyjwt==2.8.0
     # via -r requirements.in
-python-dotenv==1.0.0
-    # via -r requirements.in
 pytz==2023.3.post1
     # via -r requirements.in
-redis==4.6.0
-    # via -r requirements.in
+redis==5.0.1
+    # via limits
 requests==2.31.0
     # via -r requirements.in
 rich==13.6.0
     # via flask-limiter
-sqlalchemy==2.0.21
+sqlalchemy==2.0.22
     # via
     #   alembic
     #   flask-sqlalchemy
@@ -116,7 +116,7 @@ typing-extensions==4.8.0
     #   flask-limiter
     #   limits
     #   sqlalchemy
-urllib3==2.0.6
+urllib3==2.0.7
     # via requests
 webassets==2.0
     # via flask-assets
@@ -127,5 +127,5 @@ werkzeug==2.3.7
     #   flask-login
 wrapt==1.15.0
     # via deprecated
-wtforms==3.0.1
+wtforms==3.1.0
     # via flask-wtf

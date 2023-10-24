@@ -1,0 +1,36 @@
+services:
+  web:
+    container_name: time-tracker
+    build: .
+    restart: always
+    environment:
+      - DATABASE_URL=postgresql://mash:mash@db:5432/time_tracker
+      - MAILGUN_API_KEY=""
+      - MAILGUN_API_URL=""
+      - REDIS_URL=redis://cache:6379
+      - SECRET_KEY=27a832aa91849382e326b5200f2c3d748a78bac4587e6ffd626dd87d73438f44
+      - VERSION_NUMBER=Development
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/home/containeruser
+    depends_on:
+      - db
+      - cache
+  cache:
+    container_name: redis
+    image: redis:7.0-alpine
+    restart: always
+    ports:
+      - 6379:6379
+  db:
+    container_name: postgres
+    image: postgres:15-alpine
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: mash
+      POSTGRES_PASSWORD: mash
+      POSTGRES_DB: time_tracker
+  

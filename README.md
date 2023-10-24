@@ -10,43 +10,16 @@ A simple time tracking service.
 
 ### Required
 
-- Python 3.8.x or higher
-- Postgres 15.x.x or higher
-
-### Optional
-
-- Redis 6.0.x or higher (for rate limiting, otherwise in-memory storage is used)
+- Docker
 
 ## Getting started
 
-### Create local Postgres database
+### Run with Docker Compose
+
+Run the app and its dependencies:
 
 ```shell
-sudo service postgresql start
-sudo su - postgres -c "create user mash with password mash"
-sudo su - postgres -c "createdb time_tracker"
-sudo -u postgres psql
-grant all privileges on database time_tracker to mash;
-```
-
-### Create venv and install requirements
-
-```shell
-python -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt ; pip install -r requirements_dev.txt
-```
-
-### Run database migrations
-
-```shell
-flask db upgrade
-```
-
-### Run app
-
-```shell
-flask run
+docker compose up --build -d
 ```
 
 ## Testing
