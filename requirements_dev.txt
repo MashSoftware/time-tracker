@@ -14,7 +14,7 @@ build==1.0.3
     # via pip-tools
 certifi==2023.7.22
     # via requests
-charset-normalizer==3.3.0
+charset-normalizer==3.3.1
     # via requests
 click==8.1.7
     # via
@@ -34,7 +34,7 @@ flake8==6.1.0
     #   pep8-naming
 flake8-bugbear==23.9.16
     # via -r requirements_dev.in
-gitdb==4.0.10
+gitdb==4.0.11
     # via gitpython
 gitpython==3.1.40
     # via bandit
@@ -91,7 +91,7 @@ requests==2.31.0
     # via safety
 rich==13.6.0
     # via bandit
-ruamel-yaml==0.17.39
+ruamel-yaml==0.18.1
     # via safety
 ruamel-yaml-clib==0.2.8
     # via ruamel-yaml
