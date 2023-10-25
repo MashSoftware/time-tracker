@@ -120,7 +120,7 @@ class Event(db.Model):
     # Methods
     def __init__(self, user_id, started_at):
         self.id = str(uuid.uuid4())
-        self.user_id = str(uuid.UUID(user_id, version=4))
+        self.user_id = str(uuid.UUID(str(user_id), version=4))
         self.started_at = started_at
 
     def duration(self, end=None):
@@ -164,7 +164,7 @@ class Tag(db.Model):
     # Methods
     def __init__(self, user_id, name):
         self.id = str(uuid.uuid4())
-        self.user_id = str(uuid.UUID(user_id, version=4))
+        self.user_id = str(uuid.UUID(str(user_id), version=4))
         self.name = name
         self.created_at = pytz.utc.localize(datetime.utcnow())
 
@@ -194,6 +194,6 @@ class Location(db.Model):
     # Methods
     def __init__(self, user_id, name):
         self.id = str(uuid.uuid4())
-        self.user_id = str(uuid.UUID(user_id, version=4))
+        self.user_id = str(uuid.UUID(str(user_id), version=4))
         self.name = name.strip()
         self.created_at = pytz.utc.localize(datetime.utcnow())
