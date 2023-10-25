@@ -16,6 +16,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Previous page navigation button is removed on the 12th week page, as per the users time entry history limit.
 - Tests follow redirects to login page where authentication is required.
 
+## [0.28.3](https://github.com/MashSoftware/time-tracker/compare/v0.28.2...v0.28.3) - 2023-10-25
+
+### Fixed
+
+- Heroku Postgres dialect difference
+- Updated SQLAlchemy UUID types cast as Strings
+
 ## [0.28.2](https://github.com/MashSoftware/time-tracker/compare/v0.28.1...v0.28.2) - 2023-10-24
 
 ### Changed
