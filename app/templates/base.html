@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-bs-theme="dark">
 
 <head>
     <meta charset="utf-8">
@@ -39,13 +39,13 @@
     <title>Mash Time Tracker{% if title %} | {{ title }}{% endif %}</title>
 </head>
 
-<body class="bg-light">
+<body class="bg-dark-subtle">
     {% if "cookies_policy" not in request.cookies %}
     {% include '_cookie_banner.html' %}
     {% endif %}
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-md bg-body-tertiary">
         <div class="container">
-            <a class="navbar-brand" href="{{ url_for('main.index') }}">Mash Time Tracker <span class="badge bg-secondary">BETA</span></a>
+            <a class="navbar-brand" href="{{ url_for('main.index') }}">Mash Time Tracker <span class="badge rounded-pill bg-secondary">BETA</span></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -133,7 +133,7 @@
             </div>
             <div class="col-sm-6">
                 <p class="mb-0"><i class="bi bi-facebook"></i> <a href="https://www.facebook.com/MashSW/" target="blank" rel="noopener">Facebook</a></p>
-                <p class="mb-0"><i class="bi bi-twitter"></i> <a href="https://twitter.com/mashsoftware" target="blank" rel="noopener">Twitter</a></p>
+                <p class="mb-0"><i class="bi bi-twitter-x"></i> <a href="https://twitter.com/mashsoftware" target="blank" rel="noopener">Twitter</a></p>
                 <p class="mb-0"><i class="bi bi-github"></i> <a href="https://github.com/MashSoftware/time-tracker" target="blank" rel="noopener">GitHub</a></p>
                 <p class="mb-0"><i class="bi bi-envelope-fill"></i> <a href="mailto:hello@mashsoftware.com" target="blank" rel="noopener">Email</a></p>
             </div>
