@@ -30,6 +30,14 @@ Run the test suite
 python -m pytest --cov=app --cov-report=term-missing --cov-branch
 ```
 
+### Database querying
+
+To use `psql` in the Postgres container, run:
+
+```shell
+docker exec -it postgres psql -U mash time_tracker
+```
+
 ## Versioning
 
 We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/MashSoftware/time-tracker/tags).
