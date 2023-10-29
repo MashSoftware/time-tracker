@@ -11,7 +11,7 @@
             {% endif %} 
         </p>
         {% if event.tag %}<p class="card-text mb-2"><i class="bi bi-tag" aria-label="Tag"></i> {{event.tag.name}}</p>{% endif %}
-        {% if event.location %}<p class="card-text mb-2"><i class="bi bi-building" aria-label="Location"></i> {{event.location.name}}</p>{% endif %}
+        {% if event.location %}<p class="card-text mb-2"><i class="bi bi-building-fill" aria-label="Location"></i> {{event.location.name}}</p>{% endif %}
         {% if event.comment %}<p class="card-text mb-2"><i class="bi bi-chat-text" aria-label="Comment"></i> {{event.comment}}</p>{% endif %}
     </div>
     {% block actions %}{% endblock %}
