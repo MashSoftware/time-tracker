@@ -1,4 +1,4 @@
-<div class="card text-bg-white shadow mb-3 {% if event.ended_at is none %}border-info{% endif %}" id="{{event.id}}">
+<div class="card text-bg-dark shadow mb-3 {% if event.ended_at is none %}border-info{% endif %}" id="{{event.id}}">
     {% if event.ended_at is none %}<div class="card-header text-bg-info"><div class="spinner-border spinner-border-sm" role="status"><span class="visually-hidden">In progress</span></div> Started {{ event.duration_string(now) }} ({{ event.duration_decimal(now) }}) ago</div>{% endif %}
     <div class="card-body">
         <h5 class="card-title"><i class="bi bi-calendar-event" aria-label="Date"></i> {{event.started_at.strftime('%A %d %B')}}</h5>
