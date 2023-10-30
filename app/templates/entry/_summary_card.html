@@ -1,4 +1,4 @@
-<div class="card text-bg-white shadow mb-3">
+<div class="card text-bg-dark shadow mb-3">
     <div class="card-body">
         <h5 class="card-title"><i class="bi bi-calendar-week"></i> Weekly summary</h5>
         <hr>
@@ -37,7 +37,7 @@
             <hr>
             <h6 class="card-subtitle mb-2 text-muted">Locations</h6>
             {% for location in location_totals %}
-                <p class="card-text mb-2"><i class="bi bi-building" aria-label="Location"></i> {{location.name}}: {{location.total}} ({{location.decimal}})</p>
+                <p class="card-text mb-2"><i class="bi bi-building-fill" aria-label="Location"></i> {{location.name}}: {{location.total}} ({{location.decimal}})</p>
             {% endfor %}
         {% endif %}
     </div>

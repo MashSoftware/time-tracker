@@ -141,6 +141,6 @@ def default():
         return redirect(url_for("tag.tags"))
     elif request.method == "GET":
         if current_user.default_tag_id:
-            form.tag.data = current_user.default_tag_id
+            form.tag.data = str(current_user.default_tag_id)
 
     return render_template("default_tag_form.html", title="Default tag", form=form)

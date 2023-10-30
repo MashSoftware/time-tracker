@@ -11,7 +11,7 @@
         <form action="" method="post" novalidate>
             <div class="d-grid gap-3 d-sm-block">
                 <button class="btn btn-danger" type="submit"><i class="bi bi-trash-fill"></i> Yes - delete time entry</button>
-                <a class="btn btn-secondary" href="{{ url_for('entry.weekly') }}"><i class="bi bi-chevron-left"></i> Cancel</a>
+                <a class="btn btn-secondary" href="{{ request.referrer }}"><i class="bi bi-chevron-left"></i> Cancel</a>
             </div>
         </form>
     </div>

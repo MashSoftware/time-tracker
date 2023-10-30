@@ -1,7 +1,7 @@
-<div class="card bg-white shadow mb-3 {% if location.id == current_user.default_location_id %}border-info{% endif %}">
+<div class="card text-bg-dark shadow mb-3 {% if location.id == current_user.default_location_id %}border-info{% endif %}">
     {% if location.id == current_user.default_location_id %}<div class="card-header text-bg-info">Default location</div>{% endif %}
     <div class="card-body">
-        <h5 class="card-title"><i class="bi bi-building" aria-label="Location"></i> {{ location.name }}</h5>
+        <h5 class="card-title"><i class="bi bi-building-fill" aria-label="Location"></i> {{ location.name }}</h5>
         {% if location.events %}<h6 class="card-subtitle mb-2 text-muted">{{location.events | length}} time {% if location.events | length > 1 %}entries{% else %}entry{% endif %} : {{ location.total_string }} ({{ location.total_decimal }})</h6>{% endif %}
         <p class="card-text mb-2">
             {% if location.events %}

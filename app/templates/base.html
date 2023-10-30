@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en-GB">
+<html lang="en" data-bs-theme="dark">
 
 <head>
     <meta charset="utf-8">
@@ -34,18 +34,18 @@
     <meta name="msapplication-config" content="{{ url_for('static', filename='browserconfig.xml') }}">
     <meta name="theme-color" content="#212529">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha256-MBffSnbbXwHCuZtgPYiwMQbfE7z+GOZ7fBPCNB06Z98=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" integrity="sha256-u2/YzYU5TLNn6KxY5HKS8taOsoj6Evq2jmVDCl3fzkg=" crossorigin="anonymous">
     <title>Mash Time Tracker{% if title %} | {{ title }}{% endif %}</title>
 </head>
 
-<body class="bg-light">
+<body class="bg-dark-subtle">
     {% if "cookies_policy" not in request.cookies %}
     {% include '_cookie_banner.html' %}
     {% endif %}
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-md bg-body-tertiary">
         <div class="container">
-            <a class="navbar-brand" href="{{ url_for('main.index') }}">Mash Time Tracker <span class="badge bg-secondary">BETA</span></a>
+            <a class="navbar-brand" href="{{ url_for('main.index') }}">Mash Time Tracker <span class="badge rounded-pill bg-secondary">BETA</span></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -60,7 +60,7 @@
                         <a class="nav-link {% if url_for('tag.tags') == request.path %}active{% endif %}" href="{{ url_for('tag.tags') }}"><i class="bi bi-tags-fill"></i> Tags</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {% if url_for('location.locations') == request.path %}active{% endif %}" href="{{ url_for('location.locations') }}"><i class="bi bi-building"></i> Locations</a>
+                        <a class="nav-link {% if url_for('location.locations') == request.path %}active{% endif %}" href="{{ url_for('location.locations') }}"><i class="bi bi-building-fill"></i> Locations</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {% if url_for('search.search') == request.path %}active{% endif %}" href="{{ url_for('search.search') }}"><i class="bi bi-search"></i> Search</a>
@@ -91,14 +91,8 @@
         </div>
     </nav>
     {% block hero %}{% endblock %}
-    <main class="container py-3 mb-3">
+    <main class="container my-3">
         {% block content %}
-            {% if "time-tracker.mashsoftware.com" not in request.host %}
-            <div class="alert alert-info" role="alert">
-                <h4 class="alert-heading">The Button is now Mash Time Tracker!</h4>
-                <p>We've got a new name and a new address at <a href="https://time-tracker.mashsoftware.com" class="alert-link" target="blank" rel="noopener">time-tracker.mashsoftware.com</a>. Your account and all data is still available on the new address. Please update your bookmarks.</p>
-            </div>
-            {% endif %}
             {% with messages = get_flashed_messages(with_categories=true) %}
                 {% if messages %}
                     {% for category, message in messages %}
@@ -129,23 +123,23 @@
         {% endblock %}
     </main>
     <hr>
-    <footer class="container">
+    <footer class="container my-3">
         <div class="row">
             <div class="col-sm-6">
                 <p class="mb-0">Version <a href="https://github.com/MashSoftware/time-tracker/releases" target="blank" rel="noopener">{{ config['VERSION_NUMBER'] }}</a></p>
-                <p class="mb-0"><i class="bi bi-c-circle"></i> <a href="https://www.mashsoftware.com/" target="blank" rel="noopener">Mash Software</a> 2019 - 2022</p>
+                <p class="mb-0"><i class="bi bi-c-circle"></i> 2019-2023 <a href="https://www.mashsoftware.com/" target="blank" rel="noopener">Mash Software</a>. All rights reserved.</p>
                 <p class="mb-0"><i class="bi bi-cup-hot-fill"></i> <a href="https://ko-fi.com/mashsoftware">Buy me a coffee</a></p>
-                <p class="mb-0"><a href="{{ url_for('main.cookies') }}">Cookies</a></p>
+                <p class="mb-0"><i class="bi bi-cookie"></i> <a href="{{ url_for('main.cookies') }}">Cookies</a></p>
             </div>
             <div class="col-sm-6">
                 <p class="mb-0"><i class="bi bi-facebook"></i> <a href="https://www.facebook.com/MashSW/" target="blank" rel="noopener">Facebook</a></p>
-                <p class="mb-0"><i class="bi bi-twitter"></i> <a href="https://twitter.com/mashsoftware" target="blank" rel="noopener">Twitter</a></p>
+                <p class="mb-0"><i class="bi bi-twitter-x"></i> <a href="https://twitter.com/mashsoftware" target="blank" rel="noopener">Twitter</a></p>
                 <p class="mb-0"><i class="bi bi-github"></i> <a href="https://github.com/MashSoftware/time-tracker" target="blank" rel="noopener">GitHub</a></p>
                 <p class="mb-0"><i class="bi bi-envelope-fill"></i> <a href="mailto:hello@mashsoftware.com" target="blank" rel="noopener">Email</a></p>
             </div>
         </div>
     </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha256-gvZPYrsDwbwYJLD5yeBfcNujPhRoGOY831wwbIzz3t0=" crossorigin="anonymous"></script>
     {% assets "js" %}<script type="application/javascript" src="{{ ASSET_URL }}"></script>{% endassets %}
 </body>
 

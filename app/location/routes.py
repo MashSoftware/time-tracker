@@ -143,6 +143,6 @@ def default():
         return redirect(url_for("location.locations"))
     elif request.method == "GET":
         if current_user.default_location_id:
-            form.location.data = current_user.default_location_id
+            form.location.data = str(current_user.default_location_id)
 
     return render_template("default_location_form.html", title="Default location", form=form)

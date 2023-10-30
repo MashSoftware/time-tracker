@@ -7,6 +7,23 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased](https://github.com/MashSoftware/time-tracker/compare/main...develop)
 
+## [0.29.0](https://github.com/MashSoftware/time-tracker/compare/v0.28.3...v0.29.0) - 2023-10-30
+
+### Added
+
+- Dark mode. There is no light mode. This is the way.
+
+### Changed
+
+- Cancel button on time entry forms now goes back to the referring page with url query strings, instead of the latest weekly page.
+- Next page navigation button is removed on the current week page.
+- Previous page navigation button is removed on the 12th week page, as per the users time entry history limit.
+- Tests follow redirects to login page where authentication is required.
+
+### Fixed
+
+- Radios not populating when editing an existing time entry or setting a default tag/location.
+
 ## [0.28.3](https://github.com/MashSoftware/time-tracker/compare/v0.28.2...v0.28.3) - 2023-10-25
 
 ### Fixed
