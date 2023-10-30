@@ -284,12 +284,12 @@ def update(id):
         if event.tag_id is None:
             form.tag.data = "None"
         else:
-            form.tag.data = event.tag_id
+            form.tag.data = str(event.tag_id)
 
         if event.location_id is None:
             form.location.data = "None"
         else:
-            form.location.data = event.location_id
+            form.location.data = str(event.location_id)
 
         form.comment.data = event.comment
     return render_template("update_entry_form.html", title="Edit time entry", form=form, event=event)
