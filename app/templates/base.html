@@ -91,7 +91,7 @@
         </div>
     </nav>
     {% block hero %}{% endblock %}
-    <main class="container py-3 mb-3">
+    <main class="container my-3">
         {% block content %}
             {% with messages = get_flashed_messages(with_categories=true) %}
                 {% if messages %}
@@ -123,7 +123,7 @@
         {% endblock %}
     </main>
     <hr>
-    <footer class="container">
+    <footer class="container my-3">
         <div class="row">
             <div class="col-sm-6">
                 <p class="mb-0">Version <a href="https://github.com/MashSoftware/time-tracker/releases" target="blank" rel="noopener">{{ config['VERSION_NUMBER'] }}</a></p>
