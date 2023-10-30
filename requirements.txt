@@ -39,10 +39,8 @@ flask-assets==2.1.0
 flask-compress==1.14
     # via -r requirements.in
 flask-limiter[redis]==3.5.0
-    # via
-    #   -r requirements.in
-    #   flask-limiter
-flask-login==0.6.2
+    # via -r requirements.in
+flask-login==0.6.3
     # via -r requirements.in
 flask-migrate==4.0.5
     # via -r requirements.in
