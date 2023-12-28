@@ -106,7 +106,7 @@ requests==2.31.0
     # via -r requirements.in
 rich==13.7.0
     # via flask-limiter
-sqlalchemy==2.0.23
+sqlalchemy==2.0.24
     # via
     #   alembic
     #   flask-sqlalchemy
