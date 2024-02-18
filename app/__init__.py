@@ -43,6 +43,52 @@ def create_app(config_class=Config):
         "img-src": ["data:", "'self'"],
     }
 
+    # Set permissions policy
+    permissions_policy = {
+        "accelerometer": "()",
+        "ambient-light-sensor": "()",
+        "autoplay": "()",
+        "battery": "()",
+        "camera": "()",
+        "cross-origin-isolated": "()",
+        "display-capture": "()",
+        "document-domain": "()",
+        "encrypted-media": "()",
+        "execution-while-not-rendered": "()",
+        "execution-while-out-of-viewport": "()",
+        "fullscreen": "()",
+        "geolocation": "()",
+        "gyroscope": "()",
+        "keyboard-map": "()",
+        "magnetometer": "()",
+        "microphone": "()",
+        "midi": "()",
+        "navigation-override": "()",
+        "payment": "()",
+        "picture-in-picture": "()",
+        "publickey-credentials-get": "()",
+        "screen-wake-lock": "()",
+        "sync-xhr": "()",
+        "usb": "()",
+        "web-share": "()",
+        "xr-spatial-tracking": "()",
+        "clipboard-read": "()",
+        "clipboard-write": "()",
+        "gamepad": "()",
+        "speaker-selection": "()",
+        "conversion-measurement": "()",
+        "focus-without-user-activation": "()",
+        "hid": "()",
+        "idle-detection": "()",
+        "interest-cohort": "()",
+        "serial": "()",
+        "sync-script": "()",
+        "trust-token-redemption": "()",
+        "unload": "()",
+        "window-management": "()",
+        "vertical-scroll": "()",
+    }
+
     # Initialise app extensions
     assets.init_app(app)
     compress.init_app(app)
@@ -51,7 +97,12 @@ def create_app(config_class=Config):
     limiter.init_app(app)
     login.init_app(app)
     migrate.init_app(app, db)
-    talisman.init_app(app, content_security_policy=csp, content_security_policy_nonce_in=["style-src"])
+    talisman.init_app(
+        app,
+        content_security_policy=csp,
+        content_security_policy_nonce_in=["style-src"],
+        permissions_policy=permissions_policy,
+    )
 
     # Create static asset bundles
     js = Bundle("src/js/*.js", filters="jsmin", output="dist/js/custom-%(version)s.min.js")

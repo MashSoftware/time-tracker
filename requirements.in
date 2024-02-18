@@ -2,7 +2,7 @@ bcrypt==4.1.2
 email_validator==2.1.0.post1
 flask-assets==2.1.0
 flask-compress==1.14
-flask-limiter[redis]==3.5.0
+flask-limiter[redis]==3.5.1
 flask-login==0.6.3
 flask-migrate==4.0.5
 flask-sqlalchemy==3.1.1
@@ -13,6 +13,6 @@ gunicorn==21.2.0
 jsmin==3.0.1
 psycopg2==2.9.9
 pyjwt==2.8.0
-pytz==2023.3.post1
+pytz==2023.4
 requests==2.31.0
 werkzeug<3.0.0
