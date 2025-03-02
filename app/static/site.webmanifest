@@ -1,29 +1,29 @@
 {
-    "name": "Mash Time Tracker",
-    "short_name": "Mash Time Tracker",
-    "description": "Simple, quick and easy time tracking.",
-    "icons": [
-        {
-            "src": "/static/android-chrome-192x192.png",
-            "sizes": "192x192",
-            "type": "image/png"
-        },
-        {
-            "src": "/static/android-chrome-512x512.png",
-            "sizes": "512x512",
-            "type": "image/png"
-        }
-    ],
-    "theme_color": "#343a40",
-    "background_color": "#2196f3",
-    "display": "standalone",
-    "start_url": "/entries/",
-    "scope": "/",
-    "shortcuts": [
-        {
-            "name": "Start / stop now",
-            "url": "/entries/auto",
-            "description": "Start or stop a time entry now"
-        }
-    ]
+  "name": "Mash Time Tracker",
+  "short_name": "Mash Time Tracker",
+  "description": "Simple, quick and easy time tracking.",
+  "icons": [
+    {
+      "src": "/static/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/static/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#343a40",
+  "background_color": "#2196f3",
+  "display": "standalone",
+  "start_url": "/entries/",
+  "scope": "/",
+  "shortcuts": [
+    {
+      "name": "Start / stop now",
+      "url": "/entries/auto",
+      "description": "Start or stop a time entry now"
+    }
+  ]
 }
