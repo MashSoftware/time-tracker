@@ -13,6 +13,7 @@ RUN apt-get update && \
     apt-get install -y libpq-dev gcc
 
 COPY app app
+COPY migrations migrations
 COPY time_tracker.py config.py docker-entrypoint.sh requirements.txt ./
 
 RUN pip install -r requirements.txt \
