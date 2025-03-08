@@ -1,20 +1,15 @@
 import logging
 
 from flask import Flask
-from flask_assets import Bundle, Environment
-from flask_compress import Compress
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 from flask_login import LoginManager
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
-from flask_talisman import Talisman
 from flask_wtf.csrf import CSRFProtect
 
 from config import Config
 
-assets = Environment()
-compress = Compress()
 csrf = CSRFProtect()
 db = SQLAlchemy()
 limiter = Limiter(key_func=get_remote_address, default_limits=["2 per second", "60 per minute"])
@@ -25,7 +20,6 @@ login.needs_refresh_message = "To protect your account, please log in again to a
 login.needs_refresh_message_category = "info"
 login.refresh_view = "auth.login"
 migrate = Migrate()
-talisman = Talisman()
 
 
 def create_app(config_class=Config):
@@ -34,29 +28,12 @@ def create_app(config_class=Config):
     app.jinja_env.trim_blocks = True
     app.jinja_env.lstrip_blocks = True
 
-    # Set content security policy
-    csp = {
-        "default-src": "'self'",
-        "style-src": "https://cdn.jsdelivr.net",
-        "font-src": "https://cdn.jsdelivr.net",
-        "script-src": ["https://cdn.jsdelivr.net", "'self'"],
-        "img-src": ["data:", "'self'"],
-    }
-
     # Initialise app extensions
-    assets.init_app(app)
-    compress.init_app(app)
     csrf.init_app(app)
     db.init_app(app)
     limiter.init_app(app)
     login.init_app(app)
     migrate.init_app(app, db)
-    talisman.init_app(app, content_security_policy=csp, content_security_policy_nonce_in=["style-src"])
-
-    # Create static asset bundles
-    js = Bundle("src/js/*.js", filters="jsmin", output="dist/js/custom-%(version)s.min.js")
-    if "js" not in assets:
-        assets.register("js", js)
 
     # Register blueprints
     from app.account import bp as account_bp
