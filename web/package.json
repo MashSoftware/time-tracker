@@ -1,0 +1,40 @@
+{
+  "name": "time-tracker",
+  "version": "1.0.0",
+  "description": "Time Tracker",
+  "private": true,
+  "scripts": {
+    "build": "webpack",
+    "format": "prettier . --write",
+    "watch": "webpack --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MashSoftware/time-tracker.git"
+  },
+  "keywords": [],
+  "author": "Matt Shaw",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MashSoftware/time-tracker/issues"
+  },
+  "homepage": "https://github.com/MashSoftware/time-tracker#readme",
+  "dependencies": {
+    "@popperjs/core": "^2.11.8",
+    "bootstrap": "^5.3.3",
+    "bootstrap-icons": "^1.11.3"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.26.9",
+    "@babel/preset-env": "^7.26.9",
+    "babel-loader": "^10.0.0",
+    "css-loader": "^7.1.2",
+    "css-minimizer-webpack-plugin": "^7.0.0",
+    "mini-css-extract-plugin": "^2.9.2",
+    "prettier": "^3.5.3",
+    "sass": "^1.85.1",
+    "sass-loader": "^16.0.5",
+    "webpack": "^5.98.0",
+    "webpack-cli": "^6.0.1"
+  }
+}
