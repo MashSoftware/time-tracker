@@ -15,6 +15,13 @@ $bootstrap-icons-font-dir: "../../node_modules/bootstrap-icons/font/fonts";
 @import "bootstrap/scss/maps";
 @import "bootstrap/scss/mixins";
 @import "bootstrap/scss/root";
+@import "bootstrap/scss/alert";
+@import "bootstrap/scss/badge";
+@import "bootstrap/scss/buttons";
+@import "bootstrap/scss/close";
+@import "bootstrap/scss/forms";
+@import "bootstrap/scss/nav";
+@import "bootstrap/scss/navbar";
 
 // 6. Optionally include any other parts as needed
 @import "bootstrap/scss/utilities";
