@@ -43,21 +43,21 @@ module.exports = {
         scheme: "data",
         type: "asset/resource",
         generator: {
-          filename: "assets/icons/[hash].svg",
+          filename: "icons/[hash].svg",
         },
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
         type: "asset/resource",
         generator: {
-          filename: "assets/images/[hash][ext][query]",
+          filename: "images/[hash][ext][query]",
         },
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,
         type: "asset/resource",
         generator: {
-          filename: "assets/fonts/[hash][ext][query]",
+          filename: "fonts/[hash][ext][query]",
         },
       },
     ],
