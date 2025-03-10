@@ -2,8 +2,6 @@ import os
 
 
 class Config(object):
-    MAILGUN_API_KEY = os.environ.get("MAILGUN_API_KEY")
-    MAILGUN_API_URL = os.environ.get("MAILGUN_API_URL")
     RATELIMIT_HEADERS_ENABLED = True
     RATELIMIT_STORAGE_URI = os.environ.get("REDIS_URL")
     REMEMBER_COOKIE_DURATION = 2592000

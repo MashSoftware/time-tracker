@@ -9,12 +9,10 @@ services:
     build: .
     restart: always
     environment:
-      - DATABASE_URL=postgresql://mash:mash@db:5432/time_tracker
-      - MAILGUN_API_KEY=""
-      - MAILGUN_API_URL=""
-      - REDIS_URL=redis://cache:6379
-      - SECRET_KEY=27a832aa91849382e326b5200f2c3d748a78bac4587e6ffd626dd87d73438f44
-      - VERSION_NUMBER=Development
+      DATABASE_URL: postgresql://mash:mash@db:5432/time_tracker
+      REDIS_URL: redis://cache:6379
+      SECRET_KEY: 27a832aa91849382e326b5200f2c3d748a78bac4587e6ffd626dd87d73438f44
+      VERSION_NUMBER: 0.29.0
     expose:
       - 5000
     depends_on:
@@ -36,6 +34,20 @@ services:
       POSTGRES_DB: time_tracker
     volumes:
       - pgdata:/var/lib/postgresql/data
+  mail:
+    image: axllent/mailpit:v1.23
+    restart: always
+    volumes:
+      - ./data:/data
+    ports:
+      - 8025:8025
+    expose:
+      - 1025
+    environment:
+      MP_MAX_MESSAGES: 5000
+      MP_DATABASE: /data/mailpit.db
+      MP_SMTP_AUTH_ACCEPT_ANY: 1
+      MP_SMTP_AUTH_ALLOW_INSECURE: 1
 
 volumes:
   pgdata:
