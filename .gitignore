@@ -1,6 +1,9 @@
 # Created by https://www.toptal.com/developers/gitignore/api/git,osx,venv,flask,linux,macos,python,windows,certificates,visualstudio,jetbrains+all,visualstudiocode
 # Edit at https://www.toptal.com/developers/gitignore?templates=git,osx,venv,flask,linux,macos,python,windows,certificates,visualstudio,jetbrains+all,visualstudiocode
 
+### Mailpit ###
+data/
+
 ### certificates ###
 *.pem
 *.key
