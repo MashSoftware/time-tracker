@@ -5,6 +5,16 @@ services:
       - 443:443
     depends_on:
       - app
+    develop:
+      watch:
+        - action: rebuild
+          path: ./web/package-lock.json
+        - action: sync+restart
+          path: ./web/nginx.conf
+          target: /etc/nginx/conf.d/nginx.conf
+        - action: sync
+          path: ./web/dist
+          target: /app/static
   app:
     build: .
     restart: always
