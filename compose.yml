@@ -3,8 +3,6 @@ services:
     build: ./web
     ports:
       - 443:443
-    depends_on:
-      - app
     develop:
       watch:
         - action: rebuild
@@ -28,6 +26,16 @@ services:
     depends_on:
       - cache
       - db
+      - mail
+      - web
+    develop:
+      watch:
+        - action: rebuild
+          path: ./requirements.txt
+          target: /home/app/requirements.txt
+        - action: sync
+          path: ./app
+          target: /home/app
   cache:
     image: redis:7-alpine
     restart: always
