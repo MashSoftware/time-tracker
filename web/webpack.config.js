@@ -1,6 +1,7 @@
-const path = require("path");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const path = require("path");
 
 module.exports = {
   mode: "production",
@@ -43,21 +44,21 @@ module.exports = {
         scheme: "data",
         type: "asset/resource",
         generator: {
-          filename: "icons/[hash].svg",
+          filename: "icons/[name].svg",
         },
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
         type: "asset/resource",
         generator: {
-          filename: "images/[hash][ext][query]",
+          filename: "images/[name][ext][query]",
         },
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,
         type: "asset/resource",
         generator: {
-          filename: "fonts/[hash][ext][query]",
+          filename: "fonts/[name][ext][query]",
         },
       },
     ],
@@ -65,6 +66,14 @@ module.exports = {
   plugins: [
     new MiniCssExtractPlugin({
       filename: "main.min.css",
+    }),
+    new CopyPlugin({
+      patterns: [
+        {
+          from: "./src/images",
+          to: "images",
+        },
+      ],
     }),
   ],
   resolve: {
