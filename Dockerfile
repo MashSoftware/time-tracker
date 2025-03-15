@@ -12,13 +12,12 @@ ENV FLASK_APP=time_tracker.py \
 RUN apt-get update && \
     apt-get install -y libpq-dev gcc
 
-COPY app app
-COPY migrations migrations
-COPY time_tracker.py config.py docker-entrypoint.sh requirements.txt ./
+COPY --chown=app:app app app
+COPY --chown=app:app migrations migrations
+COPY --chown=app:app time_tracker.py config.py docker-entrypoint.sh requirements.txt ./
 
 RUN pip install -r requirements.txt \
-    && chmod +x docker-entrypoint.sh \
-    && chown -R app:app ./
+    && chmod +x docker-entrypoint.sh
 
 USER app
 
