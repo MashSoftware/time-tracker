@@ -2,7 +2,7 @@ FROM python:3.13-slim
 
 RUN addgroup --system appgroup && adduser --system --group appuser
 
-WORKDIR /home/app
+WORKDIR /home/appuser
 
 # Set environment variables
 ENV FLASK_APP=time_tracker.py \
