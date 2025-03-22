@@ -12,7 +12,6 @@
     "type": "git",
     "url": "git+https://github.com/MashSoftware/time-tracker.git"
   },
-  "keywords": [],
   "author": "Matt Shaw",
   "license": "MIT",
   "bugs": {
@@ -32,8 +31,9 @@
     "css-loader": "^7.1.2",
     "css-minimizer-webpack-plugin": "^7.0.2",
     "mini-css-extract-plugin": "^2.9.2",
+    "npm-check-updates": "^17.1.16",
     "prettier": "^3.5.3",
-    "sass": "^1.85.1",
+    "sass": "^1.86.0",
     "sass-loader": "^16.0.5",
     "webpack": "^5.98.0",
     "webpack-cli": "^6.0.1"
