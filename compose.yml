@@ -12,7 +12,7 @@ services:
           target: /etc/nginx/conf.d/nginx.conf
         - action: sync
           path: ./web/dist
-          target: /app/static
+          target: /web/static
   app:
     build: .
     restart: always
@@ -21,6 +21,13 @@ services:
       REDIS_URL: redis://cache:6379
       SECRET_KEY: 27a832aa91849382e326b5200f2c3d748a78bac4587e6ffd626dd87d73438f44
       VERSION_NUMBER: 0.29.0
+      # MAIL_DEFAULT_SENDER: 'your_email@example.com'
+      # MAIL_PASSWORD: 'your_password'
+      # MAIL_PORT: 587
+      # MAIL_SERVER: 'your_mail_server'
+      # MAIL_USE_SSL: False
+      # MAIL_USE_TLS: True
+      # MAIL_USERNAME: 'your_username'
     expose:
       - 5000
     depends_on:
