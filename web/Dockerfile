@@ -1,9 +1,9 @@
 FROM node:jod-alpine AS builder
 
-WORKDIR /app
+WORKDIR /web
 
-COPY .browserslistrc babel.config.json package*.json webpack.config.js ./
-COPY src ./src
+COPY .browserslistrc babel.config.json eslint.config.mjs package*.json webpack.config.js ./
+COPY src src
 
 RUN npm install && \
     npm run build
@@ -16,4 +16,4 @@ RUN apk update && apk add --no-cache openssl && \
 
 COPY nginx.conf /etc/nginx/conf.d
 
-COPY --from=builder /app/dist /app/static
+COPY --from=builder /web/dist /web/static
