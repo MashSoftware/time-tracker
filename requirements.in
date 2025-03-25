@@ -1,11 +1,12 @@
 bcrypt
 email_validator
-flask<3
 flask-limiter[redis]
 flask-login
+flask-mail
 flask-migrate
 flask-sqlalchemy
 flask-wtf
+flask<3
 gunicorn
 psycopg2
 pyjwt

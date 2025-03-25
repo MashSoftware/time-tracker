@@ -9,7 +9,9 @@ alembic==1.15.1
 bcrypt==4.3.0
     # via -r requirements.in
 blinker==1.9.0
-    # via flask
+    # via
+    #   flask
+    #   flask-mail
 certifi==2025.1.31
     # via requests
 charset-normalizer==3.4.1
@@ -27,12 +29,15 @@ flask==2.3.3
     #   -r requirements.in
     #   flask-limiter
     #   flask-login
+    #   flask-mail
     #   flask-migrate
     #   flask-sqlalchemy
     #   flask-wtf
 flask-limiter[redis]==3.12
     # via -r requirements.in
 flask-login==0.6.3
+    # via -r requirements.in
+flask-mail==0.10.0
     # via -r requirements.in
 flask-migrate==4.1.0
     # via -r requirements.in
@@ -82,7 +87,7 @@ pygments==2.19.1
     # via rich
 pyjwt==2.10.1
     # via -r requirements.in
-pytz==2025.1
+pytz==2025.2
     # via -r requirements.in
 redis==5.2.1
     # via limits
