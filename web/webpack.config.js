@@ -1,13 +1,13 @@
-const autoprefixer = require("autoprefixer");
 const CopyPlugin = require("copy-webpack-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const path = require("path");
+const postcssPresetEnv = require("postcss-preset-env");
 
 module.exports = {
   mode: "production",
   devtool: "source-map",
-  entry: ["./src/js/main.js", "./src/scss/main.scss"],
+  entry: ["./src/js/main.mjs", "./src/scss/main.scss"],
   output: {
     filename: "main.min.js",
     path: path.resolve(__dirname, "dist"),
@@ -24,7 +24,7 @@ module.exports = {
             loader: "postcss-loader",
             options: {
               postcssOptions: {
-                plugins: [autoprefixer],
+                plugins: [postcssPresetEnv],
               },
             },
           },
@@ -53,7 +53,7 @@ module.exports = {
         scheme: "data",
         type: "asset/resource",
         generator: {
-          filename: "icons/[name].svg",
+          filename: "icons/[name][ext][query]",
         },
       },
       {
