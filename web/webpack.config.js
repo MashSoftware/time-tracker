@@ -1,8 +1,14 @@
+const { PurgeCSSPlugin } = require("purgecss-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const glob = require("glob");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const path = require("path");
 const postcssPresetEnv = require("postcss-preset-env");
+
+const PATHS = {
+  src: path.join(__dirname, "src"),
+};
 
 module.exports = {
   mode: "production",
@@ -44,7 +50,15 @@ module.exports = {
         use: {
           loader: "babel-loader",
           options: {
-            presets: ["@babel/preset-env"],
+            presets: [
+              [
+                "@babel/preset-env",
+                {
+                  bugfixes: true,
+                  loose: true,
+                },
+              ],
+            ],
           },
         },
       },
@@ -75,6 +89,9 @@ module.exports = {
   plugins: [
     new MiniCssExtractPlugin({
       filename: "main.min.css",
+    }),
+    new PurgeCSSPlugin({
+      paths: glob.sync(`${PATHS.src}/**/*`, { nodir: true }),
     }),
     new CopyPlugin({
       patterns: [
