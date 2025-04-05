@@ -4,16 +4,19 @@ Use [Webpack](https://webpack.js.org/) to bundle, compile and minify JavaScript,
 
 - [**CSS Minimizer Webpack Plugin**](https://webpack.js.org/plugins/css-minimizer-webpack-plugin/): Uses [CSSNANO](https://cssnano.github.io/cssnano/) to minimise the CSS output, reducing file size and improving page load times.
 - [**PostCSS Preset Env**](https://github.com/csstools/postcss-plugins/tree/main/plugin-packs/postcss-preset-env): Uses [Autoprefixer](https://github.com/postcss/autoprefixer) to add vendor prefixes and ensure compatibility with older browsers.
+- [**PurgeCSS**](https://purgecss.com/): Analyses your content and your CSS files. Then it matches the selectors used in your files with the one in your content files. It removes unused selectors from your CSS, resulting in smaller CSS files.
 - [**Babel Preset Env**](https://babeljs.io/docs/babel-preset-env): Transpiles ES6+ JavaScript for cross-browser compatibility while allowing the use of modern JavaScript features.
 - [**Webpack Dev Server**](https://webpack.js.org/configuration/dev-server/): Serves files from the output directory with live reloading for development workflows.
 
-## Prerequisites
+## Requirements
 
-- [Node Version Manager (nvm)](https://github.com/nvm-sh/nvm)
+- A supported LTS version of [Node.js](https://nodejs.org/en)
+- [Node Version Manager](https://github.com/nvm-sh/nvm) (optional)
+- [Docker](https://www.docker.com/) (optional)
 
 ## Get started
 
-1. Install the correct version of [Node.js](https://nodejs.org/en). This is determined by the `.nvmrc` file and is typically the latest LTS release codename.
+1. Install Node, preferably using `nvm`. The version is set in the `.nvmrc` file and is typically the latest LTS release codename.
 
    ```shell
    nvm install
@@ -81,20 +84,20 @@ Rebuild distribution assets automatically when source is changed:
 npm run watch
 ```
 
-### Update dependencies
+### Upgrade dependencies
 
-Use [npm-check-updates](https://www.npmjs.com/package/npm-check-updates) to update Node package dependencies (such as [bootstrap](https://www.npmjs.com/package/bootstrap)):
+Use [npm-check-updates](https://www.npmjs.com/package/npm-check-updates) to upgrade Node package dependencies (such as [bootstrap](https://www.npmjs.com/package/bootstrap)):
 
 ```shell
-ncu -u
+npm run upgrade:latest
 ```
 
-If you want to be more cautious you can check only for patch or minor level updates:
+If you want to be more cautious you can apply only minor or patch level upgrades:
 
 ```shell
-ncu --target patch -u
+npm run upgrade:minor
 ```
 
 ```shell
-ncu --target minor -u
+npm run upgrade:patch
 ```
