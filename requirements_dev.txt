@@ -10,7 +10,7 @@ bandit==1.8.3
     # via -r requirements_dev.in
 black==25.1.0
     # via -r requirements_dev.in
-boolean-py==4.0
+boolean-py==5.0
     # via license-expression
 build==1.2.2.post1
     # via pip-tools
@@ -27,7 +27,7 @@ click==8.1.8
     #   black
     #   pip-tools
     #   pur
-coverage[toml]==7.7.1
+coverage[toml]==7.8.0
     # via pytest-cov
 cyclonedx-python-lib==8.9.0
     # via pip-audit
@@ -35,7 +35,7 @@ defusedxml==0.7.1
     # via py-serializable
 filelock==3.18.0
     # via cachecontrol
-flake8==7.1.2
+flake8==7.2.0
     # via
     #   flake8-bugbear
     #   pep8-naming
@@ -96,9 +96,9 @@ pur==7.3.3
     # via -r requirements_dev.in
 py-serializable==1.1.2
     # via cyclonedx-python-lib
-pycodestyle==2.12.1
+pycodestyle==2.13.0
     # via flake8
-pyflakes==3.2.0
+pyflakes==3.3.2
     # via flake8
 pygments==2.19.1
     # via rich
@@ -110,7 +110,7 @@ pyproject-hooks==1.2.0
     #   pip-tools
 pytest==8.3.5
     # via pytest-cov
-pytest-cov==6.0.0
+pytest-cov==6.1.1
     # via -r requirements_dev.in
 pyyaml==6.0.2
     # via bandit
@@ -118,7 +118,7 @@ requests==2.32.3
     # via
     #   cachecontrol
     #   pip-audit
-rich==13.9.4
+rich==14.0.0
     # via
     #   bandit
     #   pip-audit
@@ -128,7 +128,7 @@ stevedore==5.4.1
     # via bandit
 toml==0.10.2
     # via pip-audit
-typing-extensions==4.12.2
+typing-extensions==4.13.1
     # via mypy
 urllib3==2.3.0
     # via requests
