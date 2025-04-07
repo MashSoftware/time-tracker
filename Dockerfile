@@ -36,7 +36,7 @@ RUN pip install --no-cache /wheels/*
 # Copy runtime code
 COPY --chown=appuser:appgroup app app
 COPY --chown=appuser:appgroup migrations migrations
-COPY --chown=appuser:appgroup --chmod=755 time_tracker.py config.py docker-entrypoint.sh  ./
+COPY --chown=appuser:appgroup --chmod=500 time_tracker.py config.py docker-entrypoint.sh  ./
 
 USER appuser
 
