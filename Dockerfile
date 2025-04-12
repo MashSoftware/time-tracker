@@ -1,24 +1,43 @@
-FROM python:3.11-slim
+# Build stage
+FROM python:3.13-slim AS builder
 
-RUN useradd containeruser
+WORKDIR /build
 
-WORKDIR /home/containeruser
-
+# Install dependencies needed to build psycopg2
 RUN apt-get update && \
     apt-get install -y libpq-dev gcc
 
-COPY app app
-COPY time_tracker.py config.py docker-entrypoint.sh requirements.txt ./
-RUN pip install -r requirements.txt \
-    && chmod +x docker-entrypoint.sh \
-    && chown -R containeruser:containeruser ./
+# Install requirements
+COPY requirements.txt ./
+RUN pip wheel --no-cache-dir --no-deps --wheel-dir /build/wheels -r requirements.txt
+
+# Run stage
+FROM python:3.13-slim
+
+# Create app group and user
+RUN addgroup --system appgroup && adduser --system --group appuser
+
+WORKDIR /home/appuser
 
 # Set environment variables
 ENV FLASK_APP=time_tracker.py \
     PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1
 
-USER containeruser
+# Install dependency needed to run psycopg2
+RUN apt-get update && \
+    apt-get install -y libpq-dev
 
-EXPOSE 8000
+# Copy and install requirements from build stage
+COPY --chown=appuser:appgroup --from=builder /build/wheels /wheels
+COPY --chown=appuser:appgroup --from=builder /build/requirements.txt .
+RUN pip install --no-cache /wheels/*
+
+# Copy runtime code
+COPY --chown=appuser:appgroup app app
+COPY --chown=appuser:appgroup migrations migrations
+COPY --chown=appuser:appgroup --chmod=500 time_tracker.py config.py docker-entrypoint.sh  ./
+
+USER appuser
+
 ENTRYPOINT ["./docker-entrypoint.sh"]
