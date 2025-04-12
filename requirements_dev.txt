@@ -29,7 +29,7 @@ click==8.1.8
     #   pur
 coverage[toml]==7.8.0
     # via pytest-cov
-cyclonedx-python-lib==8.9.0
+cyclonedx-python-lib==9.1.0
     # via pip-audit
 defusedxml==0.7.1
     # via py-serializable
@@ -80,7 +80,7 @@ pep8-naming==0.14.1
     # via -r requirements_dev.in
 pip-api==0.0.34
     # via pip-audit
-pip-audit==2.8.0
+pip-audit==2.9.0
     # via -r requirements_dev.in
 pip-requirements-parser==32.0.1
     # via pip-audit
@@ -94,7 +94,7 @@ pluggy==1.5.0
     # via pytest
 pur==7.3.3
     # via -r requirements_dev.in
-py-serializable==1.1.2
+py-serializable==2.0.0
     # via cyclonedx-python-lib
 pycodestyle==2.13.0
     # via flake8
@@ -128,9 +128,9 @@ stevedore==5.4.1
     # via bandit
 toml==0.10.2
     # via pip-audit
-typing-extensions==4.13.1
+typing-extensions==4.13.2
     # via mypy
-urllib3==2.3.0
+urllib3==2.4.0
     # via requests
 wheel==0.45.1
     # via pip-tools
